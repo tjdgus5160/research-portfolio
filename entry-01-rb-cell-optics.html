@@ -6,31 +6,53 @@
 <title>Rb 증기셀 광학계 — 박성현</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
-<header class="bar"><div class="wrap"><span class="label">SHP · OPM</span><nav><a class="label" href="index.html">← INDEX</a></nav></div></header>
-<main><div class="wrap"><article class="entry">
-<aside class="entry__rail"><dl class="meta"><dt class="meta__k">번호</dt><dd class="meta__v">01</dd>
+<header class="bar">
+  <div class="shell bar__inner">
+    <span class="label">SHP · OPM</span>
+    <a class="pill pill--ghost" href="index.html">← INDEX</a>
+  </div>
+</header>
+
+<main>
+  <section class="section on-ink">
+    <div class="shell">
+      <h1 class="display">Rb 증기셀 광학계</h1>
+      <p class="hero__meta mono dim">펌프와 프로브를 한 섬유로 보내고, 빔을 U자로 되접는다</p>
+    </div>
+  </section>
+
+  <section class="section on-paper">
+    <div class="shell">
+      <article class="entry">
+        <aside class="entry__rail">
+          <dl class="meta"><dt class="meta__k">번호</dt><dd class="meta__v">01</dd>
 <dt class="meta__k">연도</dt><dd class="meta__v">2026</dd>
 <dt class="meta__k">상태</dt><dd class="meta__v">진행 중</dd>
 <dt class="meta__k">태그</dt><dd class="meta__v">optics · vapor cell · polarimetry</dd>
 <dt class="meta__k">역할</dt><dd class="meta__v">광학 설계 · 파라메트릭 CAD · 검증</dd>
 <dt class="meta__k">방법</dt><dd class="meta__v">파라메트릭 CAD (FreeCAD) · 편광 해석</dd>
-<dt class="meta__k">저장소</dt><dd class="meta__v">opm-freecad-cli</dd></dl></aside>
-<div class="entry__body"><h1>Rb 증기셀 광학계</h1>
-<p class="hero__meta mono">펌프와 프로브를 한 섬유로 보내고, 빔을 U자로 되접는다</p>
-<p>한 fiber에 D1(794.98 nm)과 D2(780.24 nm)를 함께 실어 펌프와 프로브를 겸하는 OPM 센서 모듈의 광학계. dual-wavelength 판과 두 직각 프리즘의 U자 되접으로 증기셀을 감지 면 뒤 2.0 mm에 놓고, 전면에는 구멍을 하나도 두지 않는다.</p>
+<dt class="meta__k">저장소</dt><dd class="meta__v">opm-freecad-cli</dd></dl>
+        </aside>
+        <div class="entry__body"><p class="prose">한 fiber에 D1(794.98 nm)과 D2(780.24 nm)를 함께 실어 펌프와 프로브를 겸하는 OPM 센서 모듈의 광학계. dual-wavelength 판과 두 직각 프리즘의 U자 되접으로 증기셀을 감지 면 뒤 2.0 mm에 놓고, 전면에는 구멍을 하나도 두지 않는다.</p>
 <section class="block block--prose reveal"><p>두 직각 프리즘이 빔을 같은 회전 방향으로 각각 90° 회전시켜 증기셀을 횡방향으로 통과시킨 뒤 바로 되돌린다. U자 되접은 두 가지 결과를 함께 만든다. 접힌 지점이 모듈의 전면이 되므로 증기셀은 감지 면 뒤 2.0 mm에 위치하는데, magnetometer에서 이 standoff는 headline figure of merit다. 동시에 되돌아오는 경로는 빔을 fiber 끝으로 되돌려 주므로 fiber와 photodiode 도선은 뒷면 벽으로만 빠져나가고, 감지 면에는 어떠한 구멍도 두지 않아도 된다.</p></section>
 <section class="block block--data reveal"><figcaption>루비듐 D선과 각각의 역할 <span class="chip chip--source-fact">SOURCE_FACT</span></figcaption><div class="scroll"><table><thead><tr><th>선</th><th>파장</th><th>역할</th><th>필요한 편광</th></tr></thead><tbody><tr><td>D1</td><td>794.98 nm</td><td>펌프</td><td>원편광</td></tr><tr><td>D2</td><td>780.24 nm</td><td>프로브</td><td>선편광</td></tr></tbody></table></div></section>
 <section class="block block--spec reveal"><dl class="meta"><dt class="meta__k">cell_length</dt><dd class="meta__v">7.5 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">standoff</dt><dd class="meta__v">2.0 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">waveplate_diameter</dt><dd class="meta__v">5 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">waveplate_thickness</dt><dd class="meta__v">1 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">module_length</dt><dd class="meta__v">136 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">module_width</dt><dd class="meta__v">32.8 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd><dt class="meta__k">module_height</dt><dd class="meta__v">20 mm <span class="chip chip--source-fact">SOURCE_FACT</span></dd></dl></section>
 <section class="block block--note reveal"><p class="label">설계 판단</p><p>dual-wavelength 판은 quarter-wave plate의 좌석에 그대로 내려앉는다. 지름, rotor, 위치가 모두 같으므로 바뀌는 것은 명세(specification)뿐이다. 검증은 retardance를 nominal 값이 아니라 허용공차의 가장 나쁜 끝에서 확인한다. nominal은 요구되었던 값일 뿐, 통과해야 하는 지점은 그 끝이다.</p></section>
 <section class="block block--prose reveal"><p>남은 일은 이 계산된 구조를 bench 위에서 검증하는 것이다. 허용공차의 끝에서 retardance가 요구 값을 지키는지, U자 되접을 거친 프로브 빔이 balanced polarimeter에서 여전히 두 개의 동등한 출력을 내는지는 조립 후의 측정으로만 판정할 수 있다.</p></section></div>
-</article></div></main>
-<footer><div class="wrap"><p class="label">박성현 · SEOUL, KR</p></div></footer>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="on-ink">
+  <div class="shell"><p class="label faint">박성현 · SEOUL, KR</p></div>
+</footer>
 <script type="module" src="assets/js/site.js"></script>
 </body>
 </html>

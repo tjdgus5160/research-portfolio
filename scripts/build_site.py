@@ -18,18 +18,42 @@ PAGE = """<!DOCTYPE html>
 <title>{title} — 박성현</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 </head>
 <body>
-<header class="bar"><div class="wrap"><span class="label">SHP · OPM</span><nav><a class="label" href="index.html">← INDEX</a></nav></div></header>
-<main><div class="wrap"><article class="entry">
-<aside class="entry__rail"><dl class="meta">{rail}</dl></aside>
-<div class="entry__body">{body}</div>
-</article></div></main>
-<footer><div class="wrap"><p class="label">박성현 · SEOUL, KR</p></div></footer>
+<header class="bar">
+  <div class="shell bar__inner">
+    <span class="label">SHP · OPM</span>
+    <a class="pill pill--ghost" href="index.html">← INDEX</a>
+  </div>
+</header>
+
+<main>
+  <section class="section on-ink">
+    <div class="shell">
+      <h1 class="display">{title}</h1>
+      {subtitle}
+    </div>
+  </section>
+
+  <section class="section on-paper">
+    <div class="shell">
+      <article class="entry">
+        <aside class="entry__rail">
+          <dl class="meta">{rail}</dl>
+        </aside>
+        <div class="entry__body">{body}</div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="on-ink">
+  <div class="shell"><p class="label faint">박성현 · SEOUL, KR</p></div>
+</footer>
 <script type="module" src="assets/js/site.js"></script>
 </body>
 </html>
@@ -51,11 +75,14 @@ def rail_html(entry):
     return "\n".join(pairs)
 
 
+def subtitle_html(entry):
+    if not entry.get("subtitle"):
+        return ""
+    return f'<p class="hero__meta mono dim">{esc(entry["subtitle"])}</p>'
+
+
 def body_html(entry):
-    parts = [f"<h1>{esc(entry['title'])}</h1>"]
-    if entry.get("subtitle"):
-        parts.append(f'<p class="hero__meta mono">{esc(entry["subtitle"])}</p>')
-    parts.append(f"<p>{esc(entry['summary'])}</p>")
+    parts = [f"<p class=\"prose\">{esc(entry['summary'])}</p>"]
     parts.extend(render_block(block) for block in entry["blocks"])
     return "\n".join(parts)
 
@@ -131,7 +158,12 @@ def main():
     rows = []
     for path in load_index():
         entry = load_entry(path)
-        page = PAGE.format(title=esc(entry["title"]), rail=rail_html(entry), body=body_html(entry))
+        page = PAGE.format(
+            title=esc(entry["title"]),
+            subtitle=subtitle_html(entry),
+            rail=rail_html(entry),
+            body=body_html(entry),
+        )
         out = ROOT / f'entry-{entry["id"]}.html'
         out.write_text(page, encoding="utf-8")
         written.append(out)

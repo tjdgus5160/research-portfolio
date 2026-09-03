@@ -1,31 +1,94 @@
+/* base.css — reset, ground pair, and shared primitives. Tokens only. */
+
+/* 1. Reset */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
 
 img,
-svg {
+svg,
+canvas {
   display: block;
   max-width: 100%;
 }
 
+/* 2. Scroll behaviour */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3. Body defaults */
 body {
-  background: var(--ground);
-  color: var(--text);
+  background: var(--ink);
+  color: var(--on-ink);
   font-family: var(--font-body);
   font-size: var(--t-body);
   line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* 4. Ground pair: each section owns its surface and its text colours */
+.on-ink {
+  background: var(--ink);
+  color: var(--on-ink);
+}
+
+.on-paper {
+  background: var(--paper);
+  color: var(--on-paper);
+}
+
+.on-ink .dim {
+  color: var(--on-ink-dim);
+}
+
+.on-ink .faint {
+  color: var(--on-ink-faint);
+}
+
+.on-paper .dim {
+  color: var(--on-paper-dim);
+}
+
+.on-paper .faint {
+  color: var(--on-paper-faint);
+}
+
+.on-ink .rule {
+  border: 1px solid var(--ink-line);
+}
+
+.on-paper .rule {
+  border: 1px solid var(--paper-line);
+}
+
+/* 5. Content column */
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 6. Section rhythm */
+.section {
+  padding-block: var(--section-y);
+}
+
+/* 7. Headings */
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  line-height: var(--lh-tight);
   text-wrap: balance;
+  line-height: var(--lh-tight);
 }
 
 h1 {
@@ -40,60 +103,65 @@ h3 {
   font-size: var(--t-h3);
 }
 
-.u-grid {
-  background-image: repeating-radial-gradient(
-    circle at center,
-    var(--line) 0 1px,
-    transparent 1px var(--u)
-  );
-  background-size: var(--u) var(--u);
+/* 8. Oversized headline */
+.display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  font-weight: 700;
+  text-wrap: balance;
+  max-width: 100%;
 }
 
-.wrap {
-  max-width: calc(var(--measure) + var(--gutter) * 2);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
+/* 9. Prose measure */
+.prose {
+  max-width: var(--measure);
 }
 
-.bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--bar-h);
-  background: var(--ground);
-  border-bottom: 1px solid var(--line);
+.prose p + p {
+  margin-top: var(--s2);
 }
 
+/* 10. Mono label */
 .label {
   font-family: var(--font-mono);
   font-size: var(--t-label);
   letter-spacing: var(--tr-label);
   text-transform: uppercase;
-  color: var(--text-faint);
 }
 
+/* 11. Tabular numerals */
 .mono {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 
+/* 12. Wide content scrolls in its own lane */
 .scroll {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
+/* 13. Visually hidden, still reachable */
 .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
 }
 
+/* 14. Links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 15. Keyboard focus */
 :focus-visible {
   outline: var(--focus);
   outline-offset: 2px;

@@ -1,8 +1,12 @@
-# DESIGN.md — Instrument Panel
+# DESIGN.md — Speedy direction
 
 The design spec for this site. Everything built here derives from this file.
-If code and this document disagree, this document is wrong or the code is —
-fix one of them, don't let them drift.
+If code and this document disagree, one of them is wrong — fix it, don't let
+them drift.
+
+The previous direction (a dark instrument panel drawn from the optical bench)
+is kept on the `instrument-panel` branch. This one takes its structure from a
+reference the author chose: **speedy.io**, Awwwards Site of the Day.
 
 ---
 
@@ -12,180 +16,150 @@ A research portfolio for work on **optically pumped magnetometers (OPM)** —
 atomic magnetometry, Rb vapor-cell optics, balanced polarimetry, and the
 precision mechanics that hold it all still.
 
-It has to do two things:
+Two jobs, unchanged from before:
 
-1. Read as the work of someone who builds instruments, not someone who
-   arranged a template.
-2. Accept new research entries later without redesign. The **양식** (the
-   template and its content schema) is the actual deliverable; the two example
-   entries only prove it works.
+1. Read as the work of someone who builds instruments.
+2. Accept new research entries later without redesign. The **양식** — the
+   template and its content schema — is the deliverable; the example entries
+   only prove it works.
 
 Korean is the body language. Technical terms, part names, units and numbers
-stay English — that is how the field is written and how the author works.
+stay English.
 
 ---
 
-## Where the design comes from
+## What is taken from the reference, and what is not
 
-Not from a gallery screenshot. From the bench:
+**Taken:** the structure and the visual grammar.
 
-| Bench thing | Becomes |
-|---|---|
-| Optical breadboard, 25 mm hole pitch | The background grid, and the layout's spacing unit |
-| FID — free induction decay | The hero motif: a live decaying sinusoid on Canvas |
-| Rb resonance fluorescence | The accent colour |
-| Anodised aluminium housing | The ground |
-| Oscilloscope / instrument readouts | Monospace for every number, label and unit |
-| Engineering drawing leaders and callouts | Hairlines, row rules, index numbering |
+- Full-bleed sections alternating **pure black** and **pure white**, each one a
+  complete surface rather than a band inside a page.
+- An oversized neutral grotesque set at **line-height 1.0**, headline anchored
+  to the left edge of the measure, running two or three lines.
+- **Floating cards** — generously rounded, dropped over the ground with a soft
+  shadow, sometimes overlapping the section edge.
+- **Pill** buttons and labels, filled or outlined.
+- Soft, wide **light sweeps** across the black ground, as if light were falling
+  across a curved surface.
+- A single sculptural object at the centre of the hero.
 
-The page commits to one visual world — a dark instrument panel. That is a
-choice, not an omission: there is no light theme, and every colour is painted
-explicitly so the page never borrows a host background.
+**Not taken:** their images, their 3D renders, their logo, their wordmark,
+their copy, and their licensed Helvetica cut. None of that is ours to use, and
+a portfolio wearing someone else's identity is worth less than a plain one.
+
+Where the reference puts a rendered abstract sculpture, this site puts the
+thing the work is actually about: the **FID trace**, computed from stated
+parameters. Same compositional role, our own subject.
 
 ---
 
 ## Colour
 
-Rubidium's D lines sit at 794.98 nm (D1) and 780.24 nm (D2) — deep red, right
-at the edge of what the eye still registers. Rendered literally they are almost
-black and useless as an interface colour, so the accent is the **fluorescence
-as a camera records it in a dark lab**: a crimson with a rose cast, lifted
-until it is legible.
-
-The neutrals are not grey. They carry a faint red bias toward the accent, so
-the ground reads as chosen rather than defaulted.
+The reference is monochrome, and monochrome is the right call here too — it
+makes the data the only coloured thing on the page.
 
 ```
---ground        #0B0809   near-black anodised, faint red bias
---surface       #131011   raised panel
---surface-high  #1B1719   hover / active panel
---line          #2A2325   hairline, engraved rule
---line-bright   #3D3336   emphasised rule
+--ink            #000000   black ground
+--ink-soft       #131313   raised panel on black
+--ink-line       rgba(255,255,255,0.10)
+--on-ink         #FFFFFF
+--on-ink-dim     rgba(255,255,255,0.62)
+--on-ink-faint   rgba(255,255,255,0.38)
 
---text          #EDE7E6   warm off-white
---text-dim      #9A9092   secondary
---text-faint    #6A6264   labels, units, disabled
+--paper          #FFFFFF   white ground
+--paper-soft     #F3F3F3   raised panel on white
+--paper-line     rgba(0,0,0,0.10)
+--on-paper       #000000
+--on-paper-dim   rgba(0,0,0,0.58)
+--on-paper-faint rgba(0,0,0,0.38)
 
---accent        #E63950   Rb fluorescence — the one loud colour
---accent-dim    #8E1F30   ambient glow, grid highlight, trace tail
---accent-ink    #FFF2F3   text on accent
-
---good          #4FB286   passes, verified
---warn          #D9A441   inferred, assumed
+--accent         #E63950   Rb fluorescence
+--good           #17B26A
+--warn           #C77700
 ```
 
-`--good` and `--warn` are semantic only. They mark evidence class on an entry,
-they are never decoration, and they are not a second accent.
+The accent survives from the previous direction and keeps its job: it belongs
+to the evidence chips and to nothing else. On a black-and-white page a single
+red chip is unmissable, which is the point — the page should make you notice
+when something is `INFERRED`.
 
-**Spend the boldness in one place.** The accent belongs to the FID trace, the
-active index row, and the single call to action. Everywhere else is ground,
-hairline and type. If something feels like it needs the accent to be legible,
-the hierarchy is wrong.
+`--good` and `--warn` are semantic only.
 
 ---
 
 ## Type
 
-Three roles, two families, so the page holds together.
+The reference sets Helvetica. That cut is licensed, so this uses a neutral
+grotesque with the same skeleton from Google Fonts.
 
 | Role | Face | Use |
 |---|---|---|
-| Display | **Archivo** 700–800, tight tracking | Hero, section openers. Latin only — Korean never gets set at display weight here. |
-| Body | **IBM Plex Sans KR** 400/500 | All Korean prose, entry text. |
-| Data | **IBM Plex Mono** 400/500 | Numbers, units, part names, labels, index numbering, metadata. |
-
-IBM Plex was drawn for technical documentation and it has a real Korean cut, so
-Korean prose and English data sit in the same family and stop fighting.
-Archivo carries the one loud typographic moment.
-
-Scale — a fifth-based ramp, tabular figures wherever digits align:
+| Display | **Schibsted Grotesk** 400/700 | Headlines. Line-height **1.0**, letter-spacing `-0.02em`. |
+| Body | **IBM Plex Sans KR** 400/500 | Korean prose. |
+| Data | **IBM Plex Mono** 400/500 | Numbers, units, labels, part names. |
 
 ```
---t-display   clamp(3.5rem, 11vw, 9rem)     Archivo 800, tracking -0.03em
---t-h1        clamp(2rem, 4.5vw, 3.25rem)   Archivo 700
---t-h2        1.5rem
---t-h3        1.125rem
---t-body      1.0625rem                     line-height 1.75 for Korean
---t-small     0.875rem
---t-label     0.75rem   mono, uppercase, tracking 0.14em
+--t-display  clamp(2.75rem, 7.5vw, 7rem)
+--t-h1       clamp(2rem, 4vw, 3.5rem)
+--t-h2       1.75rem
+--t-h3       1.125rem
+--t-body     1.0625rem
+--t-small    0.9375rem
+--t-label    0.75rem      mono, uppercase, tracking 0.1em
 ```
 
-Korean needs more leading than Latin. Body copy holds ~65 characters; Korean
-runs shorter per line, so the measure is set in `ch` against the body face.
+Display line-height is 1.0 — the reference's headlines stack tight enough that
+the lines read as one block, and that is most of its character.
 
 ---
 
 ## Layout
 
-The 25 mm breadboard pitch is the spacing unit. Everything lands on it.
-
 ```
---u: 25px            one breadboard hole
---gutter: clamp(1.25rem, 4vw, 3rem)
---measure: 68ch
+--shell      1280px      content column at its widest
+--gutter     clamp(1.25rem, 5vw, 4.5rem)
+--measure    64ch        reading width for prose only
+--radius     20px        cards
+--radius-sm  8px
+--pill       999px
+--bar-h      72px
 ```
 
-Three surfaces:
+**Sections are surfaces.** Each `section` paints its own ground edge to edge
+and carries its own text colours, so a black section and a white one can sit
+against each other with no seam. That is the whole rhythm of the page.
 
-**1. Hero** — full viewport. The breadboard dot grid, a Canvas drawing the FID
-decay, and the display type over it. Nothing else. The type says what the work
-is; the trace says what it looks like.
+**The hero** is black: light sweeps, the FID canvas as the object, the headline
+over it, and two floating cards that overlap the composition — one carrying the
+Larmor parameters, one carrying the standoff figure.
 
-**2. Index** — the research entries as an instrument list, not cards. One row
-per entry: number, Korean title, year, method tags, arrow. Hover raises the
-row, lights the rule in accent, and reveals the thumbnail. A table is the
-honest form here — these are records, and records line up.
+**The index** is white: the entry list as rows, each a card that lifts on hover.
 
-**3. Entry** — a spec sheet. A sticky left rail carries the metadata (date,
-role, methods, instruments, status, evidence class). The right column carries
-the content blocks. This is the part that has to survive content it has never
-seen, so the block set is fixed and documented below.
+**An entry page** alternates — black masthead with the title and metadata, then
+white for the content blocks.
 
----
-
-## Content blocks
-
-An entry is metadata plus an ordered list of blocks. These are the only block
-types; adding content later means writing these, not inventing new ones.
-
-| Block | For |
-|---|---|
-| `prose` | Korean body text |
-| `figure` | Image + caption + evidence class |
-| `data` | A table of measured or calculated values, with units |
-| `equation` | A derivation step, its inputs, and what it yields |
-| `spec` | Key–value parameter list, monospace, tabular |
-| `code` | Commands, config, snippets |
-| `note` | A callout — assumption, caveat, open question |
-| `refs` | Citations that resolve to something that exists |
-
-Every `figure` and `data` block carries an **evidence class** —
-`SOURCE_FACT` / `CALCULATED` / `INFERRED` / `ILLUSTRATIVE` — rendered as a
-small monospace chip. A portfolio that shows a rendering as if it were a
-measurement is worth less than one that says which is which, and this project
-already has the vocabulary for it.
+**Nothing centres by default.** The reference anchors its headlines to the left
+of the measure and lets the right side breathe. Centre only what is genuinely
+symmetrical.
 
 ---
 
 ## Motion
 
-Restrained and physical. Nothing bounces.
-
-- The FID trace draws once on load, then decays and idles. It is the page's
-  one ambient moment.
-- Index rows respond on hover in ~120 ms — the feel of a detent, not a slide.
-- Entry content reveals on scroll, 24 px rise, staggered ~60 ms, once only.
-- Everything respects `prefers-reduced-motion: reduce`: the trace renders its
-  final state immediately and reveals become instant.
+- Cards lift 4px and deepen their shadow on hover, over 180 ms.
+- Sections reveal on scroll: 32px rise, once only, staggered 80 ms.
+- The FID trace draws once on load, then idles.
+- `prefers-reduced-motion: reduce` removes every transform and renders the
+  trace in its final state immediately.
 
 ---
 
 ## Build rules
 
 - No framework, no build step for the page itself. Plain HTML, CSS, ES modules.
-- Fonts come from Google Fonts with a real fallback stack declared.
-- Images are `loading="lazy"` with explicit `width`/`height` so nothing reflows.
-- Wide content — tables, code, equations — scrolls inside its own container.
-  The page body never scrolls sideways.
-- Keyboard focus is always visible, and it uses the accent.
-- Every interactive element is reachable and labelled.
+- Fonts from Google Fonts with a real fallback stack declared.
+- Images `loading="lazy"` with explicit `width`/`height`.
+- Wide content scrolls inside its own container; the body never scrolls
+  sideways.
+- Keyboard focus always visible.
+- Every colour, size and duration comes from a token. Nothing else declares one.

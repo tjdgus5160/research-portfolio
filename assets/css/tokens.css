@@ -1,81 +1,97 @@
 /* tokens.css — the design system from DESIGN.md.
    Nothing else in this project declares a raw colour, size or duration.
 
-   This page commits to one visual world: a dark instrument panel. That is a
-   choice, so there is no theme switch and no prefers-color-scheme block —
-   but every colour is painted explicitly, so the page never borrows a host
-   background. */
+   Monochrome by intent: on a black-and-white page the evidence chips are the
+   only coloured thing, which is exactly what should catch the eye.
+
+   Sections paint their own ground and their own text colours, so a black
+   section and a white one sit against each other with no seam. That means
+   there is no single "background" token for the page — .on-ink and .on-paper
+   carry the pair. */
 
 :root {
   color-scheme: dark;
 
-  /* ── Ground ───────────────────────────────────────────────────────────
-     Not grey. A faint red bias toward the accent, so anodised aluminium
-     reads as chosen rather than defaulted. */
-  --ground:        #0B0809;
-  --surface:       #131011;
-  --surface-high:  #1B1719;
-  --line:          #2A2325;
-  --line-bright:   #3D3336;
+  /* ── Black ground ─────────────────────────────────────────────────── */
+  --ink:            #000000;
+  --ink-soft:       #131313;
+  --ink-raised:     #1E1E1E;
+  --ink-line:       rgba(255, 255, 255, 0.10);
+  --on-ink:         #FFFFFF;
+  --on-ink-dim:     rgba(255, 255, 255, 0.62);
+  --on-ink-faint:   rgba(255, 255, 255, 0.38);
 
-  /* ── Type colour ─────────────────────────────────────────────────────── */
-  --text:          #EDE7E6;
-  --text-dim:      #9A9092;
-  --text-faint:    #6A6264;
+  /* ── White ground ─────────────────────────────────────────────────── */
+  --paper:          #FFFFFF;
+  --paper-soft:     #F3F3F3;
+  --paper-raised:   #FFFFFF;
+  --paper-line:     rgba(0, 0, 0, 0.10);
+  --on-paper:       #000000;
+  --on-paper-dim:   rgba(0, 0, 0, 0.58);
+  --on-paper-faint: rgba(0, 0, 0, 0.38);
 
-  /* ── Accent ───────────────────────────────────────────────────────────
-     Rb D2 sits at 780.24 nm — rendered literally it is almost black. This is
-     the fluorescence as a camera records it in a dark lab, lifted until it is
-     legible. It is the only loud colour on the page. */
-  --accent:        #E63950;
-  --accent-dim:    #8E1F30;
-  --accent-ink:    #FFF2F3;
+  /* ── The one loud colour ──────────────────────────────────────────────
+     Rb fluorescence, carried over from the previous direction. It belongs to
+     the evidence chips and to nothing else: on a monochrome page a single red
+     chip is unmissable, and noticing that a value is INFERRED is the point. */
+  --accent:         #E63950;
+  --accent-ink:     #FFFFFF;
 
-  /* ── Semantic only. Evidence class, never decoration, never a 2nd accent. */
-  --good:          #4FB286;
-  --warn:          #D9A441;
+  /* ── Semantic only. Never decoration, never a second accent. ────────── */
+  --good:           #17B26A;
+  --warn:           #C77700;
 
   /* ── Type ─────────────────────────────────────────────────────────────
-     Archivo carries the one loud typographic moment. IBM Plex was drawn for
-     technical documentation and has a real Korean cut, so Korean prose and
-     English data sit in one family instead of fighting. */
-  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+     The reference sets Helvetica; that cut is licensed, so this is a neutral
+     grotesque with the same skeleton. IBM Plex has a real Korean cut, so
+     Korean prose and English data sit in one family. */
+  --font-display: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-body:    "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --t-display: clamp(2.5rem, 9.5vw, 9rem);
-  --t-h1:      clamp(2rem, 4.5vw, 3.25rem);
-  --t-h2:      1.5rem;
+  --t-display: clamp(2.75rem, 7.5vw, 7rem);
+  --t-h1:      clamp(2rem, 4vw, 3.5rem);
+  --t-h2:      1.75rem;
   --t-h3:      1.125rem;
   --t-body:    1.0625rem;
-  --t-small:   0.875rem;
+  --t-small:   0.9375rem;
   --t-label:   0.75rem;
 
-  --lh-tight:  1.05;
-  --lh-body:   1.75;   /* Korean needs the extra leading */
-  --tr-display: -0.03em;
-  --tr-label:   0.14em;
+  --lh-display: 1.0;    /* the reference's headlines read as one block */
+  --lh-tight:   1.15;
+  --lh-body:    1.7;    /* Korean needs the extra leading */
+  --tr-display: -0.02em;
+  --tr-label:   0.1em;
 
-  /* ── Space ────────────────────────────────────────────────────────────
-     --u is one breadboard hole, 25 mm pitch. Everything lands on it. */
-  --u:       25px;
-  --u-half:  12.5px;
-  --u2:      50px;
-  --u3:      75px;
-  --u4:      100px;
+  /* ── Space ────────────────────────────────────────────────────────── */
+  --shell:     1280px;
+  --gutter:    clamp(1.25rem, 5vw, 4.5rem);
+  --measure:   64ch;
+  --section-y: clamp(4rem, 12vh, 9rem);
 
-  --gutter:  clamp(1.25rem, 4vw, 3rem);
-  --measure: 68ch;
-  --bar-h:   56px;
+  --s1: 0.5rem;
+  --s2: 1rem;
+  --s3: 1.5rem;
+  --s4: 2.5rem;
+  --s5: 4rem;
 
-  /* ── Motion — restrained and physical. Nothing bounces. ─────────────── */
-  --ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
-  --t-detent:  120ms;
-  --t-reveal:  520ms;
+  --radius:    20px;
+  --radius-sm: 8px;
+  --pill:      999px;
+  --bar-h:     72px;
+
+  /* ── Elevation — cards float over the ground, they do not sit in it. */
+  --lift:      0 1px 2px rgba(0, 0, 0, 0.18), 0 12px 32px rgba(0, 0, 0, 0.22);
+  --lift-high: 0 2px 4px rgba(0, 0, 0, 0.20), 0 24px 56px rgba(0, 0, 0, 0.30);
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  --ease:     cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-hover:  180ms;
+  --t-reveal: 560ms;
 
   --focus: 2px solid var(--accent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --t-detent: 0ms; --t-reveal: 0ms; }
+  :root { --t-hover: 0ms; --t-reveal: 0ms; }
 }

@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>박성현 — OPM 연구</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="assets/css/tokens.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
   </head>
   <body>
     <header class="bar">
-      <div class="wrap">
+      <div class="shell bar__inner">
         <span class="label">SHP · OPM</span>
-        <nav>
-          <a class="label" href="#index">INDEX</a>
-        </nav>
+        <a class="pill pill--ghost" href="#index">INDEX</a>
       </div>
     </header>
 
-    <main>
-      <section class="hero u-grid">
-        <canvas class="hero__canvas" id="fid" aria-hidden="true"></canvas>
-        <div class="wrap">
-          <h1 class="hero__title">OPTICALLY<br>PUMPED<br>MAGNETOMETRY</h1>
-          <p class="hero__meta mono" id="fid-label"></p>
-          <p class="hero__note">위 파형은 자유유도감쇠(FID)를 명시된 파라미터로 계산한 것이다. 측정 데이터가 아니다.</p>
+    <section class="hero on-ink">
+      <div class="hero__sweep" aria-hidden="true"></div>
+      <canvas class="hero__canvas" id="fid" aria-hidden="true"></canvas>
+      <div class="shell hero__inner">
+        <h1 class="display">
+          OPTICALLY<br />PUMPED<br />MAGNETOMETRY
+        </h1>
+        <p class="hero__meta mono dim" id="fid-label"></p>
+        <p class="hero__note faint">
+          위 파형은 자유유도감쇠(FID)를 명시된 파라미터로 계산한 것이다. 측정 데이터가 아니다.
+        </p>
+        <div class="hero__cards">
+          <div class="card card--light">
+            <p class="card__k">STANDOFF</p>
+            <p class="card__v mono">2.0 mm</p>
+          </div>
+          <div class="card card--light">
+            <p class="card__k">CELL</p>
+            <p class="card__v mono">7.5 mm</p>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="index">
-        <div class="wrap">
-          <h2 class="label">INDEX</h2>
-          <div class="index">
-            <!-- BUILD:INDEX_ROWS -->
+    <section class="section on-paper" id="index">
+      <div class="shell">
+        <h2 class="label dim">INDEX</h2>
+        <div class="index">
+          <!-- BUILD:INDEX_ROWS -->
 <a class="index__row" href="entry-01-rb-cell-optics.html">
   <span class="index__num mono">01</span>
   <span class="index__title">Rb 증기셀 광학계</span>
@@ -51,14 +66,13 @@
   <span class="index__arrow" aria-hidden="true">→</span>
 </a>
 <!-- /BUILD:INDEX_ROWS -->
-          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <footer>
-      <div class="wrap">
-        <p class="label">박성현 · SEOUL, KR</p>
+    <footer class="on-ink">
+      <div class="shell">
+        <p class="label faint">박성현 · SEOUL, KR</p>
       </div>
     </footer>
 
@@ -70,5 +84,6 @@
         document.getElementById("fid-label").textContent = label();
       }
     </script>
+    <script type="module" src="assets/js/site.js"></script>
   </body>
 </html>

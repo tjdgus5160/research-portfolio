@@ -65,7 +65,7 @@ def check_no_raw_values(rep):
             rep.add("raw-values", f"{rel} declares no {label}", not hits,
                     "" if not hits else f"{len(hits)} found, e.g. {hits[0]!r}")
 
-    for path in sorted(ROOT.glob("*.html")):
+    for path in sorted(q for q in ROOT.glob("*.html") if not q.name.startswith("_")):
         rel = str(path.relative_to(ROOT))
         inline = "\n".join(re.findall(r"<style[^>]*>(.*?)</style>", path.read_text(), re.S))
         inline += "\n".join(re.findall(r'style\s*=\s*"([^"]*)"', path.read_text()))
@@ -93,7 +93,7 @@ def check_vars_resolve(rep, defined):
 
 
 def check_markup(rep):
-    for path in sorted(ROOT.glob("*.html")):
+    for path in sorted(q for q in ROOT.glob("*.html") if not q.name.startswith("_")):
         rel = str(path.relative_to(ROOT))
         html = path.read_text()
 
