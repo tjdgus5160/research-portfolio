@@ -1,0 +1,86 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "model": "lmstudio/qwen/qwen3.8-27b",
+  "small_model": "lmstudio/qwen/qwen3.8-27b",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1",
+        "timeout": 1800000,
+        "chunkTimeout": 600000
+      },
+      "models": {
+        "qwen/qwen3.8-27b": {
+          "name": "Qwen3.8 27B (local research worker)"
+        }
+      }
+    }
+  },
+  "mcp": {},
+  "permission": {
+    "edit": "allow",
+    "webfetch": "ask",
+    "bash": {
+      "*": "ask",
+      "orca orchestration *": "allow",
+      "orca skills get *": "allow",
+      "orca status*": "allow",
+      "uv run *": "allow",
+      "uv sync": "allow",
+      "python3 *": "allow",
+      "ls*": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "find *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "wc *": "allow",
+      "shasum *": "allow",
+      "mkdir -p *": "allow",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git show*": "allow",
+      "curl -s http://localhost:9875*": "allow",
+      "curl -s http://127.0.0.1:9875*": "allow",
+      "curl -s http://localhost:1234*": "allow",
+      "curl -s http://127.0.0.1:1234*": "allow",
+      "nc -z*": "allow",
+      "lsof*": "allow",
+      "./scripts/doctor.sh*": "allow",
+      "cp *": "allow",
+      "mv *": "allow",
+      "stat *": "allow",
+      "file *": "allow",
+      "diff *": "allow",
+      "sort *": "allow",
+      "base64 *": "allow",
+      "sudo *": "deny",
+      "rm -rf *": "deny",
+      "git push*": "deny",
+      "git reset --hard*": "deny",
+      "git clean -fd*": "deny",
+      "brew *": "deny",
+      "pip install*": "deny",
+      "npx *": "allow",
+      "node *": "allow",
+      "python3 -m http.server*": "allow",
+      "open *": "allow"
+    }
+  },
+  "watcher": {
+    "ignore": [
+      "node_modules/**",
+      ".git/**",
+      ".venv/**",
+      "__pycache__/**",
+      "freecad-mcp/**"
+    ]
+  }
+}
