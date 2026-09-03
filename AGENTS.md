@@ -74,6 +74,25 @@ never a plausible-looking fake measurement.
 - Respect `prefers-reduced-motion: reduce`.
 - Semantic HTML. One `<h1>` per page, headings in order, landmarks present.
 
+## 7. How to get work out of the local model
+
+Measured on this machine, and both parts are needed:
+
+**`reasoning_effort: "minimal"`** is set in `opencode.json`. Without it the model
+spends its whole budget thinking and emits no code at all — 11,317 characters of
+reasoning and zero CSS, one observed thought lasting 29 minutes 54 seconds
+before the request timed out. With it, thoughts run about 2.7 seconds.
+
+**Prompts must be self-contained.** At ~17 tok/s every tool round-trip is
+expensive, and a brief that says "read these five files first" burns the turn on
+exploration and ends without writing anything. Put the token list, the class
+list and the constraints directly in the prompt, say "do not read any files
+first", and ask for exactly one file per call.
+
+A dispatch that follows both wrote a clean 90-line stylesheet in 161 seconds.
+
+---
+
 ## 6. Working under orchestration
 
 Do the dispatched task, nothing else. Blocked? `orca orchestration ask`.

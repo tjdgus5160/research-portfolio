@@ -11,12 +11,16 @@
       "name": "LM Studio (local)",
       "options": {
         "baseURL": "http://127.0.0.1:1234/v1",
-        "timeout": 1800000,
-        "chunkTimeout": 600000
+        "timeout": 1500000,
+        "chunkTimeout": 300000,
+        "reasoning_effort": "minimal"
       },
       "models": {
         "qwen/qwen3.8-27b": {
-          "name": "Qwen3.8 27B (local research worker)"
+          "name": "Qwen3.8 27B (research worker)",
+          "options": {
+            "reasoning_effort": "minimal"
+          }
         }
       }
     }
