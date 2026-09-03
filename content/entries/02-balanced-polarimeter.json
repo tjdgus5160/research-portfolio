@@ -1,0 +1,69 @@
+{
+  "id": "02-balanced-polarimeter",
+  "number": "02",
+  "title": "균형 편광계 설계",
+  "subtitle": "두 광다이오드의 차로 신호를, 합으로 세기를 읽는다",
+  "year": "2025",
+  "status": "완료",
+  "tags": ["polarimetry", "parametric CAD", "FEM"],
+  "meta": {
+    "역할": "기구 설계 · 파라메트릭 모델링 · 빌드 검증",
+    "방법": "YAML 사양 → FreeCAD 파라메트릭 빌드 → 형상 검사",
+    "저장소": "opm-freecad-cli"
+  },
+  "summary": "PBS의 두 출력을 일치한 광다이오드 쌍으로 받아, 차분으로 패러데이 회전 신호를, 합으로 광 세기를 읽는 균형 편광계. YAML 사양 기반 FreeCAD 파라메트릭 빌드로 설계하고 형상 검사를 통과했다.",
+  "blocks": [
+    {
+      "type": "prose",
+      "text": "PBS의 두 출력을 일치한(matched) 광다이오드 쌍으로 받아들인다. 두 광전류의 차는 패러데이 회전 신호를 운반하고, 합은 광 세기를 운반한다. 같은 방향으로 들어오는 common-mode 잡음은 차분에서 상쇄되므로, 광 세기 변동에 둔감한 회전각 신호를 얻을 수 있다."
+    },
+    {
+      "type": "equation",
+      "expr": "S = (I₁ − I₂) / (I₁ + I₂) ≈ 2·θ_F",
+      "inputs": {
+        "I₁": "투과 포트 광전류",
+        "I₂": "반사 포트 광전류",
+        "θ_F": "패러데이 회전각"
+      },
+      "yields": "세기 변동에 둔감한 회전각 신호",
+      "evidence": "CALCULATED",
+      "note": "소각 근사는 θ_F ≪ 1 rad 범위에서 성립한다."
+    },
+    {
+      "type": "data",
+      "caption": "파라메트릭 빌드 결과 — 부품별 부피와 바운딩 박스",
+      "evidence": "CALCULATED",
+      "inputs": {
+        "config": "configs/opm_sensor.yaml"
+      },
+      "yields": "부품 10개, 각 7개 검사 통과",
+      "columns": ["부품", "부피 (mm³)", "바운딩 박스 (mm)"],
+      "rows": [
+        ["housing", "24269.05", "136.000 × 32.800 × 18.000"],
+        ["cover", "12286.73", "136.000 × 32.800 × 3.000"],
+        ["analyzer_mount", "3044.77", "18.000 × 14.000 × 14.000"],
+        ["waveplate_mount", "1662.63", "18.000 × 11.000 × 12.000"],
+        ["fiber_mount", "2448.29", "26.000 × 8.000 × 14.000"],
+        ["waveplate_rotor", "160.81", "6.000 × 7.919 × 7.919"],
+        ["vacuum_lid", "231.20", "17.000 × 13.600 × 1.000"],
+        ["transmit_pd_retainer", "64.91", "1.200 × 7.800 × 7.800"],
+        ["reflect_pd_retainer", "64.91", "7.800 × 1.200 × 7.800"],
+        ["reference_cell", "427.18", "10.500 × 7.500 × 7.500"]
+      ]
+    },
+    {
+      "type": "note",
+      "kind": "설계 원칙",
+      "text": "모델은 도면이 아니라 파라미터로 기술된다. housing.length를 바꾸면 모든 종속 plane, pocket, bore가 다시 유도되고, 전체 조립체가 다시 빌드되어 다시 검증된다."
+    },
+    {
+      "type": "code",
+      "lang": "bash",
+      "text": "uv run cadctl build configs/opm_sensor.yaml --overwrite"
+    },
+    {
+      "type": "prose",
+      "text": "파라메트릭성은 주장하지 않고 테스트로 증명한다. 통합 테스트가 런타임에 reference config로부터 더 짧은 envelope을 생성하고, 그로부터 전체 모델을 다시 빌드한다(test_a_resized_envelope_rebuilds_the_whole_model)."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "entries": [
+    { "id": "01-rb-cell-optics",       "file": "content/entries/01-rb-cell-optics.json" },
+    { "id": "02-balanced-polarimeter", "file": "content/entries/02-balanced-polarimeter.json" }
+  ]
+}

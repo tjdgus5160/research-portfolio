@@ -1,0 +1,53 @@
+{
+  "id": "01-rb-cell-optics",
+  "number": "01",
+  "title": "Rb 증기셀 광학계",
+  "subtitle": "펌프와 프로브를 한 섬유로 보내고, 빔을 U자로 되접는다",
+  "year": "2026",
+  "status": "진행 중",
+  "tags": ["optics", "vapor cell", "polarimetry"],
+  "meta": {
+    "역할": "광학 설계 · 파라메트릭 CAD · 검증",
+    "방법": "파라메트릭 CAD (FreeCAD) · 편광 해석",
+    "저장소": "opm-freecad-cli"
+  },
+  "summary": "한 fiber에 D1(794.98 nm)과 D2(780.24 nm)를 함께 실어 펌프와 프로브를 겸하는 OPM 센서 모듈의 광학계. dual-wavelength 판과 두 직각 프리즘의 U자 되접으로 증기셀을 감지 면 뒤 2.0 mm에 놓고, 전면에는 구멍을 하나도 두지 않는다.",
+  "blocks": [
+    {
+      "type": "prose",
+      "text": "두 직각 프리즘이 빔을 같은 회전 방향으로 각각 90° 회전시켜 증기셀을 횡방향으로 통과시킨 뒤 바로 되돌린다. U자 되접은 두 가지 결과를 함께 만든다. 접힌 지점이 모듈의 전면이 되므로 증기셀은 감지 면 뒤 2.0 mm에 위치하는데, magnetometer에서 이 standoff는 headline figure of merit다. 동시에 되돌아오는 경로는 빔을 fiber 끝으로 되돌려 주므로 fiber와 photodiode 도선은 뒷면 벽으로만 빠져나가고, 감지 면에는 어떠한 구멍도 두지 않아도 된다."
+    },
+    {
+      "type": "data",
+      "caption": "루비듐 D선과 각각의 역할",
+      "evidence": "SOURCE_FACT",
+      "source": "opm-freecad-cli, AGENTS.md §1",
+      "columns": ["선", "파장", "역할", "필요한 편광"],
+      "rows": [
+        ["D1", "794.98 nm", "펌프", "원편광"],
+        ["D2", "780.24 nm", "프로브", "선편광"]
+      ]
+    },
+    {
+      "type": "spec",
+      "items": [
+        { "k": "cell_length", "v": "7.5", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "standoff", "v": "2.0", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "waveplate_diameter", "v": "5", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "waveplate_thickness", "v": "1", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "module_length", "v": "136", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "module_width", "v": "32.8", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" },
+        { "k": "module_height", "v": "20", "unit": "mm", "evidence": "SOURCE_FACT", "source": "opm-freecad-cli, AGENTS.md §1" }
+      ]
+    },
+    {
+      "type": "note",
+      "kind": "설계 판단",
+      "text": "dual-wavelength 판은 quarter-wave plate의 좌석에 그대로 내려앉는다. 지름, rotor, 위치가 모두 같으므로 바뀌는 것은 명세(specification)뿐이다. 검증은 retardance를 nominal 값이 아니라 허용공차의 가장 나쁜 끝에서 확인한다. nominal은 요구되었던 값일 뿐, 통과해야 하는 지점은 그 끝이다."
+    },
+    {
+      "type": "prose",
+      "text": "남은 일은 이 계산된 구조를 bench 위에서 검증하는 것이다. 허용공차의 끝에서 retardance가 요구 값을 지키는지, U자 되접을 거친 프로브 빔이 balanced polarimeter에서 여전히 두 개의 동등한 출력을 내는지는 조립 후의 측정으로만 판정할 수 있다."
+    }
+  ]
+}
