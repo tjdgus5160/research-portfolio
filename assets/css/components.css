@@ -10,11 +10,13 @@
   min-height: calc(100vh - var(--bar-h));
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  place-items: center;
+  align-items: center;
+  justify-items: stretch;
 }
 
 .hero > .wrap {
   width: 100%;
+  max-width: none;
 }
 
 .hero__canvas {
