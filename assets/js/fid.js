@@ -71,7 +71,7 @@ export function mountFID(canvas) {
   function draw() {
     const c = colors();
     const mid = h / 2;
-    const amp = h * 0.34;
+    const amp = h * 0.26;
     const n = Math.max(2, Math.floor(w));
 
     ctx.clearRect(0, 0, w, h);
@@ -101,10 +101,11 @@ export function mountFID(canvas) {
     // the trace, swept in
     const upto = Math.floor(n * sweep);
     ctx.strokeStyle = c.trace;
-    ctx.lineWidth = 1.75;
+    ctx.globalAlpha = 0.55;
+    ctx.lineWidth = 1.25;
     ctx.lineJoin = "round";
     ctx.shadowColor = c.trace;
-    ctx.shadowBlur = 10;
+    ctx.shadowBlur = 6;
     ctx.beginPath();
     for (let i = 0; i <= upto; i++) {
       const x = (i / n) * w;
@@ -114,6 +115,7 @@ export function mountFID(canvas) {
     }
     ctx.stroke();
     ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
 
     // the sweep head, while it is still running
     if (sweep < 1 && upto > 0) {

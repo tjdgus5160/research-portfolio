@@ -43,7 +43,7 @@
   --font-body:    "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --t-display: clamp(3.5rem, 11vw, 9rem);
+  --t-display: clamp(2.5rem, 9.5vw, 9rem);
   --t-h1:      clamp(2rem, 4.5vw, 3.25rem);
   --t-h2:      1.5rem;
   --t-h3:      1.125rem;
