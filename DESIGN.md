@@ -115,34 +115,68 @@ the lines read as one block, and that is most of its character.
 
 ## Layout
 
+The reference's desktop hero is **asymmetric**, and that asymmetry is the
+design. Reading it from the actual desktop capture rather than its mobile
+stack:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│ ◑ mark   two-line greeting        ≡         [ghost] [solid]   │  bar
+│                                                               │
+│      ╲                          ┌───────────────────┐         │
+│        ╲   light sweep          │ headline, top-left │        │  panel
+│          ╲                      │                    │        │  (light,
+│   ┌──────────────┐              │   ▓ object ▓       │        │   tall,
+│   │ figure card  │──overlapping─┤                    │        │   right)
+│   └──────────────┘              │            ┌───────┴──┐     │
+│                                 └────────────┤ 2-tone   │     │
+│                                              └──────────┘     │
+│  ███████████████                                              │
+│  ██ display ████    ← enormous, bottom-left, two lines         │
+│  ⌶ Scroll                                                     │
+└──────────────────────────────────────────────────────────────┘
+```
+
+- **Bar** — circular mark and a two-line greeting on the left, a small
+  hamburger centred, two pills on the right (one ghost, one solid).
+- **Light sweep** — one wide, soft, curved band of light falling across the
+  black from upper-left to lower-right. It is the only thing behind everything.
+- **Panel** — a tall light-grey rounded panel on the **right half**, holding a
+  headline at its top-left and the subject object at its centre.
+- **Floating cards** — two or three, overlapping the panel's edges rather than
+  sitting beside it: one wide data card on the left, one small notification
+  pill top-right, one two-tone card bottom-right whose lower half goes black.
+- **Display type** — enormous, white, **bottom-left**, two lines, line-height
+  1.0, running most of the width. It is the loudest thing on the page and it
+  sits *under* the composition, not above it.
+- **Scroll cue** — small, bottom-left, below the type.
+
+Nothing is centred. The right half carries the object, the lower-left carries
+the voice.
+
+Below the hero the page alternates full-bleed **black** and **white** sections,
+each painting its own ground and text colours so they meet with no seam.
+
 ```
 --shell      1280px      content column at its widest
 --gutter     clamp(1.25rem, 5vw, 4.5rem)
 --measure    64ch        reading width for prose only
---radius     20px        cards
+--radius     20px        cards and the panel
 --radius-sm  8px
 --pill       999px
 --bar-h      72px
 ```
 
-**Sections are surfaces.** Each `section` paints its own ground edge to edge
-and carries its own text colours, so a black section and a white one can sit
-against each other with no seam. That is the whole rhythm of the page.
+**What goes where, for this site.** The reference sells a payments app; this
+one presents research, so the mapping is:
 
-**The hero** is black: light sweeps, the FID canvas as the object, the headline
-over it, and two floating cards that overlap the composition — one carrying the
-Larmor parameters, one carrying the standoff figure.
-
-**The index** is white: the entry list as rows, each a card that lifts on hover.
-
-**An entry page** alternates — black masthead with the title and metadata, then
-white for the content blocks.
-
-**Nothing centres by default.** The reference anchors its headlines to the left
-of the measure and lets the right side breathe. Centre only what is genuinely
-symmetrical.
-
----
+| Reference | Here |
+|---|---|
+| 3D sculpture in the panel | the **FID trace**, computed from stated parameters |
+| "Earnings € 1235.00" card | the **Larmor parameters** card |
+| "Payment Received!" pill | the **standoff** figure — the headline number of the work |
+| two-tone success card | the **cell** dimension, with its evidence chip |
+| "Speedy —Easy & Fast" | **OPTICALLY PUMPED / MAGNETOMETRY** |
 
 ## Motion
 

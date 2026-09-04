@@ -2,22 +2,61 @@
    Tokens only: every colour, size, radius, shadow and duration is var(--...). */
 
 /* ── Top bar ─────────────────────────────────────────────────────────── */
+/* Floats over the hero: no fill, no border. */
 .bar {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   height: var(--bar-h);
   z-index: 50;
-  background: var(--ink);
-  border-bottom: 1px solid var(--ink-line);
+  background: transparent;
 }
 
 .bar__inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 100%;
+  gap: var(--s3);
+}
+
+.bar__left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 100%;
+  gap: var(--s2);
+}
+
+.bar__mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--pill);
+  background: linear-gradient(90deg, var(--on-ink) 0 50%, transparent 50% 100%);
+  border: 1px solid var(--on-ink);
+  flex: none;
+}
+
+.bar__greet {
+  font-size: var(--t-label);
+  line-height: var(--lh-tight);
+}
+
+.bar__menu {
+  justify-self: center;
+  display: grid;
+  gap: 4px;
+  width: 2rem;
+}
+
+.bar__menu span {
+  display: block;
+  height: 1px;
+  background: var(--on-ink);
+}
+
+.bar__right {
+  justify-self: end;
+  display: flex;
+  gap: var(--s1);
 }
 
 /* ── Pill button ─────────────────────────────────────────────────────── */
@@ -50,67 +89,109 @@
 }
 
 /* ── Hero ────────────────────────────────────────────────────────────── */
+/* Asymmetric: light panel right, floating cards on its edges, display
+   type lower left, one wide soft sweep over the black ground. */
 .hero {
   position: relative;
-  min-height: calc(100vh - var(--bar-h));
-  display: flex;
-  align-items: center;
+  min-height: 100vh;
   overflow: hidden;
-  padding-top: var(--bar-h);
+  background: var(--ink);
+  color: var(--on-ink);
 }
 
 .hero__sweep {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
   background:
     radial-gradient(
-      120% 80% at 20% 10%,
+      140% 100% at 10% 0%,
       var(--ink-line) 0%,
       transparent 60%
     ),
     radial-gradient(
-      100% 70% at 80% 90%,
+      120% 90% at 100% 100%,
       var(--ink-line) 0%,
       transparent 65%
     );
 }
 
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.55;
-}
-
-.hero__inner {
+.hero__grid {
   position: relative;
   z-index: 2;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--s4);
+  padding-top: var(--bar-h);
+  padding-bottom: var(--s5);
+  min-height: 100vh;
 }
 
-.hero__meta {
-  font-family: var(--font-mono);
-  font-size: var(--t-small);
-  margin-top: var(--s3);
+.hero__voice {
+  grid-column: 1;
+  align-self: end;
 }
 
-.hero__note {
-  font-family: var(--font-mono);
-  font-size: var(--t-label);
-  margin-top: var(--s1);
+.hero__stage {
+  grid-column: 2;
+  position: relative;
+  justify-self: center;
+  width: 100%;
+  max-width: 26rem;
 }
 
-/* ── Floating card ───────────────────────────────────────────────────── */
+/* ── Panel and its object ────────────────────────────────────────────── */
+.panel {
+  position: relative;
+  border-radius: var(--radius);
+  background: var(--paper-soft);
+  color: var(--on-paper);
+  padding: var(--s4);
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--lift-high);
+}
+
+.panel__title {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  max-width: 12ch;
+}
+
+.panel__object {
+  position: absolute;
+  inset-inline: var(--s4);
+  top: 50%;
+  transform: translateY(-50%);
+  height: 45%;
+}
+
+.panel__object canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Floating cards ──────────────────────────────────────────────────── */
+/* They overlap the panel rather than sit beside it. */
 .card {
+  position: absolute;
+  z-index: 3;
   border-radius: var(--radius);
   padding: var(--s3);
-  box-shadow: var(--lift);
-  transition: transform var(--t-hover) var(--ease),
-    box-shadow var(--t-hover) var(--ease);
+  box-shadow: var(--lift-high);
+  transition: transform var(--t-hover) var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .card--light {
@@ -118,14 +199,24 @@
   color: var(--on-paper);
 }
 
-.card--dark {
-  background: var(--ink-raised);
-  color: var(--on-ink);
+.card--split {
+  background: var(--paper-raised);
+  color: var(--on-paper);
+  padding: 0;
+  overflow: hidden;
+  right: -12%;
+  bottom: 14%;
+  width: 46%;
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--lift-high);
+.card__top {
+  padding: var(--s3);
+}
+
+.card__bottom {
+  padding: var(--s3);
+  background: var(--ink);
+  color: var(--on-ink);
 }
 
 .card__k {
@@ -133,14 +224,7 @@
   font-size: var(--t-label);
   letter-spacing: var(--tr-label);
   text-transform: uppercase;
-}
-
-.card--light .card__k {
   color: var(--on-paper-faint);
-}
-
-.card--dark .card__k {
-  color: var(--on-ink-faint);
 }
 
 .card__v {
@@ -150,12 +234,81 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ── Hero card cluster ───────────────────────────────────────────────── */
-.hero__cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s2);
+.card--data {
+  left: -18%;
+  top: 28%;
+  width: 62%;
+}
+
+.card--pill {
+  right: -14%;
+  top: 12%;
+  width: 58%;
+  padding: var(--s2) var(--s3);
+  border-radius: var(--pill);
+}
+
+/* ── Voice and scroll cue ────────────────────────────────────────────── */
+.hero__display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  text-wrap: balance;
+  max-width: 100%;
+}
+
+.hero__meta {
+  font-family: var(--font-mono);
+  font-size: var(--t-small);
+  color: var(--on-ink-dim);
+  margin-top: var(--s3);
+}
+
+.hero__note {
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  color: var(--on-ink-faint);
+  margin-top: var(--s1);
+}
+
+.hero__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
   margin-top: var(--s4);
+  font-family: var(--font-mono);
+  font-size: var(--t-label);
+  letter-spacing: var(--tr-label);
+  text-transform: uppercase;
+  color: var(--on-ink-faint);
+}
+
+/* ── Narrow screens ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__voice {
+    grid-column: 1;
+    order: 2;
+  }
+
+  .hero__stage {
+    grid-column: 1;
+    order: 1;
+    max-width: 22rem;
+  }
+
+  .card--data,
+  .card--pill,
+  .card--split {
+    position: static;
+    width: 100%;
+    margin-top: var(--s2);
+  }
 }
 
 /* ── Index rows ──────────────────────────────────────────────────────── */
