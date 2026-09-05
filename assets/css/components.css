@@ -122,7 +122,7 @@
   z-index: 2;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
   align-items: center;
   gap: var(--s4);
   padding-top: var(--bar-h);
@@ -204,8 +204,8 @@
   color: var(--on-paper);
   padding: 0;
   overflow: hidden;
-  right: -12%;
-  bottom: 14%;
+  right: -22%;
+  bottom: 6%;
   width: 46%;
 }
 
@@ -235,14 +235,14 @@
 }
 
 .card--data {
-  left: -18%;
-  top: 28%;
+  left: -30%;
+  top: 46%;
   width: 62%;
 }
 
 .card--pill {
-  right: -14%;
-  top: 12%;
+  right: -20%;
+  top: 6%;
   width: 58%;
   padding: var(--s2) var(--s3);
   border-radius: var(--pill);

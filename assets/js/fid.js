@@ -51,12 +51,13 @@ export function mountFID(canvas) {
   let raf = null;
   let started = 0;
 
-  // The page is monochrome by intent and DESIGN.md gives the accent to the
-  // evidence chips alone, so the trace is drawn in the ground's own greys.
+  // The trace now sits inside the light panel, so it draws in the paper
+  // ground's greys. DESIGN.md gives the accent to the evidence chips alone,
+  // so it stays out of here.
   const colors = () => ({
-    trace: css(canvas, "--on-ink-dim") || "rgba(255,255,255,0.62)",
-    env: css(canvas, "--on-ink-faint") || "rgba(255,255,255,0.38)",
-    axis: css(canvas, "--ink-line") || "rgba(255,255,255,0.10)",
+    trace: css(canvas, "--on-paper") || "#000000",
+    env: css(canvas, "--on-paper-faint") || "rgba(0,0,0,0.38)",
+    axis: css(canvas, "--paper-line") || "rgba(0,0,0,0.10)",
   });
 
   function resize() {
@@ -103,11 +104,11 @@ export function mountFID(canvas) {
     // the trace, swept in
     const upto = Math.floor(n * sweep);
     ctx.strokeStyle = c.trace;
-    ctx.globalAlpha = 0.8;
+    ctx.globalAlpha = 1;
     ctx.lineWidth = 1.25;
     ctx.lineJoin = "round";
     ctx.shadowColor = c.trace;
-    ctx.shadowBlur = 6;
+    ctx.shadowBlur = 0;
     ctx.beginPath();
     for (let i = 0; i <= upto; i++) {
       const x = (i / n) * w;

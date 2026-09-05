@@ -17,32 +17,59 @@
   <body>
     <header class="bar">
       <div class="shell bar__inner">
-        <span class="label">SHP · OPM</span>
-        <a class="pill pill--ghost" href="#index">INDEX</a>
+        <div class="bar__left">
+          <span class="bar__mark" aria-hidden="true"></span>
+          <span class="bar__greet"><strong>박성현</strong>, OPM 연구<br>원자 자력계 · 광학 · 정밀 기구</span>
+        </div>
+        <span class="bar__menu" aria-hidden="true"><span></span><span></span></span>
+        <div class="bar__right">
+          <a class="pill pill--ghost" href="#index">INDEX</a>
+          <a class="pill pill--solid" href="mailto:tjdgus5160@gmail.com">CONTACT</a>
+        </div>
       </div>
     </header>
 
-    <section class="hero on-ink">
+    <section class="hero">
       <div class="hero__sweep" aria-hidden="true"></div>
-      <canvas class="hero__canvas" id="fid" aria-hidden="true"></canvas>
-      <div class="shell hero__inner">
-        <h1 class="display">
-          OPTICALLY<br />PUMPED<br />MAGNETOMETRY
-        </h1>
-        <p class="hero__meta mono dim" id="fid-label"></p>
-        <p class="hero__note faint">
-          위 파형은 자유유도감쇠(FID)를 명시된 파라미터로 계산한 것이다. 측정 데이터가 아니다.
-        </p>
-        <div class="hero__cards">
-          <div class="card card--light">
+      <div class="shell hero__grid">
+
+        <div class="hero__voice">
+          <h1 class="hero__display">OPTICALLY PUMPED<br>—MAGNETOMETRY</h1>
+          <p class="hero__meta mono" id="fid-label"></p>
+          <p class="hero__note">위 파형은 자유유도감쇠(FID)를 명시된 파라미터로 계산한 것이다. 측정 데이터가 아니다.</p>
+          <a class="hero__scroll" href="#index">↓ SCROLL</a>
+        </div>
+
+        <div class="hero__stage">
+          <div class="panel">
+            <p class="panel__title">원자를 재는 일은,<br>빛으로 한다.</p>
+            <div class="panel__object">
+              <canvas id="fid" aria-hidden="true"></canvas>
+            </div>
+          </div>
+
+          <div class="card card--light card--data">
+            <p class="card__k">LARMOR</p>
+            <p class="card__v mono">6.996 kHz</p>
+            <p class="card__k">B₀ 1.00 µT · T₂ 1.0 ms</p>
+          </div>
+
+          <div class="card card--light card--pill">
             <p class="card__k">STANDOFF</p>
             <p class="card__v mono">2.0 mm</p>
           </div>
-          <div class="card card--light">
-            <p class="card__k">CELL</p>
-            <p class="card__v mono">7.5 mm</p>
+
+          <div class="card card--split">
+            <div class="card__top">
+              <p class="card__k">VAPOR CELL</p>
+              <span class="chip chip--source-fact">SOURCE_FACT</span>
+            </div>
+            <div class="card__bottom">
+              <p class="card__v mono">7.5 mm</p>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 

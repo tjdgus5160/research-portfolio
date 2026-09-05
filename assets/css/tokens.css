@@ -49,7 +49,10 @@
   --font-body:    "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  --t-display: clamp(2.75rem, 7.5vw, 7rem);
+  /* MAGNETOMETRY is the longest word the hero has to carry. At 1512px the
+     left column is 888px wide, and the word needs 957px at 7rem — which is
+     what collapsed the grid. 6.5rem fits it with room to spare. */
+  --t-display: clamp(2.5rem, 5.5vw, 5.25rem);
   --t-h1:      clamp(2rem, 4vw, 3.5rem);
   --t-h2:      1.75rem;
   --t-h3:      1.125rem;
