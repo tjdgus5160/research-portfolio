@@ -1,0 +1,22 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>desktop preview</title>
+<style>
+  html,body{margin:0;background:#111}
+  #s{width:522px;height:328px;overflow:hidden}
+  #f{width:1512px;height:950px;border:0;transform-origin:0 0;transform:scale(.345);display:block}
+</style>
+<!--
+  Renders the site at a real 1512x950 desktop viewport, scaled down to fit the
+  522px preview pane.
+
+  The src is stamped with a fresh query on every load. Without it the browser
+  reuses a cached copy of /index.html no matter what the server says, and four
+  separate diagnoses in this project were made against a stale page before that
+  was noticed.
+-->
+<div id="s"><iframe id="f"></iframe></div>
+<script>
+  const target = new URLSearchParams(location.search).get("page") || "/index.html";
+  document.getElementById("f").src = target + (target.includes("?") ? "&" : "?") + "cb=" + Date.now();
+</script>
