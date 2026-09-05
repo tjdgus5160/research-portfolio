@@ -2,3 +2,10 @@
 node_modules/
 __pycache__/
 /.orca/
+
+# OpenClaw scaffolds these into an agent workspace; they are the agent's, not
+# the project's, and they got committed once by accident.
+/IDENTITY.md
+/SOUL.md
+/USER.md
+/.openclaw/
