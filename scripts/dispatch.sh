@@ -18,6 +18,18 @@ H="$1"; BRIEF="$2"; EXPECT="${3:-}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 AGENT="${OPENCLAW_AGENT:-portfolio}"
 
+# One active dispatch per terminal. Every "intermittent" dispatch failure in
+# this project was this: a previous dispatch left open. Settle it first.
+ACTIVE=$(orca orchestration worker-list --json 2>/dev/null | python3 -c "
+import json,sys
+try: d=json.load(sys.stdin)
+except Exception: raise SystemExit
+for w in d.get('result',{}).get('workers',[]):
+    if w.get('assignee_handle')=='$H' and w.get('status')=='dispatched':
+        print(w.get('id') or w.get('dispatch_id')); break
+" 2>/dev/null)
+[ -n "$ACTIVE" ] && orca orchestration worker-stop --dispatch "$ACTIVE" --json >/dev/null 2>&1
+
 SPEC="$(head -1 "$BRIEF" | sed 's/^#\s*//')"
 TASK=$(orca orchestration task-create --spec "$SPEC" --json | python3 -c 'import json,sys;print(json.load(sys.stdin)["result"]["task"]["id"])')
 DISP=$(orca orchestration dispatch --task "$TASK" --to "$H" --json | python3 -c 'import json,sys;print(json.load(sys.stdin)["result"]["dispatch"]["id"])')

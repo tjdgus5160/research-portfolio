@@ -55,8 +55,16 @@ def main() -> int:
     html = PAGE.read_text()
     checks = []
 
+    # The credit line names the design's origin on purpose. Attribution is not
+    # leftover copy, so it is excluded before the foreign-copy count.
+    CREDIT = "DESIGN AFTER WEBISOFT.COM · INDEPENDENTLY CODED"
+    hay = html.replace(CREDIT, "")
+    checks.append(("attribution", "the design credit line is present",
+                   CREDIT in html,
+                   "" if CREDIT in html else "the page must say where the design came from"))
+
     for s in FOREIGN:
-        n = html.count(s)
+        n = hay.count(s)
         checks.append(("foreign copy", f"{s!r} is gone", n == 0,
                        "" if n == 0 else f"still present {n}x"))
 
