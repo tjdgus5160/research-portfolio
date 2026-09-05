@@ -23,3 +23,29 @@ Scene/backdrop: Tall monumental concrete office buildings surround a rectangular
 Composition/framing: Wide landscape 3:2 photograph, camera looking directly upward; strong repeating square windows and converging architectural edges surround the central sky.
 Style/medium: Editorial architectural photography, crisp contrast, fine monochrome film grain.
 Constraints: No humans, no text, no watermark.
+
+## vapor-cell.png  (replaces glass-w.png)
+
+Mode: local ComfyUI, krea2_turbo_bf16 + krea2_darkbrush LoRA at 0.8, Qwen3-VL
+text encoder, 8 steps, cfg 1, euler/simple, 1536x1024. One generation, no
+variants or edits.
+
+Use case: stylized-concept
+Asset type: hero artwork for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 photorealistic 3D studio render of a rubidium
+vapor cell for an optically pumped magnetometer.
+Subject: a small precision cuboid cell of clear glass with polished chrome
+mounting collars on two opposing faces, floating in space, hard straight angular
+geometry, a faint warm amber glow contained inside the glass.
+Scene/backdrop: light dove-gray seamless studio space.
+Composition/framing: wide landscape 3:2, object centred and occupying about 55
+percent of the frame, three-quarter view, gently tilted.
+Lighting/mood: minimalist premium studio art direction, refined studio lighting,
+subtle reflected blue on the chrome edges.
+Materials/textures: physically convincing clear glass, polished chrome, precise
+hard geometry.
+Constraints: no text, no watermark, no extra objects.
+
+The art direction deliberately matches glass-w.png — same studio, same
+materials, same framing — so the section it sits in is unchanged in everything
+but subject.

@@ -19,6 +19,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+ALLOW = Path(__file__).resolve().parent / "structure-allow.txt"
 
 # Attributes that describe structure or styling. `src`/`href` are included so a
 # swapped image or a rewired link is reported rather than slipping through as
@@ -102,10 +103,23 @@ def main() -> int:
 
         if rel.endswith(".html"):
             a, b = skeleton(old), skeleton(new)
+            allowed = set()
+            if ALLOW.is_file():
+                for line in ALLOW.read_text().splitlines():
+                    line = line.split("#", 1)[0].strip()
+                    if line:
+                        allowed.add(line)
             if a == b:
                 checks.append((rel, True, f"{len(a)} structural nodes unchanged"))
             else:
-                diffs = [(i, x, y) for i, (x, y) in enumerate(zip(a, b)) if x != y]
+                raw = [(i, x, y) for i, (x, y) in enumerate(zip(a, b)) if x != y]
+                # A deliberate change passes only if it is written down.
+                diffs = [(i, x, y) for i, x, y in raw
+                         if f"{x.strip()} -> {y.strip()}" not in allowed]
+                if not diffs and len(a) == len(b):
+                    checks.append((rel, True,
+                                   f"{len(a)} nodes, {len(raw)} allowed change(s) in structure-allow.txt"))
+                    continue
                 detail = f"{len(diffs)} node(s) differ; first at {diffs[0][0]}: {diffs[0][1].strip()[:60]!r} -> {diffs[0][2].strip()[:60]!r}" \
                     if diffs else f"node count {len(a)} -> {len(b)}"
                 checks.append((rel, False, detail))
