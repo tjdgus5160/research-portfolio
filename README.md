@@ -1,74 +1,29 @@
-# research-portfolio
+# Webisoft 메인 페이지 디자인 재현
 
-박성현 · OPM(광펌핑 자력계) 연구 포트폴리오.
+## 실행
 
-프레임워크 없음. 빌드 도구 없음. HTML, CSS, ES 모듈뿐이다.
+`index.html`을 브라우저로 열면 됩니다. 별도의 설치, API 키, 서버 없이 동작합니다.
 
----
+- `index.html`: 문서 구조와 콘텐츠
+- `styles.css`: 색상, 타이포그래피, 레이아웃, 반응형 규칙과 애니메이션
+- `script.js`: 메뉴, 탭, 카드 슬라이더, 문의 창과 파일 다운로드
+- `assets/`: 생성한 이미지와 직접 작성한 파비콘
+- `assets/prompts.md`: 이미지 생성 도구와 정확한 프롬프트 기록
 
-## 연구 하나 추가하기
+## 구현 범위
 
-1. `content/entries/03-무엇.json` 을 쓴다 — 형식은 **[CONTENT.md](CONTENT.md)**.
-2. `content/index.json` 에 한 줄 추가한다.
-3. 확인하고 빌드한다.
+https://webisoft.com/ 의 메인 페이지 화면을 참고해 코드를 새로 작성했습니다. 적갈색 첫 화면, 검은 가로선 모션, 큰 워드마크, 고정 메뉴, 유리 이미지 구간, 서비스 목록, 고객 카드, 접근 방식 탭, 사진 배경 구간과 푸터를 포함합니다.
 
-```bash
-python3 scripts/validators/validate_content.py   # 증거 등급·필수 필드 검사
-python3 scripts/build_site.py                    # 항목 페이지와 인덱스 생성
-python3 scripts/validators/validate_site.py      # 토큰·마크업·접근성 검사
-```
+원본 HTML·CSS·JS나 이미지 파일을 다운로드해 재사용하지 않았습니다. 3D 이미지와 건축 이미지는 새로 생성했고, 본문 문구도 새로 작성했습니다. 따라서 원본과 픽셀 단위로 동일한 복제본은 아닙니다. 브랜드명은 디자인 참고 대상을 나타내며, 페이지 하단에 공식 사이트가 아님을 표시했습니다. 원본의 별도 하위 페이지와 실제 서버 기능은 포함하지 않습니다.
 
-HTML은 손대지 않는다. `index.html` 의 인덱스 행과 `entry-*.html` 은 전부 생성물이다.
+문의 버튼에서 작성한 내용은 외부에 전송되지 않습니다. 사용자가 다운로드 버튼을 누르면 텍스트 파일이 생성됩니다. 폼 내용은 브라우저 저장소에도 저장하지 않습니다.
 
-## 미리보기
+## 수정
 
-```bash
-python3 -m http.server 8765
-open http://127.0.0.1:8765/index.html
-```
+`styles.css` 상단 `:root`의 `--clay`, `--ink`, `--silver`로 기본 색상을 바꿀 수 있습니다. 문구와 브랜드명은 `index.html`에서 바꿉니다. 이미지를 교체할 때에는 HTML의 `src`, `alt`, `width`, `height`도 함께 수정하세요.
 
-`file://` 로는 열지 말 것. ES 모듈이 로드되지 않는다.
+가로선 애니메이션은 CSS의 `scan-shift`, 하단 흐르는 문구는 `marquee`로 정의되어 있습니다. 운영체제의 동작 줄이기 설정을 존중합니다. 탭은 좌우 방향키와 Home/End, 메뉴와 문의 창은 Escape 키로 조작할 수 있습니다.
 
----
+## 검증
 
-## 무엇이 어디에 있나
-
-```
-DESIGN.md                    디자인 스펙. 색·타입·레이아웃의 근거가 전부 여기 있다
-CONTENT.md                   연구 항목 형식
-AGENTS.md                    에이전트 작업 규칙
-
-index.html                   손으로 관리. 단 인덱스 행 구간은 생성물
-entry-<id>.html              전부 생성물 — 직접 고치지 말 것
-
-assets/css/tokens.css        디자인 시스템. 색·크기·시간은 전부 여기서만 정의한다
-assets/css/base.css          리셋, 문서 타이포, 레이아웃 프리미티브
-assets/css/components.css    히어로 · 인덱스 · 항목 · 블록 · 칩
-assets/js/fid.js             히어로의 FID 파형. 명시된 파라미터로 계산한다
-assets/js/site.js            스크롤 리빌
-
-content/index.json           항목 목록
-content/entries/*.json       항목 하나당 파일 하나
-content/index-rows.html      생성물
-
-scripts/build_site.py        JSON → HTML
-scripts/blocks.py            블록 8종의 렌더러
-scripts/validators/          게이트
-scripts/doctor.sh            작업 전 환경 점검
-```
-
----
-
-## 규칙 두 개
-
-**색·크기·시간은 `tokens.css` 밖에서 선언하지 않는다.** hex 코드나 px 폰트 크기가
-다른 파일에 있으면 `validate_site.py` 가 실패시킨다. 필요한 값에 토큰이 없다면
-그건 디자인 결정이지 구현 결정이 아니다.
-
-**측정한 것과 가정한 것을 섞지 않는다.** 그림·표·수식·파라미터는 모두 증거 등급을
-갖는다 — `SOURCE_FACT` / `CALCULATED` / `INFERRED` / `ILLUSTRATIVE`. 렌더링을
-측정처럼 보이게 두는 것은 스타일 선택이 아니라 결함이고, `validate_content.py` 가
-잡는다.
-
-히어로의 FID 파형도 같은 규칙을 따른다. 실제 파라미터로 계산한 것이고,
-페이지에 "측정 데이터가 아니다"라고 적혀 있다.
+JavaScript 구문 검사, CSS 파싱, 내부 링크·ID·이미지 경로 검사와 배포용 빌드를 통과했습니다. 자동 브라우저 동작 테스트나 픽셀 비교는 수행하지 않았습니다.

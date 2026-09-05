@@ -1,116 +1,675 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>박성현 — OPM 연구</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#cc604e" />
+    <meta
+      name="description"
+      content="A self-contained, independently coded Webisoft homepage design study, with original imagery and text."
     />
-    <link rel="stylesheet" href="assets/css/tokens.css" />
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
+    <title>Webisoft — Design Study</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <header class="bar">
-      <div class="shell bar__inner">
-        <div class="bar__left">
-          <span class="bar__mark" aria-hidden="true"></span>
-          <span class="bar__greet"><strong>박성현</strong>, OPM 연구<br>원자 자력계 · 광학 · 정밀 기구</span>
-        </div>
-        <span class="bar__menu" aria-hidden="true"><span></span><span></span></span>
-        <div class="bar__right">
-          <a class="pill pill--ghost" href="#index">INDEX</a>
-          <a class="pill pill--solid" href="mailto:tjdgus5160@gmail.com">CONTACT</a>
-        </div>
-      </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="identity" id="identity">
+      <a class="logo" href="#home" aria-label="Webisoft home">W<span>®</span></a
+      ><a class="identity-label" href="#home"
+        ><span>WBSFT®</span><span>DEVELOPMENT<br />LABS</span></a
+      ><button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="site-menu"
+      >
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
+        <a href="#services"><small>01</small>Services<span>↗</span></a
+        ><a href="#clients"><small>02</small>Projects<span>↗</span></a
+        ><a href="#expertise"><small>03</small>Expertise<span>↗</span></a
+        ><a href="#contact"><small>04</small>Contact<span>↗</span></a
+        ><a class="menu-contact" href="#contact"
+          ><small>CONTACT US</small><strong>Let's talk</strong><span>↗</span></a
+        >
+      </nav>
     </header>
-
-    <section class="hero">
-      <div class="hero__sweep" aria-hidden="true"></div>
-      <div class="shell hero__grid">
-
-        <div class="hero__voice">
-          <h1 class="hero__display">OPTICALLY PUMPED<br>—MAGNETOMETRY</h1>
-          <p class="hero__meta mono" id="fid-label"></p>
-          <p class="hero__note">위 파형은 자유유도감쇠(FID)를 명시된 파라미터로 계산한 것이다. 측정 데이터가 아니다.</p>
-          <a class="hero__scroll" href="#index">↓ SCROLL</a>
+    <div class="menu-shade" hidden></div>
+    <main id="main">
+      <section id="home" class="hero">
+        <div class="hero-top">
+          <p>A SPECIALIST TEAM OF<br />DIGITAL PRODUCT ENGINEERS</p>
+          <a class="button dark" href="#contact">LET'S TALK <span>↗</span></a>
         </div>
-
-        <div class="hero__stage">
-          <div class="panel">
-            <p class="panel__title">원자를 재는 일은,<br>빛으로 한다.</p>
-            <div class="panel__object">
-              <canvas id="fid" aria-hidden="true"></canvas>
-            </div>
+        <div class="hero-stage">
+          <div class="technical-row">
+            <span>WBSFT®</span><span>MTL (CAN)</span><span>/0026</span
+            ><span>ENGINEERING_</span>
           </div>
-
-          <div class="card card--light card--data">
-            <p class="card__k">LARMOR</p>
-            <p class="card__v mono">6.996 kHz</p>
-            <p class="card__k">B₀ 1.00 µT · T₂ 1.0 ms</p>
-          </div>
-
-          <div class="card card--light card--pill">
-            <p class="card__k">STANDOFF</p>
-            <p class="card__v mono">2.0 mm</p>
-          </div>
-
-          <div class="card card--split">
-            <div class="card__top">
-              <p class="card__k">VAPOR CELL</p>
-              <span class="chip chip--source-fact">SOURCE_FACT</span>
-            </div>
-            <div class="card__bottom">
-              <p class="card__v mono">7.5 mm</p>
-            </div>
+          <div class="line-field" aria-hidden="true"></div>
+          <div class="hero-bottom">
+            <h1>WEBISOFT<span>®</span></h1>
+            <a class="explore-link" href="#about"
+              ><span>/</span><span>EXPLORE ↓</span></a
+            >
           </div>
         </div>
+      </section>
 
+      <section class="brand-scene" aria-label="Glass monogram">
+        <img
+          src="assets/glass-w.png"
+          alt="An angular glass W with polished metallic edges floating in a gray studio"
+          width="1536"
+          height="1024"
+          loading="lazy"
+        />
+        <div class="scene-caption eyebrow">
+          <span>WBSFT®</span><span>DIGITAL SYSTEMS<br />HUMAN AMBITION</span
+          ><span>/0026<br />ENGINEERING_</span>
+        </div>
+      </section>
+      <section id="about" class="about section-pad">
+        <div class="eyebrow">WHO WE ARE /</div>
+        <h2 class="reveal">
+          Independent minds.<br />Connected by a shared<br />obsession with
+          building<br /><span>what comes next.</span>
+        </h2>
+        <a href="#contact" class="button about-cta" data-contact
+          >CONTACT US <span>↗</span></a
+        >
+      </section>
+      <section id="services" class="services section-pad">
+        <div class="section-heading">
+          <span class="eyebrow">/ SERVICES</span>
+          <h2>Technology moves fast.<br />We build for what follows.</h2>
+          <span class="eyebrow count">/005</span>
+        </div>
+        <article class="service-row" id="service-1">
+          <span class="eyebrow service-number">S/001</span>
+          <div class="service-body">
+            <h3>Advisory</h3>
+            <p>
+              A clear technical direction, from the very first decision. Bring
+              experienced engineering leadership to your roadmap, architecture
+              and development process.
+            </p>
+            <details class="service-details">
+              <summary class="button">
+                EXPLORE 9 SERVICES <span class="plus">+</span>
+              </summary>
+              <ul>
+                <li>Technical strategy</li>
+                <li>Architecture review</li>
+                <li>Fractional leadership</li>
+                <li>Technology audit</li>
+                <li>Product discovery</li>
+                <li>Cloud planning</li>
+                <li>Team enablement</li>
+                <li>Delivery planning</li>
+                <li>Security review</li>
+              </ul>
+            </details>
+          </div>
+          <div class="service-visual" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="currentColor">
+              <circle cx="85" cy="85" r="43" />
+              <circle cx="155" cy="85" r="43" />
+              <circle cx="85" cy="155" r="43" />
+              <circle cx="155" cy="155" r="43" />
+              <circle cx="120" cy="120" r="27" fill="#eff0f3" /></svg
+            ><span>FIG. 001 / ADVISORY</span>
+          </div>
+        </article>
+        <article class="service-row" id="service-2">
+          <span class="eyebrow service-number">S/002</span>
+          <div class="service-body">
+            <h3>Blockchain</h3>
+            <p>
+              Build trust into the system. Connect decentralized infrastructure,
+              resilient smart contracts and intuitive products with carefully
+              considered engineering.
+            </p>
+            <details class="service-details">
+              <summary class="button">
+                EXPLORE 17 SERVICES <span class="plus">+</span>
+              </summary>
+              <ul>
+                <li>Smart contracts</li>
+                <li>Protocol design</li>
+                <li>Digital assets</li>
+                <li>Wallet integration</li>
+                <li>Token systems</li>
+                <li>On-chain analytics</li>
+                <li>Security engineering</li>
+                <li>Layer 2 systems</li>
+                <li>DApp development</li>
+                <li>Identity</li>
+                <li>Payments</li>
+                <li>DeFi platforms</li>
+                <li>NFT infrastructure</li>
+                <li>Indexing</li>
+                <li>Cross-chain tools</li>
+                <li>Zero-knowledge systems</li>
+                <li>Protocol audits</li>
+              </ul>
+            </details>
+          </div>
+          <div class="service-visual" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="currentColor">
+              <g fill="none" stroke="currentColor" stroke-width="17">
+                <ellipse
+                  cx="120"
+                  cy="120"
+                  rx="90"
+                  ry="39"
+                  transform="rotate(45 120 120)"
+                />
+                <ellipse
+                  cx="120"
+                  cy="120"
+                  rx="90"
+                  ry="39"
+                  transform="rotate(-45 120 120)"
+                />
+              </g></svg
+            ><span>FIG. 002 / BLOCKCHAIN</span>
+          </div>
+        </article>
+        <article class="service-row" id="service-3">
+          <span class="eyebrow service-number">S/003</span>
+          <div class="service-body">
+            <h3>Product Development</h3>
+            <p>
+              Turn a promising idea into a product people use. Connect research,
+              design and engineering through prototypes, first releases and
+              every iteration that follows.
+            </p>
+            <details class="service-details">
+              <summary class="button">
+                EXPLORE 7 SERVICES <span class="plus">+</span>
+              </summary>
+              <ul>
+                <li>Product strategy</li>
+                <li>Interface design</li>
+                <li>Rapid prototypes</li>
+                <li>MVP development</li>
+                <li>Web applications</li>
+                <li>Mobile applications</li>
+                <li>Product maintenance</li>
+              </ul>
+            </details>
+          </div>
+          <div class="service-visual" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="currentColor">
+              <path
+                d="M40 35h55v55H40zm60 0h55v55h-55zm60 0h40v55h-40zM40 95h55v55H40zm60 0h55v55h-55zm60 0h40v55h-40zM40 155h55v55H40zm60 0h55v55h-55zm60 0h40v55h-40z"
+              /></svg
+            ><span>FIG. 003 / PRODUCT DEVELOPMENT</span>
+          </div>
+        </article>
+        <article class="service-row" id="service-4">
+          <span class="eyebrow service-number">S/004</span>
+          <div class="service-body">
+            <h3>Enterprise Software</h3>
+            <p>
+              Make complex operations work together. Develop dependable
+              platforms, connect the tools your teams rely on and create room
+              for your business to grow.
+            </p>
+            <details class="service-details">
+              <summary class="button">
+                EXPLORE 9 SERVICES <span class="plus">+</span>
+              </summary>
+              <ul>
+                <li>Custom platforms</li>
+                <li>System integration</li>
+                <li>Workflow automation</li>
+                <li>ERP development</li>
+                <li>Cloud migration</li>
+                <li>Data infrastructure</li>
+                <li>Internal tools</li>
+                <li>Platform support</li>
+                <li>Quality engineering</li>
+              </ul>
+            </details>
+          </div>
+          <div class="service-visual" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="currentColor">
+              <path d="M35 160h40v-40h40V80h40V40h50v165H35z" /></svg
+            ><span>FIG. 004 / ENTERPRISE SOFTWARE</span>
+          </div>
+        </article>
+        <article class="service-row" id="service-5">
+          <span class="eyebrow service-number">S/005</span>
+          <div class="service-body">
+            <h3>Artificial Intelligence (AI)</h3>
+            <p>
+              Put intelligence to practical use. Explore the right
+              opportunities, connect useful models to your data and build
+              reliable tools that improve everyday work.
+            </p>
+            <details class="service-details">
+              <summary class="button">
+                EXPLORE 10 SERVICES <span class="plus">+</span>
+              </summary>
+              <ul>
+                <li>AI discovery</li>
+                <li>Model integration</li>
+                <li>Knowledge assistants</li>
+                <li>Document processing</li>
+                <li>Workflow agents</li>
+                <li>Predictive systems</li>
+                <li>Data pipelines</li>
+                <li>Model evaluation</li>
+                <li>Computer vision</li>
+                <li>AI operations</li>
+              </ul>
+            </details>
+          </div>
+          <div class="service-visual" aria-hidden="true">
+            <svg viewBox="0 0 240 240" fill="currentColor">
+              <g fill="none" stroke="currentColor" stroke-width="30">
+                <path d="M120 25v190M25 120h190M53 53l134 134M53 187 187 53" />
+              </g></svg
+            ><span>FIG. 005 / ARTIFICIAL INTELLIGENCE (AI)</span>
+          </div>
+        </article>
+      </section>
+      <section id="clients" class="clients section-pad">
+        <div class="section-heading">
+          <span class="eyebrow">/ OUR CLIENTS</span>
+          <h2>Built around<br />your ambitions.</h2>
+          <div class="carousel-controls">
+            <button
+              class="button"
+              id="client-prev"
+              aria-label="Previous client type"
+            >
+              ←</button
+            ><button
+              class="button"
+              id="client-next"
+              aria-label="Next client type"
+            >
+              →
+            </button>
+          </div>
+        </div>
+        <div
+          class="client-track"
+          tabindex="0"
+          aria-label="Client types. Use arrow keys to browse"
+        >
+          <article class="client-card">
+            <div class="client-image">
+              <span class="eyebrow">I/001</span
+              ><img
+                src="assets/concrete-courtyard.png"
+                alt="Modern concrete architecture seen from below"
+                width="1536"
+                height="1024"
+                loading="lazy"
+              />
+            </div>
+            <div class="client-copy">
+              <span class="eyebrow">01 — FROM IDEA TO IMPACT</span>
+              <h3>Startups</h3>
+              <p>
+                Find the shortest path from an early idea to a useful product.
+                Build a focused first release, learn from real users, and
+                develop a foundation that grows with you.
+              </p>
+              <a class="button" href="#contact" data-contact
+                >START SOMETHING <span>↗</span></a
+              >
+            </div>
+          </article>
+          <article class="client-card">
+            <div class="client-image">
+              <span class="eyebrow">I/002</span
+              ><img
+                class="crop-two"
+                src="assets/concrete-courtyard.png"
+                alt="Repeating windows of a monumental office building"
+                width="1536"
+                height="1024"
+                loading="lazy"
+              />
+            </div>
+            <div class="client-copy">
+              <span class="eyebrow">02 — BUILT FOR COMPLEXITY</span>
+              <h3>Enterprises</h3>
+              <p>
+                Connect ambitious teams with dependable technology. Bring
+                separate systems together, simplify operations and turn the
+                scale of your organization into an advantage.
+              </p>
+              <a class="button" href="#contact" data-contact
+                >MAKE THE NEXT MOVE <span>↗</span></a
+              >
+            </div>
+          </article>
+          <article class="client-card">
+            <div class="client-image">
+              <span class="eyebrow">I/003</span
+              ><img
+                src="assets/glass-w.png"
+                alt="Transparent glass and chrome geometric form"
+                width="1536"
+                height="1024"
+                loading="lazy"
+              />
+            </div>
+            <div class="client-copy">
+              <span class="eyebrow">03 — NEW POSSIBILITIES</span>
+              <h3>Web 3 Companies</h3>
+              <p>
+                Make decentralized ideas tangible. Engineer robust foundations
+                and approachable experiences that help people connect with a new
+                generation of digital products.
+              </p>
+              <a class="button" href="#contact" data-contact
+                >EXPLORE THE POSSIBILITIES <span>↗</span></a
+              >
+            </div>
+          </article>
+        </div>
+        <div class="carousel-bottom eyebrow">
+          <span>← DRAG TO EXPLORE →</span
+          ><span id="client-counter" aria-live="polite">01 / 03</span>
+        </div>
+      </section>
+      <section id="expertise" class="expertise section-pad">
+        <div class="tab-list" role="tablist" aria-label="Our approach">
+          <button
+            class="button"
+            role="tab"
+            id="tab-expertise"
+            aria-controls="panel-expertise"
+            aria-selected="true"
+            tabindex="0"
+          >
+            EXPERTISE</button
+          ><button
+            class="button"
+            role="tab"
+            id="tab-values"
+            aria-controls="panel-values"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            VALUES</button
+          ><button
+            class="button"
+            role="tab"
+            id="tab-method"
+            aria-controls="panel-method"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            METHODOLOGY
+          </button>
+        </div>
+        <div
+          class="approach-panel"
+          id="panel-expertise"
+          role="tabpanel"
+          aria-labelledby="tab-expertise"
+        >
+          <span class="panel-slash">/</span>
+          <h2>Expertise</h2>
+          <span class="panel-number" aria-hidden="true">1</span>
+          <div class="approach-rows">
+            <article>
+              <span class="eyebrow">01</span>
+              <h3>FORWARD THINKING</h3>
+              <p>
+                New tools, tested thinking. We connect emerging technology with
+                useful applications.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">02</span>
+              <h3>DIRECT COLLABORATION</h3>
+              <p>
+                Work directly with the people building your product. Shared
+                context makes better decisions possible.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">03</span>
+              <h3>ENGINEERING DEPTH</h3>
+              <p>
+                Bring focused expertise to the complicated parts, from the
+                architecture to the final detail.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div
+          class="approach-panel"
+          id="panel-values"
+          role="tabpanel"
+          aria-labelledby="tab-values"
+          hidden
+        >
+          <span class="panel-slash">/</span>
+          <h2>Values</h2>
+          <span class="panel-number" aria-hidden="true">2</span>
+          <div class="approach-rows">
+            <article>
+              <span class="eyebrow">01</span>
+              <h3>ADAPTABILITY</h3>
+              <p>
+                Make space for new information. Adjust the plan as your product
+                and business develop.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">02</span>
+              <h3>CRAFT</h3>
+              <p>
+                Care about what people see and everything they do not. Quality
+                lives in both.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">03</span>
+              <h3>CURIOSITY</h3>
+              <p>
+                Ask useful questions, examine assumptions and keep looking for a
+                better way forward.
+              </p>
+            </article>
+          </div>
+        </div>
+        <div
+          class="approach-panel"
+          id="panel-method"
+          role="tabpanel"
+          aria-labelledby="tab-method"
+          hidden
+        >
+          <span class="panel-slash">/</span>
+          <h2>Methodology</h2>
+          <span class="panel-number" aria-hidden="true">3</span>
+          <div class="approach-rows">
+            <article>
+              <span class="eyebrow">01</span>
+              <h3>UNDERSTAND</h3>
+              <p>
+                Start with the people, the problem and the outcome. Define what
+                a successful product needs to do.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">02</span>
+              <h3>BUILD TOGETHER</h3>
+              <p>
+                Bring design and engineering into the same conversation. Share
+                working progress throughout.
+              </p>
+            </article>
+            <article>
+              <span class="eyebrow">03</span>
+              <h3>KEEP IMPROVING</h3>
+              <p>
+                Release, observe and refine. Build systems that can evolve
+                alongside the people using them.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="manifesto">
+        <img
+          src="assets/concrete-courtyard.png"
+          width="1536"
+          height="1024"
+          alt="An open sky framed by geometric concrete architecture"
+          loading="lazy"
+        />
+        <div class="manifesto-copy">
+          <span class="eyebrow">/ A SHARED PERSPECTIVE</span>
+          <p>
+            Good software starts<br />with people who care.<br />About the
+            problem.<br />About the details.<br />About what comes next.
+          </p>
+          <span class="eyebrow"
+            >BUILT WITH INTENTION.<br />DESIGNED TO EVOLVE.</span
+          >
+        </div>
+      </section>
+      <section id="contact" class="contact section-pad">
+        <div class="contact-marquee" aria-hidden="true">
+          <span>YOUR NEXT CHAPTER STARTS HERE ↗&nbsp;</span
+          ><span>YOUR NEXT CHAPTER STARTS HERE ↗&nbsp;</span>
+        </div>
+        <h2 class="sr-only">Your next chapter starts here</h2>
+        <div class="contact-bottom">
+          <p>Big ambitions.<br />Thoughtfully engineered.</p>
+          <a class="button dark" href="#inquiry" data-contact
+            >LET'S TALK <span>↗</span></a
+          >
+        </div>
+        <div class="technical-row">
+          <span>WBSFT®</span><span>MTL (CAN)</span><span>/0026</span
+          ><span>FORWARD_</span>
+        </div>
+        <div class="footer-wordmark" aria-hidden="true">
+          WEBISOFT<span>®</span>
+        </div>
+      </section>
+    </main>
+    <footer class="footer section-pad">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home">Webisoft<span>®</span></a
+          ><span class="eyebrow">INDEPENDENT<br />DESIGN STUDY / 2026</span>
+        </div>
+        <div class="footer-links">
+          <h2>SERVICES</h2>
+          <a href="#service-1">Advisory</a><a href="#service-2">Blockchain</a
+          ><a href="#service-3">Product Development</a
+          ><a href="#service-4">Enterprise Software</a
+          ><a href="#service-5">Artificial Intelligence (AI)</a>
+        </div>
+        <div class="footer-links">
+          <h2>EXPLORE</h2>
+          <a href="#about">About</a><a href="#clients">Who we work with</a
+          ><a href="#expertise">Our approach</a
+          ><a href="#contact" data-contact>Start a conversation ↗</a>
+        </div>
+        <div class="footer-office">
+          <h2>OFFICES</h2>
+          <div class="office-tabs" role="tablist" aria-label="Office locations">
+            <button
+              role="tab"
+              id="office-canada"
+              aria-selected="true"
+              aria-controls="office-ca"
+              tabindex="0"
+            >
+              CANADA</button
+            ><button
+              role="tab"
+              id="office-us"
+              aria-selected="false"
+              aria-controls="office-usa"
+              tabindex="-1"
+            >
+              UNITED STATES
+            </button>
+          </div>
+          <div id="office-ca" role="tabpanel" aria-labelledby="office-canada">
+            <p>Montréal, Québec<br />Canada</p>
+            <span class="eyebrow office-clock" data-zone="America/Toronto"
+              >LOCAL TIME</span
+            >
+          </div>
+          <div
+            id="office-usa"
+            role="tabpanel"
+            aria-labelledby="office-us"
+            hidden
+          >
+            <p>Miami, Florida<br />United States</p>
+            <span class="eyebrow office-clock" data-zone="America/New_York"
+              >LOCAL TIME</span
+            >
+          </div>
+        </div>
       </div>
-    </section>
-
-    <section class="section on-paper" id="index">
-      <div class="shell">
-        <h2 class="label dim">INDEX</h2>
-        <div class="index">
-          <!-- BUILD:INDEX_ROWS -->
-<a class="index__row" href="entry-01-rb-cell-optics.html">
-  <span class="index__num mono">01</span>
-  <span class="index__title">Rb 증기셀 광학계</span>
-  <span class="index__year mono">2026</span>
-  <span class="index__tags mono">optics · vapor cell · polarimetry</span>
-  <span class="index__arrow" aria-hidden="true">→</span>
-</a>
-<a class="index__row" href="entry-02-balanced-polarimeter.html">
-  <span class="index__num mono">02</span>
-  <span class="index__title">균형 편광계 설계</span>
-  <span class="index__year mono">2025</span>
-  <span class="index__tags mono">polarimetry · parametric CAD · FEM</span>
-  <span class="index__arrow" aria-hidden="true">→</span>
-</a>
-<!-- /BUILD:INDEX_ROWS -->
-        </div>
-      </div>
-    </section>
-
-    <footer class="on-ink">
-      <div class="shell">
-        <p class="label faint">박성현 · SEOUL, KR</p>
+      <div class="footer-bottom eyebrow">
+        <span>© 2026 — INDEPENDENT IMPLEMENTATION</span
+        ><span>INSPIRED BY WEBISOFT · NOT THE OFFICIAL WEBSITE</span
+        ><a href="#home">BACK TO TOP ↑</a>
       </div>
     </footer>
-
-    <script type="module">
-      import { mountFID, label } from "./assets/js/fid.js";
-      const c = document.getElementById("fid");
-      if (c) {
-        mountFID(c);
-        document.getElementById("fid-label").textContent = label();
-      }
-    </script>
-    <script type="module" src="assets/js/site.js"></script>
+    <dialog id="inquiry" class="inquiry-dialog" aria-labelledby="inquiry-title">
+      <button type="button" class="dialog-close" aria-label="Close inquiry">
+        ×</button
+      ><span class="eyebrow">/ START A CONVERSATION</span>
+      <h2 id="inquiry-title">What are you<br />building next?</h2>
+      <form id="inquiry-form">
+        <label
+          >Your name<input
+            name="name"
+            autocomplete="name"
+            required
+            maxlength="100"
+            placeholder="Alex Morgan" /></label
+        ><label
+          >Email address<input
+            name="email"
+            autocomplete="email"
+            type="email"
+            required
+            maxlength="254"
+            placeholder="you@company.com" /></label
+        ><label
+          >A little about your project<textarea
+            name="project"
+            rows="3"
+            required
+            maxlength="3000"
+            placeholder="Your idea, your challenge, your next step…"
+          ></textarea>
+        </label>
+        <p class="form-note">
+          Design study: your details stay in this browser. Download a project
+          brief to keep a copy; nothing is sent.
+        </p>
+        <button class="button dark" type="submit">
+          DOWNLOAD PROJECT BRIEF <span>↓</span>
+        </button>
+        <p class="form-result" role="status"></p>
+      </form>
+    </dialog>
   </body>
 </html>
