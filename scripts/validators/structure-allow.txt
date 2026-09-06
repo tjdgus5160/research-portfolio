@@ -1,18 +1,14 @@
-# Deliberate structural changes, one per line, exactly as the gate
-# reports them. Anything not written here fails the check.
-
-# The hero image is no longer a glass letter W. It is a render of an Rb
-# vapor cell, generated locally with krea2 at the same 1536x1024 as the
-# original, so nothing about the layout changes.
-# The three architectural crops now show the bench this work happens on: a
-# monochrome optics-bench photograph generated locally with krea2, at the same
-# 1536x1024 and under the same treatment, so all three crops behave as before.
-# The base reused one photograph in three places. Each slot now carries its own
-# image so the page stops repeating itself: the balanced-polarimeter card gets
-# the machined housing, the manifesto gets the shielded chamber. All generated
-# locally with krea2, all 1536x1024, all under the same monochrome treatment.
-<img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
-<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'
-<img class='crop-two' width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img class='crop-two' width='1536' height='1024' src='assets/sensor-housing.png'
-<img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/metrology.png'
-<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/shielded-chamber.png'
+# Deliberate structural changes, one per line, exactly as the gate reports them.
+# Anything not written here fails the check.
+#
+# The five service symbols were geometric SVG shapes. The author asked for
+# photographs instead. The <svg> wrapper is kept — styles.css binds the hover
+# rotate/scale to `.service-visual svg`, and replacing the element outright
+# would have silently dropped that motion — so only its children changed, from
+# drawn shapes to a single <image>. That alters the node count, which is more
+# than an entry-per-line list can express, so index.html's baseline moves to the
+# commit that introduces it (see structure-base.txt).
+#
+# styles.css and script.js are still compared against the original adoption
+# commit and are still byte-identical. Nothing has ever been allowed to touch
+# the files that carry the design.

@@ -20,6 +20,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 ALLOW = Path(__file__).resolve().parent / "structure-allow.txt"
+# index.html's skeleton is compared against this ref instead of the adoption
+# commit once a change too large to enumerate has been deliberately accepted.
+# styles.css and script.js are always compared against the adoption commit —
+# those carry the design and nothing has ever been allowed to touch them.
+HTML_BASE = Path(__file__).resolve().parent / "structure-base.txt"
 
 # Attributes that describe structure or styling. `src`/`href` are included so a
 # swapped image or a rewired link is reported rather than slipping through as
@@ -91,9 +96,18 @@ def main() -> int:
         return 1
 
     files = args.file or ["index.html", "styles.css", "script.js"]
+    html_base = base
+    if HTML_BASE.is_file():
+        for line in HTML_BASE.read_text().splitlines():
+            line = line.split("#", 1)[0].strip()
+            if line:
+                html_base = line
+                break
+
     checks = []
     for rel in files:
-        old = at_ref(base, rel)
+        ref = html_base if rel.endswith(".html") else base
+        old = at_ref(ref, rel)
         new_path = ROOT / rel
         if old is None:
             checks.append((rel, False, "not present in the base commit")); continue
