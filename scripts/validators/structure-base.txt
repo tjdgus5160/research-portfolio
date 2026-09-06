@@ -1,0 +1,4 @@
+# index.html's structural baseline. It moved here when the service symbols were
+# deliberately replaced with photographs — see structure-allow.txt for why.
+# styles.css and script.js are not affected and stay pinned to the adoption commit.
+305bfafc02def8c45bd8af1bd39b53f34774f20e
