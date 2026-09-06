@@ -7,8 +7,12 @@
 # The three architectural crops now show the bench this work happens on: a
 # monochrome optics-bench photograph generated locally with krea2, at the same
 # 1536x1024 and under the same treatment, so all three crops behave as before.
+# The base reused one photograph in three places. Each slot now carries its own
+# image so the page stops repeating itself: the balanced-polarimeter card gets
+# the machined housing, the manifesto gets the shielded chamber. All generated
+# locally with krea2, all 1536x1024, all under the same monochrome treatment.
 <img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
 <img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'
-<img class='crop-two' width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img class='crop-two' width='1536' height='1024' src='assets/optics-bench.png'
+<img class='crop-two' width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img class='crop-two' width='1536' height='1024' src='assets/sensor-housing.png'
 <img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
-<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'
+<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/shielded-chamber.png'

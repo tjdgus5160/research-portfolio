@@ -74,3 +74,29 @@ The treatment deliberately matches concrete-courtyard.png — wide monochrome,
 fine grain, strong repetition, converging edges, bright centre — because the
 same file is cropped three ways in the page and had to behave the same in all
 three.
+
+## sensor-housing.png  (balanced-polarimeter card)
+
+Mode: local ComfyUI, krea2_turbo_bf16 + krea2_darkbrush LoRA at 0.8, 8 steps,
+cfg 1, euler/simple, 1536x1024. One generation, no variants or edits.
+
+A wide black-and-white fine-grain photograph of a precision machined aluminium
+opto-mechanical housing on a workbench, shot close and slightly from above:
+milled pockets, counterbored mounting holes, a long internal channel, cover
+removed, crisp machined edges and fine tool marks catching the light. Editorial
+industrial photography, crisp contrast, deep blacks, fine monochrome film grain,
+shallow depth of field. No humans, no text, no watermark, no branding.
+
+## shielded-chamber.png  (manifesto background)
+
+Same model, settings and size.
+
+A wide black-and-white fine-grain photograph looking into the open end of a
+cylindrical magnetic shield: nested concentric mu-metal cylinders receding
+inward, smooth matte metal walls, a soft pool of light at the far end, strong
+concentric geometry and deep shadow around the rim. Editorial architectural
+photography treatment, crisp contrast, deep blacks, fine monochrome film grain.
+No humans, no text, no watermark.
+
+Both keep the treatment of the image they sit beside, because the page crops
+them the same way it cropped the original.
