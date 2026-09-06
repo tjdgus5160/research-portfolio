@@ -4,5 +4,11 @@
 # The hero image is no longer a glass letter W. It is a render of an Rb
 # vapor cell, generated locally with krea2 at the same 1536x1024 as the
 # original, so nothing about the layout changes.
+# The three architectural crops now show the bench this work happens on: a
+# monochrome optics-bench photograph generated locally with krea2, at the same
+# 1536x1024 and under the same treatment, so all three crops behave as before.
 <img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
+<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'
+<img class='crop-two' width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img class='crop-two' width='1536' height='1024' src='assets/optics-bench.png'
 <img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
+<img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'

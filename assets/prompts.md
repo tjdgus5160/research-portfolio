@@ -49,3 +49,28 @@ Constraints: no text, no watermark, no extra objects.
 The art direction deliberately matches glass-w.png — same studio, same
 materials, same framing — so the section it sits in is unchanged in everything
 but subject.
+
+## optics-bench.png  (replaces concrete-courtyard.png)
+
+Mode: local ComfyUI, krea2_turbo_bf16 + krea2_darkbrush LoRA at 0.8, Qwen3-VL
+text encoder, 8 steps, cfg 1, euler/simple, 1536x1024. One generation, no
+variants or edits.
+
+Use case: photorealistic-natural
+Asset type: editorial image for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 black-and-white fine-grain photograph of a
+laser optics bench in a research laboratory, looking straight down the length of
+the bench.
+Scene/backdrop: a long optical breadboard with a regular grid of mounting holes,
+receding into the distance; rows of identical precision optical mounts,
+kinematic mirror mounts, lens holders and posts standing along it in strong
+repetition; converging perspective lines toward a bright empty background.
+Style/medium: editorial architectural photography treatment, crisp contrast,
+deep blacks, fine monochrome film grain, shallow depth of field falling off with
+distance.
+Constraints: no humans, no text, no watermark, no visible laser beam.
+
+The treatment deliberately matches concrete-courtyard.png — wide monochrome,
+fine grain, strong repetition, converging edges, bright centre — because the
+same file is cropped three ways in the page and had to behave the same in all
+three.
