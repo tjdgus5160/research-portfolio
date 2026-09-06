@@ -214,3 +214,201 @@ Lighting/mood: Flat even overhead light so every part reads the same; short soft
 Materials/textures: Bead-blasted aluminium parts, matte dark tray.
 Constraints: No humans, no hands, no tools, no text, no labels, no watermark.
 ```
+
+---
+
+# Service-row images, redrawn with Ideogram 4
+
+Mode: local ComfyUI, `ideogram4_bf16` + `ideogram4_unconditional_bf16` through
+`DualModelGuider` at cfg 7, `qwen3vl_8b_bf16` text encoder, `flux2-vae`,
+`Ideogram4Scheduler` Quality preset (48 steps, mu 0.0, std 1.5), euler,
+1024x1024. The bf16 weights were dequantized locally from the published
+fp8_scaled files: MPS cannot hold a `Float8_e4m3fn` tensor at all, so every
+published Ideogram 4 variant fails on Apple Silicon.
+
+Two things about this model shaped the prompts, and both cost a round to learn:
+
+- **Prompts must be structured JSON, not prose.** Ideogram 4.0's built-in safety
+  filter has a much higher false-positive rate on plain text — the ComfyUI
+  template says so outright. Three of five field-style prompts came back as
+  `Image blocked by safety filter`; removing the negative prompt changed
+  nothing, and rewriting the same content as the JSON caption contract cleared
+  two of the three immediately.
+- **The filter also judges the rendered image, not only the text.** The vapour
+  cell stayed blocked in JSON. Four variants changed one thing each: the
+  plainest wording with an upright full silhouette was blocked, while the same
+  subject cropped, mounted, or laid on its side all passed. The silhouette is
+  what it objects to, so S/002 is shot seated in its holder.
+
+Counts are the other known weakness. Six holes came out as eight twice, and a
+five-by-five grid came out four-by-five then four-by-four. Asking harder did not
+work; S/003 and S/005 are framed so the repeated features run off the frame edge
+and no count is assertable.
+
+Contract: exactly three top-level keys, minified, `bbox` as `[y1, x1, y2, x2]`
+normalised 0-1000 from a top-left origin, one coherent subject per element.
+
+## svc-1-optics.png
+
+*service row S/001, optical path*  
+`size=1024x1024  seed=7685860265279240  preset=Quality`
+
+```json
+{
+  "aspect_ratio": "1:1",
+  "high_level_description": "A right-angle glass prism and a polarising beamsplitter cube standing side by side on a pale grey studio sweep, black-and-white fine-grain macro product photograph.",
+  "compositional_deconstruction": {
+    "background": "A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          420,
+          190,
+          770,
+          470
+        ],
+        "desc": "A right-angle prism of water-clear optical glass resting on one square face, its 45-degree hypotenuse turned toward the camera and working as a mirror, every ground edge carrying one narrow uniform bevel that catches a bright hairline, a sharp caustic pooling on the sweep beneath it, rendered in monochrome."
+      },
+      {
+        "type": "obj",
+        "bbox": [
+          420,
+          500,
+          770,
+          780
+        ],
+        "desc": "A polarising beamsplitter cube of water-clear optical glass the same height as the prism, built from two right-angle prisms cemented together so one fine straight diagonal seam runs corner to corner through the glass and stays visible from the front, its outer faces darkened evenly by an anti-reflection coating, rendered in monochrome."
+      }
+    ]
+  }
+}
+```
+
+## svc-2-vapour.png
+
+*service row S/002, atomic physics*  
+`size=1024x1024  seed=2002306702012535  preset=Quality`
+
+```json
+{
+  "aspect_ratio": "1:1",
+  "high_level_description": "A sealed borosilicate glass cell seated in a machined aluminium holder on a pale grey studio sweep, black-and-white fine-grain macro photograph of laboratory hardware.",
+  "compositional_deconstruction": {
+    "background": "A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          430,
+          300,
+          830,
+          700
+        ],
+        "desc": "One machined aluminium holder, a rectangular block with a circular seat milled into its top face and two counterbored fixing holes. Every face is clean bare satin aluminium, uniform and unmarked, carrying nothing but fine even face-mill witness marks, with one narrow chamfer along every edge. Rendered in monochrome."
+      },
+      {
+        "type": "obj",
+        "bbox": [
+          210,
+          380,
+          560,
+          620
+        ],
+        "desc": "One small sealed component of clear borosilicate laboratory glass sitting in the holder's circular seat, a squat cylinder as wide as it is tall with a straight thin side wall, a flat base, and a top closing in one smooth continuous dome, forming a single unbroken sealed volume of glass with no opening anywhere; one short narrow stem rises at an angle from the shoulder and is drawn down to a rounded solid fused point. The glass is empty and clean, with true refraction against the aluminium. Rendered in monochrome."
+      }
+    ]
+  }
+}
+```
+
+## svc-3-machining.png
+
+*service row S/003, parametric CAD*  
+`size=1024x1024  seed=8352767430678811  preset=Quality`
+
+```json
+{
+  "aspect_ratio": "1:1",
+  "high_level_description": "An extreme macro close-up across the finish-milled face of an aluminium part, its counterbored holes running out past the frame edge, black-and-white fine-grain product photograph.",
+  "compositional_deconstruction": {
+    "background": "The milled aluminium face itself fills the whole frame, falling out of focus toward the top where a pale grey studio sweep shows in a narrow band.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          120,
+          0,
+          1000,
+          1000
+        ],
+        "desc": "The top face of a bare satin aluminium part seen in extreme macro from a low raking angle, so close that the part's outline is far outside the frame. The surface is covered in fine regular overlapping arcs of face-mill witness marks catching the raking light as parallel highlights. A shallow circular pocket with a clean vertical wall and a flat floor sits at the lower left. Counterbored holes with crisp unbroken edges curve away from that pocket toward the upper right and continue off the right edge of the frame, the nearest hole sharp and the farthest already soft. One narrow uniform chamfer runs along a machined step crossing the lower right corner. No tool touches the part. Rendered in monochrome."
+      }
+    ]
+  }
+}
+```
+
+## svc-4-detectors.png
+
+*service row S/004, signal and validation*  
+`size=1024x1024  seed=6868208227789809  preset=Quality`
+
+```json
+{
+  "aspect_ratio": "1:1",
+  "high_level_description": "Two identical metal-can photodiode detectors standing upright side by side on a pale grey studio sweep, black-and-white fine-grain macro product photograph of matched electronic components.",
+  "compositional_deconstruction": {
+    "background": "A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          300,
+          190,
+          800,
+          450
+        ],
+        "desc": "One small cylindrical nickel-plated metal photodiode package standing upright, its rolled rim catching a bright ring highlight, closed by a flat glass window through which one square matte dark silicon die is clearly visible with two hairline bond wires arcing from its corners to the package wall, three straight metal leads dropping from its base out of the bottom of the frame. Rendered in monochrome."
+      },
+      {
+        "type": "obj",
+        "bbox": [
+          300,
+          550,
+          800,
+          810
+        ],
+        "desc": "A second photodiode package identical to the first in height, diameter, rim, window and die size, standing upright at the same height and lit identically, its three straight metal leads dropping from its base out of the bottom of the frame. Rendered in monochrome."
+      }
+    ]
+  }
+}
+```
+
+## svc-5-inspection.png
+
+*service row S/005, supervised pipeline*  
+`size=1024x1024  seed=6477864860046536  preset=Quality`
+
+```json
+{
+  "aspect_ratio": "1:1",
+  "high_level_description": "An overhead macro close-up of identical turned steel parts standing in a black foam inspection tray, the grid running off every edge of the frame with one pocket left empty, black-and-white fine-grain photograph.",
+  "compositional_deconstruction": {
+    "background": "Dense matte black foam fills the entire frame, seen square-on from directly overhead, its milled pockets running past all four frame edges.",
+    "elements": [
+      {
+        "type": "obj",
+        "bbox": [
+          0,
+          0,
+          1000,
+          1000
+        ],
+        "desc": "A field of identical short stepped turned steel cylinders standing on end in the milled pockets of a dense matte black foam tray, seen from directly overhead. The rows run parallel to the frame edges and continue past all four edges, cut off by the frame on every side so neither the tray rim nor the extent of the batch is visible. Every part stands at the same height and the same orientation, each with a bright polished top face carrying fine concentric lathe marks and one small concentric bore at its centre. One pocket left of the frame centre is empty, its bare foam floor visible, the part that belongs there removed for measurement. A small crisp shadow sits inside every pocket. Rendered in monochrome."
+      }
+    ]
+  }
+}
+```
