@@ -14,5 +14,5 @@
 <img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
 <img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/optics-bench.png'
 <img class='crop-two' width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img class='crop-two' width='1536' height='1024' src='assets/sensor-housing.png'
-<img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/vapor-cell.png'
+<img width='1536' height='1024' src='assets/glass-w.png' -> <img width='1536' height='1024' src='assets/metrology.png'
 <img width='1536' height='1024' src='assets/concrete-courtyard.png' -> <img width='1536' height='1024' src='assets/shielded-chamber.png'

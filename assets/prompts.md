@@ -100,3 +100,22 @@ No humans, no text, no watermark.
 
 Both keep the treatment of the image they sit beside, because the page crops
 them the same way it cropped the original.
+
+## metrology.png  (supervised-pipeline card)
+
+Same model, settings and size as the others.
+
+A wide black-and-white fine-grain photograph of a precision metrology setup on
+a granite surface plate: a stack of steel gauge blocks wrung together, a dial
+indicator on a height stand with its probe resting on the stack, and a machined
+part beside them awaiting inspection. Editorial industrial photography, crisp
+contrast, deep blacks, fine monochrome film grain, shallow depth of field. No
+humans, no text, no watermark, no branding.
+
+The card is about separating the side that builds from the side that judges, so
+the picture is the act of checking rather than the thing built.
+
+Note: the prompt asked for no legible numbers and the dial still carries its
+scale. Nothing on it states a measurement, so it reads as an instrument face
+rather than a result — but it is a generated image, not a photograph of a real
+reading, and no value on it means anything.
