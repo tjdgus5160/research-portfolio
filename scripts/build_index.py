@@ -55,6 +55,7 @@ def render(s: dict) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="{d}/styles.css" />
 <link rel="stylesheet" href="{d}/entry.css" />
+<link rel="stylesheet" href="{d}/decor.css" />
 <script src="{d}/script.js" defer></script>
 <script src="{d}/minigame.js" defer></script>
 </head>

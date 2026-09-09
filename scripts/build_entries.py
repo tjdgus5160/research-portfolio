@@ -63,6 +63,7 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="../styles.css" />
 <link rel="stylesheet" href="../entry.css" />
+<link rel="stylesheet" href="../decor.css" />
 </head>
 <body class="entry">
 <a class="skip" href="#main">본문으로 건너뛰기</a>

@@ -1,0 +1,236 @@
+/* Optional decoration, loaded after styles.css and entry.css.
+   Opting in only for no-preference restores the original stylesheet in full
+   under prefers-reduced-motion: reduce, including the original list squares.
+   The requested durations are kept here; all geometry uses the --px grid.
+   CSS cannot test whether a URL loaded: sprite layers have no background
+   colour and never hide the still image, so a failed request paints nothing. */
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    --decor-hero-sheet: url("assets/gb/hero-sprite.png");
+    --decor-detect-sheet: url("assets/gb/detect-sprite.png");
+    --decor-shield-sheet: url("assets/gb/shield-sprite.png");
+    --decor-hero-time: 1.6s;
+    --decor-detect-time: 0.9s;
+    --decor-shield-time: 2.4s;
+    --decor-caret-time: 1s;
+    --decor-scan-time: 3s;
+  }
+
+  :root[data-pal="dmg"] {
+    --decor-hero-sheet: url("assets/gb/dmg/hero-sprite.png");
+    --decor-detect-sheet: url("assets/gb/dmg/detect-sprite.png");
+    --decor-shield-sheet: url("assets/gb/dmg/shield-sprite.png");
+  }
+
+  .work article,
+  .slab,
+  .e-verdict {
+    position: relative;
+  }
+
+  /* A notched border leaves all four Ls on one pseudo-element. This reserves
+     .screen::after for its sprite and article::before for the existing cursor.
+     round() keeps the far corners on the grid even in a fluid grid track. */
+  @supports (width: round(down, 100%, 100%)) {
+    .screen::before,
+    .work article::after {
+      content: "";
+      position: absolute;
+      top: var(--px);
+      left: var(--px);
+      width: round(down, calc(100% - var(--px) * 2), var(--px));
+      height: round(down, calc(100% - var(--px) * 2), var(--px));
+      border: var(--px) solid var(--t2);
+      pointer-events: none;
+      z-index: 1;
+      clip-path: polygon(
+        0 0, calc(var(--px) * 4) 0,
+        calc(var(--px) * 4) var(--px),
+        calc(100% - var(--px) * 4) var(--px),
+        calc(100% - var(--px) * 4) 0, 100% 0,
+        100% calc(var(--px) * 4),
+        calc(100% - var(--px)) calc(var(--px) * 4),
+        calc(100% - var(--px)) calc(100% - var(--px) * 4),
+        100% calc(100% - var(--px) * 4), 100% 100%,
+        calc(100% - var(--px) * 4) 100%,
+        calc(100% - var(--px) * 4) calc(100% - var(--px)),
+        calc(var(--px) * 4) calc(100% - var(--px)),
+        calc(var(--px) * 4) 100%, 0 100%,
+        0 calc(100% - var(--px) * 4),
+        var(--px) calc(100% - var(--px) * 4),
+        var(--px) calc(var(--px) * 4), 0 calc(var(--px) * 4)
+      );
+    }
+
+    /* 960:864 = 10:9. Quantize the content width in ten-pixel groups so
+       both frame dimensions and every horizontal step are whole pixels. */
+    .screen {
+      width: calc(round(down, calc(100% - var(--px) * 2), calc(var(--px) * 10)) + var(--px) * 2);
+      container-type: inline-size;
+    }
+
+    /* Reuse the completed boot-wipe state at its existing specificity.
+       The caption stays outside the 10:9 image area. */
+    .screen.lit::after {
+      --decor-frame: round(down, 100cqi, calc(var(--px) * 10));
+      inset: 0 auto auto 0;
+      width: var(--decor-frame);
+      height: calc(var(--decor-frame) / 10 * 9);
+      background: none;
+      background-image: var(--decor-hero-sheet);
+      background-repeat: no-repeat;
+      background-size: calc(var(--decor-frame) * 4) calc(var(--decor-frame) / 10 * 9);
+      image-rendering: pixelated;
+      pointer-events: none;
+      transform: none;
+      transition: none;
+      animation: decor-four-frames var(--decor-hero-time) steps(4, end) infinite;
+    }
+
+    .slab::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: round(down, 100%, calc(var(--px) * 2));
+      height: var(--px);
+      pointer-events: none;
+      background-image: repeating-linear-gradient(
+        90deg, var(--t1) 0 var(--px),
+        var(--t3) var(--px) calc(var(--px) * 2)
+      );
+    }
+
+    /* Paint behind the text so the band cannot obscure the PASS label.
+       Round the travel to six pixels so each of six steps stays on-grid. */
+    .e-verdict {
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .e-verdict::after {
+      content: "";
+      position: absolute;
+      top: calc(var(--px) * -1);
+      left: 0;
+      width: round(down, 100%, var(--px));
+      height: var(--px);
+      background-color: var(--t2);
+      z-index: -1;
+      pointer-events: none;
+      animation: decor-scan var(--decor-scan-time) steps(6, end) infinite;
+    }
+  }
+
+  .shield {
+    position: relative;
+    width: calc(var(--px) * 50);
+  }
+
+  .shield::after {
+    --decor-frame: calc(var(--px) * 48);
+    content: "";
+    position: absolute;
+    top: var(--px);
+    left: var(--px);
+    width: var(--decor-frame);
+    height: var(--decor-frame);
+    background-image: var(--decor-shield-sheet);
+    background-repeat: no-repeat;
+    background-size: calc(var(--decor-frame) * 4) var(--decor-frame);
+    image-rendering: pixelated;
+    pointer-events: none;
+    animation: decor-four-frames var(--decor-shield-time) steps(4, end) infinite;
+  }
+
+  /* The current detector img is a sibling of .svc-b, not its child.
+     These rules need an anchor named --decor-detect-still on that image.
+     Assigning it awaits clarification of the no-img-targeting constraint.
+     Without that anchor the fallback frame is zero-sized; no text is covered.
+     With it, the overlay follows the image across both existing grid layouts. */
+  @supports (position-anchor: --decor-detect-still) and (width: round(down, 100%, 100%)) {
+    .svc li:nth-child(4) {
+      position: relative;
+    }
+
+    .svc li:nth-child(4) .svc-b::after {
+      --decor-frame: max(0 * var(--px), round(down,
+        calc(anchor-size(--decor-detect-still width, calc(var(--px) * 2)) - var(--px) * 2),
+        var(--px)
+      ));
+      content: "";
+      position: absolute;
+      position-anchor: --decor-detect-still;
+      top: round(nearest, calc(anchor(top, 0) + var(--px)), var(--px));
+      left: round(nearest, calc(anchor(left, 0) + var(--px)), var(--px));
+      width: var(--decor-frame);
+      height: var(--decor-frame);
+      background-image: var(--decor-detect-sheet);
+      background-repeat: no-repeat;
+      /* Percentages resolve against the snapped frame, without evaluating
+         anchor-size() in a background property where it is not supported. */
+      background-size: 200% 100%;
+      image-rendering: pixelated;
+      pointer-events: none;
+      visibility: hidden;
+      animation: decor-two-frames var(--decor-detect-time) steps(2, end) infinite;
+    }
+
+    .svc li:nth-child(4).on .svc-b::after {
+      visibility: visible;
+    }
+  }
+
+  .manifesto::after {
+    content: "";
+    display: inline-block;
+    width: var(--px);
+    height: var(--px);
+    margin-left: var(--px);
+    background-color: var(--t0);
+    animation: decor-caret var(--decor-caret-time) steps(2, end) infinite;
+  }
+
+  .chan a {
+    box-shadow: var(--px) var(--px) 0 var(--t1);
+  }
+
+  .chan a:hover,
+  .chan a:focus-visible,
+  .chan a:active {
+    transform: translate(var(--px), var(--px));
+    box-shadow: none;
+  }
+
+  .sq li::before {
+    width: var(--px);
+    height: var(--px);
+    margin-top: var(--px);
+    margin-right: var(--px);
+    box-shadow: var(--px) var(--px) 0 var(--t0);
+  }
+
+  @keyframes decor-four-frames {
+    from { background-position: 0 0; }
+    to { background-position: calc(var(--decor-frame) * -4) 0; }
+  }
+
+  @keyframes decor-two-frames {
+    from { background-position: 0 0; }
+    to { background-position: 200% 0; }
+  }
+
+  /* visibility is discrete: steps(2) switches directly between the two
+     states at halfway, without introducing any intermediate grey tones. */
+  @keyframes decor-caret {
+    from { visibility: hidden; }
+    to { visibility: visible; }
+  }
+
+  @keyframes decor-scan {
+    from { top: calc(var(--px) * -1); }
+    to {
+      top: calc(round(up, calc(100% + var(--px)), calc(var(--px) * 6)) - var(--px));
+    }
+  }
+}
