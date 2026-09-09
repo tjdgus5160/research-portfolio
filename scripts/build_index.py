@@ -43,9 +43,13 @@ def render(s: dict) -> str:
 <meta property="og:title" content="{esc(s["title"])}" />
 <meta property="og:description" content="{esc(s["description"])}" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="{d}/assets/gb/hero.png" />
+<meta property="og:image" content="{esc(s["base_url"])}/assets/gb/hero.png" />
+<meta property="og:url" content="{esc(s["canonical"])}" />
+<meta property="og:locale" content="{esc(s["lang"])}" />
+<link rel="canonical" href="{esc(s["canonical"])}" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="{d}/assets/gb/wordmark.png" />
+<link rel="alternate" hreflang="{esc(s["lang"])}" href="{esc(s["canonical"])}" />
 <link rel="alternate" hreflang="{esc(o["code"].lower())}" href="{esc(o["href"])}" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
