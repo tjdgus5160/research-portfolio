@@ -1,655 +1,181 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#cc604e" />
-    <meta
-      name="description"
-      content="광펌핑 자력계(OPM) 연구 포트폴리오. Rb 증기셀 광학계, 균형 편광계, 파라메트릭 CAD와 검증 파이프라인."
-    />
-    <title>박성현 — 광펌핑 자력계 연구</title>
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <header class="identity" id="identity">
-      <a class="logo" href="#home" aria-label="박성현 홈">S<span>®</span></a
-      ><a class="identity-label" href="#home"
-        ><span>SHP®</span><span>PARK<br />SEONGHYEON</span></a
-      ><button
-        class="menu-toggle"
-        type="button"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="site-menu"
-      >
-        <span></span><span></span><span></span>
-      </button>
-      <nav id="site-menu" class="site-menu" aria-label="Main navigation" hidden>
-        <a href="#services"><small>01</small>연구 영역<span>↗</span></a
-        ><a href="#clients"><small>02</small>프로젝트<span>↗</span></a
-        ><a href="#expertise"><small>03</small>방법론<span>↗</span></a
-        ><a href="#contact"><small>04</small>연락<span>↗</span></a
-        ><a class="menu-contact" href="#contact"
-          ><small>CONTACT</small><strong>연락하기</strong><span>↗</span></a
-        >
-      </nav>
-    </header>
-    <div class="menu-shade" hidden></div>
-    <main id="main">
-      <section id="home" class="hero">
-        <div class="hero-top">
-          <p>RESEARCH IN OPTICALLY<br />PUMPED MAGNETOMETRY</p>
-          <a class="button dark" href="#contact">GET IN TOUCH <span>↗</span></a>
-        </div>
-        <div class="hero-stage">
-          <div class="technical-row">
-            <span>SHP®</span><span>SEOUL (KR)</span><span>/2026</span
-            ><span>MAGNETOMETRY_</span>
-          </div>
-          <div class="line-field" aria-hidden="true"></div>
-          <div class="hero-bottom">
-            <h1>SHP<span>®</span></h1>
-            <a class="explore-link" href="#about"
-              ><span>/</span><span>EXPLORE ↓</span></a
-            >
-          </div>
-        </div>
-      </section>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SHP® — 광펌핑 자력계 연구</title>
+<meta name="description" content="박성현. 광펌핑 자력계(OPM) 연구 — 광학 설계, 증기셀 원자물리, 파라메트릭 CAD, 감독형 검증 파이프라인." />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<script src="script.js" defer></script>
+</head>
+<body>
+<!-- SHP® — optically pumped magnetometry, rendered as a 4-tone handheld interface. -->
+<div class="scan" aria-hidden="true"></div>
+<canvas class="rain" aria-hidden="true"></canvas>
 
-      <section class="brand-scene" aria-label="Glass monogram">
-        <img
-          src="assets/vapor-cell.png"
-          alt="옆으로 누운 납작한 원통형 유리 증기셀, 위쪽 어깨에 짧은 유리 스템이 서 있다"
-          width="1536"
-          height="1024"
-          loading="lazy"
-        />
-        <div class="scene-caption eyebrow">
-          <span>SHP®</span><span>ATOMIC SENSING<br />PRECISION OPTICS</span
-          ><span>/2026<br />MAGNETOMETRY_</span>
-        </div>
-      </section>
-      <section id="about" class="about section-pad">
-        <div class="eyebrow">WHO I AM /</div>
-        <h2 class="reveal">
-          원자의 세차운동을 읽어<br />자기장을 재는 일.<br />그 장치를 설계하고
-          <br /><span>직접 검증한다.</span>
-        </h2>
-        <a href="#contact" class="button about-cta" data-contact
-          >연락하기 <span>↗</span></a
-        >
-      </section>
-      <section id="services" class="services section-pad">
-        <div class="section-heading">
-          <span class="eyebrow">/ 연구 영역</span>
-          <h2>장치를 만드는 일과<br />그것을 믿는 일은 다르다.</h2>
-          <span class="eyebrow count">/005</span>
-        </div>
-        <article class="service-row" id="service-1">
-          <span class="eyebrow service-number">S/001</span>
-          <div class="service-body">
-            <h3>광학 설계</h3>
-            <p>
-              펌프와 프로브를 한 섬유로 보내고, 프리즘 두 개로 빔을 U자로
-              되접한다. 되접힌 경로 덕분에 증기셀이 감지 면 뒤 2.0 mm에
-              놓이고, 섬유와 광다이오드 배선은 모두 뒤쪽 벽으로 빠져 감지 면에는
-              구멍이 하나도 남지 않는다.
-            </p>
-            <details class="service-details">
-              <summary class="button">
-                EXPLORE 9 TOPICS <span class="plus">+</span>
-              </summary>
-              <ul>
-                <li>Fiber input</li>
-                <li>Dual-wavelength plate</li>
-                <li>Input prism</li>
-                <li>Rb vapor cell</li>
-                <li>Output prism</li>
-                <li>Polarizing beam splitter</li>
-                <li>Balanced photodiode pair</li>
-                <li>U-turn fold</li>
-                <li>2.0 mm standoff</li>
-              </ul>
-            </details>
-          </div>
-          <div class="service-visual" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="currentColor">
-                <image href="assets/svc-1-optics.png" x="0" y="0" width="240" height="240" preserveAspectRatio="xMidYMid slice"><title>대각 접합선이 보이는 편광 빔 스플리터 큐브 두 개</title></image></svg
-            ><span>FIG. 001 / OPTICAL PATH</span>
-          </div>
-        </article>
-        <article class="service-row" id="service-2">
-          <span class="eyebrow service-number">S/002</span>
-          <div class="service-body">
-            <h3>증기셀과 원자물리</h3>
-            <p>
-              두 루비듐 선이 한 섬유로 들어와 서로 다른 일을 한다. D1은 펌프라
-              원편광으로 원자를 정렬시키고, D2는 프로브라 선편광을 유지해야
-              한다. 균형 편광계는 선편광의 회전을 읽기 때문이다.
-            </p>
-            <details class="service-details">
-              <summary class="button">
-                EXPLORE 17 TOPICS <span class="plus">+</span>
-              </summary>
-              <ul>
-                <li>D1 794.98 nm</li>
-                <li>D2 780.24 nm</li>
-                <li>Optical pumping</li>
-                <li>Circular polarization</li>
-                <li>Linear polarization</li>
-                <li>Spin orientation</li>
-                <li>Larmor precession</li>
-                <li>Gyromagnetic ratio</li>
-                <li>Free induction decay</li>
-                <li>T2 relaxation</li>
-                <li>Faraday rotation</li>
-                <li>Bias field</li>
-                <li>Magnetic shielding</li>
-                <li>Vapor pressure</li>
-                <li>Buffer gas</li>
-                <li>Cell geometry</li>
-                <li>Resonance linewidth</li>
-              </ul>
-            </details>
-          </div>
-          <div class="service-visual" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="currentColor">
-                <image href="assets/svc-2-vapour.png" x="0" y="0" width="240" height="240" preserveAspectRatio="xMidYMid slice"><title>가공된 알루미늄 홀더에 앉은 밀봉 유리 증기셀</title></image></svg
-            ><span>FIG. 002 / ATOMIC PHYSICS</span>
-          </div>
-        </article>
-        <article class="service-row" id="service-3">
-          <span class="eyebrow service-number">S/003</span>
-          <div class="service-body">
-            <h3>파라메트릭 CAD</h3>
-            <p>
-              모델은 도면이 아니라 파라미터로 기술된다. housing.length 하나를
-              바꾸면 그에 딸린 모든 평면과 포켓과 보어가 다시 유도되고, 조립
-              전체가 재생성된 뒤 다시 검사된다.
-            </p>
-            <details class="service-details">
-              <summary class="button">
-                EXPLORE 7 TOPICS <span class="plus">+</span>
-              </summary>
-              <ul>
-                <li>YAML specification</li>
-                <li>Parametric derivation</li>
-                <li>Housing and cover</li>
-                <li>Optical mounts</li>
-                <li>STEP export</li>
-                <li>Geometry checks</li>
-                <li>Resized-envelope test</li>
-              </ul>
-            </details>
-          </div>
-          <div class="service-visual" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="currentColor">
-                <image href="assets/svc-3-machining.png" x="0" y="0" width="240" height="240" preserveAspectRatio="xMidYMid slice"><title>페이스밀 자국을 가로질러 이어지는 카운터보어 구멍들</title></image></svg
-            ><span>FIG. 003 / PARAMETRIC CAD</span>
-          </div>
-        </article>
-        <article class="service-row" id="service-4">
-          <span class="eyebrow service-number">S/004</span>
-          <div class="service-body">
-            <h3>신호와 검증</h3>
-            <p>
-              두 광다이오드의 차가 패러데이 회전 신호를, 합이 광 세기를
-              운반한다. 같은 방향으로 들어오는 잡음은 차분에서 상쇄되므로, 세기
-              변동에 둔감한 회전각을 얻을 수 있다.
-            </p>
-            <details class="service-details">
-              <summary class="button">
-                EXPLORE 9 TOPICS <span class="plus">+</span>
-              </summary>
-              <ul>
-                <li>Balanced detection</li>
-                <li>Difference signal</li>
-                <li>Sum signal</li>
-                <li>Common-mode rejection</li>
-                <li>FID fitting</li>
-                <li>Numerical substitution</li>
-                <li>Unit consistency</li>
-                <li>Tolerance bounds</li>
-                <li>Build report</li>
-              </ul>
-            </details>
-          </div>
-          <div class="service-visual" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="currentColor">
-                <image href="assets/svc-4-detectors.png" x="0" y="0" width="240" height="240" preserveAspectRatio="xMidYMid slice"><title>나란히 놓인 일치한 광다이오드 검출기 한 쌍</title></image></svg
-            ><span>FIG. 004 / SIGNAL AND VALIDATION</span>
-          </div>
-        </article>
-        <article class="service-row" id="service-5">
-          <span class="eyebrow service-number">S/005</span>
-          <div class="service-body">
-            <h3>감독형 파이프라인</h3>
-            <p>
-              분석하고 계산하고 형상을 만드는 쪽과, 그것을 검증하고 합격 여부를
-              정하는 쪽을 분리한다. 검증하는 쪽에는 CAD 권한을 주지 않는다.
-              자기 일을 자기가 통과시키는 구조를 만들지 않기 위해서다.
-            </p>
-            <details class="service-details">
-              <summary class="button">
-                EXPLORE 10 TOPICS <span class="plus">+</span>
-              </summary>
-              <ul>
-                <li>Evidence classes</li>
-                <li>Source traceability</li>
-                <li>Deterministic gates</li>
-                <li>Independent re-measurement</li>
-                <li>Delta correction</li>
-                <li>Task DAG</li>
-                <li>Worker dispatch</li>
-                <li>Artifact validation</li>
-                <li>Provenance tagging</li>
-                <li>PASS / FAIL report</li>
-              </ul>
-            </details>
-          </div>
-          <div class="service-visual" aria-hidden="true">
-            <svg viewBox="0 0 240 240" fill="currentColor">
-                <image href="assets/svc-5-inspection.png" x="0" y="0" width="240" height="240" preserveAspectRatio="xMidYMid slice"><title>검은 폼 트레이에 격자로 늘어선 동일 부품들과 아직 빈 포켓들</title></image></svg
-            ><span>FIG. 005 / SUPERVISED PIPELINE</span>
-          </div>
-        </article>
-      </section>
-      <section id="clients" class="clients section-pad">
-        <div class="section-heading">
-          <span class="eyebrow">/ 프로젝트</span>
-          <h2>센서 하나를 두고<br />세 갈래로 갈린다.</h2>
-          <div class="carousel-controls">
-            <button
-              class="button"
-              id="client-prev"
-              aria-label="Previous client type"
-            >
-              ←</button
-            ><button
-              class="button"
-              id="client-next"
-              aria-label="Next client type"
-            >
-              →
-            </button>
-          </div>
-        </div>
-        <div
-          class="client-track"
-          tabindex="0"
-          aria-label="Client types. Use arrow keys to browse"
-        >
-          <article class="client-card">
-            <div class="client-image">
-              <span class="eyebrow">I/001</span
-              ><img
-                src="assets/optics-bench.png"
-                alt="광학 브레드보드 위에서 안쪽으로 모여드는 키네마틱 미러 마운트 두 줄"
-                width="1536"
-                height="1024"
-                loading="lazy"
-              />
-            </div>
-            <div class="client-copy">
-              <span class="eyebrow">01 — 빛으로 읽는다</span>
-              <h3>Rb 증기셀 광학계</h3>
-              <p>
-                한 섬유에 D1 794.98 nm와 D2 780.24 nm를 함께 실어 펌프와 프로브를
-                겸한다. dual-wavelength 판 하나와 직각 프리즘 두 개로 빔을 U자로
-                되접어, 증기셀을 감지 면 뒤 2.0 mm에 놓고 전면에는 구멍을
-                남기지 않는다.
-              </p>
-              <a class="button" href="#contact" data-contact
-                >광학계 보기 <span>↗</span></a
-              >
-            </div>
-          </article>
-          <article class="client-card">
-            <div class="client-image">
-              <span class="eyebrow">I/002</span
-              ><img
-                class="crop-two"
-                src="assets/sensor-housing.png"
-                alt="밀링 포켓과 카운터보어가 드러난 알루미늄 센서 하우징"
-                width="1536"
-                height="1024"
-                loading="lazy"
-              />
-            </div>
-            <div class="client-copy">
-              <span class="eyebrow">02 — 차로 신호, 합으로 세기</span>
-              <h3>균형 편광계 설계</h3>
-              <p>
-                PBS의 두 출력을 일치한 광다이오드 쌍으로 받는다. 두 광전류의 차가
-                패러데이 회전 신호를, 합이 광 세기를 운반하므로 공통 잡음은 차분에서
-                상쇄된다. 136 × 32.8 × 20 mm 안에 부품 열 개가 들어간다.
-              </p>
-              <a class="button" href="#contact" data-contact
-                >빌드 리포트 보기 <span>↗</span></a
-              >
-            </div>
-          </article>
-          <article class="client-card">
-            <div class="client-image">
-              <span class="eyebrow">I/003</span
-              ><img
-                src="assets/metrology.png"
-                alt="화강암 정반 위에 링잉된 게이지 블록 스택과 정밀 원통 표준기"
-                width="1536"
-                height="1024"
-                loading="lazy"
-              />
-            </div>
-            <div class="client-copy">
-              <span class="eyebrow">03 — 만든 쪽과 판정하는 쪽</span>
-              <h3>감독형 검증 파이프라인</h3>
-              <p>
-                분석과 계산과 CAD를 맡는 쪽, 검증하고 합격을 정하는 쪽을 나눈다.
-                판정하는 쪽에는 CAD 권한을 주지 않아, 자기 산출물을 자기가
-                통과시키는 경로를 구조적으로 없앤다.
-              </p>
-              <a class="button" href="#contact" data-contact
-                >파이프라인 보기 <span>↗</span></a
-              >
-            </div>
-          </article>
-        </div>
-        <div class="carousel-bottom eyebrow">
-          <span>← DRAG TO EXPLORE →</span
-          ><span id="client-counter" aria-live="polite">01 / 03</span>
-        </div>
-      </section>
-      <section id="expertise" class="expertise section-pad">
-        <div class="tab-list" role="tablist" aria-label="Our approach">
-          <button
-            class="button"
-            role="tab"
-            id="tab-expertise"
-            aria-controls="panel-expertise"
-            aria-selected="true"
-            tabindex="0"
-          >
-            EXPERTISE</button
-          ><button
-            class="button"
-            role="tab"
-            id="tab-values"
-            aria-controls="panel-values"
-            aria-selected="false"
-            tabindex="-1"
-          >
-            VALUES</button
-          ><button
-            class="button"
-            role="tab"
-            id="tab-method"
-            aria-controls="panel-method"
-            aria-selected="false"
-            tabindex="-1"
-          >
-            METHODOLOGY
-          </button>
-        </div>
-        <div
-          class="approach-panel"
-          id="panel-expertise"
-          role="tabpanel"
-          aria-labelledby="tab-expertise"
-        >
-          <span class="panel-slash">/</span>
-          <h2>전문성</h2>
-          <span class="panel-number" aria-hidden="true">1</span>
-          <div class="approach-rows">
-            <article>
-              <span class="eyebrow">01</span>
-              <h3>ATOMIC MAGNETOMETRY</h3>
-              <p>
-                원자의 세차운동에서 자기장을 읽는다. 펌프와 프로브, 편광과
-                완화가 하나의 신호로 모이는 지점을 다룬다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">02</span>
-              <h3>PRECISION OPTOMECHANICS</h3>
-              <p>
-                광학 경로를 유지하는 것은 결국 기구의 일이다. 마운트와 하우징을
-                파라미터로 기술하고 형상으로 검사한다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">03</span>
-              <h3>MEASUREMENT AND PROOF</h3>
-              <p>
-                수치는 재현되어야 한다. 식과 단위와 대입을 기록하고, 결과가
-                다시 나오는지 확인한다.
-              </p>
-            </article>
-          </div>
-        </div>
-        <div
-          class="approach-panel"
-          id="panel-values"
-          role="tabpanel"
-          aria-labelledby="tab-values"
-          hidden
-        >
-          <span class="panel-slash">/</span>
-          <h2>원칙</h2>
-          <span class="panel-number" aria-hidden="true">2</span>
-          <div class="approach-rows">
-            <article>
-              <span class="eyebrow">01</span>
-              <h3>MEASURED, NOT ASSUMED</h3>
-              <p>
-                측정된 것과 가정한 것을 섞지 않는다. 값마다 SOURCE_FACT ·
-                CALCULATED · INFERRED · ILLUSTRATIVE 중 하나를 붙인다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">02</span>
-              <h3>NO INVENTED CITATIONS</h3>
-              <p>
-                인용은 DOI나 arXiv ID, 실제로 받은 URL 중 하나로 반드시
-                닿아야 한다. 못 찾으면 못 찾았다고 적는다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">03</span>
-              <h3>A RENDER IS NOT A SIMULATION</h3>
-              <p>
-                계산하지 않은 그림은 ILLUSTRATIVE다. 그럴듯한 그림을 데이터로
-                두는 것은 스타일이 아니라 결함이다.
-              </p>
-            </article>
-          </div>
-        </div>
-        <div
-          class="approach-panel"
-          id="panel-method"
-          role="tabpanel"
-          aria-labelledby="tab-method"
-          hidden
-        >
-          <span class="panel-slash">/</span>
-          <h2>방법론</h2>
-          <span class="panel-number" aria-hidden="true">3</span>
-          <div class="approach-rows">
-            <article>
-              <span class="eyebrow">01</span>
-              <h3>EVIDENCE FIRST</h3>
-              <p>
-                CAD는 첫 단계가 아니다. 출처에서 값을 뽑고, 유도하고, 사양을
-                확정한 뒤에 형상을 깎는다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">02</span>
-              <h3>GATES, NOT OPINIONS</h3>
-              <p>
-                파일 존재와 증거 등급과 치수 일치를 기계가 먼저 판정한다.
-                사람의 검토는 그 다음이다.
-              </p>
-            </article>
-            <article>
-              <span class="eyebrow">03</span>
-              <h3>CORRECT WITH DELTAS</h3>
-              <p>
-                하나가 틀렸으면 그 하나만 고친다. 보존할 것과 바꿀 것을
-                지정하고, 다시 만들 산출물을 지목한다.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section class="manifesto">
-        <img
-          src="assets/shielded-chamber.png"
-          width="1536"
-          height="1024"
-          alt="동심으로 겹친 자기 차폐 실린더 안쪽, 중앙에 밝은 원"
-          loading="lazy"
-        />
-        <div class="manifesto-copy">
-          <span class="eyebrow">/ 태도</span>
-          <p>
-            믿을 수 있는 수치는<br />기록에서 나온다.<br />무엇을 쟀는지.
-            무엇을 가정했는지.<br />무엇을 아직 모르는지.<br />그 셋을
-            섞지 않는 것.
-          </p>
-          <span class="eyebrow"
-            >MEASURED WITH CARE.<br />RECORDED TO BE CHECKED.</span
-          >
-        </div>
-      </section>
-      <section id="contact" class="contact section-pad">
-        <div class="contact-marquee" aria-hidden="true">
-          <span>MEASURED, NOT ASSUMED ↗&nbsp;</span
-          ><span>MEASURED, NOT ASSUMED ↗&nbsp;</span>
-        </div>
-        <h2 class="sr-only">연락하기</h2>
-        <div class="contact-bottom">
-          <p>읽고 있는 값이<br />어디서 왔는지 묻는다면.</p>
-          <a class="button dark" href="#inquiry" data-contact
-            >연락하기 <span>↗</span></a
-          >
-        </div>
-        <div class="technical-row">
-          <span>SHP®</span><span>SEOUL (KR)</span><span>/2026</span
-          ><span>MEASURED_</span>
-        </div>
-        <div class="footer-wordmark" aria-hidden="true">
-          SHP<span>®</span>
-        </div>
-      </section>
-    </main>
-    <footer class="footer section-pad">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="#home">PARK SEONGHYEON<span>®</span></a
-          ><span class="eyebrow">RESEARCH<br />PORTFOLIO / 2026</span>
-        </div>
-        <div class="footer-links">
-          <h2>SERVICES</h2>
-          <a href="#service-1">광학 설계</a><a href="#service-2">증기셀과 원자물리</a
-          ><a href="#service-3">파라메트릭 CAD</a
-          ><a href="#service-4">신호와 검증</a
-          ><a href="#service-5">감독형 파이프라인</a>
-        </div>
-        <div class="footer-links">
-          <h2>EXPLORE</h2>
-          <a href="#about">소개</a><a href="#clients">프로젝트</a
-          ><a href="#expertise">방법론</a
-          ><a href="#contact" data-contact>연락하기 ↗</a>
-        </div>
-        <div class="footer-office">
-          <h2>OFFICES</h2>
-          <div class="office-tabs" role="tablist" aria-label="Office locations">
-            <button
-              role="tab"
-              id="office-canada"
-              aria-selected="true"
-              aria-controls="office-ca"
-              tabindex="0"
-            >
-              SEOUL</button
-            ><button
-              role="tab"
-              id="office-us"
-              aria-selected="false"
-              aria-controls="office-usa"
-              tabindex="-1"
-            >
-              UTC
-            </button>
-          </div>
-          <div id="office-ca" role="tabpanel" aria-labelledby="office-canada">
-            <p>서울, 대한민국<br />KST (UTC+9)</p>
-            <span class="eyebrow office-clock" data-zone="Asia/Seoul"
-              >LOCAL TIME</span
-            >
-          </div>
-          <div
-            id="office-usa"
-            role="tabpanel"
-            aria-labelledby="office-us"
-            hidden
-          >
-            <p>협정 세계시<br />UTC</p>
-            <span class="eyebrow office-clock" data-zone="UTC"
-              >LOCAL TIME</span
-            >
-          </div>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="#home" aria-label="SHP, 처음으로">
+      <span class="mark-px" aria-hidden="true"></span>
+      <span class="mark-tx">SHP®</span>
+    </a>
+    <p class="bar-meta"><span>SEOUL (KR)</span><b aria-hidden="true"></b><span>/2026</span></p>
+    <nav class="bar-nav" aria-label="주요">
+      <a href="#services">SERVICES</a>
+      <a href="#clients">WORK</a>
+      <a href="#expertise">ABOUT</a>
+      <a class="btn" href="#contact">CONTACT<i aria-hidden="true">▶</i></a>
+    </nav>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu">
+      <span aria-hidden="true"></span><span class="sr-only">메뉴</span>
+    </button>
+  </div>
+  <div class="menu" id="menu" hidden>
+    <a href="#services">SERVICES</a><a href="#clients">WORK</a>
+    <a href="#expertise">ABOUT</a><a href="#contact">CONTACT</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── HOME ─────────────────────────────────────────────────────────── -->
+  <section id="home" class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="tag">RESEARCH IN OPTICALLY<br />PUMPED MAGNETOMETRY</p>
+        <h1 class="big">SHP<span>®</span></h1>
+        <p class="who">PARK<br />SEONGHYEON</p>
+        <p class="lede">원자의 세차운동을 빛으로 읽습니다. 읽어낸 값이 어디서
+          왔는지까지 함께 남깁니다.</p>
+        <div class="acts">
+          <a class="btn big-btn" href="#contact">GET IN TOUCH<i aria-hidden="true">▶</i></a>
+          <a class="btn ghost" href="/gallery.html">IMAGE LOG<i aria-hidden="true">▶</i></a>
         </div>
       </div>
-      <div class="footer-bottom eyebrow">
-        <span>© 2026 PARK SEONGHYEON</span
-        ><span>DESIGN AFTER WEBISOFT.COM · INDEPENDENTLY CODED</span
-        ><a href="#home">BACK TO TOP ↑</a>
-      </div>
-    </footer>
-    <dialog id="inquiry" class="inquiry-dialog" aria-labelledby="inquiry-title">
-      <button type="button" class="dialog-close" aria-label="Close inquiry">
-        ×</button
-      ><span class="eyebrow">/ 연락</span>
-      <h2 id="inquiry-title">무엇을 재고<br />계십니까?</h2>
-      <form id="inquiry-form">
-        <label
-          >이름<input
-            name="name"
-            autocomplete="name"
-            required
-            maxlength="100"
-            placeholder="홍길동" /></label
-        ><label
-          >이메일<input
-            name="email"
-            autocomplete="email"
-            type="email"
-            required
-            maxlength="254"
-            placeholder="you@lab.ac.kr" /></label
-        ><label
-          >문의 내용<textarea
-            name="project"
-            rows="3"
-            required
-            maxlength="3000"
-            placeholder="연구 주제, 측정 대상, 필요한 것…"
-          ></textarea>
-        </label>
-        <p class="form-note">
-          이 페이지는 입력한 내용을 어디에도 보내지 않는다. 아래 버튼을 누르면
-          브라우저에서 텍스트 파일로 내려받을 수 있다.
-        </p>
-        <button class="button dark" type="submit">
-          문의 내용 내려받기 <span>↓</span>
-        </button>
-        <p class="form-result" role="status"></p>
-      </form>
-    </dialog>
-  </body>
+      <figure class="screen">
+        <img src="assets/gb/hero.png" alt="밀봉된 유리 증기셀을 4계조 픽셀 아트로 그린 그림" />
+        <figcaption class="strip">
+          <span>SEOUL (KR)</span><span>MAGNETOMETRY_</span><span class="on">● LIVE</span>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="ticker" aria-hidden="true"><div class="ticker-run"></div></div>
+  </section>
+
+  <!-- ── ABOUT ────────────────────────────────────────────────────────── -->
+  <section id="about" class="slab">
+    <p class="kicker">01 — 무엇을 하는가</p>
+    <p class="say">원자의 세차운동은 자기장의 세기에 정확히 비례합니다.
+      그 주파수를 빛으로 읽어내면, 눈금이 아니라 자연상수가 기준이 되는
+      자력계가 됩니다.</p>
+    <dl class="facts">
+      <div><dt>D1 794.98 nm</dt><dd>펌핑 전이</dd></div>
+      <div><dt>D2 780.24 nm</dt><dd>검출 전이</dd></div>
+      <div><dt>Evidence classes</dt><dd>SOURCE_FACT / CALCULATED / INFERRED / ILLUSTRATIVE</dd></div>
+    </dl>
+  </section>
+
+  <!-- ── SERVICES ─────────────────────────────────────────────────────── -->
+  <section id="services" class="slab">
+    <p class="kicker">02 — 어떻게 하는가</p>
+    <ol class="svc">
+      <li>
+        <span class="no">S/001</span>
+        <div class="svc-b"><h3>광학 설계</h3>
+          <p>빔 경로, 편광, 검출 각도를 먼저 정하고 기구를 뒤에 맞춥니다.</p>
+          <p class="fig">FIG. 001 / OPTICAL PATH</p></div>
+        <img src="assets/gb/svc-1-optics.png" alt="프리즘과 빔 스플리터를 그린 픽셀 아이콘" />
+      </li>
+      <li>
+        <span class="no">S/002</span>
+        <div class="svc-b"><h3>증기셀과 원자물리</h3>
+          <p>증기압, 완충기체, 공명 선폭 — 셀 안에서 정해지는 값들.</p>
+          <p class="fig">FIG. 002 / ATOMIC PHYSICS</p></div>
+        <img src="assets/gb/svc-2-cell.png" alt="팁오프 스템이 달린 밀봉 증기셀 픽셀 아이콘" />
+      </li>
+      <li>
+        <span class="no">S/003</span>
+        <div class="svc-b"><h3>파라메트릭 CAD</h3>
+          <p>치수가 세 군데 흩어져 있으면 그건 버그입니다.</p>
+          <p class="fig">FIG. 003 / PARAMETRIC CAD</p></div>
+        <img src="assets/gb/svc-3-cad.png" alt="볼트 서클이 가공된 블록의 아이소메트릭 픽셀 아이콘" />
+      </li>
+      <li>
+        <span class="no">S/004</span>
+        <div class="svc-b"><h3>신호와 검증</h3>
+          <p>측정한 값과 가정한 값을 절대 같은 칸에 적지 않습니다.</p>
+          <p class="fig">FIG. 004 / SIGNAL AND VALIDATION</p></div>
+        <img src="assets/gb/svc-4-detect.png" alt="일치한 검출기 한 쌍을 그린 픽셀 아이콘" />
+      </li>
+      <li>
+        <span class="no">S/005</span>
+        <div class="svc-b"><h3>감독형 파이프라인</h3>
+          <p>만든 사람과 검사하는 사람을 분리합니다. 통과는 의견이 아닙니다.</p>
+          <p class="fig">FIG. 005 / SUPERVISED PIPELINE</p></div>
+        <img src="assets/gb/svc-5-check.png" alt="한 칸이 비어 있는 부품 격자 픽셀 아이콘" />
+      </li>
+    </ol>
+  </section>
+
+  <!-- ── WORK ─────────────────────────────────────────────────────────── -->
+  <section id="clients" class="slab">
+    <p class="kicker">03 — 무엇을 만들었나</p>
+    <div class="work">
+      <article><span class="no">W/01</span><h3>Rb 증기셀 광학계</h3>
+        <p>펌프와 프로브를 직교로 넣고 셀 온도를 유지하는 광학 배치.</p>
+        <div class="meter" aria-hidden="true"></div></article>
+      <article><span class="no">W/02</span><h3>균형 편광계 설계</h3>
+        <p>공통 모드를 빼고 회전각만 남기는 차동 검출기.</p>
+        <div class="meter" aria-hidden="true"></div></article>
+      <article><span class="no">W/03</span><h3>감독형 검증 파이프라인</h3>
+        <p>증거·수치·형상·렌더를 각각 기계로 검사하는 게이트.</p>
+        <div class="meter" aria-hidden="true"></div></article>
+    </div>
+  </section>
+
+  <!-- ── ABOUT / PRINCIPLES ───────────────────────────────────────────── -->
+  <section id="expertise" class="slab">
+    <p class="kicker">04 — 어떤 기준으로</p>
+    <div class="cols">
+      <div><h2>전문성</h2><ul class="sq">
+        <li>ATOMIC MAGNETOMETRY</li><li>PRECISION OPTOMECHANICS</li>
+        <li>MEASUREMENT AND PROOF</li></ul></div>
+      <div><h2>원칙</h2><ul class="sq">
+        <li>MEASURED, NOT ASSUMED</li><li>NO INVENTED CITATIONS</li>
+        <li>A RENDER IS NOT A SIMULATION</li></ul></div>
+      <div><h2>방법론</h2><ul class="sq">
+        <li>EVIDENCE FIRST</li><li>GATES, NOT OPINIONS</li>
+        <li>CORRECT WITH DELTAS</li></ul></div>
+    </div>
+    <p class="manifesto">RECORDED TO BE CHECKED</p>
+    <figure class="shield">
+      <img src="assets/gb/shield.png" alt="동심으로 겹친 자기 차폐 실린더를 그린 픽셀 아이콘" />
+    </figure>
+  </section>
+
+  <!-- ── CONTACT ──────────────────────────────────────────────────────── -->
+  <section id="contact" class="slab end">
+    <h2 class="sr-only">연락하기</h2>
+    <p class="kicker">05 — 연락</p>
+    <p class="big2">START<br />A PROJECT<i aria-hidden="true">▶</i></p>
+    <ul class="chan">
+      <li><span>MAIL</span><a href="mailto:tjdgus5160@gmail.com">tjdgus5160@gmail.com</a></li>
+      <li><span>PLACE</span><b>서울, 대한민국<br />KST (UTC+9)</b></li>
+      <li><span>INDEX</span><a href="/gallery.html">생성 이미지 로그</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="brand">PARK SEONGHYEON®</p>
+  <p class="credit">8-BIT INTERFACE · ORIGINAL PIXEL ART, GENERATED BY CODE</p>
+  <p class="bits" aria-hidden="true"></p>
+</footer>
+</body>
 </html>

@@ -9,3 +9,6 @@ __pycache__/
 /SOUL.md
 /USER.md
 /.openclaw/
+
+# stray reference screenshots kept out of the tree
+awwwards-*.png

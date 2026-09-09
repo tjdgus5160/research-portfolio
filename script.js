@@ -1,247 +1,104 @@
-'use strict';
-const field = document.querySelector('.line-field');
-for (let i = 0; i < 14; i++) {
-  const line = document.createElement('div');
-  line.className = 'scanline';
-  line.style.setProperty('--i', i);
-  line.style.setProperty('--wave-start', `${100 - i * 7}%`);
-  line.style.setProperty('--wave-end', `${107 - i * 7}%`);
-  field.append(line);
-}
-const identity = document.querySelector('.identity'),
-  toggle = document.querySelector('.menu-toggle'),
-  menu = document.querySelector('.site-menu'),
-  shade = document.querySelector('.menu-shade');
-function setMenu(open) {
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  menu.hidden = !open;
-  shade.hidden = !open;
-  identity.classList.toggle('is-open', open);
-  document.body.classList.toggle('menu-open', open);
-}
-toggle.addEventListener('click', () =>
-  setMenu(toggle.getAttribute('aria-expanded') !== 'true'),
-);
-shade.addEventListener('click', () => setMenu(false));
-menu
-  .querySelectorAll('a')
-  .forEach((a) => a.addEventListener('click', () => setMenu(false)));
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    setMenu(false);
-    toggle.focus();
+/* SHP® — 8-bit interface behaviour. Everything here is drawn on a whole-pixel
+   grid; nothing animates smoothly, because the point is that it cannot. */
+(() => {
+  'use strict';
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── the mobile menu ────────────────────────────────────────────────── */
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('menu');
+  if (burger && menu) {
+    const set = (open) => {
+      menu.hidden = !open;
+      burger.setAttribute('aria-expanded', String(open));
+    };
+    burger.addEventListener('click', () => set(menu.hidden));
+    menu.addEventListener('click', (e) => { if (e.target.matches('a')) set(false); });
+    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
   }
-});
-// Collapsing identity card: visible while scrolling up, tucked away on the way down.
-let lastY = window.scrollY,
-  scrollQueued = false;
-window.addEventListener(
-  'scroll',
-  () => {
-    if (scrollQueued) return;
-    scrollQueued = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastY) > 5) {
-        identity.classList.toggle('is-hidden', y > lastY && y > 180);
-        lastY = y;
-      }
-      scrollQueued = false;
-    });
-  },
-  { passive: true },
-);
-// Accessible tab groups, including arrow, Home and End keyboard navigation.
-document.querySelectorAll('[role="tablist"]').forEach((list) => {
-  const tabs = [...list.querySelectorAll('[role="tab"]')];
-  function select(tab, focus = false) {
-    tabs.forEach((item) => {
-      const chosen = item === tab;
-      item.setAttribute('aria-selected', String(chosen));
-      item.tabIndex = chosen ? 0 : -1;
-      document.getElementById(item.getAttribute('aria-controls')).hidden =
-        !chosen;
-    });
-    if (focus) tab.focus();
+
+  /* ── the ticker, filled with the binary the page is asked to be made of ── */
+  const run = document.querySelector('.ticker-run');
+  if (run) {
+    const words = ['794.98', '780.24', 'SOURCE_FACT', 'CALCULATED', 'INFERRED',
+                   'ILLUSTRATIVE', 'MEASURED NOT ASSUMED', 'SHP®'];
+    const bits = (n) => Array.from({ length: n },
+      () => (Math.random() < 0.5 ? '0' : '1')).join('');
+    let line = '';
+    for (const w of words) line += `${bits(8)} ▪ ${w} ▪ `;
+    // duplicated so the -50% slide loops without a seam
+    run.textContent = (line + line).replace(/\s+$/, '');
   }
-  tabs.forEach((tab, i) => {
-    tab.addEventListener('click', () => select(tab));
-    tab.addEventListener('keydown', (event) => {
-      let next = i;
-      if (event.key === 'ArrowRight') next = (i + 1) % tabs.length;
-      else if (event.key === 'ArrowLeft')
-        next = (i - 1 + tabs.length) % tabs.length;
-      else if (event.key === 'Home') next = 0;
-      else if (event.key === 'End') next = tabs.length - 1;
-      else return;
-      event.preventDefault();
-      select(tabs[next], true);
-    });
-  });
-});
-// Client carousel supports buttons, trackpad/touch, mouse dragging and the keyboard.
-const track = document.querySelector('.client-track'),
-  cards = [...document.querySelectorAll('.client-card')],
-  counter = document.querySelector('#client-counter');
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-function currentCard() {
-  return Math.round(track.scrollLeft / (cards[0].offsetWidth + 16));
-}
-function moveCard(delta) {
-  const next = (currentCard() + delta + cards.length) % cards.length;
-  track.scrollTo({
-    left: next * (cards[0].offsetWidth + 16),
-    behavior: reduced.matches ? 'instant' : 'smooth',
-  });
-}
-document
-  .querySelector('#client-prev')
-  .addEventListener('click', () => moveCard(-1));
-document
-  .querySelector('#client-next')
-  .addEventListener('click', () => moveCard(1));
-track.addEventListener('keydown', (e) => {
-  if (e.target !== track) return;
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-    e.preventDefault();
-    moveCard(e.key === 'ArrowRight' ? 1 : -1);
+
+  /* ── the footer's bit field ─────────────────────────────────────────── */
+  const bits = document.querySelector('.bits');
+  if (bits) {
+    bits.textContent = Array.from({ length: 240 },
+      () => (Math.random() < 0.5 ? '0' : '1')).join('');
   }
-});
-track.addEventListener(
-  'scroll',
-  () => {
-    counter.textContent = `${String(Math.min(cards.length, currentCard() + 1)).padStart(2, '0')} / 03`;
-  },
-  { passive: true },
-);
-let drag = null,
-  didDrag = false;
-track.addEventListener('pointerdown', (e) => {
-  if (
-    e.pointerType !== 'mouse' ||
-    e.button !== 0 ||
-    e.target.closest('a,button')
-  )
-    return;
-  drag = { x: e.clientX, left: track.scrollLeft, id: e.pointerId };
-  didDrag = false;
-});
-track.addEventListener('pointermove', (e) => {
-  if (!drag) return;
-  const distance = e.clientX - drag.x;
-  if (Math.abs(distance) > 5) {
-    if (!didDrag) track.setPointerCapture(drag.id);
-    didDrag = true;
-    track.classList.add('dragging');
-    track.scrollLeft = drag.left - distance;
-  }
-});
-function stopDrag() {
-  if (!drag) return;
-  const target = Math.round(track.scrollLeft / (cards[0].offsetWidth + 16));
-  drag = null;
-  track.classList.remove('dragging');
-  track.scrollTo({
-    left: target * (cards[0].offsetWidth + 16),
-    behavior: reduced.matches ? 'instant' : 'smooth',
-  });
-}
-track.addEventListener('pointerup', stopDrag);
-track.addEventListener('pointercancel', stopDrag);
-track.addEventListener('lostpointercapture', stopDrag);
-track.addEventListener(
-  'click',
-  (e) => {
-    if (didDrag) {
-      e.preventDefault();
-      didDrag = false;
-    }
-  },
-  true,
-);
-// Native modal preserves keyboard focus and keeps all project details on the device.
-const dialog = document.querySelector('#inquiry'),
-  form = document.querySelector('#inquiry-form'),
-  result = document.querySelector('.form-result');
-let inquiryTrigger = null;
-document.querySelectorAll('[data-contact]').forEach((link) =>
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    setMenu(false);
-    inquiryTrigger = link;
-    result.textContent = '';
-    dialog.showModal();
-  }),
-);
-document
-  .querySelector('.dialog-close')
-  .addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', (e) => {
-  if (e.target === dialog) {
-    const rect = dialog.getBoundingClientRect();
-    if (
-      e.clientX < rect.left ||
-      e.clientX > rect.right ||
-      e.clientY < rect.top ||
-      e.clientY > rect.bottom
-    )
-      dialog.close();
-  }
-});
-dialog.addEventListener('close', () => inquiryTrigger?.focus());
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (!form.reportValidity()) return;
-  const data = new FormData(form);
-  const brief = `PROJECT BRIEF\n=============\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\n\nProject\n-------\n${data.get('project')}\n\nCreated locally in an independent Webisoft design study. This brief has not been sent.\n`;
-  const url = URL.createObjectURL(
-    new Blob([brief], { type: 'text/plain;charset=utf-8' }),
-  );
-  const download = document.createElement('a');
-  download.href = url;
-  download.download = 'project-brief.txt';
-  document.body.append(download);
-  download.click();
-  download.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  result.textContent =
-    'Your project brief is ready. No information has been sent.';
-});
-function updateClocks() {
-  document.querySelectorAll('.office-clock').forEach((el) => {
-    try {
-      el.textContent =
-        new Intl.DateTimeFormat('en-GB', {
-          hour: '2-digit',
-          minute: '2-digit',
-          timeZone: el.dataset.zone,
-          hour12: false,
-        }).format(new Date()) + ' LOCAL TIME';
-    } catch {
-      el.textContent = 'EASTERN TIME';
-    }
-  });
-}
-updateClocks();
-setInterval(updateClocks, 60000);
-if ('IntersectionObserver' in window && !reduced.matches) {
-  document.documentElement.classList.add('motion-ready');
-  const observer = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+
+  /* ── falling binary, snapped to a character cell so it stays 8-bit ──── */
+  const cv = document.querySelector('.rain');
+  if (cv && !still) {
+    const ctx = cv.getContext('2d', { alpha: true });
+    const CELL = 16;              // one glyph cell, in CSS pixels
+    let cols = 0, drops = [], raf = 0, last = 0;
+
+    const size = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      cv.width = Math.ceil(innerWidth * dpr);
+      cv.height = Math.ceil(innerHeight * dpr);
+      cv.style.width = innerWidth + 'px';
+      cv.style.height = innerHeight + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.font = `${CELL - 4}px "Press Start 2P", monospace`;
+      ctx.textBaseline = 'top';
+      cols = Math.ceil(innerWidth / CELL);
+      drops = Array.from({ length: cols },
+        () => Math.floor(Math.random() * (innerHeight / CELL)));
+    };
+
+    const ink = () => getComputedStyle(document.documentElement)
+      .getPropertyValue('--t1').trim() || '#3a3a3a';
+
+    const tick = (t) => {
+      raf = requestAnimationFrame(tick);
+      if (t - last < 90) return;          // deliberately choppy, ~11 fps
+      last = t;
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      ctx.fillStyle = ink();
+      const rows = Math.ceil(innerHeight / CELL);
+      for (let i = 0; i < cols; i++) {
+        const y = drops[i];
+        for (let k = 0; k < 5; k++) {          // a short trail per column
+          const r = y - k;
+          if (r < 0 || r > rows) continue;
+          ctx.globalAlpha = 1 - k * 0.19;
+          ctx.fillText(Math.random() < 0.5 ? '0' : '1', i * CELL, r * CELL);
         }
-      }),
-    { threshold: 0.15 },
-  );
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-}
-// Pause decorative motion while the tab is not being viewed.
-document.addEventListener('visibilitychange', () => {
-  document.querySelectorAll('.scanline,.contact-marquee').forEach((el) => {
-    el.style.animationPlayState = document.hidden ? 'paused' : 'running';
+        ctx.globalAlpha = 1;
+        drops[i] = y > rows + Math.random() * 18 ? 0 : y + 1;
+      }
+    };
+
+    size();
+    addEventListener('resize', size, { passive: true });
+    raf = requestAnimationFrame(tick);
+    addEventListener('pagehide', () => cancelAnimationFrame(raf));
+  }
+
+  /* ── palette switch, kept per viewer ────────────────────────────────── */
+  const root = document.documentElement;
+  try {
+    const saved = localStorage.getItem('shp-pal');
+    if (saved === 'dmg' || saved === 'mono') root.dataset.pal = saved;
+  } catch (e) { /* private window, or site data blocked */ }
+  addEventListener('keydown', (e) => {
+    if (e.key !== 'p' && e.key !== 'P') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    const next = root.dataset.pal === 'dmg' ? 'mono' : 'dmg';
+    root.dataset.pal = next;
+    try { localStorage.setItem('shp-pal', next); } catch (err) { /* ignore */ }
   });
-});
+})();
