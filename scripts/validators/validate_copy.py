@@ -35,7 +35,7 @@ FOREIGN = [
 # Copy that must be present, section by section, so a skipped section is loud.
 REQUIRED = {
     "identity": ["SHP®", "PARK<br />SEONGHYEON"],
-    "hero":     ["RESEARCH IN OPTICALLY", "SEOUL (KR)", "MAGNETOMETRY_"],
+    "hero":     ["RESEARCH IN OPTICALLY", "CHEONGJU (KR)", "MAGNETOMETRY_"],
     "about":    ["원자의 세차운동"],
     "services": ["광학 설계", "증기셀과 원자물리", "파라메트릭 CAD",
                  "신호와 검증", "감독형 파이프라인",
@@ -43,7 +43,7 @@ REQUIRED = {
     "clients":  ["Rb 증기셀 광학계", "균형 편광계 설계", "감독형 검증 파이프라인"],
     "expertise":["ATOMIC MAGNETOMETRY", "MEASURED, NOT ASSUMED", "EVIDENCE FIRST"],
     "manifesto":["RECORDED TO BE CHECKED"],
-    "contact":  ["SHP®"],
+    "contact":  ["SHP®", "tjdgus5160@chungbuk.ac.kr", "S1-1-249"],
 }
 
 
