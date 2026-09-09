@@ -13,6 +13,16 @@
 <script src="script.js" defer></script>
 </head>
 <body>
+<!-- The power-on sequence. Hidden in the markup so a browser with no JS, or a
+     crawler, gets the page immediately; script.js un-hides it and plays it. -->
+<div class="boot" id="boot" hidden>
+  <div class="boot-screen">
+    <img class="boot-logo" src="assets/gb/wordmark.png" alt="" />
+    <p class="boot-line" aria-hidden="true"></p>
+  </div>
+  <div class="boot-wipe" aria-hidden="true"></div>
+</div>
+<p class="boot-live sr-only" role="status" aria-live="polite"></p>
 <!-- SHP® — optically pumped magnetometry, rendered as a 4-tone handheld interface. -->
 <div class="scan" aria-hidden="true"></div>
 <canvas class="rain" aria-hidden="true"></canvas>
@@ -36,6 +46,7 @@
       <span aria-hidden="true"></span><span class="sr-only">메뉴</span>
     </button>
   </div>
+  <div class="prog" aria-hidden="true"><i></i></div>
   <div class="menu" id="menu" hidden>
     <a href="#services">SERVICES</a><a href="#clients">WORK</a>
     <a href="#expertise">ABOUT</a><a href="#contact">CONTACT</a>

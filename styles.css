@@ -208,3 +208,79 @@ main{position:relative;z-index:1}
   .ticker-run,.strip .on{animation:none}
   .rain{display:none}
 }
+
+/* ══ POWER ON ════════════════════════════════════════════════════════════
+   The DMG boot: a blank screen, the mark travelling down to the middle in
+   discrete jumps, a beat of nothing, then the screen wipes away. Every timing
+   function is steps() — an eased curve would give the whole thing away.      */
+.boot{position:fixed;inset:0;z-index:100;background:var(--t3);
+  display:grid;place-items:center;overflow:hidden}
+.boot[hidden]{display:none}
+.boot-screen{position:relative;width:min(84vw,520px);aspect-ratio:160/144;
+  display:grid;place-items:center;align-content:center;gap:calc(var(--px)*5);
+  overflow:hidden;                      /* the mark travels in from off-panel */
+  border:var(--px) solid var(--t0);background:var(--t3);
+  box-shadow:calc(var(--px)*2) calc(var(--px)*2) 0 var(--t1)}
+.boot-logo{width:min(58%,260px);
+  transform:translateY(-560%);          /* clear of the panel's top edge */
+  animation:drop 1.25s steps(14,end) .3s forwards}
+@keyframes drop{to{transform:translateY(0)}}
+.boot-line{margin:0;font-family:var(--disp);font-size:9px;letter-spacing:.26em;
+  color:var(--t2);opacity:0;animation:pop .01s steps(1,end) 1.62s forwards}
+@keyframes pop{to{opacity:1}}
+/* the wipe: a hard band that sweeps down, then the whole overlay is gone */
+.boot-wipe{position:absolute;left:0;right:0;top:0;height:100%;
+  background:var(--t0);transform:scaleY(0);transform-origin:top;
+  animation:wipe .42s steps(7,end) 2.15s forwards}
+@keyframes wipe{45%{transform:scaleY(1);transform-origin:top}
+                46%{transform:scaleY(1);transform-origin:bottom}
+                100%{transform:scaleY(0);transform-origin:bottom}}
+.boot.off{animation:snap .01s steps(1,end) forwards}
+@keyframes snap{to{opacity:0;visibility:hidden}}
+/* while booting, hold the page still underneath */
+html.booting,html.booting body{overflow:hidden}
+
+/* ══ SCROLL METER ════════════════════════════════════════════════════════
+   Squares, not a bar: the fill is a repeating hard-edged gradient so it can
+   only ever advance one whole block at a time.                              */
+.prog{height:calc(var(--px)*2);background:var(--t3);
+  border-top:var(--px) solid var(--t0)}
+.prog i{display:block;height:100%;width:var(--sp,0%);
+  background:repeating-linear-gradient(90deg,var(--t0) 0 calc(var(--px)*3),
+             transparent calc(var(--px)*3) calc(var(--px)*5))}
+
+/* ══ SCROLL-DRIVEN STATES ════════════════════════════════════════════════ */
+/* Sections arrive in three hard stops rather than sliding in. */
+[data-r]{opacity:0;transform:translateY(calc(var(--px)*5))}
+[data-r].r1{opacity:.34;transform:translateY(calc(var(--px)*3))}
+[data-r].r2{opacity:.68;transform:translateY(calc(var(--px)*1))}
+[data-r].r3{opacity:1;transform:none}
+[data-r]{transition:opacity .34s steps(3,end),transform .34s steps(3,end)}
+
+/* Service icons load a band at a time, the way a tile map fills in. */
+.svc img{clip-path:inset(0 0 100% 0);transition:clip-path .5s steps(8,end)}
+.svc li.on img{clip-path:inset(0 0 0 0)}
+/* and the row's number counts itself out in binary while it does */
+.no{font-variant-numeric:tabular-nums}
+.svc li .no::after{content:" " attr(data-bits);color:var(--t2);font-size:.85em}
+
+/* The hero screen powers up with a scanline sweep the first time it is seen. */
+.screen{position:relative}
+.screen::after{content:"";position:absolute;inset:0;background:var(--t3);
+  transform-origin:top;transform:scaleY(1);
+  transition:transform .6s steps(9,end)}
+.screen.lit::after{transform:scaleY(0)}
+
+/* The manifesto blinks awake like a cursor line. */
+.manifesto{--cut:0}
+.manifesto.on{animation:flick .5s steps(2,end) 1}
+@keyframes flick{0%,40%{opacity:.25}20%,60%,100%{opacity:1}}
+
+@media (prefers-reduced-motion:reduce){
+  .boot{display:none !important}
+  html.booting,html.booting body{overflow:auto}
+  [data-r]{opacity:1 !important;transform:none !important;transition:none}
+  .svc img{clip-path:none;transition:none}
+  .screen::after{display:none}
+  .manifesto.on{animation:none}
+}

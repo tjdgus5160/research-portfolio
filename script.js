@@ -87,8 +87,97 @@
     addEventListener('pagehide', () => cancelAnimationFrame(raf));
   }
 
-  /* ── palette switch, kept per viewer ────────────────────────────────── */
+
+  /* ── power on ───────────────────────────────────────────────────────────
+     Plays once per browser session, the way a handheld boots when you switch
+     it on rather than every time you change screens. The page underneath is
+     already rendered; this only covers it, so nothing depends on it finishing. */
+  const boot = document.getElementById('boot');
   const root = document.documentElement;
+  if (boot) {
+    let seen = false;
+    try { seen = sessionStorage.getItem('shp-boot') === '1'; } catch (e) { /* blocked */ }
+    if (seen || still) {
+      boot.remove();
+    } else {
+      const line = boot.querySelector('.boot-line');
+      if (line) line.textContent = 'SHP®  OK';
+      const live = document.querySelector('.boot-live');
+      if (live) live.textContent = '시작 화면';
+      root.classList.add('booting');
+      boot.hidden = false;
+      const done = () => {
+        root.classList.remove('booting');
+        boot.remove();
+        try { sessionStorage.setItem('shp-boot', '1'); } catch (e) { /* blocked */ }
+      };
+      // driven by the wipe finishing, with a wall-clock backstop so a dropped
+      // animationend can never leave the page covered
+      const wipe = boot.querySelector('.boot-wipe');
+      const t = setTimeout(done, 3200);
+      if (wipe) wipe.addEventListener('animationend', () => { clearTimeout(t); done(); },
+                                      { once: true });
+      // let anyone skip it
+      addEventListener('keydown', function esc(e) {
+        if (e.key !== 'Escape' && e.key !== 'Enter' && e.key !== ' ') return;
+        clearTimeout(t); done(); removeEventListener('keydown', esc);
+      });
+      boot.addEventListener('click', () => { clearTimeout(t); done(); });
+    }
+  }
+
+  /* ── how far down the page we are, in whole blocks ────────────────────── */
+  const fill = document.querySelector('.prog i');
+  if (fill) {
+    let queued = false;
+    const paint = () => {
+      queued = false;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const pct = max > 0 ? (scrollY / max) * 100 : 0;
+      // snap to 2% so the meter advances in steps, never smoothly
+      fill.style.setProperty('--sp', (Math.round(pct / 2) * 2) + '%');
+    };
+    addEventListener('scroll', () => {
+      if (!queued) { queued = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    addEventListener('resize', paint, { passive: true });
+    paint();
+  }
+
+  /* ── things arrive in hard stops as they enter ────────────────────────── */
+  const steps = ['r1', 'r2', 'r3'];
+  // .sr-only headings are 1px tall, so they can never satisfy the observer's
+  // threshold and would sit at opacity 0 for ever — visually identical, but it
+  // is still an element hidden from assistive tech by an animation that never
+  // runs. They are excluded rather than special-cased later.
+  document.querySelectorAll('.slab > *, .hero-copy, .screen, .work article, .svc li')
+    .forEach((el) => { if (!el.classList.contains('sr-only')) el.setAttribute('data-r', ''); });
+
+  if (still) {
+    document.querySelectorAll('[data-r]').forEach((el) => el.classList.add('r3'));
+    document.querySelectorAll('.svc li').forEach((el) => el.classList.add('on'));
+    document.querySelector('.screen')?.classList.add('lit');
+  } else {
+    const stagger = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        steps.forEach((c, i) => setTimeout(() => el.classList.add(c), i * 90));
+        if (el.matches('.svc li')) setTimeout(() => el.classList.add('on'), 160);
+        if (el.matches('.screen')) setTimeout(() => el.classList.add('lit'), 120);
+        if (el.matches('.manifesto')) el.classList.add('on');
+        stagger.unobserve(el);
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+    document.querySelectorAll('[data-r], .manifesto').forEach((el) => stagger.observe(el));
+  }
+
+  /* ── each service row carries its index in binary ─────────────────────── */
+  document.querySelectorAll('.svc li .no').forEach((no, i) => {
+    no.dataset.bits = (i + 1).toString(2).padStart(4, '0');
+  });
+
+  /* ── palette switch, kept per viewer ────────────────────────────────── */
   try {
     const saved = localStorage.getItem('shp-pal');
     if (saved === 'dmg' || saved === 'mono') root.dataset.pal = saved;
