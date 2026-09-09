@@ -56,9 +56,13 @@
 
     const held = new Set();
     const down = (e) => {
-      if (e.key === 'Escape') { stop(); return; }
+      // This runs on the capture phase, so it sees the key before the page's
+      // control pad does — and the pad binds Escape to "back". Without stopping
+      // it here, one Escape both closed the game and fired the pad's back
+      // action underneath it.
+      e.stopPropagation();
+      if (e.key === 'Escape') { e.preventDefault(); stop(); return; }
       if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { held.add(e.key); e.preventDefault(); }
-      e.stopPropagation();                    // keep the page's pad out of it
     };
     const up = (e) => held.delete(e.key);
     addEventListener('keydown', down, true);
