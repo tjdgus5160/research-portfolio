@@ -143,7 +143,7 @@ def shadow(image, bounds, coverage=6):
     dither(image, mask_for(image.size, "ellipse", bounds), GB3, GB2, coverage)
 
 
-def hero():
+def hero(dither_shift=0):
     image = canvas((160, 144))
     # A quiet field: light behind the glass, denser towards the bottom edge.
     field = Image.new("1", image.size, 1)
@@ -161,7 +161,9 @@ def hero():
         (35, 65), (39, 54), (46, 46),
     ]
     body = mask_for(image.size, "polygon", outer)
-    dither(image, body, GB1, GB2, lambda x, y: max(4, 15 - max(0, x - 70) // 4))
+    dither(image, body, GB1, GB2,
+           lambda x, y: max(4, 15 - max(0, x - 70) // 4)
+           + (dither_shift if y >= 44 else 0))  # Keep the fused stem static.
     draw = ImageDraw.Draw(image)
     draw.line(outer + [outer[0]], fill=GB0, width=2)
     poly(image, [(53, 45), (84, 43), (97, 48), (108, 62), (110, 68),
@@ -176,7 +178,7 @@ def hero():
     draw.line([(101, 59), (108, 72), (109, 92), (106, 99)], GB0, 1)
     dither(image, mask_for(image.size, "polygon", [
         (92, 77), (106, 81), (107, 96), (101, 103), (86, 106),
-    ]), GB1, GB2, 8)
+    ]), GB1, GB2, 8 + dither_shift)
     # Broad, closed glass front. A thin wall follows the capsule rather than
     # adding a thick concentric collar that could read as a camera lens.
     front = [(56, 49), (76, 48), (88, 51), (97, 58), (102, 68),
@@ -189,7 +191,8 @@ def hero():
         (50, 103), (45, 95), (43, 85), (43, 68), (47, 60),
     ])
     dither(image, window, GB2, GB3,
-           lambda x, y: max(0, min(16, 21 - (y - 52) // 3 - max(0, x - 64) // 3)))
+           lambda x, y: max(0, min(16, 21 - (y - 52) // 3
+                                  - max(0, x - 64) // 3 + dither_shift)))
     # Sparse, unbroken highlight strokes retain the empty-looking interior.
     draw.line([(45, 66), (49, 59), (57, 54), (70, 53)], GB3, 2)
     draw.line([(43, 73), (43, 85), (46, 95), (51, 101)], GB3, 2)
@@ -380,6 +383,80 @@ def shield():
     return image
 
 
+def hero_frames():
+    # The still already contains this isolated five-pixel bright cross.
+    # Use it as the first orbit position, preserving frame 1 pixel for pixel.
+    cluster = ((0, 0), (-1, 0), (1, 0), (0, -1), (0, 1))
+    halo = ((-2, 0), (2, 0), (0, -2), (0, 2),
+            (-1, -1), (1, -1), (-1, 1), (1, 1))
+    orbit = ((77, 76), (83, 81), (77, 86), (71, 81))
+    shifts = (0, 1, 0, -1)
+    still = hero()
+    start_x, start_y = orbit[0]
+    for offsets, colour in ((cluster, GB3), (halo, GB2)):
+        assert all(still.getpixel((start_x + dx, start_y + dy)) == colour
+                   for dx, dy in offsets), "hero-sprite.png: still's seed cluster changed"
+    frames = []
+    for (cx, cy), shift in zip(orbit, shifts):
+        image = hero(dither_shift=shift)
+        # Remove the seed before moving it; a dark one-pixel halo keeps the
+        # same single cross legible against the breathing glass dither.
+        for dx, dy in cluster:
+            image.putpixel((start_x + dx, start_y + dy), GB2)
+        for offsets, colour in ((halo, GB2), (cluster, GB3)):
+            for dx, dy in offsets:
+                image.putpixel((cx + dx, cy + dy), colour)
+        frames.append(image)
+    assert frames[0].tobytes() == still.tobytes(), "hero-sprite.png: frame 1 differs from hero()"
+    return frames
+
+
+def detect_frames():
+    still = detect()
+    frames = []
+    # Only the 3x3 die interiors change; package, window, wires and leads stay.
+    for active_x in (5, 34):
+        image = still.copy()
+        ImageDraw.Draw(image).rectangle(
+            (active_x + 11, 25, active_x + 13, 27), fill=GB3)
+        frames.append(image)
+    return frames
+
+
+def shield_frames():
+    still = shield()
+    # Rotate the index texture clockwise about the existing half-pixel
+    # centre. Copy only the innermost wall, never any of the three rims.
+    wall = Image.new("1", still.size, 0)
+    for y in range(still.height):
+        for x in range(still.width):
+            dx, dy = 2 * x - (still.width - 1), 2 * y - (still.height - 1)
+            if 22 <= isqrt(dx * dx + dy * dy) < 40:
+                wall.putpixel((x, y), 1)
+    frames = [still.copy()]
+    texture = still
+    for _ in range(3):
+        texture = texture.transpose(Image.Transpose.ROTATE_270)
+        image = still.copy()
+        image.paste(texture, (0, 0), wall)
+        frames.append(image)
+    return frames
+
+
+def sprite_sheet(render, frame_size, frame_count):
+    frames = render()
+    assert len(frames) == frame_count, "Sprite has the wrong frame count"
+    assert len({frame.tobytes() for frame in frames}) == frame_count, "Duplicate sprite frames"
+    width, height = frame_size
+    sheet = canvas((width * frame_count, height))
+    for index, frame in enumerate(frames):
+        assert frame.size == frame_size, f"Frame {index + 1}: wrong logical grid"
+        verify_palette(frame, f"Frame {index + 1}", 4, PALETTE_RGB[""])
+        sheet.paste(frame, (index * width, 0))
+        assert sheet.crop((index * width, 0, (index + 1) * width, height)).tobytes() == frame.tobytes(), "Misaligned sprite frame"
+    return sheet
+
+
 def binary_pixel(x, y):
     """Infinite 8-pixel glyph lattice; the sequence repeats every 32 pixels."""
     column, local_x = divmod(x, 8)
@@ -438,6 +515,15 @@ ASSETS = (
     ("wordmark.png", (120, 24), wordmark, "직접 그린 SHP pixel wordmark와 작은 ®"),
 )
 
+SPRITES = (
+    ("hero-sprite.png", (160, 144), 4, hero_frames, "hero.png",
+     "고정된 vapour cell 내부의 pixel cluster 순환과 Bayer shading 변화"),
+    ("detect-sprite.png", (64, 64), 2, detect_frames, None,
+     "좌우 photodiode detector의 active area가 번갈아 밝아지는 한 쌍"),
+    ("shield-sprite.png", (96, 96), 4, shield_frames, "shield.png",
+     "세 cylinder의 고정된 rim과 가장 안쪽 벽면의 회전하는 Bayer pattern"),
+)
+
 
 def verify_palette(image, name, expected_count, palette_rgb):
     assert image.mode == "P", f"{name}: expected an indexed image"
@@ -483,7 +569,7 @@ def encode_png(image, size, description):
     return stream.getvalue()
 
 
-def export_asset(name, size, render, description):
+def export_asset(name, size, render, description, *, frame_count=1, still_name=None):
     logical = render()
     assert logical.size == size, f"{name}: wrong logical grid"
     assert render().tobytes() == logical.tobytes(), f"{name}: nondeterministic renderer"
@@ -495,6 +581,7 @@ def export_asset(name, size, render, description):
         verify_seam(logical, noise_pixel)
         assert list(logical.get_flattened_data()).count(GB1) == 96, "Wrong Bayer coverage"
     size_out = (size[0] * SCALE, size[1] * SCALE)
+    assert size[0] % frame_count == 0, f"{name}: unequal frame widths"
     exported = logical.resize(size_out, Image.Resampling.NEAREST)
     # Apply both palettes to the same index raster so their pixels cannot drift.
     for directory, palette_rgb in PALETTE_RGB.items():
@@ -511,11 +598,22 @@ def export_asset(name, size, render, description):
                     block = decoded.crop((x * SCALE, y * SCALE, (x + 1) * SCALE, (y + 1) * SCALE))
                     assert set(block.get_flattened_data()) == {logical.getpixel((x, y))}, f"{name}: non-integer pixels"
             assert decoded.info["EvidenceClass"] == "ILLUSTRATIVE"
+            if still_name is not None:
+                with Image.open(OUTPUT / directory / still_name) as still:
+                    first_frame = decoded.crop((0, 0, size_out[0] // frame_count, size_out[1]))
+                    assert first_frame.size == still.size, f"{name}: frame 1 and {still_name} sizes differ"
+                    assert first_frame.convert("RGB").tobytes() == still.convert("RGB").tobytes(), f"{directory or 'greyscale'}/{name}: frame 1 differs from {still_name}"
         destination = OUTPUT / directory
         destination.mkdir(parents=True, exist_ok=True)
         (destination / name).write_bytes(encoded)
-        print(f"{name}: logical {size[0]}x{size[1]} -> export {size_out[0]}x{size_out[1]}; "
-              f"{count} colours; {destination.relative_to(ROOT)}/")
+        if frame_count == 1:
+            print(f"{name}: logical {size[0]}x{size[1]} -> export {size_out[0]}x{size_out[1]}; "
+                  f"{count} colours; {destination.relative_to(ROOT)}/")
+    if frame_count > 1:
+        equality = f"PASS ({still_name}, both palettes)" if still_name else "N/A (alternating active areas)"
+        print(f"{name}: {frame_count} frames; logical frame {size[0] // frame_count}x{size[1]}; "
+              f"export {size_out[0]}x{size_out[1]}; {count} colours/palette; "
+              f"frame-1-equals-still {equality}; assets/gb/ + assets/gb/dmg/")
 
 
 def export_font():
@@ -542,13 +640,18 @@ def export_font():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS] + ["font5x7.json"],
+    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS + SPRITES] + ["font5x7.json"],
                         help="Regenerate one asset in both palettes; omit to regenerate the complete set.")
     args = parser.parse_args()
     OUTPUT.mkdir(parents=True, exist_ok=True)
     for entry in ASSETS:
         if args.asset is None or args.asset == entry[0]:
             export_asset(*entry)
+    for name, frame_size, frame_count, render, still_name, description in SPRITES:
+        if args.asset is None or args.asset == name:
+            export_asset(name, (frame_size[0] * frame_count, frame_size[1]),
+                         lambda: sprite_sheet(render, frame_size, frame_count), description,
+                         frame_count=frame_count, still_name=still_name)
     if args.asset is None or args.asset == "font5x7.json":
         export_font()
 

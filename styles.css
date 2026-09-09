@@ -327,3 +327,104 @@ html.booting,html.booting body{overflow:hidden}
   border:var(--px) solid var(--t0);background:var(--t3)}
 .bar-nav .lang:hover{background:var(--t0);color:var(--t3)}
 .menu a[hreflang]{color:var(--t2)}
+
+/* ══ SCREEN TRANSITION ═══════════════════════════════════════════════════
+   A Game Boy changes screens by filling the LCD with a dither pattern that
+   thickens, then thins away on the other side. Four hard steps, drawn with a
+   repeating conic gradient so the cells stay square at any viewport.        */
+.wipe{position:fixed;inset:0;z-index:90;pointer-events:none;display:none}
+.wipe.on{display:block}
+.wipe i{position:absolute;inset:0;display:block;
+  --cell:calc(var(--px)*4);
+  background-image:
+    conic-gradient(from 0deg at 50% 50%, var(--t0) 0 25%, transparent 0 50%,
+                   var(--t0) 0 75%, transparent 0);
+  background-size:var(--cell) var(--cell);
+  opacity:0}
+/* four thresholds: a quarter of the cells, half, three quarters, all of it */
+.wipe.s1 i{opacity:1;--cell:calc(var(--px)*10)}
+.wipe.s2 i{opacity:1;--cell:calc(var(--px)*6)}
+.wipe.s3 i{opacity:1;--cell:calc(var(--px)*3)}
+.wipe.s4 i{opacity:1;background-image:none;background-color:var(--t0)}
+
+/* ══ LCD GHOSTING ════════════════════════════════════════════════════════
+   The DMG's panel was slow: moving content smeared. The trail is drawn from
+   the element's own colour so it works on either palette, and it only exists
+   while the page is actually moving.                                        */
+html.moving .svc img,
+html.moving .screen img,
+html.moving .work article,
+html.moving .shield img{
+  filter:drop-shadow(0 calc(var(--px)*-1) 0 rgba(0,0,0,.20))
+         drop-shadow(0 calc(var(--px)*-2) 0 rgba(0,0,0,.10))}
+html.moving .big,
+html.moving .big2,
+html.moving .manifesto{text-shadow:0 calc(var(--px)*-1) 0 rgba(0,0,0,.16),
+                                   0 calc(var(--px)*-2) 0 rgba(0,0,0,.07)}
+html.moving.up .svc img,
+html.moving.up .screen img,
+html.moving.up .work article,
+html.moving.up .shield img{
+  filter:drop-shadow(0 var(--px) 0 rgba(0,0,0,.20))
+         drop-shadow(0 calc(var(--px)*2) 0 rgba(0,0,0,.10))}
+html.moving.up .big,
+html.moving.up .big2,
+html.moving.up .manifesto{text-shadow:0 var(--px) 0 rgba(0,0,0,.16),
+                                      0 calc(var(--px)*2) 0 rgba(0,0,0,.07)}
+
+@media (prefers-reduced-motion:reduce){
+  .wipe{display:none !important}
+  html.moving *{filter:none !important;text-shadow:none !important}
+}
+
+/* ══ CONTROL PAD ═════════════════════════════════════════════════════════
+   A HUD rather than a full shell: the site stays full width and readable, and
+   the controls sit over it the way a handheld's do under the screen.        */
+.pad{position:fixed;right:clamp(12px,2vw,26px);bottom:clamp(12px,2vw,26px);
+  z-index:70;display:grid;grid-template-columns:auto auto;gap:calc(var(--px)*4);
+  align-items:center;padding:calc(var(--px)*3);
+  background:var(--t3);border:var(--px) solid var(--t0);
+  box-shadow:calc(var(--px)*2) calc(var(--px)*2) 0 var(--t1)}
+.pad button{margin:0;padding:0;border:0;background:var(--t0);cursor:pointer;
+  font:inherit;color:var(--t3);-webkit-tap-highlight-color:transparent}
+.pad button:focus-visible{outline:var(--px) solid var(--t0);outline-offset:calc(var(--px)*1)}
+.pad button:active,.pad button.hit{background:var(--t2)}
+
+.dpad{display:grid;grid-template-columns:repeat(3,calc(var(--px)*5));
+  grid-template-rows:repeat(3,calc(var(--px)*5));gap:0}
+.d{width:100%;height:100%}
+.d.up{grid-area:1/2}.d.left{grid-area:2/1}.d.hub{grid-area:2/2;background:var(--t0)}
+.d.right{grid-area:2/3}.d.down{grid-area:3/2}
+
+.ab{display:flex;gap:calc(var(--px)*2);align-items:flex-end}
+.ab-b{width:calc(var(--px)*7);height:calc(var(--px)*7);
+  display:grid;place-items:center;font-family:var(--disp);font-size:9px}
+.ab-b.b{transform:translateY(calc(var(--px)*2))}
+.ab-b span{pointer-events:none}
+.start{grid-column:1/-1;justify-self:center;font-family:var(--disp);font-size:7px;
+  letter-spacing:.1em;padding:calc(var(--px)*1.5) calc(var(--px)*3);
+  white-space:nowrap;line-height:1}
+
+/* what the pad is currently pointing at */
+.cursor{outline:var(--px) solid var(--t0);outline-offset:calc(var(--px)*1.5);
+  position:relative}
+.cursor::before{content:"";position:absolute;left:calc(var(--px)*-4);
+  top:50%;width:0;height:0;transform:translateY(-50%);
+  border-left:calc(var(--px)*2) solid var(--t0);
+  border-top:calc(var(--px)*1.5) solid transparent;
+  border-bottom:calc(var(--px)*1.5) solid transparent;
+  animation:nudge .6s steps(2,end) infinite alternate}
+@keyframes nudge{to{transform:translate(calc(var(--px)*1),-50%)}}
+.work article.cursor::before,.svc li.cursor::before{border-left-color:var(--t0)}
+
+@media (max-width:620px){ .pad{transform:scale(.86);transform-origin:100% 100%} }
+@media (prefers-reduced-motion:reduce){ .cursor::before{animation:none} }
+
+/* ══ HIDDEN MODE ═════════════════════════════════════════════════════════ */
+.game{position:fixed;inset:0;z-index:95;display:grid;place-items:center;
+  background:color-mix(in srgb, var(--t0) 82%, transparent);padding:16px}
+.game-in{border:var(--px) solid var(--t3);background:var(--t3);
+  box-shadow:calc(var(--px)*2) calc(var(--px)*2) 0 var(--t1);padding:var(--px)}
+.game canvas{display:block;image-rendering:pixelated}
+.game-help{margin:0;padding:8px 4px 4px;text-align:center;font-family:var(--disp);
+  font-size:8px;letter-spacing:.16em;color:var(--t1)}

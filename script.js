@@ -109,15 +109,17 @@
       const done = () => {
         root.classList.remove('booting');
         boot.remove();
+        screenWipe?.in();
         try { sessionStorage.setItem('shp-boot', '1'); } catch (e) { /* blocked */ }
       };
       // driven by the wipe finishing, with a wall-clock backstop so a dropped
       // animationend can never leave the page covered
-      const wipe = boot.querySelector('.boot-wipe');
+      const bootWipe = boot.querySelector('.boot-wipe');
       setTimeout(() => snd.thunk(), 2150);
       const t = setTimeout(done, 3200);
-      if (wipe) wipe.addEventListener('animationend', () => { clearTimeout(t); done(); },
-                                      { once: true });
+      if (bootWipe) bootWipe.addEventListener('animationend',
+                                              () => { clearTimeout(t); done(); },
+                                              { once: true });
       // let anyone skip it
       addEventListener('keydown', function esc(e) {
         if (e.key !== 'Escape' && e.key !== 'Enter' && e.key !== ' ') return;
@@ -297,6 +299,168 @@
     el.addEventListener('pointerenter', () => snd.tick());
     el.addEventListener('click', () => snd.blip(el.matches('.btn') ? 660 : 880));
   });
+
+
+  /* ── screen transitions ─────────────────────────────────────────────────
+     Leaving the page fills the LCD with a dither that thickens in four hard
+     steps; arriving reverses it. Navigation is only committed once the screen
+     is fully covered, so the swap itself is never visible. Anything that fails
+     — a blocked navigation, a slow network — still ends with the overlay gone,
+     because the uncover runs off a timer rather than off the page unloading. */
+  const screenWipe = (() => {
+    if (still) return { out: (go) => go(), in: () => {} };
+    const el = document.createElement('div');
+    el.className = 'wipe';
+    el.innerHTML = '<i></i>';
+    document.body.appendChild(el);
+    const steps = ['s1', 's2', 's3', 's4'];
+    const clear = () => { el.className = 'wipe'; };
+
+    return {
+      out(go) {
+        el.className = 'wipe on';
+        steps.forEach((c, i) => setTimeout(() => {
+          el.className = 'wipe on ' + c;
+          if (i === 0) snd.thunk();
+        }, i * 70));
+        setTimeout(go, steps.length * 70 + 40);
+      },
+      in() {
+        el.className = 'wipe on s4';
+        [...steps].reverse().forEach((c, i) => setTimeout(() => {
+          el.className = 'wipe on ' + c;
+        }, 60 + i * 60));
+        setTimeout(clear, 60 + steps.length * 60);
+      },
+    };
+  })();
+
+  // arriving: uncover, unless the boot is already covering the screen
+  if (!document.getElementById('boot')) screenWipe.in();
+
+  // leaving: cover first, navigate second
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest?.('a[href]');
+    if (!a || a.target || a.hasAttribute('download')) return;
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('mailto:')) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    const url = new URL(href, location.href);
+    if (url.origin !== location.origin) return;      // leave outbound links alone
+    e.preventDefault();
+    snd.blip(660);
+    screenWipe.out(() => { location.href = url.href; });
+  });
+
+  /* ── LCD ghosting ───────────────────────────────────────────────────────
+     The DMG's panel was slow enough that moving content smeared. The trail is
+     only mounted while the page is actually moving, so a still page pays
+     nothing for it. */
+  if (!still) {
+    let last = scrollY, idle = 0;
+    addEventListener('scroll', () => {
+      const now = scrollY;
+      root.classList.add('moving');
+      root.classList.toggle('up', now < last);
+      last = now;
+      clearTimeout(idle);
+      idle = setTimeout(() => root.classList.remove('moving', 'up'), 110);
+    }, { passive: true });
+  }
+
+
+  /* ── the control pad ────────────────────────────────────────────────────
+     Up and down step between sections; left and right step between the items
+     inside the section you are on; A opens what the cursor points at; B goes
+     back; START opens the menu. The on-screen buttons and the keyboard arrows
+     drive the same code, so the pad is a visible label for a shortcut that
+     works either way — not a second, divergent implementation. */
+  const pad = document.querySelector('.pad');
+  if (pad) {
+    const sections = [...document.querySelectorAll('main > section[id]')];
+    const itemsIn = (sec) =>
+      [...sec.querySelectorAll('.work article, .svc li, .chan a, .acts a')];
+
+    let si = 0, ii = -1;
+
+    const mark = () => {
+      document.querySelectorAll('.cursor').forEach((e) => e.classList.remove('cursor'));
+      if (ii < 0) return;
+      const it = itemsIn(sections[si])[ii];
+      if (!it) return;
+      it.classList.add('cursor');
+      const r = it.getBoundingClientRect();
+      if (r.top < 90 || r.bottom > innerHeight - 90)
+        it.scrollIntoView({ block: 'center',
+                            behavior: still ? 'auto' : 'smooth' });
+    };
+
+    // keep the section index honest when the page is scrolled by hand
+    const spy = new IntersectionObserver((es) => {
+      es.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const n = sections.indexOf(e.target);
+        if (n >= 0 && n !== si) { si = n; ii = -1; mark(); }
+      });
+    }, { threshold: 0.35 });
+    sections.forEach((x) => spy.observe(x));
+
+    const goSection = (d) => {
+      si = Math.max(0, Math.min(sections.length - 1, si + d));
+      ii = -1;
+      document.querySelectorAll('.cursor').forEach((e) => e.classList.remove('cursor'));
+      sections[si].scrollIntoView({ behavior: still ? 'auto' : 'smooth',
+                                    block: 'start' });
+      snd.tick();
+    };
+    const goItem = (d) => {
+      const list = itemsIn(sections[si]);
+      if (!list.length) return goSection(d);
+      ii = ii < 0 ? (d > 0 ? 0 : list.length - 1)
+                  : (ii + d + list.length) % list.length;
+      mark();
+      snd.tick();
+    };
+    const open = () => {
+      const it = document.querySelector('.cursor');
+      const a = it && (it.matches('a') ? it : it.querySelector('a[href]'));
+      if (a) { snd.blip(660); a.click(); return; }
+      goItem(1);                       // nothing selected yet — select the first
+    };
+
+    const act = {
+      up:    () => goSection(-1),
+      down:  () => goSection(1),
+      left:  () => goItem(-1),
+      right: () => goItem(1),
+      a:     open,
+      b:     () => { snd.blip(440);
+                     if (history.length > 1) history.back();
+                     else scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); },
+      start: () => { burger?.click(); snd.blip(880); },
+    };
+
+    pad.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-act]');
+      if (btn) act[btn.dataset.act]?.();
+    });
+
+    const KEYS = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left',
+                   ArrowRight: 'right', Enter: 'a', ' ': 'a',
+                   Backspace: 'b', Escape: 'b' };
+    addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+      // let the keyboard reach real controls; the pad only claims bare keys
+      if (e.target.closest('a, button') && (e.key === 'Enter' || e.key === ' ')) return;
+      const a = KEYS[e.key];
+      if (!a) return;
+      e.preventDefault();
+      act[a]();
+      const btn = pad.querySelector(`[data-act="${a}"]`);
+      if (btn) { btn.classList.add('hit'); setTimeout(() => btn.classList.remove('hit'), 110); }
+    });
+  }
 
   /* ── palette switch, kept per viewer ────────────────────────────────── */
   try {

@@ -56,6 +56,7 @@ def render(s: dict) -> str:
 <link rel="stylesheet" href="{d}/styles.css" />
 <link rel="stylesheet" href="{d}/entry.css" />
 <script src="{d}/script.js" defer></script>
+<script src="{d}/minigame.js" defer></script>
 </head>
 <body>
 <div class="boot" id="boot" hidden>
@@ -170,7 +171,22 @@ def render(s: dict) -> str:
         A(f'      <li><span>{esc(r["k"])}</span>{val}</li>')
     A("    </ul>\n  </section>\n</main>\n")
 
-    A(f'''<footer class="foot">
+    A(f'''<div class="pad" role="group" aria-label="{esc(s["pad"]["label"])}">
+  <div class="dpad">
+    <button class="d up"    type="button" data-act="up"    aria-label="{esc(s["pad"]["up"])}"></button>
+    <button class="d left"  type="button" data-act="left"  aria-label="{esc(s["pad"]["left"])}"></button>
+    <span class="d hub" aria-hidden="true"></span>
+    <button class="d right" type="button" data-act="right" aria-label="{esc(s["pad"]["right"])}"></button>
+    <button class="d down"  type="button" data-act="down"  aria-label="{esc(s["pad"]["down"])}"></button>
+  </div>
+  <div class="ab">
+    <button class="ab-b b" type="button" data-act="b" aria-label="{esc(s["pad"]["b"])}"><span>B</span></button>
+    <button class="ab-b a" type="button" data-act="a" aria-label="{esc(s["pad"]["a"])}"><span>A</span></button>
+  </div>
+  <button class="start" type="button" data-act="start">{esc(s["pad"]["start"])}</button>
+</div>
+
+<footer class="foot">
   <p class="brand">{esc(s["footer"]["brand"])}</p>
   <p class="credit">{esc(s["footer"]["credit"])}</p>
   <p class="bits" aria-hidden="true"></p>

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./styles.css" />
 <link rel="stylesheet" href="./entry.css" />
 <script src="./script.js" defer></script>
+<script src="./minigame.js" defer></script>
 </head>
 <body>
 <div class="boot" id="boot" hidden>
@@ -174,6 +175,21 @@
     </ul>
   </section>
 </main>
+
+<div class="pad" role="group" aria-label="방향키와 버튼">
+  <div class="dpad">
+    <button class="d up"    type="button" data-act="up"    aria-label="이전 섹션"></button>
+    <button class="d left"  type="button" data-act="left"  aria-label="이전 항목"></button>
+    <span class="d hub" aria-hidden="true"></span>
+    <button class="d right" type="button" data-act="right" aria-label="다음 항목"></button>
+    <button class="d down"  type="button" data-act="down"  aria-label="다음 섹션"></button>
+  </div>
+  <div class="ab">
+    <button class="ab-b b" type="button" data-act="b" aria-label="뒤로"><span>B</span></button>
+    <button class="ab-b a" type="button" data-act="a" aria-label="열기"><span>A</span></button>
+  </div>
+  <button class="start" type="button" data-act="start">START</button>
+</div>
 
 <footer class="foot">
   <p class="brand">PARK SEONGHYEON®</p>
