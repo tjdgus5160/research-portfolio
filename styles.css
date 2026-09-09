@@ -44,11 +44,17 @@ img{image-rendering:pixelated;display:block;max-width:100%;height:auto}
 .bar-in{display:flex;align-items:center;gap:18px;
   padding:12px clamp(14px,3vw,34px)}
 .mark{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--t0)}
-.mark-px{width:calc(var(--px)*10);height:calc(var(--px)*6);flex:none;
-  background:var(--t0);
-  box-shadow:calc(var(--px)*2) 0 0 var(--t3), calc(var(--px)*4) 0 0 var(--t0),
-             0 calc(var(--px)*2) 0 var(--t3), calc(var(--px)*4) calc(var(--px)*2) 0 var(--t3),
-             0 calc(var(--px)*4) 0 var(--t0), calc(var(--px)*4) calc(var(--px)*4) 0 var(--t0)}
+.mark-px{width:calc(var(--px)*6);height:calc(var(--px)*6);flex:none;
+  background-color:var(--t3);
+  background-image:
+    linear-gradient(var(--t0) 0 0),linear-gradient(var(--t0) 0 0),
+    linear-gradient(var(--t0) 0 0),linear-gradient(var(--t0) 0 0),
+    linear-gradient(var(--t0) 0 0);
+  background-repeat:no-repeat;
+  background-size:calc(var(--px)*2) calc(var(--px)*2);
+  background-position:0 0, calc(var(--px)*4) 0,
+                      calc(var(--px)*2) calc(var(--px)*2),
+                      0 calc(var(--px)*4), calc(var(--px)*4) calc(var(--px)*4);}
 .mark-tx{font-family:var(--disp);font-size:14px;letter-spacing:.04em}
 .bar-meta{margin:0 auto 0 6px;display:flex;align-items:center;gap:8px;
   font-family:var(--disp);font-size:8px;color:var(--t2);letter-spacing:.06em}
@@ -284,3 +290,31 @@ html.booting,html.booting body{overflow:hidden}
   .screen::after{display:none}
   .manifesto.on{animation:none}
 }
+
+/* ══ SOUND ═══════════════════════════════════════════════════════════════
+   A speaker cone cut with clip-path, so the glyph cannot paint outside the
+   button, and two stepped bars that only exist when sound is actually on —
+   the states differ in shape, not just in tone.                             */
+.snd{width:calc(var(--px)*10);height:calc(var(--px)*9);flex:none;padding:0;
+  border:var(--px) solid var(--t0);background:var(--t3);cursor:pointer;
+  position:relative;margin-left:4px;display:grid;place-items:center}
+.snd:hover{background:var(--t0)}
+.snd-px{position:relative;display:block;
+  width:calc(var(--px)*4);height:calc(var(--px)*5);background:var(--t0);
+  clip-path:polygon(0 30%,40% 30%,100% 0,100% 100%,40% 70%,0 70%);
+  margin-right:calc(var(--px)*2)}
+.snd:hover .snd-px{background:var(--t3)}
+/* the two waves */
+.snd-px::after{content:"";position:absolute;left:calc(100% + var(--px)*0.5);
+  top:20%;width:var(--px);height:60%;background:transparent}
+.snd[aria-pressed="true"]{background:var(--t0);border-color:var(--t0)}
+.snd[aria-pressed="true"] .snd-px{background:var(--t3)}
+.snd[aria-pressed="true"] .snd-px::after{background:var(--t3);
+  box-shadow:calc(var(--px)*1.6) 0 0 calc(var(--px)*-0.0) var(--t2)}
+.snd[aria-pressed="true"]:hover{background:var(--t1)}
+/* muted: a bar struck through the cone */
+.snd[aria-pressed="false"]::after{content:"";position:absolute;
+  width:calc(var(--px)*7);height:var(--px);background:var(--t0);
+  transform:rotate(-45deg)}
+.snd[aria-pressed="false"]:hover::after{background:var(--t3)}
+@media (max-width:720px){ .snd{margin-left:auto} }
