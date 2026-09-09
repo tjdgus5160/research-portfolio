@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "content" / "entries"
 OUT = ROOT / "work"
 INDEX = ROOT / "index.html"
+EN_INDEX = ROOT / "en" / "index.html"
 
 CLASSES = {
     "SOURCE_FACT":  ("SRC", "출처에 적혀 있는 값"),
@@ -180,9 +181,10 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
     return "\n".join(p) + "\n"
 
 # ── the stage-select cards on the index ────────────────────────────────────
-def cards(entries: list[dict]) -> str:
+def cards(entries: list[dict], lang: str = "ko", prefix: str = "work/") -> str:
     out = []
     for e in entries:
+        loc = e.get(lang, {}) if lang != "ko" else {}
         v = e.get("validation") or {}
         n_num = len(e.get("numbers") or [])
         n_chk = len(v.get("checks") or [])
@@ -190,20 +192,24 @@ def cards(entries: list[dict]) -> str:
         meter = "█" * filled + "░" * (10 - filled)
         out.append(
             f'      <article><span class="no">{esc(e["no"])}</span>'
-            f'<h3>{esc(e["title"])}</h3>'
-            f'<p>{esc(e.get("summary",""))}</p>'
+            f'<h3>{esc(loc.get("title", e["title"]))}</h3>'
+            f'<p>{esc(loc.get("summary", e.get("summary","")))}</p>'
             f'<p class="stat"><b>{esc(meter)}</b>'
             f'<span>{n_num} VALUES · {n_chk} CHECKS · {esc(v.get("verdict","—"))}</span></p>'
-            f'<a class="btn ghost" href="work/{esc(e["slug"])}.html">'
+            f'<a class="btn ghost" href="{prefix}{esc(e["slug"])}.html">'
             f'OPEN<i aria-hidden="true">▶</i></a></article>')
     return "\n".join(out)
 
 MARK_A = "<!-- entries:start -->"
 MARK_B = "<!-- entries:end -->"
 
-def splice(entries: list[dict], check: bool) -> bool:
-    h = INDEX.read_text(encoding="utf-8")
-    block = f"{MARK_A}\n{cards(entries)}\n      {MARK_B}"
+def splice(entries: list[dict], check: bool, page: Path = None,
+           lang: str = "ko", prefix: str = "work/") -> bool:
+    page = page or INDEX
+    if not page.exists():
+        return False
+    h = page.read_text(encoding="utf-8")
+    block = f"{MARK_A}\n{cards(entries, lang, prefix)}\n      {MARK_B}"
     if MARK_A in h and MARK_B in h:
         new = re.sub(re.escape(MARK_A) + r".*?" + re.escape(MARK_B), lambda _: block,
                      h, flags=re.S)
@@ -219,7 +225,7 @@ def splice(entries: list[dict], check: bool) -> bool:
     if new == h:
         return False
     if not check:
-        INDEX.write_text(new, encoding="utf-8")
+        page.write_text(new, encoding="utf-8")
     return True
 
 def main() -> int:
@@ -239,7 +245,9 @@ def main() -> int:
             changed.append(f.name)
             if not a.check:
                 f.write_text(body, encoding="utf-8")
+    # The English index links back up out of en/ to the same pages.
     idx = splice(entries, a.check)
+    idx |= splice(entries, a.check, ROOT / "en" / "index.html", "en", "../work/")
     verb = "would change" if a.check else "wrote"
     print(f"{len(entries)} entries · {verb} {len(changed)} page(s)"
           f"{' + index' if idx else ''}"

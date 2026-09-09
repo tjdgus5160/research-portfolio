@@ -9,26 +9,87 @@
   "summary": "PBS의 두 출력을 일치한 광다이오드 쌍으로 받아, 차로 패러데이 회전을 읽고 합으로 세기를 읽는 검출부 기구.",
   "question": "회전각 신호는 작고 레이저 세기 요동은 큽니다. 두 신호가 같은 검출기에 섞여 들어오면 분리할 수 없습니다. 기구 쪽에서 무엇을 보장해야 공통 모드가 실제로 상쇄되는가.",
   "evidence": [
-    { "claim": "두 광다이오드는 균형 쌍이다 — 차가 패러데이 회전 신호, 합이 세기, 공통 모드는 상쇄된다", "class": "SOURCE_FACT",
-      "source": "configs/opm_sensor.yaml 머리주석" },
-    { "claim": "프로브는 선편광으로 유지되어야 한다", "class": "INFERRED",
-      "reasoning": "균형 편광계는 선편광의 회전을 읽습니다. 원편광이면 원자가 얼마나 회전시키든 두 출력이 같아져 신호가 0이 됩니다. 파장판이 이중 파장판이어야 하는 이유가 여기서 나옵니다." },
-    { "claim": "두 리테이너는 서로 직교로 놓인 동일 부품이다", "class": "CALCULATED",
-      "source": "빌드 리포트: transmit_pd_retainer 64.90731031232467 mm³ / reflect_pd_retainer 64.90731031232447 mm³ — 부피가 부동소수 오차 범위에서 동일하고, 경계상자는 1.2 × 7.8 × 7.8 과 7.8 × 1.2 × 7.8 로 축만 바뀜" }
+    {
+      "claim": "두 광다이오드는 균형 쌍이다 — 차가 패러데이 회전 신호, 합이 세기, 공통 모드는 상쇄된다",
+      "class": "SOURCE_FACT",
+      "source": "configs/opm_sensor.yaml 머리주석"
+    },
+    {
+      "claim": "프로브는 선편광으로 유지되어야 한다",
+      "class": "INFERRED",
+      "reasoning": "균형 편광계는 선편광의 회전을 읽습니다. 원편광이면 원자가 얼마나 회전시키든 두 출력이 같아져 신호가 0이 됩니다. 파장판이 이중 파장판이어야 하는 이유가 여기서 나옵니다."
+    },
+    {
+      "claim": "두 리테이너는 서로 직교로 놓인 동일 부품이다",
+      "class": "CALCULATED",
+      "source": "빌드 리포트: transmit_pd_retainer 64.90731031232467 mm³ / reflect_pd_retainer 64.90731031232447 mm³ — 부피가 부동소수 오차 범위에서 동일하고, 경계상자는 1.2 × 7.8 × 7.8 과 7.8 × 1.2 × 7.8 로 축만 바뀜"
+    }
   ],
   "method": [
-    { "step": "01", "name": "쌍을 동일 부품으로", "detail": "두 검출기 리테이너를 같은 파라메트릭 정의에서 만들고 배치만 직교로 돌립니다. 정합이 조립자의 손끝이 아니라 모델에서 보장됩니다." },
-    { "step": "02", "name": "PBS 뒤에 붙이기", "detail": "빔이 되돌아오는 구간 끝에서 PBS가 두 갈래로 나누고, 각 갈래를 리테이너가 받습니다." },
-    { "step": "03", "name": "인출선을 뒤로", "detail": "검출기 인출선을 섬유와 같은 끝으로 빼내, 감지면에 구멍이 생기지 않게 합니다." },
-    { "step": "04", "name": "빌드로 확인", "detail": "부피·솔리드 수·닫힌 셸·경계상자를 빌드 때마다 기계로 검사합니다." }
+    {
+      "step": "01",
+      "name": "쌍을 동일 부품으로",
+      "detail": "두 검출기 리테이너를 같은 파라메트릭 정의에서 만들고 배치만 직교로 돌립니다. 정합이 조립자의 손끝이 아니라 모델에서 보장됩니다."
+    },
+    {
+      "step": "02",
+      "name": "PBS 뒤에 붙이기",
+      "detail": "빔이 되돌아오는 구간 끝에서 PBS가 두 갈래로 나누고, 각 갈래를 리테이너가 받습니다."
+    },
+    {
+      "step": "03",
+      "name": "인출선을 뒤로",
+      "detail": "검출기 인출선을 섬유와 같은 끝으로 빼내, 감지면에 구멍이 생기지 않게 합니다."
+    },
+    {
+      "step": "04",
+      "name": "빌드로 확인",
+      "detail": "부피·솔리드 수·닫힌 셸·경계상자를 빌드 때마다 기계로 검사합니다."
+    }
   ],
   "numbers": [
-    { "name": "transmit_pd_retainer 부피", "value": "64.907310", "unit": "mm³", "class": "CALCULATED", "note": "형상에서 계산" },
-    { "name": "reflect_pd_retainer 부피", "value": "64.907310", "unit": "mm³", "class": "CALCULATED", "note": "위와 동일 (차이 2.0e−13 mm³)" },
-    { "name": "리테이너 경계상자 (투과)", "value": "1.200 × 7.800 × 7.800", "unit": "mm", "class": "CALCULATED", "note": "빌드 리포트" },
-    { "name": "리테이너 경계상자 (반사)", "value": "7.800 × 1.200 × 7.800", "unit": "mm", "class": "CALCULATED", "note": "같은 부품, 축만 교환" },
-    { "name": "analyzer_mount 부피", "value": "3044.765126", "unit": "mm³", "class": "CALCULATED", "note": "PBS와 검출기를 안는 마운트" },
-    { "name": "면 수 (각 리테이너)", "value": "13", "unit": "faces", "class": "CALCULATED", "note": "둘 다 동일" }
+    {
+      "name": "transmit_pd_retainer 부피",
+      "value": "64.907310",
+      "unit": "mm³",
+      "class": "CALCULATED",
+      "note": "형상에서 계산"
+    },
+    {
+      "name": "reflect_pd_retainer 부피",
+      "value": "64.907310",
+      "unit": "mm³",
+      "class": "CALCULATED",
+      "note": "위와 동일 (차이 2.0e−13 mm³)"
+    },
+    {
+      "name": "리테이너 경계상자 (투과)",
+      "value": "1.200 × 7.800 × 7.800",
+      "unit": "mm",
+      "class": "CALCULATED",
+      "note": "빌드 리포트"
+    },
+    {
+      "name": "리테이너 경계상자 (반사)",
+      "value": "7.800 × 1.200 × 7.800",
+      "unit": "mm",
+      "class": "CALCULATED",
+      "note": "같은 부품, 축만 교환"
+    },
+    {
+      "name": "analyzer_mount 부피",
+      "value": "3044.765126",
+      "unit": "mm³",
+      "class": "CALCULATED",
+      "note": "PBS와 검출기를 안는 마운트"
+    },
+    {
+      "name": "면 수 (각 리테이너)",
+      "value": "13",
+      "unit": "faces",
+      "class": "CALCULATED",
+      "note": "둘 다 동일"
+    }
   ],
   "geometry": {
     "tolerance": "0.001 mm (경계상자)",
@@ -43,9 +104,21 @@
   "validation": {
     "verdict": "PASS",
     "checks": [
-      { "name": "쌍의 동일성", "result": "부피 차 2.0e−13 mm³", "how": "빌드 리포트의 두 부피를 직접 비교" },
-      { "name": "부품 검사", "result": "각 7 / 7 통과", "how": "not_null · positive_volume · is_valid · brep_check · single_solid · closed_shell · bbox_matches_expected" },
-      { "name": "간섭", "result": "없음", "how": "어셈블리 전체에서 interferences 비어 있음" }
+      {
+        "name": "쌍의 동일성",
+        "result": "부피 차 2.0e−13 mm³",
+        "how": "빌드 리포트의 두 부피를 직접 비교"
+      },
+      {
+        "name": "부품 검사",
+        "result": "각 7 / 7 통과",
+        "how": "not_null · positive_volume · is_valid · brep_check · single_solid · closed_shell · bbox_matches_expected"
+      },
+      {
+        "name": "간섭",
+        "result": "없음",
+        "how": "어셈블리 전체에서 interferences 비어 있음"
+      }
     ]
   },
   "unknown": [
@@ -54,8 +127,22 @@
     "PBS의 편광 소광비가 사양으로 고정되어 있지 않습니다."
   ],
   "artifacts": [
-    { "path": "configs/opm_sensor.yaml", "note": "검출부 치수 포함" },
-    { "path": "output/opm_sensor/build-report.json", "note": "두 리테이너의 부피와 검사 결과" },
-    { "path": "output/opm_sensor/opm_sensor-assembly.step", "note": "어셈블리" }
-  ]
+    {
+      "path": "configs/opm_sensor.yaml",
+      "note": "검출부 치수 포함"
+    },
+    {
+      "path": "output/opm_sensor/build-report.json",
+      "note": "두 리테이너의 부피와 검사 결과"
+    },
+    {
+      "path": "output/opm_sensor/opm_sensor-assembly.step",
+      "note": "어셈블리"
+    }
+  ],
+  "en": {
+    "title": "Balanced Polarimeter",
+    "summary": "The two outputs of the PBS onto a matched photodiode pair — the difference is the Faraday rotation, the sum is the intensity.",
+    "question": "The rotation signal is small and the laser's intensity noise is large. Once both land on the same detector they cannot be separated. What does the hardware itself have to guarantee for the common mode to actually cancel?"
+  }
 }

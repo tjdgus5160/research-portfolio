@@ -318,3 +318,12 @@ html.booting,html.booting body{overflow:hidden}
   transform:rotate(-45deg)}
 .snd[aria-pressed="false"]:hover::after{background:var(--t3)}
 @media (max-width:720px){ .snd{margin-left:auto} }
+
+/* ══ LANGUAGE ════════════════════════════════════════════════════════════
+   Reads as a cartridge label rather than another nav item, so it does not
+   compete with the section links beside it.                               */
+.bar-nav .lang{font-family:var(--disp);font-size:9px;letter-spacing:.08em;
+  color:var(--t0);text-decoration:none;padding:8px 9px;margin-left:4px;
+  border:var(--px) solid var(--t0);background:var(--t3)}
+.bar-nav .lang:hover{background:var(--t0);color:var(--t3)}
+.menu a[hreflang]{color:var(--t2)}

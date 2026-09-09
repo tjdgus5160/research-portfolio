@@ -9,30 +9,106 @@
   "summary": "빔을 도그레그가 아니라 U자로 되접어, 증기셀을 감지면 뒤 1.7 mm에 놓고 감지면에서 구멍을 완전히 없앤 광학 배치.",
   "question": "자력계에서 가장 중요한 수치는 증기셀과 측정 대상 사이의 거리입니다. 광섬유와 검출기 인출선을 모두 통과시키면서도 감지면에 구멍을 내지 않고, 셀을 감지면에 최대한 붙일 수 있는가.",
   "evidence": [
-    { "claim": "D1 794.98 nm가 펌핑과 프로브를 겸하고, D2 780.24 nm는 같은 섬유가 나르는 두 번째 선", "class": "SOURCE_FACT",
-      "source": "configs/opm_sensor.yaml — optics.wavelengths [794.98, 780.24], design_wavelength 794.98" },
-    { "claim": "빔 경로 순서는 섬유 → QWP → 입력 프리즘 → Rb 증기셀 → 출력 프리즘 → PBS → PD 두 개", "class": "SOURCE_FACT",
-      "source": "configs/opm_sensor.yaml 머리주석의 경로 다이어그램" },
-    { "claim": "파장판은 이중 파장판이어야 한다 — 펌프는 원편광, 프로브는 선편광으로 남아야 하므로", "class": "INFERRED",
-      "reasoning": "균형 편광계는 선편광의 회전을 읽습니다. 원편광이 들어오면 원자가 아무리 회전시켜도 두 출력이 같아져 신호가 사라집니다. 한 장의 판이 두 선에 서로 다른 일을 해야 합니다." },
-    { "claim": "beam_offset_y = 8.6 mm는 증기셀이 아래에서 밀어 올린 값", "class": "INFERRED",
-      "reasoning": "프리즘 마운트가 셀 홀더를 비켜가야 해서 하한이 정해지고, 오븐의 빔면 벽 때문에 1.2 mm 더 밀렸습니다. 이 값이 모듈 폭을 결정합니다." }
+    {
+      "claim": "D1 794.98 nm가 펌핑과 프로브를 겸하고, D2 780.24 nm는 같은 섬유가 나르는 두 번째 선",
+      "class": "SOURCE_FACT",
+      "source": "configs/opm_sensor.yaml — optics.wavelengths [794.98, 780.24], design_wavelength 794.98"
+    },
+    {
+      "claim": "빔 경로 순서는 섬유 → QWP → 입력 프리즘 → Rb 증기셀 → 출력 프리즘 → PBS → PD 두 개",
+      "class": "SOURCE_FACT",
+      "source": "configs/opm_sensor.yaml 머리주석의 경로 다이어그램"
+    },
+    {
+      "claim": "파장판은 이중 파장판이어야 한다 — 펌프는 원편광, 프로브는 선편광으로 남아야 하므로",
+      "class": "INFERRED",
+      "reasoning": "균형 편광계는 선편광의 회전을 읽습니다. 원편광이 들어오면 원자가 아무리 회전시켜도 두 출력이 같아져 신호가 사라집니다. 한 장의 판이 두 선에 서로 다른 일을 해야 합니다."
+    },
+    {
+      "claim": "beam_offset_y = 8.6 mm는 증기셀이 아래에서 밀어 올린 값",
+      "class": "INFERRED",
+      "reasoning": "프리즘 마운트가 셀 홀더를 비켜가야 해서 하한이 정해지고, 오븐의 빔면 벽 때문에 1.2 mm 더 밀렸습니다. 이 값이 모듈 폭을 결정합니다."
+    }
   ],
   "method": [
-    { "step": "01", "name": "좌표계 고정", "detail": "+X는 길이, X=0이 감지면. +Y 폭, +Z 높이, 외곽은 Y·Z에 대해 중심 대칭. 프로젝트 전체가 이 하나를 씁니다." },
-    { "step": "02", "name": "빔을 되접기", "detail": "세 직선 구간을 모두 같은 Z에 두고, 입력은 Y=+9로 −X 방향, 되돌림은 Y=−9로 +X 방향. 섬유와 검출기 인출선이 같은 끝에서 나갑니다." },
-    { "step": "03", "name": "YAML로 기술", "detail": "치수를 파이썬 소스에 적지 않고 configs/opm_sensor.yaml에만 둡니다. 값은 여기서만 바뀝니다." },
-    { "step": "04", "name": "빌드와 검사", "detail": "cadctl build이 FreeCAD 문서·STEP·STL과 함께 부품별 검사가 붙은 빌드 리포트를 냅니다." }
+    {
+      "step": "01",
+      "name": "좌표계 고정",
+      "detail": "+X는 길이, X=0이 감지면. +Y 폭, +Z 높이, 외곽은 Y·Z에 대해 중심 대칭. 프로젝트 전체가 이 하나를 씁니다."
+    },
+    {
+      "step": "02",
+      "name": "빔을 되접기",
+      "detail": "세 직선 구간을 모두 같은 Z에 두고, 입력은 Y=+9로 −X 방향, 되돌림은 Y=−9로 +X 방향. 섬유와 검출기 인출선이 같은 끝에서 나갑니다."
+    },
+    {
+      "step": "03",
+      "name": "YAML로 기술",
+      "detail": "치수를 파이썬 소스에 적지 않고 configs/opm_sensor.yaml에만 둡니다. 값은 여기서만 바뀝니다."
+    },
+    {
+      "step": "04",
+      "name": "빌드와 검사",
+      "detail": "cadctl build이 FreeCAD 문서·STEP·STL과 함께 부품별 검사가 붙은 빌드 리포트를 냅니다."
+    }
   ],
   "numbers": [
-    { "name": "D1 (펌프·프로브)", "value": "794.98", "unit": "nm", "class": "SOURCE_FACT", "note": "optics.wavelengths" },
-    { "name": "D2 (두 번째 선)", "value": "780.24", "unit": "nm", "class": "SOURCE_FACT", "note": "optics.wavelengths" },
-    { "name": "셀 ↔ 감지면 거리", "value": "1.7", "unit": "mm", "class": "SOURCE_FACT", "note": "설정 다이어그램. 자력계에서 가장 중요한 수치" },
-    { "name": "beam_offset_y", "value": "8.6", "unit": "mm", "class": "INFERRED", "note": "셀 홀더 회피 + 오븐 벽 1.2 mm" },
-    { "name": "bore_diameter", "value": "3.0", "unit": "mm", "class": "SOURCE_FACT", "note": "각 구간 부품의 광학 관통" },
-    { "name": "fiber_entry_diameter", "value": "5.0", "unit": "mm", "class": "SOURCE_FACT", "note": "후면 벽의 콜리메이터 배럴 보어" },
-    { "name": "waveplate", "value": "Ø5.0 × 1.0", "unit": "mm", "class": "SOURCE_FACT", "note": "회전 마운트에 앉은 이중 파장판" },
-    { "name": "reference_cell 부피", "value": "427.176438", "unit": "mm³", "class": "CALCULATED", "note": "빌드 리포트에서 형상으로부터 계산" }
+    {
+      "name": "D1 (펌프·프로브)",
+      "value": "794.98",
+      "unit": "nm",
+      "class": "SOURCE_FACT",
+      "note": "optics.wavelengths"
+    },
+    {
+      "name": "D2 (두 번째 선)",
+      "value": "780.24",
+      "unit": "nm",
+      "class": "SOURCE_FACT",
+      "note": "optics.wavelengths"
+    },
+    {
+      "name": "셀 ↔ 감지면 거리",
+      "value": "1.7",
+      "unit": "mm",
+      "class": "SOURCE_FACT",
+      "note": "설정 다이어그램. 자력계에서 가장 중요한 수치"
+    },
+    {
+      "name": "beam_offset_y",
+      "value": "8.6",
+      "unit": "mm",
+      "class": "INFERRED",
+      "note": "셀 홀더 회피 + 오븐 벽 1.2 mm"
+    },
+    {
+      "name": "bore_diameter",
+      "value": "3.0",
+      "unit": "mm",
+      "class": "SOURCE_FACT",
+      "note": "각 구간 부품의 광학 관통"
+    },
+    {
+      "name": "fiber_entry_diameter",
+      "value": "5.0",
+      "unit": "mm",
+      "class": "SOURCE_FACT",
+      "note": "후면 벽의 콜리메이터 배럴 보어"
+    },
+    {
+      "name": "waveplate",
+      "value": "Ø5.0 × 1.0",
+      "unit": "mm",
+      "class": "SOURCE_FACT",
+      "note": "회전 마운트에 앉은 이중 파장판"
+    },
+    {
+      "name": "reference_cell 부피",
+      "value": "427.176438",
+      "unit": "mm³",
+      "class": "CALCULATED",
+      "note": "빌드 리포트에서 형상으로부터 계산"
+    }
   ],
   "geometry": {
     "tolerance": "0.001 mm (경계상자)",
@@ -47,10 +123,26 @@
   "validation": {
     "verdict": "PASS",
     "checks": [
-      { "name": "부품 검사", "result": "175 / 175 통과", "how": "부품 25개 × 검사 7종 (not_null · positive_volume · is_valid · brep_check · single_solid · closed_shell · bbox_matches_expected)" },
-      { "name": "간섭", "result": "없음", "how": "interferences 배열이 비어 있음" },
-      { "name": "경고 · 오류", "result": "0 · 0", "how": "빌드 리포트" },
-      { "name": "외곽 일치", "result": "최대 편차 0.000000 mm", "how": "허용 0.001 mm, tightest(plain, optimal)로 측정" }
+      {
+        "name": "부품 검사",
+        "result": "175 / 175 통과",
+        "how": "부품 25개 × 검사 7종 (not_null · positive_volume · is_valid · brep_check · single_solid · closed_shell · bbox_matches_expected)"
+      },
+      {
+        "name": "간섭",
+        "result": "없음",
+        "how": "interferences 배열이 비어 있음"
+      },
+      {
+        "name": "경고 · 오류",
+        "result": "0 · 0",
+        "how": "빌드 리포트"
+      },
+      {
+        "name": "외곽 일치",
+        "result": "최대 편차 0.000000 mm",
+        "how": "허용 0.001 mm, tightest(plain, optimal)로 측정"
+      }
     ]
   },
   "unknown": [
@@ -59,9 +151,26 @@
     "이 항목은 형상과 그 검증까지입니다. 광학 성능 자체 — 소광비, 실제 회전각, 잡음 — 는 측정된 바 없습니다."
   ],
   "artifacts": [
-    { "path": "configs/opm_sensor.yaml", "note": "유일한 치수 출처" },
-    { "path": "output/opm_sensor/build-report.json", "note": "부품 25개, 검사 175건" },
-    { "path": "output/opm_sensor/opm_sensor-assembly.step", "note": "FreeCAD 1.1.1로 생성" },
-    { "path": "docs/COORDINATE_SYSTEM.md", "note": "프로젝트 전체가 공유하는 좌표계" }
-  ]
+    {
+      "path": "configs/opm_sensor.yaml",
+      "note": "유일한 치수 출처"
+    },
+    {
+      "path": "output/opm_sensor/build-report.json",
+      "note": "부품 25개, 검사 175건"
+    },
+    {
+      "path": "output/opm_sensor/opm_sensor-assembly.step",
+      "note": "FreeCAD 1.1.1로 생성"
+    },
+    {
+      "path": "docs/COORDINATE_SYSTEM.md",
+      "note": "프로젝트 전체가 공유하는 좌표계"
+    }
+  ],
+  "en": {
+    "title": "Rb Vapour Cell Optics",
+    "summary": "Folding the beam back on itself instead of doglegging it, putting the cell 1.7 mm behind the sensing face and leaving that face without a single hole.",
+    "question": "For a magnetometer the number that matters most is the standoff between the vapour cell and what it is measuring. Can the fibre and the detector leads both be brought through without putting a hole in the sensing face, and the cell still be pushed hard against it?"
+  }
 }

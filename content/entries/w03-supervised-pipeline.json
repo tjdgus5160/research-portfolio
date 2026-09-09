@@ -8,38 +8,107 @@
   "summary": "만드는 에이전트와 검사하는 에이전트를 구조적으로 분리하고, 그 분리가 실제로 결함을 잡아내는지 끝까지 돌려본 기록.",
   "question": "연구 산출물을 만든 쪽이 스스로 검사하면, 통과는 증거가 아니라 의견이 됩니다. 만드는 권한과 검사하는 권한을 물리적으로 갈라놓으면 그 문제가 사라지는지 — 그리고 갈라놓은 검사가 실제로 무언가를 잡아내는지 — 확인하려 했습니다.",
   "evidence": [
-    { "claim": "감독자에게 FreeCAD MCP를 붙이지 않는다", "class": "INFERRED",
-      "reasoning": "도구가 없으면 감독자가 워커의 일을 몰래 대신하고 자기 결과를 검증하는 경로가 구조적으로 막힙니다. 규칙이 아니라 능력의 부재로 보장합니다." },
-    { "claim": "모든 치수는 INFERRED이며 물리적 주장을 하지 않는다", "class": "INFERRED",
-      "reasoning": "이 프로젝트는 인프라 시험입니다. 해석적으로 검산 가능하도록 고른 값이고, 실제 대상을 기술하지 않습니다." },
-    { "claim": "값 하나하나가 증거 등급을 달고 저장된다", "class": "SOURCE_FACT",
-      "source": "AGENTS.md §2 — SOURCE_FACT / CALCULATED / INFERRED / ILLUSTRATIVE" }
+    {
+      "claim": "감독자에게 FreeCAD MCP를 붙이지 않는다",
+      "class": "INFERRED",
+      "reasoning": "도구가 없으면 감독자가 워커의 일을 몰래 대신하고 자기 결과를 검증하는 경로가 구조적으로 막힙니다. 규칙이 아니라 능력의 부재로 보장합니다."
+    },
+    {
+      "claim": "모든 치수는 INFERRED이며 물리적 주장을 하지 않는다",
+      "class": "INFERRED",
+      "reasoning": "이 프로젝트는 인프라 시험입니다. 해석적으로 검산 가능하도록 고른 값이고, 실제 대상을 기술하지 않습니다."
+    },
+    {
+      "claim": "값 하나하나가 증거 등급을 달고 저장된다",
+      "class": "SOURCE_FACT",
+      "source": "AGENTS.md §2 — SOURCE_FACT / CALCULATED / INFERRED / ILLUSTRATIVE"
+    }
   ],
   "method": [
-    { "step": "01", "name": "명세 먼저", "detail": "CAD보다 specifications/geometry_spec.json이 앞섭니다. 형상은 승인된 명세에서 잘라냅니다." },
-    { "step": "02", "name": "워커 디스패치", "detail": "Orca 오케스트레이션 아래 Run → Task → Dispatch로 내보내고, 완료는 worker_done 한 번으로만 보고받습니다." },
-    { "step": "03", "name": "결정적 게이트", "detail": "validate_artifacts.py가 증거 등급, 단위, 치환, 명세↔CAD 대조를 기계로 검사합니다." },
-    { "step": "04", "name": "감독자 재측정", "detail": "워커 보고를 읽기 전에 저장된 모델을 감독자가 직접 열어 다시 잽니다." },
-    { "step": "05", "name": "델타 정정", "detail": "결함이 나오면 전체를 다시 만들지 않고 틀린 것만 지정해 고칩니다." }
+    {
+      "step": "01",
+      "name": "명세 먼저",
+      "detail": "CAD보다 specifications/geometry_spec.json이 앞섭니다. 형상은 승인된 명세에서 잘라냅니다."
+    },
+    {
+      "step": "02",
+      "name": "워커 디스패치",
+      "detail": "Orca 오케스트레이션 아래 Run → Task → Dispatch로 내보내고, 완료는 worker_done 한 번으로만 보고받습니다."
+    },
+    {
+      "step": "03",
+      "name": "결정적 게이트",
+      "detail": "validate_artifacts.py가 증거 등급, 단위, 치환, 명세↔CAD 대조를 기계로 검사합니다."
+    },
+    {
+      "step": "04",
+      "name": "감독자 재측정",
+      "detail": "워커 보고를 읽기 전에 저장된 모델을 감독자가 직접 열어 다시 잽니다."
+    },
+    {
+      "step": "05",
+      "name": "델타 정정",
+      "detail": "결함이 나오면 전체를 다시 만들지 않고 틀린 것만 지정해 고칩니다."
+    }
   ],
   "numbers": [
-    { "name": "plate_length", "value": "30.000", "unit": "mm", "class": "INFERRED",
-      "note": "해석적으로 검산 가능하도록 고른 시험용 치수" },
-    { "name": "plate_width", "value": "20.000", "unit": "mm", "class": "INFERRED", "note": "같음" },
-    { "name": "plate_thickness", "value": "10.000", "unit": "mm", "class": "INFERRED", "note": "같음" },
-    { "name": "hole_diameter", "value": "8.000", "unit": "mm", "class": "INFERRED", "note": "같음" },
-    { "name": "solid_volume", "value": "5497.345175", "unit": "mm³", "class": "CALCULATED",
-      "note": "V = L·W·T − π(D/2)²·T,  L=30 W=20 T=10 D=8" }
+    {
+      "name": "plate_length",
+      "value": "30.000",
+      "unit": "mm",
+      "class": "INFERRED",
+      "note": "해석적으로 검산 가능하도록 고른 시험용 치수"
+    },
+    {
+      "name": "plate_width",
+      "value": "20.000",
+      "unit": "mm",
+      "class": "INFERRED",
+      "note": "같음"
+    },
+    {
+      "name": "plate_thickness",
+      "value": "10.000",
+      "unit": "mm",
+      "class": "INFERRED",
+      "note": "같음"
+    },
+    {
+      "name": "hole_diameter",
+      "value": "8.000",
+      "unit": "mm",
+      "class": "INFERRED",
+      "note": "같음"
+    },
+    {
+      "name": "solid_volume",
+      "value": "5497.345175",
+      "unit": "mm³",
+      "class": "CALCULATED",
+      "note": "V = L·W·T − π(D/2)²·T,  L=30 W=20 T=10 D=8"
+    }
   ],
   "geometry": {
     "tolerance": "0.01 mm",
     "renders": [
-      { "src": "assets/entries/w03-front.png", "view": "FRONT", "alt": "가공된 판의 정면 투상",
-        "note": "실루엣 종횡비 2.994 — 30 × 10 mm 정면에 대한 기대값 3.0" },
-      { "src": "assets/entries/w03-top.png", "view": "TOP", "alt": "가운데 구멍이 뚫린 판의 평면 투상",
-        "note": "실루엣 종횡비 1.497 — 30 × 20 mm 평면에 대한 기대값 1.5" },
-      { "src": "assets/entries/w03-iso.png", "view": "ISOMETRIC", "alt": "판의 등각 투상",
-        "note": "실루엣 종횡비 1.243" }
+      {
+        "src": "assets/entries/w03-front.png",
+        "view": "FRONT",
+        "alt": "가공된 판의 정면 투상",
+        "note": "실루엣 종횡비 2.994 — 30 × 10 mm 정면에 대한 기대값 3.0"
+      },
+      {
+        "src": "assets/entries/w03-top.png",
+        "view": "TOP",
+        "alt": "가운데 구멍이 뚫린 판의 평면 투상",
+        "note": "실루엣 종횡비 1.497 — 30 × 20 mm 평면에 대한 기대값 1.5"
+      },
+      {
+        "src": "assets/entries/w03-iso.png",
+        "view": "ISOMETRIC",
+        "alt": "판의 등각 투상",
+        "note": "실루엣 종횡비 1.243"
+      }
     ],
     "parametric": [
       "PlateBlank.Length ← Parameters.plate_length",
@@ -53,15 +122,36 @@
   "validation": {
     "verdict": "PASS",
     "checks": [
-      { "name": "결정적 게이트", "result": "PASS", "how": "validate_artifacts.py — 20개 검사" },
-      { "name": "저장된 모델 재측정", "result": "delta 0.0 mm³",
-        "how": "감독자가 FCStd를 XML-RPC로 다시 열어 재계산. 부피 5497.345175426, 기대값과 차이 0.0, 허용 0.01" },
-      { "name": "형상 무결성", "result": "solids 1 · isValid · isClosed", "how": "재측정 시 함께 확인" },
-      { "name": "파라메트릭 여부", "result": "PASS", "how": "Document.xml의 표현식 바인딩 5개 확인" },
-      { "name": "렌더 ↔ 형상 대조", "result": "PASS",
-        "how": "감독자가 PNG를 디코딩해 실루엣 경계상자를 직접 측정" },
-      { "name": "델타가 모델을 보존했는가", "result": "PASS",
-        "how": "sha256 비교 — 정정이 결함 렌더 2장만 건드림" }
+      {
+        "name": "결정적 게이트",
+        "result": "PASS",
+        "how": "validate_artifacts.py — 20개 검사"
+      },
+      {
+        "name": "저장된 모델 재측정",
+        "result": "delta 0.0 mm³",
+        "how": "감독자가 FCStd를 XML-RPC로 다시 열어 재계산. 부피 5497.345175426, 기대값과 차이 0.0, 허용 0.01"
+      },
+      {
+        "name": "형상 무결성",
+        "result": "solids 1 · isValid · isClosed",
+        "how": "재측정 시 함께 확인"
+      },
+      {
+        "name": "파라메트릭 여부",
+        "result": "PASS",
+        "how": "Document.xml의 표현식 바인딩 5개 확인"
+      },
+      {
+        "name": "렌더 ↔ 형상 대조",
+        "result": "PASS",
+        "how": "감독자가 PNG를 디코딩해 실루엣 경계상자를 직접 측정"
+      },
+      {
+        "name": "델타가 모델을 보존했는가",
+        "result": "PASS",
+        "how": "sha256 비교 — 정정이 결함 렌더 2장만 건드림"
+      }
     ]
   },
   "defect": {
@@ -77,11 +167,34 @@
     "이 기계에서 qwen3.8-27b의 처리량은 6.68 tok/s입니다. 큰 파일 하나를 통째로 쓰면 스트림이 먼저 끊깁니다. 하드웨어·모델 크기의 한계이지 설정 문제가 아닙니다."
   ],
   "artifacts": [
-    { "path": "specifications/geometry_spec.json", "note": "증거와 CAD 사이의 계약" },
-    { "path": "models/freecad/smoketest.FCStd", "note": "sha256 185ca724…1139aa" },
-    { "path": "models/freecad/smoketest.step", "note": "ISO-10303-21, Open CASCADE 7.8" },
-    { "path": "validation/cad/smoketest.json", "note": "빌드된 모델에서 읽어낸 측정값" },
-    { "path": "validation/final/smoketest.json", "note": "전체 PASS/FAIL 보고" },
-    { "path": "reports/smoketest-report.html", "note": "143 KB, 자체 완결. 재빌드 시 바이트 동일" }
-  ]
+    {
+      "path": "specifications/geometry_spec.json",
+      "note": "증거와 CAD 사이의 계약"
+    },
+    {
+      "path": "models/freecad/smoketest.FCStd",
+      "note": "sha256 185ca724…1139aa"
+    },
+    {
+      "path": "models/freecad/smoketest.step",
+      "note": "ISO-10303-21, Open CASCADE 7.8"
+    },
+    {
+      "path": "validation/cad/smoketest.json",
+      "note": "빌드된 모델에서 읽어낸 측정값"
+    },
+    {
+      "path": "validation/final/smoketest.json",
+      "note": "전체 PASS/FAIL 보고"
+    },
+    {
+      "path": "reports/smoketest-report.html",
+      "note": "143 KB, 자체 완결. 재빌드 시 바이트 동일"
+    }
+  ],
+  "en": {
+    "title": "Supervised Validation Pipeline",
+    "summary": "Separating the agent that builds from the agent that checks, and running it far enough to see whether that separation catches anything real.",
+    "question": "If whatever produced a result also certifies it, a pass is an opinion rather than evidence. Does splitting the two capabilities physically remove that problem — and does the separated check actually catch anything?"
+  }
 }
