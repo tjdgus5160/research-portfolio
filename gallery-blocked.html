@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>생성 이미지 로그 — 1/1 — SHP®</title>
+<meta name="description" content="이 포트폴리오를 위해 생성한 모든 이미지와 그 출처." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="entry.css" />
+<link rel="stylesheet" href="crt.css" />
+<link rel="stylesheet" href="frames.css" />
+<style>
+/* The log is part of the site, not a separate document: it inherits the four
+   tones, the pixel type and the frames from the same stylesheets the rest of
+   the pages use, and only adds the grid. */
+.log-head{padding:clamp(40px,6vw,74px) clamp(14px,3vw,34px) clamp(22px,3vw,32px);
+  border-bottom:var(--px) solid var(--t0);max-width:1240px;margin:0 auto}
+.log-head h1{margin:0 0 14px;font-family:var(--disp);font-size:clamp(18px,3.4vw,34px);
+  font-weight:400;line-height:1.4}
+.log-head .sub{margin:0;max-width:62ch;color:var(--t1);font-size:14.5px}
+.log-head .meta{margin:20px 0 0;font-family:var(--disp);font-size:9px;
+  letter-spacing:.12em;color:var(--t1)}
+nav.filters{display:flex;flex-wrap:wrap;gap:8px;padding:16px clamp(14px,3vw,34px);
+  border-bottom:var(--px) solid var(--t0);position:sticky;top:0;z-index:40;
+  background:var(--t3);max-width:1240px;margin:0 auto}
+/* the filters became links when each one got its own paginated run, and the
+   rule still only styled buttons, so they rendered as default blue underlines */
+nav.filters a,nav.filters span[aria-current]{font:inherit;font-family:var(--disp);
+  font-size:9px;letter-spacing:.06em;padding:9px 12px;
+  border:var(--px) solid var(--t0);background:var(--t3);color:var(--t0);
+  text-decoration:none;display:inline-block}
+nav.filters a:hover{background:var(--t0);color:var(--t3)}
+nav.filters span[aria-current]{background:var(--t0);color:var(--t3)}
+nav.filters a:focus-visible{outline:var(--px) solid var(--t0);outline-offset:var(--px)}
+.count{align-self:center;font-family:var(--disp);font-size:9px;color:var(--t1);
+  letter-spacing:.1em;margin-left:auto}
+main.log{padding:26px clamp(14px,3vw,34px) 70px;max-width:1240px;margin:0 auto}
+.grid{display:grid;gap:calc(var(--px)*5);
+  grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
+.grid figure{margin:0;background:var(--t3);display:flex;flex-direction:column;
+  border:var(--px) solid var(--t0)}
+/* `hidden` is what the filter sets, and an author `display` on the same element
+   overrides it. The previous stylesheet forced display:flex here, so the filter
+   changed an attribute and hid nothing at all. */
+.grid figure[hidden]{display:none}
+.grid figure img{width:100%;height:auto;display:block;background:var(--t2);
+  image-rendering:auto}
+figcaption{padding:12px 13px 14px;display:flex;flex-direction:column;gap:8px}
+.name{font-family:var(--disp);font-size:9.5px;word-break:break-all;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--disp);font-size:8px;letter-spacing:.06em;padding:4px 6px;
+  border:var(--px) solid var(--t1);color:var(--t1)}
+.tag.live{border-color:var(--t0);background:var(--t0);color:var(--t3)}
+.tag.blocked{border-style:dashed}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12px;
+  color:var(--t1);font-variant-numeric:tabular-nums}
+dt{font-family:var(--disp);font-size:8px;letter-spacing:.08em;padding-top:2px}
+dd{margin:0;color:var(--t0);word-break:break-word}
+details summary{cursor:pointer;font-family:var(--disp);font-size:8px;
+  letter-spacing:.08em;color:var(--t1);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"- "}
+details pre{margin:8px 0 0;padding:10px;background:var(--t3);
+  border:var(--px) solid var(--t1);font-size:11px;line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto}
+.note{font-size:12.5px;color:var(--t1);border-left:calc(var(--px)*2) solid var(--t1);
+  padding-left:10px}
+.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:30px clamp(14px,3vw,34px) 0;max-width:1240px;margin:0 auto}
+.pager a,.pager span{font-family:var(--disp);font-size:9px;letter-spacing:.06em;
+  padding:9px 12px;border:var(--px) solid var(--t0);text-decoration:none;color:var(--t0)}
+.pager a:hover{background:var(--t0);color:var(--t3)}
+.pager [aria-current]{background:var(--t0);color:var(--t3)}
+.pager .gap{border:0;color:var(--t1)}
+</style>
+</head>
+<body>
+<div class="panel" aria-hidden="true"><div class="panel-mask"></div><div class="panel-vig"></div><div class="panel-glass"></div><div class="panel-curve"></div></div>
+<div class="scan" aria-hidden="true"></div>
+<header class="bar"><div class="bar-in"><a class="mark" href="index.html" aria-label="SHP, 사이트로 돌아가기"><span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span></a><p class="bar-meta"><span>IMAGE LOG</span><b aria-hidden="true"></b><span>1 / 1</span></p><nav class="bar-nav" aria-label="주요"><a href="index.html">← 사이트로</a><a class="btn" href="index.html#clients">WORK<i aria-hidden="true">▶</i></a></nav></div></header>
+<div class="log-head">
+<h1>생성 이미지 로그</h1>
+<p class="sub">이 포트폴리오를 위해 만든 모든 이미지입니다 — 사이트에 올라간 것과, 반려되거나 거부된 것까지. 각 장이 어떤 모델·설정·프롬프트에서 나왔는지 함께 싣습니다. 출처는 PNG 자체에서 읽으므로 ComfyUI를 다시 시작해도 남습니다.</p>
+<p class="meta">126장 · 사이트에 10장 · 1/1 페이지 · 2026-09-10 20:34 KST 갱신</p>
+</div>
+<nav class="filters" aria-label="filters"><a href="gallery.html">All 126</a><a href="gallery-ideogram-4.html">Ideogram 4</a><a href="gallery-krea2-turbo.html">krea2 turbo</a><a href="gallery-unknown.html">unknown</a><a href="gallery-installed.html">On the site 10</a><span aria-current="true">Blocked 8</span><span class="count">8장 · 1쪽</span></nav>
+<main class="log"><div class="grid">
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/k_s2_a_plain_00001_.jpg" alt="k_s2_a_plain_00001_" loading="lazy"><figcaption><div class="name">k_s2_a_plain_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>8784325522457294</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1175 KB</dd></dl><p class="note">The control: plainest possible wording, upright full silhouette. Refused, while the cropped, mounted and lying-down variants of the same subject all passed. The filter judges the rendered image, not only the text.</p><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;A small sealed blown-glass component standing upright on a pale grey studio sweep, black-and-white fine-grain macro photograph of scientific glassware.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[260,330,830,670],&quot;desc&quot;:&quot;One small sealed component of clear borosilicate laboratory glass standing upright, a squat cylinder as wide as it is tall with a straight thin side wall, a flat base, and a top closing in one smooth continuous dome, forming a single unbroken sealed volume of glass with no opening anywhere; one short narrow stem rises at an angle from the shoulder and is drawn down to a rounded solid fused point. A faint fusion seam marks where the glass was closed. The glass is empty and clean. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/j_s2_cell_00001_.jpg" alt="j_s2_cell_00001_" loading="lazy"><figcaption><div class="name">j_s2_cell_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>1620310384737511</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1315 KB</dd></dl><p class="note">Refused even as structured JSON, while the other four in the same batch passed — so form was not this one&#x27;s whole cause.</p><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;A sealed borosilicate glass ampoule standing upright on a pale grey studio sweep, black-and-white fine-grain macro photograph of laboratory glassware.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[260,330,830,670],&quot;desc&quot;:&quot;A flame-sealed borosilicate glass capsule standing upright, a squat cylinder as wide as it is tall, with a straight thin side wall, a flat base, and a top that closes in one smooth continuous dome, forming a single unbroken sealed volume of glass with no opening anywhere. One short narrow tip-off stem rises at an angle from the shoulder where the dome meets the wall and is drawn down to a rounded solid fused point, a faint fusion seam marking where the glass was closed. One tiny bright bead of condensed metal rests in the bottom corner and a faint metallic film clouds one small patch of the inner wall. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig2_s4_signal_00001_.jpg" alt="ig2_s4_signal_00001_" loading="lazy"><figcaption><div class="name">ig2_s4_signal_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>4569656076375311</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 211 KB</dd></dl><p class="note">Refused again without a negative prompt.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 004 / SIGNAL AND VALIDATION
+Primary request: A precise studio close-up of a matched pair of photodiode detectors, the two halves of a balanced detector, photographed head-on as components.
+Subject: Two identical metal-can photodiodes standing upright side by side, mirror-symmetric about the centre of the frame and separated by a narrow even gap. Each is a small cylindrical metal package with a rolled rim, closed by a flat glass window through which the square semiconductor die is clearly visible, dark and flat, with two hairline bond wires arcing from its corners to the package wall. Below each can, three straight metal leads drop down out of the bottom of the frame. The two units are visibly identical in height, diameter and die size, and are lit identically.
+Composition/framing: Square frame, straight-on view at the height of the windows, the pair centred and together filling about 60 percent of the width, the gap between them exactly on the centre line.
+Materials/textures: Brushed nickel-plated metal cans with a fine circular grain, a bright ring highlight on each rolled rim, a flat specular sheet across each glass window, matte dark silicon die.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig2_s2_cell_00001_.jpg" alt="ig2_s2_cell_00001_" loading="lazy"><figcaption><div class="name">ig2_s2_cell_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>8829079402248716</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 328 KB</dd></dl><p class="note">Refused again without a negative prompt.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 002 / ATOMIC PHYSICS
+Primary request: A precise studio close-up of a hermetically sealed alkali vapour cell, a single piece of laboratory glassware, photographed as a component.
+Subject: One flame-sealed borosilicate glass capsule standing upright on the sweep, a squat cylinder roughly as wide as it is tall. Its side wall is straight and thin-walled; its top closes in a smooth continuous dome, and its base is flat. The glass is one unbroken sealed volume, with no opening anywhere. A short narrow tip-off stem rises at an angle from the shoulder where the dome meets the wall, drawn down to a rounded solid fused point, with a faint fusion seam where the glass was closed. Inside, a single tiny bright bead of condensed alkali metal rests in the bottom corner, and a very faint metallic film clouds one small patch of the inner wall.
+Composition/framing: Square frame, three-quarter view from slightly above, the capsule centred and filling about 55 percent of the frame height, generous empty sweep around it.
+Materials/textures: Thin-walled laboratory glass with visible wall thickness at the rim of the base, true refraction, a bright specular streak down the shoulder, a soft caustic under the base.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig2_s1_optics_00001_.jpg" alt="ig2_s1_optics_00001_" loading="lazy"><figcaption><div class="name">ig2_s1_optics_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>7639139427138037</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 188 KB</dd></dl><p class="note">Refused again with the negative prompt removed — which ruled out my first theory that the negative text tripped the filter.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 001 / OPTICAL PATH
+Primary request: A precise studio close-up of two bulk optical components used to split and fold a laser beam, photographed as laboratory hardware.
+Subject: Two pieces of polished optical glass standing on the sweep, side by side and touching along their bases. On the left, a right-angle prism resting on one square face, its 45-degree hypotenuse turned toward the camera so it works as a mirror and throws a compressed reflection of the sweep across itself; its three ground edges carry a narrow uniform protective bevel and its polished faces are flawless. On the right, a polarising beamsplitter cube of the same height, formed from two right-angle prisms cemented together, so a single fine straight diagonal seam runs corner to corner through the glass and is visible from the front; its outer faces carry an anti-reflection coating that reads as a faint even darkening against the bright sweep.
+Composition/framing: Square frame. The pair sits centred and slightly below the middle, together filling about 60 percent of the width, seen from just above eye level so the top faces are foreshortened into thin bright bands.
+Materials/textures: Water-clear optical glass with true refraction, internal total reflection off the hypotenuse, sharp caustics pooling on the sweep beneath each piece, hairline bevels catching a bright line.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig_s4_signal_00001_.jpg" alt="ig_s4_signal_00001_" loading="lazy"><figcaption><div class="name">ig_s4_signal_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>6278957566357238</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 210 KB</dd></dl><p class="note">Refused. Same plain-text form.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 004 / SIGNAL AND VALIDATION
+Primary request: A precise studio close-up of a matched pair of photodiode detectors, the two halves of a balanced detector, photographed head-on as components.
+Subject: Two identical metal-can photodiodes standing upright side by side, mirror-symmetric about the centre of the frame and separated by a narrow even gap. Each is a small cylindrical metal package with a rolled rim, closed by a flat glass window through which the square semiconductor die is clearly visible, dark and flat, with two hairline bond wires arcing from its corners to the package wall. Below each can, three straight metal leads drop down out of the bottom of the frame. The two units are visibly identical in height, diameter and die size, and are lit identically.
+Composition/framing: Square frame, straight-on view at the height of the windows, the pair centred and together filling about 60 percent of the width, the gap between them exactly on the centre line.
+Materials/textures: Brushed nickel-plated metal cans with a fine circular grain, a bright ring highlight on each rolled rim, a flat specular sheet across each glass window, matte dark silicon die.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details><details><summary>negative</summary><pre>colour, colour cast, text, lettering, numbers, digits, engraved scale, graduation marks, logo, brand name, watermark, signature, hands, people, cluttered background, props, blur, soft focus, low detail, plastic toy look, cartoon, illustration, render, CGI, eyes, eyeballs, face, robot, headlights, buttons, speakers, camera lens, binoculars, asymmetric pair, mismatched sizes, three objects, single object, circuit board, wires tangled</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig_s2_cell_00001_.jpg" alt="ig_s2_cell_00001_" loading="lazy"><figcaption><div class="name">ig_s2_cell_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>7280309258439054</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 230 KB</dd></dl><p class="note">Refused. Same plain-text form.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 002 / ATOMIC PHYSICS
+Primary request: A precise studio close-up of a hermetically sealed alkali vapour cell, a single piece of laboratory glassware, photographed as a component.
+Subject: One flame-sealed borosilicate glass capsule standing upright on the sweep, a squat cylinder roughly as wide as it is tall. Its side wall is straight and thin-walled; its top closes in a smooth continuous dome, and its base is flat. The glass is one unbroken sealed volume, with no opening anywhere. A short narrow tip-off stem rises at an angle from the shoulder where the dome meets the wall, drawn down to a rounded solid fused point, with a faint fusion seam where the glass was closed. Inside, a single tiny bright bead of condensed alkali metal rests in the bottom corner, and a very faint metallic film clouds one small patch of the inner wall.
+Composition/framing: Square frame, three-quarter view from slightly above, the capsule centred and filling about 55 percent of the frame height, generous empty sweep around it.
+Materials/textures: Thin-walled laboratory glass with visible wall thickness at the rim of the base, true refraction, a bright specular streak down the shoulder, a soft caustic under the base.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details><details><summary>negative</summary><pre>colour, colour cast, text, lettering, numbers, digits, engraved scale, graduation marks, logo, brand name, watermark, signature, hands, people, cluttered background, props, blur, soft focus, low detail, plastic toy look, cartoon, illustration, render, CGI, bottle, jar, vial, flask, beaker, drinking glass, tumbler, cup, vase, open mouth, rim, lip, opening, hole, cork, cap, lid, stopper, screw thread, neck, label, liquid, water, pouring</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 blocked"><img src="assets/gallery/ig_s1_optics_00001_.jpg" alt="ig_s1_optics_00001_" loading="lazy"><figcaption><div class="name">ig_s1_optics_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag blocked">refused</span></div><dl><dt>seed</dt><dd>895787089333494</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 288 KB</dd></dl><p class="note">Refused by Ideogram&#x27;s safety filter. Prompt was written in krea2&#x27;s plain-text field form; the template warns plain text has a high false-positive rate.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: figure image for the service row FIG. 001 / OPTICAL PATH
+Primary request: A precise studio close-up of two bulk optical components used to split and fold a laser beam, photographed as laboratory hardware.
+Subject: Two pieces of polished optical glass standing on the sweep, side by side and touching along their bases. On the left, a right-angle prism resting on one square face, its 45-degree hypotenuse turned toward the camera so it works as a mirror and throws a compressed reflection of the sweep across itself; its three ground edges carry a narrow uniform protective bevel and its polished faces are flawless. On the right, a polarising beamsplitter cube of the same height, formed from two right-angle prisms cemented together, so a single fine straight diagonal seam runs corner to corner through the glass and is visible from the front; its outer faces carry an anti-reflection coating that reads as a faint even darkening against the bright sweep.
+Composition/framing: Square frame. The pair sits centred and slightly below the middle, together filling about 60 percent of the width, seen from just above eye level so the top faces are foreshortened into thin bright bands.
+Materials/textures: Water-clear optical glass with true refraction, internal total reflection off the hypotenuse, sharp caustics pooling on the sweep beneath each piece, hairline bevels catching a bright line.
+Style/medium: Square black-and-white editorial macro photograph, large-format sharpness, fine monochrome film grain, crisp contrast, deep blacks and clean highlights, no colour.
+Scene/backdrop: A light dove-grey seamless studio sweep, smooth and featureless, the subject sitting on it with a soft contact shadow.
+Lighting/mood: One large soft key from the upper left raking across the subject, a weak fill from the right, quiet and clinical.</pre></details><details><summary>negative</summary><pre>colour, colour cast, text, lettering, numbers, digits, engraved scale, graduation marks, logo, brand name, watermark, signature, hands, people, cluttered background, props, blur, soft focus, low detail, plastic toy look, cartoon, illustration, render, CGI, crystal ball, gemstone, jewel, faceted diamond, rainbow dispersion, prism rainbow, spectrum, chipped glass, cracked glass, dusty</pre></details></figcaption></figure>
+</div></main>
+
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">PROVENANCE READ BACK OUT OF THE PNGs THEMSELVES</p><p class="credit"><a href="index.html" style="color:inherit">← 포트폴리오로 돌아가기</a></p></footer>
+<script>
+/* The log needs no JavaScript: the filters are links and every page arrives
+   already filtered. This only remembers which filter you were last on, so the
+   header link back to the log returns you there. */
+try{
+  const here = location.pathname.split('/').pop() || 'gallery.html';
+  localStorage.setItem('gallery-page', here);
+}catch(e){}
+</script>
+</body>
+</html>

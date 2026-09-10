@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>생성 이미지 로그 — 1/1 — SHP®</title>
+<meta name="description" content="이 포트폴리오를 위해 생성한 모든 이미지와 그 출처." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="entry.css" />
+<link rel="stylesheet" href="crt.css" />
+<link rel="stylesheet" href="frames.css" />
+<style>
+/* The log is part of the site, not a separate document: it inherits the four
+   tones, the pixel type and the frames from the same stylesheets the rest of
+   the pages use, and only adds the grid. */
+.log-head{padding:clamp(40px,6vw,74px) clamp(14px,3vw,34px) clamp(22px,3vw,32px);
+  border-bottom:var(--px) solid var(--t0);max-width:1240px;margin:0 auto}
+.log-head h1{margin:0 0 14px;font-family:var(--disp);font-size:clamp(18px,3.4vw,34px);
+  font-weight:400;line-height:1.4}
+.log-head .sub{margin:0;max-width:62ch;color:var(--t1);font-size:14.5px}
+.log-head .meta{margin:20px 0 0;font-family:var(--disp);font-size:9px;
+  letter-spacing:.12em;color:var(--t1)}
+nav.filters{display:flex;flex-wrap:wrap;gap:8px;padding:16px clamp(14px,3vw,34px);
+  border-bottom:var(--px) solid var(--t0);position:sticky;top:0;z-index:40;
+  background:var(--t3);max-width:1240px;margin:0 auto}
+/* the filters became links when each one got its own paginated run, and the
+   rule still only styled buttons, so they rendered as default blue underlines */
+nav.filters a,nav.filters span[aria-current]{font:inherit;font-family:var(--disp);
+  font-size:9px;letter-spacing:.06em;padding:9px 12px;
+  border:var(--px) solid var(--t0);background:var(--t3);color:var(--t0);
+  text-decoration:none;display:inline-block}
+nav.filters a:hover{background:var(--t0);color:var(--t3)}
+nav.filters span[aria-current]{background:var(--t0);color:var(--t3)}
+nav.filters a:focus-visible{outline:var(--px) solid var(--t0);outline-offset:var(--px)}
+.count{align-self:center;font-family:var(--disp);font-size:9px;color:var(--t1);
+  letter-spacing:.1em;margin-left:auto}
+main.log{padding:26px clamp(14px,3vw,34px) 70px;max-width:1240px;margin:0 auto}
+.grid{display:grid;gap:calc(var(--px)*5);
+  grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
+.grid figure{margin:0;background:var(--t3);display:flex;flex-direction:column;
+  border:var(--px) solid var(--t0)}
+/* `hidden` is what the filter sets, and an author `display` on the same element
+   overrides it. The previous stylesheet forced display:flex here, so the filter
+   changed an attribute and hid nothing at all. */
+.grid figure[hidden]{display:none}
+.grid figure img{width:100%;height:auto;display:block;background:var(--t2);
+  image-rendering:auto}
+figcaption{padding:12px 13px 14px;display:flex;flex-direction:column;gap:8px}
+.name{font-family:var(--disp);font-size:9.5px;word-break:break-all;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--disp);font-size:8px;letter-spacing:.06em;padding:4px 6px;
+  border:var(--px) solid var(--t1);color:var(--t1)}
+.tag.live{border-color:var(--t0);background:var(--t0);color:var(--t3)}
+.tag.blocked{border-style:dashed}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12px;
+  color:var(--t1);font-variant-numeric:tabular-nums}
+dt{font-family:var(--disp);font-size:8px;letter-spacing:.08em;padding-top:2px}
+dd{margin:0;color:var(--t0);word-break:break-word}
+details summary{cursor:pointer;font-family:var(--disp);font-size:8px;
+  letter-spacing:.08em;color:var(--t1);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"- "}
+details pre{margin:8px 0 0;padding:10px;background:var(--t3);
+  border:var(--px) solid var(--t1);font-size:11px;line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto}
+.note{font-size:12.5px;color:var(--t1);border-left:calc(var(--px)*2) solid var(--t1);
+  padding-left:10px}
+.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:30px clamp(14px,3vw,34px) 0;max-width:1240px;margin:0 auto}
+.pager a,.pager span{font-family:var(--disp);font-size:9px;letter-spacing:.06em;
+  padding:9px 12px;border:var(--px) solid var(--t0);text-decoration:none;color:var(--t0)}
+.pager a:hover{background:var(--t0);color:var(--t3)}
+.pager [aria-current]{background:var(--t0);color:var(--t3)}
+.pager .gap{border:0;color:var(--t1)}
+</style>
+</head>
+<body>
+<div class="panel" aria-hidden="true"><div class="panel-mask"></div><div class="panel-vig"></div><div class="panel-glass"></div><div class="panel-curve"></div></div>
+<div class="scan" aria-hidden="true"></div>
+<header class="bar"><div class="bar-in"><a class="mark" href="index.html" aria-label="SHP, 사이트로 돌아가기"><span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span></a><p class="bar-meta"><span>IMAGE LOG</span><b aria-hidden="true"></b><span>1 / 1</span></p><nav class="bar-nav" aria-label="주요"><a href="index.html">← 사이트로</a><a class="btn" href="index.html#clients">WORK<i aria-hidden="true">▶</i></a></nav></div></header>
+<div class="log-head">
+<h1>생성 이미지 로그</h1>
+<p class="sub">이 포트폴리오를 위해 만든 모든 이미지입니다 — 사이트에 올라간 것과, 반려되거나 거부된 것까지. 각 장이 어떤 모델·설정·프롬프트에서 나왔는지 함께 싣습니다. 출처는 PNG 자체에서 읽으므로 ComfyUI를 다시 시작해도 남습니다.</p>
+<p class="meta">126장 · 사이트에 10장 · 1/1 페이지 · 2026-09-10 20:34 KST 갱신</p>
+</div>
+<nav class="filters" aria-label="filters"><a href="gallery.html">All 126</a><a href="gallery-ideogram-4.html">Ideogram 4</a><a href="gallery-krea2-turbo.html">krea2 turbo</a><a href="gallery-unknown.html">unknown</a><span aria-current="true">On the site 10</span><a href="gallery-blocked.html">Blocked 8</a><span class="count">10장 · 1쪽</span></nav>
+<main class="log"><div class="grid">
+<figure data-group="ideogram-4 installed"><img src="assets/gallery/m_s2_mount_3_00001_.jpg" alt="m_s2_mount_3_00001_" loading="lazy"><figcaption><div class="name">m_s2_mount_3_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag live">svc-2-vapour.png</span></div><dl><dt>seed</dt><dd>2002306702012535</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1064 KB</dd></dl><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;A sealed borosilicate glass cell seated in a machined aluminium holder on a pale grey studio sweep, black-and-white fine-grain macro photograph of laboratory hardware.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[430,300,830,700],&quot;desc&quot;:&quot;One machined aluminium holder, a rectangular block with a circular seat milled into its top face and two counterbored fixing holes. Every face is clean bare satin aluminium, uniform and unmarked, carrying nothing but fine even face-mill witness marks, with one narrow chamfer along every edge. Rendered in monochrome.&quot;},{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[210,380,560,620],&quot;desc&quot;:&quot;One small sealed component of clear borosilicate laboratory glass sitting in the holder&#x27;s circular seat, a squat cylinder as wide as it is tall with a straight thin side wall, a flat base, and a top closing in one smooth continuous dome, forming a single unbroken sealed volume of glass with no opening anywhere; one short narrow stem rises at an angle from the shoulder and is drawn down to a rounded solid fused point. The glass is empty and clean, with true refraction against the aluminium. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 installed"><img src="assets/gallery/k_s5_pipeline_00001_.jpg" alt="k_s5_pipeline_00001_" loading="lazy"><figcaption><div class="name">k_s5_pipeline_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag live">svc-5-inspection.png</span></div><dl><dt>seed</dt><dd>6477864860046536</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1834 KB</dd></dl><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;An overhead macro close-up of identical turned steel parts standing in a black foam inspection tray, the grid running off every edge of the frame with one pocket left empty, black-and-white fine-grain photograph.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;Dense matte black foam fills the entire frame, seen square-on from directly overhead, its milled pockets running past all four frame edges.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[0,0,1000,1000],&quot;desc&quot;:&quot;A field of identical short stepped turned steel cylinders standing on end in the milled pockets of a dense matte black foam tray, seen from directly overhead. The rows run parallel to the frame edges and continue past all four edges, cut off by the frame on every side so neither the tray rim nor the extent of the batch is visible. Every part stands at the same height and the same orientation, each with a bright polished top face carrying fine concentric lathe marks and one small concentric bore at its centre. One pocket left of the frame centre is empty, its bare foam floor visible, the part that belongs there removed for measurement. A small crisp shadow sits inside every pocket. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 installed"><img src="assets/gallery/k_s3_cad_00001_.jpg" alt="k_s3_cad_00001_" loading="lazy"><figcaption><div class="name">k_s3_cad_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag live">svc-3-machining.png</span></div><dl><dt>seed</dt><dd>8352767430678811</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1477 KB</dd></dl><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;An extreme macro close-up across the finish-milled face of an aluminium part, its counterbored holes running out past the frame edge, black-and-white fine-grain product photograph.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;The milled aluminium face itself fills the whole frame, falling out of focus toward the top where a pale grey studio sweep shows in a narrow band.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[120,0,1000,1000],&quot;desc&quot;:&quot;The top face of a bare satin aluminium part seen in extreme macro from a low raking angle, so close that the part&#x27;s outline is far outside the frame. The surface is covered in fine regular overlapping arcs of face-mill witness marks catching the raking light as parallel highlights. A shallow circular pocket with a clean vertical wall and a flat floor sits at the lower left. Counterbored holes with crisp unbroken edges curve away from that pocket toward the upper right and continue off the right edge of the frame, the nearest hole sharp and the farthest already soft. One narrow uniform chamfer runs along a machined step crossing the lower right corner. No tool touches the part. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 installed"><img src="assets/gallery/j_s4_signal_00001_.jpg" alt="j_s4_signal_00001_" loading="lazy"><figcaption><div class="name">j_s4_signal_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag live">svc-4-detectors.png</span></div><dl><dt>seed</dt><dd>6868208227789809</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1365 KB</dd></dl><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;Two identical metal-can photodiode detectors standing upright side by side on a pale grey studio sweep, black-and-white fine-grain macro product photograph of matched electronic components.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[300,190,800,450],&quot;desc&quot;:&quot;One small cylindrical nickel-plated metal photodiode package standing upright, its rolled rim catching a bright ring highlight, closed by a flat glass window through which one square matte dark silicon die is clearly visible with two hairline bond wires arcing from its corners to the package wall, three straight metal leads dropping from its base out of the bottom of the frame. Rendered in monochrome.&quot;},{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[300,550,800,810],&quot;desc&quot;:&quot;A second photodiode package identical to the first in height, diameter, rim, window and die size, standing upright at the same height and lit identically, its three straight metal leads dropping from its base out of the bottom of the frame. Rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="ideogram-4 installed"><img src="assets/gallery/j_s1_optics_00001_.jpg" alt="j_s1_optics_00001_" loading="lazy"><figcaption><div class="name">j_s1_optics_00001_</div><div class="tags"><span class="tag">Ideogram 4</span><span class="tag live">svc-1-optics.png</span></div><dl><dt>seed</dt><dd>7685860265279240</dd><dt>steps</dt><dd>48</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.5</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1291 KB</dd></dl><details><summary>prompt</summary><pre>{&quot;aspect_ratio&quot;:&quot;1:1&quot;,&quot;high_level_description&quot;:&quot;A right-angle glass prism and a polarising beamsplitter cube standing side by side on a pale grey studio sweep, black-and-white fine-grain macro product photograph.&quot;,&quot;compositional_deconstruction&quot;:{&quot;background&quot;:&quot;A smooth pale grey seamless studio sweep, evenly lit, entirely featureless, with one soft contact shadow falling to the lower right.&quot;,&quot;elements&quot;:[{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[420,190,770,470],&quot;desc&quot;:&quot;A right-angle prism of water-clear optical glass resting on one square face, its 45-degree hypotenuse turned toward the camera and working as a mirror, every ground edge carrying one narrow uniform bevel that catches a bright hairline, a sharp caustic pooling on the sweep beneath it, rendered in monochrome.&quot;},{&quot;type&quot;:&quot;obj&quot;,&quot;bbox&quot;:[420,500,770,780],&quot;desc&quot;:&quot;A polarising beamsplitter cube of water-clear optical glass the same height as the prism, built from two right-angle prisms cemented together so one fine straight diagonal seam runs corner to corner through the glass and stays visible from the front, its outer faces darkened evenly by an anti-reflection coating, rendered in monochrome.&quot;}]}}</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v3_w_metrology_00001_.jpg" alt="v3_w_metrology_00001_" loading="lazy"><figcaption><div class="name">v3_w_metrology_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">metrology.png</span></div><dl><dt>seed</dt><dd>531248676</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1810 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: editorial laboratory photograph for a research portfolio
+Primary request: A wide 1536x1024 photorealistic photograph of dimensional metrology reference standards resting on a granite inspection surface.
+Scene/backdrop: A black granite surface plate, its lapped top face flat and slightly matte, filling the lower two thirds of the frame; a dark neutral studio background above it, fading out of focus.
+Subject: A short stack of four rectangular steel gauge blocks wrung together into one solid column, their lapped faces mirror-bright; beside them two loose blocks lie flat, and a single precision steel cylinder rests on its side. Every surface is bare polished steel. There is no measuring instrument in the frame.
+Composition/framing: Wide landscape frame, low camera close to the plate surface, objects grouped left of centre with open granite to the right; shallow depth of field, the near stack sharp and the background soft.
+Lighting/mood: Single soft raking light from the left grazing across the granite so the lapped steel faces read as mirrors against the matte stone; deep quiet shadows.
+Materials/textures: Mirror-polished hardened steel, fine-grained black granite, faint reflections of the steel in the plate.
+Constraints: Absolutely NO dials, NO gauge faces, NO round instrument heads, NO clock-like objects, NO needles or pointers, NO calipers, NO micrometers, NO rulers, NO graduation marks, NO engraved scales. No text, no numbers, no lettering of any kind, no logos, no watermark, no hands, no people.</pre></details><details><summary>negative</summary><pre>text, letters, numbers, digits, watermark, signature, logo, blurry, low quality, deformed, distorted, extra objects, cluttered</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v2_w_shield_00001_.jpg" alt="v2_w_shield_00001_" loading="lazy"><figcaption><div class="name">v2_w_shield_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">shielded-chamber.png</span></div><dl><dt>seed</dt><dd>1867086054</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2018 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: editorial background image for a research portfolio
+Primary request: A wide 1536x1024 black-and-white fine-grain editorial photograph, crisp contrast, deep blacks, fine monochrome film grain looking into the open end of a cylindrical magnetic shield.
+Scene/backdrop: A quiet laboratory, dark surroundings, the shield filling the frame.
+Subject: Three nested concentric mu-metal cylinders of decreasing diameter seen end on, their rims stepping inward one behind the next, smooth matte grey metal walls with a fine satin finish, a soft pool of light at the innermost end.
+Composition/framing: Wide landscape 3:2, camera on the cylinder axis so the rims form clean concentric circles, the bright innermost opening slightly off centre.
+Lighting/mood: One soft light from deep inside; the outer rim falls into near-black.
+Materials/textures: Matte annealed mu-metal, no reflections sharp enough to read the room.
+Constraints: No humans, no cables, no text, no watermark, no visible equipment inside.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v2_w_sensor_housing_00001_.jpg" alt="v2_w_sensor_housing_00001_" loading="lazy"><figcaption><div class="name">v2_w_sensor_housing_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">sensor-housing.png</span></div><dl><dt>seed</dt><dd>1560511686</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2206 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: editorial image for a research portfolio
+Primary request: A wide 1536x1024 black-and-white fine-grain editorial photograph, crisp contrast, deep blacks, fine monochrome film grain of a precision machined aluminium sensor housing.
+Scene/backdrop: A clean matte steel workbench, plain and uncluttered, softly out of focus behind.
+Subject: One rectangular aluminium housing about 136 mm long, lid removed, lying flat. Inside are milled pockets and a long straight channel running its length, with circular seats at intervals. Counterbored fixing holes along the rim, crisp sharp arrises, fine concentric tool marks on the pocket floors.
+Composition/framing: Wide landscape 3:2, camera close and slightly above at a three-quarter angle so the internal channel is visible along its length.
+Lighting/mood: Raking light from the left so the machined surfaces show their finish; deep shadow in the pockets.
+Materials/textures: Bead-blasted and anodised aluminium, bright cut edges, faint machining witness marks.
+Constraints: No humans, no hands, no tools, no text, no engraved markings, no watermark.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v2_w_optics_bench_00001_.jpg" alt="v2_w_optics_bench_00001_" loading="lazy"><figcaption><div class="name">v2_w_optics_bench_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">optics-bench.png</span></div><dl><dt>seed</dt><dd>1222921344</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2190 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: editorial image for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 black-and-white fine-grain editorial photograph, crisp contrast, deep blacks, fine monochrome film grain of a laser optics bench, looking straight down its length.
+Scene/backdrop: A black anodised aluminium optical breadboard filling the lower half, its regular grid of tapped mounting holes running away from camera to a bright empty far wall.
+Subject: Two parallel rows of identical kinematic mirror mounts on short posts, each a small square anodised plate with three adjustment screws and a round mirror held at forty-five degrees; the rows recede and converge.
+Composition/framing: Wide landscape 3:2, camera at bench height on the centre line, strong one-point perspective, the far end bright and empty.
+Lighting/mood: Even diffuse laboratory light, deep shadow under the mounts, no flare.
+Materials/textures: Matte black anodised aluminium, knurled steel adjusters, first-surface mirrors.
+Constraints: No humans, no visible laser beam, no text, no watermark, no cables across the frame.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v2_w_vapor_cell_00001_.jpg" alt="v2_w_vapor_cell_00001_" loading="lazy"><figcaption><div class="name">v2_w_vapor_cell_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">vapor-cell.png</span></div><dl><dt>seed</dt><dd>533753314</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1643 KB</dd></dl><details><summary>prompt</summary><pre>Use case: stylized-concept
+Asset type: hero artwork for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 photorealistic macro studio photograph of a rubidium vapour cell.
+Scene/backdrop: Light dove-gray seamless studio sweep, nothing else in frame.
+Subject: A single small sealed borosilicate glass cell, a squat cylinder about 25 mm across and 25 mm tall with flat polished optical windows on its two circular ends and a short narrow glass stem, the tip-off, standing up from the shoulder. The glass is clear and empty-looking; one tiny bright bead of liquid metal rests in the bottom corner. Thin wall, visible seam where the stem was fused.
+Composition/framing: Wide landscape 3:2; the cell centred, occupying about 45 percent of the frame, seen slightly from above at a three-quarter angle.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from upper left, gentle rim light picking out the glass edges and the stem.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, one small mercury-like droplet, no coatings, no metal fittings.
+Constraints: No chrome clamps, no holder, no mount, no cables, no text, no watermark, no extra objects.</pre></details></figcaption></figure>
+</div></main>
+
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">PROVENANCE READ BACK OUT OF THE PNGs THEMSELVES</p><p class="credit"><a href="index.html" style="color:inherit">← 포트폴리오로 돌아가기</a></p></footer>
+<script>
+/* The log needs no JavaScript: the filters are links and every page arrives
+   already filtered. This only remembers which filter you were last on, so the
+   header link back to the log returns you there. */
+try{
+  const here = location.pathname.split('/').pop() || 'gallery.html';
+  localStorage.setItem('gallery-page', here);
+}catch(e){}
+</script>
+</body>
+</html>

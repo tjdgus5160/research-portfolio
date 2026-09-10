@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>생성 이미지 로그 — 7/11 — SHP®</title>
+<meta name="description" content="이 포트폴리오를 위해 생성한 모든 이미지와 그 출처." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="entry.css" />
+<link rel="stylesheet" href="crt.css" />
+<link rel="stylesheet" href="frames.css" />
+<style>
+/* The log is part of the site, not a separate document: it inherits the four
+   tones, the pixel type and the frames from the same stylesheets the rest of
+   the pages use, and only adds the grid. */
+.log-head{padding:clamp(40px,6vw,74px) clamp(14px,3vw,34px) clamp(22px,3vw,32px);
+  border-bottom:var(--px) solid var(--t0);max-width:1240px;margin:0 auto}
+.log-head h1{margin:0 0 14px;font-family:var(--disp);font-size:clamp(18px,3.4vw,34px);
+  font-weight:400;line-height:1.4}
+.log-head .sub{margin:0;max-width:62ch;color:var(--t1);font-size:14.5px}
+.log-head .meta{margin:20px 0 0;font-family:var(--disp);font-size:9px;
+  letter-spacing:.12em;color:var(--t1)}
+nav.filters{display:flex;flex-wrap:wrap;gap:8px;padding:16px clamp(14px,3vw,34px);
+  border-bottom:var(--px) solid var(--t0);position:sticky;top:0;z-index:40;
+  background:var(--t3);max-width:1240px;margin:0 auto}
+/* the filters became links when each one got its own paginated run, and the
+   rule still only styled buttons, so they rendered as default blue underlines */
+nav.filters a,nav.filters span[aria-current]{font:inherit;font-family:var(--disp);
+  font-size:9px;letter-spacing:.06em;padding:9px 12px;
+  border:var(--px) solid var(--t0);background:var(--t3);color:var(--t0);
+  text-decoration:none;display:inline-block}
+nav.filters a:hover{background:var(--t0);color:var(--t3)}
+nav.filters span[aria-current]{background:var(--t0);color:var(--t3)}
+nav.filters a:focus-visible{outline:var(--px) solid var(--t0);outline-offset:var(--px)}
+.count{align-self:center;font-family:var(--disp);font-size:9px;color:var(--t1);
+  letter-spacing:.1em;margin-left:auto}
+main.log{padding:26px clamp(14px,3vw,34px) 70px;max-width:1240px;margin:0 auto}
+.grid{display:grid;gap:calc(var(--px)*5);
+  grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
+.grid figure{margin:0;background:var(--t3);display:flex;flex-direction:column;
+  border:var(--px) solid var(--t0)}
+/* `hidden` is what the filter sets, and an author `display` on the same element
+   overrides it. The previous stylesheet forced display:flex here, so the filter
+   changed an attribute and hid nothing at all. */
+.grid figure[hidden]{display:none}
+.grid figure img{width:100%;height:auto;display:block;background:var(--t2);
+  image-rendering:auto}
+figcaption{padding:12px 13px 14px;display:flex;flex-direction:column;gap:8px}
+.name{font-family:var(--disp);font-size:9.5px;word-break:break-all;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--disp);font-size:8px;letter-spacing:.06em;padding:4px 6px;
+  border:var(--px) solid var(--t1);color:var(--t1)}
+.tag.live{border-color:var(--t0);background:var(--t0);color:var(--t3)}
+.tag.blocked{border-style:dashed}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12px;
+  color:var(--t1);font-variant-numeric:tabular-nums}
+dt{font-family:var(--disp);font-size:8px;letter-spacing:.08em;padding-top:2px}
+dd{margin:0;color:var(--t0);word-break:break-word}
+details summary{cursor:pointer;font-family:var(--disp);font-size:8px;
+  letter-spacing:.08em;color:var(--t1);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"- "}
+details pre{margin:8px 0 0;padding:10px;background:var(--t3);
+  border:var(--px) solid var(--t1);font-size:11px;line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto}
+.note{font-size:12.5px;color:var(--t1);border-left:calc(var(--px)*2) solid var(--t1);
+  padding-left:10px}
+.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:30px clamp(14px,3vw,34px) 0;max-width:1240px;margin:0 auto}
+.pager a,.pager span{font-family:var(--disp);font-size:9px;letter-spacing:.06em;
+  padding:9px 12px;border:var(--px) solid var(--t0);text-decoration:none;color:var(--t0)}
+.pager a:hover{background:var(--t0);color:var(--t3)}
+.pager [aria-current]{background:var(--t0);color:var(--t3)}
+.pager .gap{border:0;color:var(--t1)}
+</style>
+</head>
+<body>
+<div class="panel" aria-hidden="true"><div class="panel-mask"></div><div class="panel-vig"></div><div class="panel-glass"></div><div class="panel-curve"></div></div>
+<div class="scan" aria-hidden="true"></div>
+<header class="bar"><div class="bar-in"><a class="mark" href="index.html" aria-label="SHP, 사이트로 돌아가기"><span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span></a><p class="bar-meta"><span>IMAGE LOG</span><b aria-hidden="true"></b><span>7 / 11</span></p><nav class="bar-nav" aria-label="주요"><a href="index.html">← 사이트로</a><a class="btn" href="index.html#clients">WORK<i aria-hidden="true">▶</i></a></nav></div></header>
+<div class="log-head">
+<h1>생성 이미지 로그</h1>
+<p class="sub">이 포트폴리오를 위해 만든 모든 이미지입니다 — 사이트에 올라간 것과, 반려되거나 거부된 것까지. 각 장이 어떤 모델·설정·프롬프트에서 나왔는지 함께 싣습니다. 출처는 PNG 자체에서 읽으므로 ComfyUI를 다시 시작해도 남습니다.</p>
+<p class="meta">126장 · 사이트에 10장 · 7/11 페이지 · 2026-09-10 20:34 KST 갱신</p>
+</div>
+<nav class="filters" aria-label="filters"><span aria-current="true">All 126</span><a href="gallery-ideogram-4.html">Ideogram 4</a><a href="gallery-krea2-turbo.html">krea2 turbo</a><a href="gallery-unknown.html">unknown</a><a href="gallery-installed.html">On the site 10</a><a href="gallery-blocked.html">Blocked 8</a><span class="count">126장 · 11쪽</span></nav>
+<main class="log"><div class="grid">
+<figure data-group="ideogram-4"><img src="assets/gallery/ig_test_00001_.jpg" alt="ig_test_00001_" loading="lazy"><figcaption><div class="name">ig_test_00001_</div><div class="tags"><span class="tag">Ideogram 4</span></div><dl><dt>seed</dt><dd>1746908443593157</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>7.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>Ideogram4 mu=0.0 std=1.75</dd><dt>size</dt><dd>1024x1024</dd><dt>full</dt><dd>1024x1024 · 1201 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph
+Primary request: A square photorealistic close-up of a sealed glass ampoule used as a rubidium vapour cell.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small flame-sealed borosilicate glass capsule standing upright, a squat cylinder about 25 mm across and 25 mm tall, closed by a smoothly domed glass cap, with a short narrow glass tip-off stem drawn to a rounded fused point rising at an angle from the shoulder. A single tiny bright bead of liquid metal rests inside at the bottom.
+Composition/framing: Square frame, three-quarter view from slightly above, the capsule centred and filling about 55 percent of the frame.
+Lighting/mood: Soft broad key from the upper left, gentle rim light along the glass edges, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v7_hero_cell_2_00001_.jpg" alt="v7_hero_cell_2_00001_" loading="lazy"><figcaption><div class="name">v7_hero_cell_2_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1975696344</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1581 KB</dd></dl><p class="note">Rejected: same fault, an internal rod instead of an external stem.</p><details><summary>prompt</summary><pre>Use case: stylized-concept
+Asset type: hero artwork for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 photorealistic macro studio photograph of a hermetically sealed rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small flame-sealed borosilicate glass capsule standing upright, a squat cylinder about 25 mm across and 25 mm tall. Its top is closed by a smoothly domed glass cap, the way the fused end of a sealed ampoule is domed, so the capsule is one continuous unbroken volume of glass from the flat base to the dome. A short narrow glass tip-off stem about 6 mm long, drawn to a rounded fused solid point, rises at an angle from the shoulder where the dome meets the wall. The wall is thin and continuous. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint fusion seam marks the tip-off.
+Composition/framing: Wide landscape 3:2; the capsule centred, occupying about 45 percent of the frame, seen slightly from above at a three-quarter angle, generous empty space either side.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, gentle rim light picking out the glass edges and the stem, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v7_hero_cell_1_00001_.jpg" alt="v7_hero_cell_1_00001_" loading="lazy"><figcaption><div class="name">v7_hero_cell_1_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1440231879</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1570 KB</dd></dl><p class="note">Rejected: wide format put the tip-off stem inside the glass.</p><details><summary>prompt</summary><pre>Use case: stylized-concept
+Asset type: hero artwork for a research portfolio on optically pumped magnetometry
+Primary request: A wide 1536x1024 photorealistic macro studio photograph of a hermetically sealed rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small flame-sealed borosilicate glass capsule standing upright, a squat cylinder about 25 mm across and 25 mm tall. Its top is closed by a smoothly domed glass cap, the way the fused end of a sealed ampoule is domed, so the capsule is one continuous unbroken volume of glass from the flat base to the dome. A short narrow glass tip-off stem about 6 mm long, drawn to a rounded fused solid point, rises at an angle from the shoulder where the dome meets the wall. The wall is thin and continuous. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint fusion seam marks the tip-off.
+Composition/framing: Wide landscape 3:2; the capsule centred, occupying about 45 percent of the frame, seen slightly from above at a three-quarter angle, generous empty space either side.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, gentle rim light picking out the glass edges and the stem, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v6_s2_cell_3_00001_.jpg" alt="v6_s2_cell_3_00001_" loading="lazy"><figcaption><div class="name">v6_s2_cell_3_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>96677971</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1076 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic macro studio photograph of a sealed glass ampoule used as a rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small hermetically sealed borosilicate glass ampoule standing upright, a squat capsule about 25 mm across and 25 mm tall. Its top is closed by a smoothly domed glass cap, the way the fused end of a flame-sealed ampoule is domed, so the capsule is one continuous unbroken volume of glass from the flat base to the dome. A short narrow glass tip-off stem about 6 mm long, drawn to a rounded fused point, rises at an angle from the shoulder where the dome meets the wall. The wall is thin and continuous. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint fusion seam marks the tip-off.
+Composition/framing: Square frame, three-quarter view from slightly above; the ampoule centred, occupying about 55 percent of the frame.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, gentle rim light along the glass edges and the stem, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v6_s2_cell_2_00001_.jpg" alt="v6_s2_cell_2_00001_" loading="lazy"><figcaption><div class="name">v6_s2_cell_2_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1296459969</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1112 KB</dd></dl><p class="note">Rejected: the stem sits inside the capsule.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic macro studio photograph of a sealed glass ampoule used as a rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small hermetically sealed borosilicate glass ampoule standing upright, a squat capsule about 25 mm across and 25 mm tall. Its top is closed by a smoothly domed glass cap, the way the fused end of a flame-sealed ampoule is domed, so the capsule is one continuous unbroken volume of glass from the flat base to the dome. A short narrow glass tip-off stem about 6 mm long, drawn to a rounded fused point, rises at an angle from the shoulder where the dome meets the wall. The wall is thin and continuous. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint fusion seam marks the tip-off.
+Composition/framing: Square frame, three-quarter view from slightly above; the ampoule centred, occupying about 55 percent of the frame.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, gentle rim light along the glass edges and the stem, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v6_s2_cell_1_00001_.jpg" alt="v6_s2_cell_1_00001_" loading="lazy"><figcaption><div class="name">v6_s2_cell_1_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>308488285</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1105 KB</dd></dl><p class="note">Rejected: sealed at last, but the dome became a bulb.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic macro studio photograph of a sealed glass ampoule used as a rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small hermetically sealed borosilicate glass ampoule standing upright, a squat capsule about 25 mm across and 25 mm tall. Its top is closed by a smoothly domed glass cap, the way the fused end of a flame-sealed ampoule is domed, so the capsule is one continuous unbroken volume of glass from the flat base to the dome. A short narrow glass tip-off stem about 6 mm long, drawn to a rounded fused point, rises at an angle from the shoulder where the dome meets the wall. The wall is thin and continuous. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint fusion seam marks the tip-off.
+Composition/framing: Square frame, three-quarter view from slightly above; the ampoule centred, occupying about 55 percent of the frame.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, gentle rim light along the glass edges and the stem, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v5_s2_cell_00001_.jpg" alt="v5_s2_cell_00001_" loading="lazy"><figcaption><div class="name">v5_s2_cell_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>557717268</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1160 KB</dd></dl><p class="note">Rejected: an open jar with a good tip-off stem. First attempt with every negation deleted.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic macro studio photograph of a sealed rubidium vapour cell, a solid closed capsule of laboratory glass.
+Scene/backdrop: Light dove-gray seamless studio sweep.
+Subject: One small sealed borosilicate glass capsule standing upright, a squat cylinder about 25 mm across and 25 mm tall. Its flat circular top is a polished optical window fused across the full diameter, a smooth transparent disc like a lens element, and it rests on an identical flat window at the bottom. The glass wall is thin and continuous, curving smoothly into both windows so the capsule is one closed volume. A short narrow glass tip-off stem, about 6 mm long with a rounded fused tip, rises at an angle from the shoulder near the top edge. Inside the sealed volume a single tiny bright bead of liquid metal rests in the bottom corner, and a faint seam marks where the stem was fused shut.
+Composition/framing: Square frame, three-quarter view from slightly above so the top window reads as a flat disc and the curved wall is visible beneath it; the capsule centred, occupying about 55 percent of the frame.
+Lighting/mood: Minimalist premium studio art direction; soft broad key from the upper left, a gentle rim light picking out the glass edges and the stem, one clean specular streak across the top window, soft contact shadow.
+Materials/textures: Clear thin-walled laboratory glass with true refraction and caustics, faint green edge tint at the thickest glass, one small mercury-like droplet.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v4_s2_cell_00001_.jpg" alt="v4_s2_cell_00001_" loading="lazy"><figcaption><div class="name">v4_s2_cell_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1847051315</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1155 KB</dd></dl><p class="note">Rejected: an open glass tumbler. Piling on more negations made it worse.</p><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic close-up of a hermetically sealed alkali vapour cell, a solid closed laboratory glass component with no opening anywhere.
+Scene/backdrop: Light dove-gray seamless studio sweep, nothing else in frame.
+Subject: ONE squat borosilicate glass cylinder, about 25 mm across and 20 mm long, resting on its side. Both circular ends are permanently CLOSED by flat optically polished glass windows fused flush to the body, each window a smooth transparent disc exactly like a camera lens element, catching one clean elongated specular highlight. The body is a completely sealed capsule: the glass surface is continuous and unbroken all the way around, with no opening, no mouth, no rim, no hollow interior visible. One short sealed glass stub about 6 mm long with a rounded fire-polished tip projects sideways from the curved wall. A single tiny bead of silvery metal rests inside against the lower glass.
+Composition/framing: Square frame, three-quarter view from slightly above, the cylinder axis running from lower left to upper right so one flat sealed end window faces the camera at a shallow angle; the cell fills about 55 percent of the frame, centred.
+Lighting/mood: Soft large-source studio light from the upper left, one crisp specular streak across the sealed end window, gentle contact shadow beneath.
+Materials/textures: Thick clear borosilicate glass with visible wall thickness at the edge, faint green edge tint, flawless polished sealed window faces.
+Constraints: The cell is SEALED and CLOSED. NO open end, NO rim, NO lip, NO mouth, NO hole, NO opening of any kind, NO hollow cup, NO tube open at one end. It is NOT a bottle, NOT a jar, NOT a vial, NOT a flask, NOT a cup, NOT a drinking glass, NOT a candle holder. No neck, no thread, no cap, no lid, no cork, no label, no liquid, no text, no numbers, no watermark, no hands.</pre></details><details><summary>negative</summary><pre>open end, rim, lip, mouth, opening, hollow cup, jar, bottle, vial, glass tumbler, text, letters, numbers, watermark, logo, blurry, low quality, deformed, extra objects</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v3_s3_machining_00001_.jpg" alt="v3_s3_machining_00001_" loading="lazy"><figcaption><div class="name">v3_s3_machining_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>789506173</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1466 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up manufacturing photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic close-up of a finished precision-machined aluminium part sitting still on a workbench, already cut, with no tool touching it.
+Scene/backdrop: A dark matte steel bench top, clean and swept, softly out of focus behind the part.
+Subject: ONE rectangular block of aluminium, its top face freshly face-milled to a smooth continuous surface covered in fine regular overlapping arcs of tool witness marks. A shallow circular pocket with a clean vertical wall and a flat bottom is milled into the top face, and two small precisely drilled holes with crisp unbroken edges sit beside it. All outer edges are sharp, straight and lightly chamfered.
+Composition/framing: Square frame, three-quarter view from about 40 degrees above so the milled top face and one side wall are both visible; the block fills about 65% of the frame.
+Lighting/mood: Raking light from the upper left so the concentric tool marks catch the light as fine parallel highlights; controlled specular sheen, soft shadow.
+Materials/textures: Bare satin aluminium with a fine directional machined finish, sharp chamfers, no coating, no paint.
+Constraints: The part is finished and untouched. NO cutting tool, NO end mill, NO drill bit, NO spindle, NO chips or swarf, NO coolant, NO torn or fractured or broken material, NO jagged edges, NO cracks, NO rough cast surface. No text, no numbers, no watermark, no hands.</pre></details><details><summary>negative</summary><pre>text, letters, numbers, digits, watermark, signature, logo, blurry, low quality, deformed, distorted, extra objects, cluttered</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo installed"><img src="assets/gallery/v3_w_metrology_00001_.jpg" alt="v3_w_metrology_00001_" loading="lazy"><figcaption><div class="name">v3_w_metrology_00001_</div><div class="tags"><span class="tag">krea2 turbo</span><span class="tag live">metrology.png</span></div><dl><dt>seed</dt><dd>531248676</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1810 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: editorial laboratory photograph for a research portfolio
+Primary request: A wide 1536x1024 photorealistic photograph of dimensional metrology reference standards resting on a granite inspection surface.
+Scene/backdrop: A black granite surface plate, its lapped top face flat and slightly matte, filling the lower two thirds of the frame; a dark neutral studio background above it, fading out of focus.
+Subject: A short stack of four rectangular steel gauge blocks wrung together into one solid column, their lapped faces mirror-bright; beside them two loose blocks lie flat, and a single precision steel cylinder rests on its side. Every surface is bare polished steel. There is no measuring instrument in the frame.
+Composition/framing: Wide landscape frame, low camera close to the plate surface, objects grouped left of centre with open granite to the right; shallow depth of field, the near stack sharp and the background soft.
+Lighting/mood: Single soft raking light from the left grazing across the granite so the lapped steel faces read as mirrors against the matte stone; deep quiet shadows.
+Materials/textures: Mirror-polished hardened steel, fine-grained black granite, faint reflections of the steel in the plate.
+Constraints: Absolutely NO dials, NO gauge faces, NO round instrument heads, NO clock-like objects, NO needles or pointers, NO calipers, NO micrometers, NO rulers, NO graduation marks, NO engraved scales. No text, no numbers, no lettering of any kind, no logos, no watermark, no hands, no people.</pre></details><details><summary>negative</summary><pre>text, letters, numbers, digits, watermark, signature, logo, blurry, low quality, deformed, distorted, extra objects, cluttered</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v3_s2_cell_00001_.jpg" alt="v3_s2_cell_00001_" loading="lazy"><figcaption><div class="name">v3_s2_cell_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1378036514</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1196 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-product
+Asset type: close-up laboratory hardware photograph for a research portfolio
+Primary request: A square 1024x1024 photorealistic close-up of a sealed alkali vapour cell, a laboratory glass component, photographed as a product still.
+Scene/backdrop: Light dove-gray seamless studio sweep, no bench, no other equipment.
+Subject: ONE squat borosilicate glass cylinder, distinctly wider than it is tall, roughly 25 mm across and 20 mm long, lying on its side with its axis horizontal. Both circular ends are closed by flat optically polished parallel windows that catch a clean specular highlight. One short sealed glass stub, about 6 mm long with a rounded fire-polished tip, projects from the curved side wall. Inside, a single tiny bead of silvery metal rests against the lower glass.
+Composition/framing: Square frame, three-quarter view from slightly above so both the flat end window and the curved side wall are visible at once; the cell fills about 55% of the frame and is centred.
+Lighting/mood: Soft large-source studio light from the upper left, one crisp specular streak along the polished window, gentle contact shadow.
+Materials/textures: Thick clear borosilicate glass with visible wall thickness at the rim, faint green edge tint, flawless polished window faces.
+Constraints: It is NOT a bottle, NOT a jar, NOT a vial, NOT a flask, NOT a drinking glass. No neck, no threaded opening, no cap, no lid, no cork, no label, no liquid, no pouring shape. No text, no numbers, no watermark, no hands.</pre></details><details><summary>negative</summary><pre>text, letters, numbers, digits, watermark, signature, logo, blurry, low quality, deformed, distorted, extra objects, cluttered</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/v2_s5_inspection_00001_.jpg" alt="v2_s5_inspection_00001_" loading="lazy"><figcaption><div class="name">v2_s5_inspection_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1359601664</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1452 KB</dd></dl><details><summary>prompt</summary><pre>Use case: photorealistic-natural
+Asset type: small square symbol image for a service row
+Primary request: A Square 1024x1024 black-and-white fine-grain editorial photograph, crisp contrast, deep blacks, fine monochrome film grain, seen from directly above, of parts laid out for inspection.
+Scene/backdrop: A matte dark inspection tray filling the frame.
+Subject: Twenty-five identical small machined aluminium parts arranged in a precise five by five grid, each in its own shallow recess, all facing the same way, evenly spaced.
+Composition/framing: Square, straight top-down view, the grid square to the frame and filling about 80 percent of it.
+Lighting/mood: Flat even overhead light so every part reads the same; short soft shadows.
+Materials/textures: Bead-blasted aluminium parts, matte dark tray.
+Constraints: No humans, no hands, no tools, no text, no labels, no watermark.</pre></details></figcaption></figure>
+</div></main>
+<nav class="pager" aria-label="pages"><a href="gallery-6.html" rel="prev">PREV</a><a href="gallery.html">1</a><span class="gap">…</span><a href="gallery-5.html">5</a><a href="gallery-6.html">6</a><span aria-current="page">7</span><a href="gallery-8.html">8</a><a href="gallery-9.html">9</a><span class="gap">…</span><a href="gallery-11.html">11</a><a href="gallery-8.html" rel="next">NEXT</a></nav>
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">PROVENANCE READ BACK OUT OF THE PNGs THEMSELVES</p><p class="credit"><a href="index.html" style="color:inherit">← 포트폴리오로 돌아가기</a></p></footer>
+<script>
+/* The log needs no JavaScript: the filters are links and every page arrives
+   already filtered. This only remembers which filter you were last on, so the
+   header link back to the log returns you there. */
+try{
+  const here = location.pathname.split('/').pop() || 'gallery.html';
+  localStorage.setItem('gallery-page', here);
+}catch(e){}
+</script>
+</body>
+</html>

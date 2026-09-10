@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>생성 이미지 로그 — 9/11 — SHP®</title>
+<meta name="description" content="이 포트폴리오를 위해 생성한 모든 이미지와 그 출처." />
+<meta name="robots" content="noindex, follow" />
+<link rel="icon" href="assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="entry.css" />
+<link rel="stylesheet" href="crt.css" />
+<link rel="stylesheet" href="frames.css" />
+<style>
+/* The log is part of the site, not a separate document: it inherits the four
+   tones, the pixel type and the frames from the same stylesheets the rest of
+   the pages use, and only adds the grid. */
+.log-head{padding:clamp(40px,6vw,74px) clamp(14px,3vw,34px) clamp(22px,3vw,32px);
+  border-bottom:var(--px) solid var(--t0);max-width:1240px;margin:0 auto}
+.log-head h1{margin:0 0 14px;font-family:var(--disp);font-size:clamp(18px,3.4vw,34px);
+  font-weight:400;line-height:1.4}
+.log-head .sub{margin:0;max-width:62ch;color:var(--t1);font-size:14.5px}
+.log-head .meta{margin:20px 0 0;font-family:var(--disp);font-size:9px;
+  letter-spacing:.12em;color:var(--t1)}
+nav.filters{display:flex;flex-wrap:wrap;gap:8px;padding:16px clamp(14px,3vw,34px);
+  border-bottom:var(--px) solid var(--t0);position:sticky;top:0;z-index:40;
+  background:var(--t3);max-width:1240px;margin:0 auto}
+/* the filters became links when each one got its own paginated run, and the
+   rule still only styled buttons, so they rendered as default blue underlines */
+nav.filters a,nav.filters span[aria-current]{font:inherit;font-family:var(--disp);
+  font-size:9px;letter-spacing:.06em;padding:9px 12px;
+  border:var(--px) solid var(--t0);background:var(--t3);color:var(--t0);
+  text-decoration:none;display:inline-block}
+nav.filters a:hover{background:var(--t0);color:var(--t3)}
+nav.filters span[aria-current]{background:var(--t0);color:var(--t3)}
+nav.filters a:focus-visible{outline:var(--px) solid var(--t0);outline-offset:var(--px)}
+.count{align-self:center;font-family:var(--disp);font-size:9px;color:var(--t1);
+  letter-spacing:.1em;margin-left:auto}
+main.log{padding:26px clamp(14px,3vw,34px) 70px;max-width:1240px;margin:0 auto}
+.grid{display:grid;gap:calc(var(--px)*5);
+  grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))}
+.grid figure{margin:0;background:var(--t3);display:flex;flex-direction:column;
+  border:var(--px) solid var(--t0)}
+/* `hidden` is what the filter sets, and an author `display` on the same element
+   overrides it. The previous stylesheet forced display:flex here, so the filter
+   changed an attribute and hid nothing at all. */
+.grid figure[hidden]{display:none}
+.grid figure img{width:100%;height:auto;display:block;background:var(--t2);
+  image-rendering:auto}
+figcaption{padding:12px 13px 14px;display:flex;flex-direction:column;gap:8px}
+.name{font-family:var(--disp);font-size:9.5px;word-break:break-all;line-height:1.7}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--disp);font-size:8px;letter-spacing:.06em;padding:4px 6px;
+  border:var(--px) solid var(--t1);color:var(--t1)}
+.tag.live{border-color:var(--t0);background:var(--t0);color:var(--t3)}
+.tag.blocked{border-style:dashed}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;font-size:12px;
+  color:var(--t1);font-variant-numeric:tabular-nums}
+dt{font-family:var(--disp);font-size:8px;letter-spacing:.08em;padding-top:2px}
+dd{margin:0;color:var(--t0);word-break:break-word}
+details summary{cursor:pointer;font-family:var(--disp);font-size:8px;
+  letter-spacing:.08em;color:var(--t1);list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+ "}
+details[open] summary::before{content:"- "}
+details pre{margin:8px 0 0;padding:10px;background:var(--t3);
+  border:var(--px) solid var(--t1);font-size:11px;line-height:1.6;
+  white-space:pre-wrap;word-break:break-word;max-height:320px;overflow:auto}
+.note{font-size:12.5px;color:var(--t1);border-left:calc(var(--px)*2) solid var(--t1);
+  padding-left:10px}
+.pager{display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:30px clamp(14px,3vw,34px) 0;max-width:1240px;margin:0 auto}
+.pager a,.pager span{font-family:var(--disp);font-size:9px;letter-spacing:.06em;
+  padding:9px 12px;border:var(--px) solid var(--t0);text-decoration:none;color:var(--t0)}
+.pager a:hover{background:var(--t0);color:var(--t3)}
+.pager [aria-current]{background:var(--t0);color:var(--t3)}
+.pager .gap{border:0;color:var(--t1)}
+</style>
+</head>
+<body>
+<div class="panel" aria-hidden="true"><div class="panel-mask"></div><div class="panel-vig"></div><div class="panel-glass"></div><div class="panel-curve"></div></div>
+<div class="scan" aria-hidden="true"></div>
+<header class="bar"><div class="bar-in"><a class="mark" href="index.html" aria-label="SHP, 사이트로 돌아가기"><span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span></a><p class="bar-meta"><span>IMAGE LOG</span><b aria-hidden="true"></b><span>9 / 11</span></p><nav class="bar-nav" aria-label="주요"><a href="index.html">← 사이트로</a><a class="btn" href="index.html#clients">WORK<i aria-hidden="true">▶</i></a></nav></div></header>
+<div class="log-head">
+<h1>생성 이미지 로그</h1>
+<p class="sub">이 포트폴리오를 위해 만든 모든 이미지입니다 — 사이트에 올라간 것과, 반려되거나 거부된 것까지. 각 장이 어떤 모델·설정·프롬프트에서 나왔는지 함께 싣습니다. 출처는 PNG 자체에서 읽으므로 ComfyUI를 다시 시작해도 남습니다.</p>
+<p class="meta">126장 · 사이트에 10장 · 9/11 페이지 · 2026-09-10 20:34 KST 갱신</p>
+</div>
+<nav class="filters" aria-label="filters"><span aria-current="true">All 126</span><a href="gallery-ideogram-4.html">Ideogram 4</a><a href="gallery-krea2-turbo.html">krea2 turbo</a><a href="gallery-unknown.html">unknown</a><a href="gallery-installed.html">On the site 10</a><a href="gallery-blocked.html">Blocked 8</a><span class="count">126장 · 11쪽</span></nav>
+<main class="log"><div class="grid">
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_svc2_00001_.jpg" alt="opm_svc2_00001_" loading="lazy"><figcaption><div class="name">opm_svc2_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1855336274</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1480 KB</dd></dl><details><summary>prompt</summary><pre>Square 1024x1024 black-and-white fine-grain macro photograph, editorial industrial style, crisp contrast, deep blacks, plain light background, subject centred and filling most of the frame, shallow depth of field. No humans, no text, no watermark, no branding. Subject: a small sealed cuboid glass vapour cell held in a chrome collar, faint soft glow contained inside the glass, clean optical surfaces.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_svc1_00001_.jpg" alt="opm_svc1_00001_" loading="lazy"><figcaption><div class="name">opm_svc1_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1975393505</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1024x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1024x1024 · 1404 KB</dd></dl><details><summary>prompt</summary><pre>Square 1024x1024 black-and-white fine-grain macro photograph, editorial industrial style, crisp contrast, deep blacks, plain light background, subject centred and filling most of the frame, shallow depth of field. No humans, no text, no watermark, no branding. Subject: a pair of right-angle glass prisms and a small polarising beam-splitter cube resting together, edges catching the light, clear optical glass with sharp bevels.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_metrology_00001_.jpg" alt="opm_metrology_00001_" loading="lazy"><figcaption><div class="name">opm_metrology_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>664891269</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2462 KB</dd></dl><details><summary>prompt</summary><pre>A wide 1536x1024 black-and-white fine-grain photograph of a precision metrology setup on a granite surface plate, shot close and slightly from above. Subject: a stack of steel gauge blocks wrung together, a dial indicator on a height stand with its probe resting on the stack, and a machined metal part beside them awaiting inspection; matte granite, ground steel, the indicator&#x27;s dial face catching the light. Style: editorial industrial photography, crisp contrast, deep blacks, fine monochrome film grain, shallow depth of field. Constraints: no humans, no text, no numbers legible on the dial, no watermark, no branding.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_shielded_chamber_00001_.jpg" alt="opm_shielded_chamber_00001_" loading="lazy"><figcaption><div class="name">opm_shielded_chamber_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>633530134</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2188 KB</dd></dl><details><summary>prompt</summary><pre>A wide 1536x1024 black-and-white fine-grain photograph looking into the open end of a cylindrical magnetic shield in a quiet laboratory. Subject: nested concentric mu-metal cylinders receding inward, smooth matte metal walls, a soft pool of light at the far end; strong concentric geometry and deep shadow around the rim. Style: editorial architectural photography treatment, crisp contrast, deep blacks, fine monochrome film grain. Constraints: no humans, no text, no watermark.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_sensor_housing_00001_.jpg" alt="opm_sensor_housing_00001_" loading="lazy"><figcaption><div class="name">opm_sensor_housing_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1830830965</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2427 KB</dd></dl><details><summary>prompt</summary><pre>A wide 1536x1024 black-and-white fine-grain photograph of a precision machined aluminium opto-mechanical housing lying on a workbench, shot close and slightly from above. Subject: an anodised rectangular sensor housing with milled pockets, counterbored mounting holes and a long internal channel, its cover removed; crisp machined edges and fine tool marks catching the light. Style: editorial industrial photography, crisp contrast, deep blacks, fine monochrome film grain, shallow depth of field. Constraints: no humans, no text, no watermark, no branding.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_optics_bench_00001_.jpg" alt="opm_optics_bench_00001_" loading="lazy"><figcaption><div class="name">opm_optics_bench_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>1814261721</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 2286 KB</dd></dl><details><summary>prompt</summary><pre>A wide 1536x1024 black-and-white fine-grain photograph of a laser optics bench in a research laboratory, looking straight down the length of the bench. Scene: a long optical breadboard with a regular grid of mounting holes, receding into the distance; rows of identical precision optical mounts, kinematic mirror mounts, lens holders and posts standing along it in strong repetition; converging perspective lines toward a bright empty background. Style: editorial architectural photography treatment, crisp contrast, deep blacks, fine monochrome film grain, shallow depth of field falling off with distance. Constraints: no humans, no text, no watermark, no visible laser beam.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/opm_vapor_cell_00001_.jpg" alt="opm_vapor_cell_00001_" loading="lazy"><figcaption><div class="name">opm_vapor_cell_00001_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>571262454</dd><dt>steps</dt><dd>8</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>1536x1024</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.8</dd><dt>full</dt><dd>1536x1024 · 1497 KB</dd></dl><details><summary>prompt</summary><pre>A wide 1536x1024 photorealistic 3D studio render of a rubidium vapor cell for an optically pumped magnetometer. Subject: a small precision cuboid cell of clear glass with polished chrome mounting collars on two opposing faces, floating in space, hard straight angular geometry, a faint warm amber glow contained inside the glass. Scene: light dove-gray seamless studio space. Composition: wide landscape 3:2, object centred and occupying about 55 percent of the frame, three-quarter view, gently tilted. Lighting: minimalist premium studio art direction, refined studio lighting, subtle reflected blue on the chrome edges. Materials: physically convincing clear glass, polished chrome, precise hard geometry. No text, no watermark, no extra objects.</pre></details></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/Krea2_turbo_00023_.jpg" alt="Krea2_turbo_00023_" loading="lazy"><figcaption><div class="name">Krea2_turbo_00023_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>509865323194329</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>[&#x27;49&#x27;, 0]x[&#x27;49&#x27;, 1]</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.3</dd><dt>full</dt><dd>1472x1472 · 3389 KB</dd></dl></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/Krea2_turbo_00022_.jpg" alt="Krea2_turbo_00022_" loading="lazy"><figcaption><div class="name">Krea2_turbo_00022_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>57320457644233</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>[&#x27;49&#x27;, 0]x[&#x27;49&#x27;, 1]</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.3</dd><dt>full</dt><dd>1472x1472 · 1307 KB</dd></dl></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/Krea2_turbo_00021_.jpg" alt="Krea2_turbo_00021_" loading="lazy"><figcaption><div class="name">Krea2_turbo_00021_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>97553305500463</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>[&#x27;49&#x27;, 0]x[&#x27;49&#x27;, 1]</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.3</dd><dt>full</dt><dd>1472x1472 · 2984 KB</dd></dl></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/Krea2_turbo_00020_.jpg" alt="Krea2_turbo_00020_" loading="lazy"><figcaption><div class="name">Krea2_turbo_00020_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>463965313981162</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>[&#x27;49&#x27;, 0]x[&#x27;49&#x27;, 1]</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.3</dd><dt>full</dt><dd>1472x1472 · 1662 KB</dd></dl></figcaption></figure>
+<figure data-group="krea2-turbo"><img src="assets/gallery/Krea2_turbo_00019_.jpg" alt="Krea2_turbo_00019_" loading="lazy"><figcaption><div class="name">Krea2_turbo_00019_</div><div class="tags"><span class="tag">krea2 turbo</span></div><dl><dt>seed</dt><dd>537405682954506</dd><dt>steps</dt><dd>20</dd><dt>cfg</dt><dd>1.0</dd><dt>sampler</dt><dd>euler</dd><dt>scheduler</dt><dd>simple</dd><dt>size</dt><dd>[&#x27;49&#x27;, 0]x[&#x27;49&#x27;, 1]</dd><dt>lora</dt><dd>krea2_darkbrush.safetensors @ 0.3</dd><dt>full</dt><dd>1920x1088 · 1497 KB</dd></dl></figcaption></figure>
+</div></main>
+<nav class="pager" aria-label="pages"><a href="gallery-8.html" rel="prev">PREV</a><a href="gallery.html">1</a><span class="gap">…</span><a href="gallery-7.html">7</a><a href="gallery-8.html">8</a><span aria-current="page">9</span><a href="gallery-10.html">10</a><a href="gallery-11.html">11</a><a href="gallery-10.html" rel="next">NEXT</a></nav>
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">PROVENANCE READ BACK OUT OF THE PNGs THEMSELVES</p><p class="credit"><a href="index.html" style="color:inherit">← 포트폴리오로 돌아가기</a></p></footer>
+<script>
+/* The log needs no JavaScript: the filters are links and every page arrives
+   already filtered. This only remembers which filter you were last on, so the
+   header link back to the log returns you there. */
+try{
+  const here = location.pathname.split('/').pop() || 'gallery.html';
+  localStorage.setItem('gallery-page', here);
+}catch(e){}
+</script>
+</body>
+</html>
