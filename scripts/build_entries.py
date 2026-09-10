@@ -66,6 +66,7 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
 <link rel="stylesheet" href="../decor.css" />
 <link rel="stylesheet" href="../crt.css" />
 <link rel="stylesheet" href="../frames.css" />
+<link rel="stylesheet" href="../gameboy.css" />
 </head>
 <body class="entry">
 <div class="panel" aria-hidden="true">

@@ -58,6 +58,7 @@ def render(s: dict) -> str:
 <link rel="stylesheet" href="{d}/decor.css" />
 <link rel="stylesheet" href="{d}/crt.css" />
 <link rel="stylesheet" href="{d}/frames.css" />
+<link rel="stylesheet" href="{d}/gameboy.css" />
 <script src="{d}/script.js" defer></script>
 <script src="{d}/minigame.js" defer></script>
 </head>

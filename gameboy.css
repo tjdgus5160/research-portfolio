@@ -1,0 +1,310 @@
+/* Last-layer handheld shell. All dimensions are whole --px units; decoration
+   is ILLUSTRATIVE. The seven original buttons remain the only hit targets. */
+.pad {
+  --focus: var(--t0);
+  position: fixed;
+  right: calc(var(--px) * 4);
+  bottom: calc(var(--px) * 4);
+  display: block;
+  width: calc(var(--px) * 60);
+  height: calc(var(--px) * 98);
+  padding: 0;
+  border: var(--px) solid var(--t0);
+  border-image: none;
+  border-radius: calc(var(--px) * 3) calc(var(--px) * 3)
+    calc(var(--px) * 14) calc(var(--px) * 3);
+  /* Shoulder seam, mould joins, and six diagonal speaker vents. Each image
+     occupies its own grid rectangle; no extra palette or alpha is needed. */
+  background:
+    linear-gradient(var(--t2) 0 0)
+      0 calc(var(--px) * 4) / calc(var(--px) * 58) var(--px),
+    linear-gradient(var(--t2) 0 0)
+      calc(var(--px) * 4) 0 / var(--px) calc(var(--px) * 4),
+    linear-gradient(var(--t2) 0 0)
+      calc(var(--px) * 53) 0 / var(--px) calc(var(--px) * 4),
+    repeating-linear-gradient(120deg,
+      var(--t0) 0 var(--px),
+      var(--t2) var(--px) calc(var(--px) * 2),
+      var(--t3) calc(var(--px) * 2) calc(var(--px) * 4))
+      calc(var(--px) * 34) calc(var(--px) * 85) /
+      calc(var(--px) * 19) calc(var(--px) * 7);
+  background-color: var(--t3);
+  background-repeat: no-repeat;
+  box-shadow:
+    inset var(--px) var(--px) 0 var(--t3),
+    inset calc(var(--px) * -1) calc(var(--px) * -2) 0 var(--t2),
+    inset 0 0 0 calc(var(--px) * 2) var(--t2),
+    var(--px) calc(var(--px) * 2) 0 var(--t1),
+    calc(var(--px) * 2) calc(var(--px) * 3) 0 var(--t0);
+  /* Cancel the older narrow-screen scale: the shared --px already shrinks. */
+  transform: none;
+  isolation: isolate;
+}
+
+.pad::before,
+.pad::after {
+  box-sizing: border-box;
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Recessed bezel, two indicator rules, round power LED, LCD and idle cursor.
+   A single layered pseudo-element leaves ::after free for moulded lettering. */
+.pad::before {
+  content: "";
+  top: calc(var(--px) * 7);
+  left: calc(var(--px) * 4);
+  width: calc(var(--px) * 50);
+  height: calc(var(--px) * 39);
+  border: var(--px) solid var(--t0);
+  border-radius: calc(var(--px) * 2) calc(var(--px) * 2)
+    calc(var(--px) * 7) calc(var(--px) * 2);
+  background:
+    linear-gradient(var(--gb-cursor, var(--t1)) 0 0)
+      calc(var(--px) * 12) calc(var(--px) * 29) /
+      calc(var(--px) * 2) var(--px),
+    linear-gradient(var(--t2) 0 0)
+      calc(var(--px) * 10) calc(var(--px) * 7) /
+      calc(var(--px) * 32) calc(var(--px) * 26),
+    linear-gradient(var(--t0) 0 0)
+      calc(var(--px) * 9) calc(var(--px) * 6) /
+      calc(var(--px) * 34) calc(var(--px) * 28),
+    linear-gradient(var(--t2) 0 0)
+      calc(var(--px) * 3) calc(var(--px) * 2) /
+      calc(var(--px) * 41) var(--px),
+    linear-gradient(var(--t0) 0 0)
+      calc(var(--px) * 3) calc(var(--px) * 4) /
+      calc(var(--px) * 41) var(--px),
+    radial-gradient(circle at var(--px) var(--px),
+      var(--t3) 0 var(--px), var(--t1) var(--px))
+      calc(var(--px) * 3) calc(var(--px) * 17) /
+      calc(var(--px) * 2) calc(var(--px) * 2);
+  background-color: var(--t1);
+  background-repeat: no-repeat;
+  box-shadow: inset var(--px) var(--px) 0 var(--t0),
+    0 var(--px) 0 var(--t2);
+}
+
+.pad[role="group"]::after {
+  content: "GAME BOY";
+  top: calc(var(--px) * 49);
+  left: calc(var(--px) * 5);
+  color: var(--t1);
+  font-family: var(--disp);
+  font-size: calc(var(--px) * 2);
+  line-height: calc(var(--px) * 3);
+  letter-spacing: 0;
+}
+
+/* No inherited 9-slice border, translation or fractional font size survives
+   on a control. Its painted face and its real button box share a position. */
+.pad button {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-image: none;
+  background: var(--t0);
+  color: var(--t3);
+  font-family: var(--disp);
+  font-size: calc(var(--px) * 2);
+  line-height: calc(var(--px) * 3);
+  letter-spacing: 0;
+  transform: none;
+  transition: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: var(--t2);
+}
+
+.pad .dpad {
+  position: absolute;
+  top: calc(var(--px) * 58);
+  left: calc(var(--px) * 5);
+  display: grid;
+  grid-template-columns: repeat(3, calc(var(--px) * 8));
+  grid-template-rows: repeat(3, calc(var(--px) * 8));
+  gap: 0;
+  width: calc(var(--px) * 24);
+  height: calc(var(--px) * 24);
+}
+
+/* One continuous moulded cross underneath all four independent hit boxes. */
+.pad .dpad::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--px) * -1);
+  background: var(--t2);
+  clip-path: polygon(
+    calc(var(--px) * 8) 0, calc(var(--px) * 18) 0,
+    calc(var(--px) * 18) calc(var(--px) * 8),
+    calc(var(--px) * 26) calc(var(--px) * 8),
+    calc(var(--px) * 26) calc(var(--px) * 18),
+    calc(var(--px) * 18) calc(var(--px) * 18),
+    calc(var(--px) * 18) calc(var(--px) * 26),
+    calc(var(--px) * 8) calc(var(--px) * 26),
+    calc(var(--px) * 8) calc(var(--px) * 18),
+    0 calc(var(--px) * 18), 0 calc(var(--px) * 8),
+    calc(var(--px) * 8) calc(var(--px) * 8));
+  pointer-events: none;
+}
+
+.pad .d {
+  width: calc(var(--px) * 8);
+  height: calc(var(--px) * 8);
+  outline: none;
+  border-radius: 0;
+  background: var(--t0);
+}
+
+.pad .d.up {
+  grid-area: 1 / 2;
+  border-radius: var(--px) var(--px) 0 0;
+  box-shadow: inset 0 var(--px) 0 var(--t1);
+}
+.pad .d.left {
+  grid-area: 2 / 1;
+  border-radius: var(--px) 0 0 var(--px);
+  box-shadow: inset var(--px) var(--px) 0 var(--t1);
+}
+.pad .d.hub { grid-area: 2 / 2; position: relative; }
+.pad .d.right {
+  grid-area: 2 / 3;
+  border-radius: 0 var(--px) var(--px) 0;
+  box-shadow: inset 0 var(--px) 0 var(--t1);
+}
+.pad .d.down {
+  grid-area: 3 / 2;
+  border-radius: 0 0 var(--px) var(--px);
+  box-shadow: inset var(--px) 0 0 var(--t1);
+}
+
+/* Thumb well: no seam between the hub and the four arms. */
+.pad .d.hub::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--px) * 2);
+  border: var(--px) solid var(--t1);
+  border-radius: calc(var(--px) * 2);
+  pointer-events: none;
+}
+
+.pad .ab {
+  position: absolute;
+  top: calc(var(--px) * 62);
+  left: calc(var(--px) * 33);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--px) * 3);
+  width: calc(var(--px) * 21);
+  height: calc(var(--px) * 9);
+  transform: rotate(-25deg);
+  transform-origin: calc(var(--px) * 10) calc(var(--px) * 4);
+}
+
+.pad .ab::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--px) * -2);
+  border-radius: calc(var(--px) * 7);
+  background: var(--t2);
+  box-shadow: inset 0 var(--px) 0 var(--t1), 0 var(--px) 0 var(--t3);
+  pointer-events: none;
+}
+
+.pad .ab-b {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: calc(var(--px) * 9);
+  height: calc(var(--px) * 9);
+  border: var(--px) solid var(--t0);
+  border-radius: calc(var(--px) * 5);
+  box-shadow: inset 0 var(--px) 0 var(--t1), 0 var(--px) 0 var(--t1);
+  transform: none;
+}
+
+/* Keep letters upright while the physical pair, including hit boxes, tilts. */
+.pad .ab-b span { transform: rotate(25deg); }
+
+.pad .start {
+  position: absolute;
+  top: calc(var(--px) * 81);
+  left: calc(var(--px) * 20);
+  width: calc(var(--px) * 17);
+  height: calc(var(--px) * 8);
+  border: var(--px) solid var(--t3);
+  border-top-width: calc(var(--px) * 2);
+  border-bottom-width: calc(var(--px) * 2);
+  border-radius: calc(var(--px) * 5);
+  background: var(--t1);
+  background-clip: padding-box;
+  box-shadow: none;
+  transform: rotate(-25deg);
+  transform-origin: calc(var(--px) * 8) calc(var(--px) * 4);
+}
+
+/* A thin physical pill inside a larger keyboard/touch target. Negative
+   stacking keeps this moulding behind the button's original START text. */
+.pad .start::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: calc(var(--px) * 15);
+  height: calc(var(--px) * 4);
+  border: var(--px) solid var(--t0);
+  border-radius: calc(var(--px) * 3);
+  background: var(--t1);
+  box-shadow: 0 var(--px) 0 var(--t2);
+  pointer-events: none;
+}
+
+/* Keep the hit boxes fixed when pressed. Inverting the relief depresses the
+   face without opening a crack in the cross or dropping START's angle. */
+.pad button:is(:active, .hit),
+.pad .ab-b:is(:active, .hit),
+.pad .start:is(:active, .hit) {
+  border-image: none;
+  background: var(--t1);
+  color: var(--t3);
+  box-shadow: inset 0 var(--px) 0 var(--t0),
+    inset 0 calc(var(--px) * -1) 0 var(--t2);
+  transform: none;
+}
+.pad .start:is(:active, .hit) {
+  background: var(--t0);
+  box-shadow: none;
+  transform: rotate(-25deg);
+}
+.pad .start:is(:active, .hit)::before {
+  background: var(--t0);
+  box-shadow: inset 0 var(--px) 0 var(--t1), 0 var(--px) 0 var(--t3);
+}
+
+.pad button:focus-visible {
+  z-index: 2;
+  outline: var(--px) solid var(--focus);
+  outline-offset: var(--px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pad::before {
+    animation: gb-idle-cursor var(--decor-scan-time) steps(1, end) infinite;
+  }
+}
+@keyframes gb-idle-cursor {
+  0%, 75%, 100% { --gb-cursor: var(--t1); }
+  50% { --gb-cursor: var(--t2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pad, .pad::before, .pad::after,
+  .pad *, .pad *::before, .pad *::after {
+    animation: none;
+    transition: none;
+  }
+}
