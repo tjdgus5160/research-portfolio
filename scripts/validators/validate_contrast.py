@@ -1,5 +1,24 @@
 #!/usr/bin/env python3
-"""Prove the four tones are still readable in both palettes.
+"""SUPERSEDED by scripts/validators/contrast.mjs — kept as a record, not a gate.
+
+This inferred each element's background from its selector with regular
+expressions. It was wrong in three different ways before it was replaced:
+
+  * false positives — .skip and .btn.ghost declare their own background, which
+    a selector-name guess cannot see, so their text looked invisible;
+  * false negatives — .ticker-run inherits its ground from .ticker, which the
+    guess also could not see, so a real 2.40:1 went unreported;
+  * substring matching — ".bar-nav a:not(.btn)" contains ".btn", so it was
+    filed under the dark ground twice, once before and once after a "fix".
+
+The browser version reads what is actually painted and needs no table of
+assumptions at all. It found a defect this one structurally could not: .no is
+used on the light service rows and again on the dark work cards, at 1.71:1 on
+the second.
+
+Original docstring follows.
+
+Prove the four tones are still readable in both palettes.
 
 The palette is deliberately tiny — four tones, no more — and that makes it easy
 to reach for the mid tone because it looks right, without noticing it is 2.4:1
@@ -58,6 +77,12 @@ def main() -> int:
     checks = []
 
     for name, p in PALETTES.items():
+        # four tones that are not four distinct tones is not a palette
+        seen = {}
+        for k, v in p.items():
+            checks.append((f"palette {name}", f"{k} is distinct from {seen.get(v, '')}",
+                           v not in seen, f"{k} and {seen.get(v,'')} are both {v}"))
+            seen[v] = k
         for fg, bg, need, what in (("t0", "t3", 4.5, "ink on ground"),
                                    ("t1", "t3", 4.5, "secondary on ground"),
                                    ("t3", "t0", 4.5, "reversed"),
@@ -74,16 +99,40 @@ def main() -> int:
         for m in re.finditer(r"([^{}]+)\{([^}]*)\}", s):
             sel = m.group(1).strip().split("\n")[-1]
             body = m.group(2)
-            cm = re.search(r"(?<!background-)(?<!border-)(?<!outline-)color\s*:\s*var\(--(t[0-3])\)", body)
+            # `color` and nothing else: border-left-color, outline-color and
+            # background-color are not text, and a lookbehind for "border-"
+            # does not catch "border-left-". Anchor on a property boundary.
+            cm = re.search(r"(?:^|;)\s*color\s*:\s*var\(--(t[0-3])\)", body)
             if not cm:
                 continue
             tone = cm.group(1)
             size = px((re.search(r"font-size\s*:\s*([^;]+)", body) or [None, ""])[1]) \
                 if re.search(r"font-size\s*:\s*([^;]+)", body) else None
-            dark = any(k in sel for k in ON_DARK)
-            ground = "t0" if dark else "t3"
+            # If the rule paints its own background, that is the ground —
+            # reading it is exact, where guessing from the selector name is not.
+            # Most of the "invisible text" this gate first reported was really
+            # my guess being wrong about rules like .skip and .btn.ghost, which
+            # set background and colour together.
+            own = re.search(r"background(?:-color)?\s*:[^;]*var\(--(t[0-3])\)", body)
+            if own:
+                ground = own.group(1)
+            else:
+                # Substring matching put ".bar-nav a:not(.btn)" on the dark
+                # ground because the selector contains ".btn". Compare whole
+                # selector tokens instead.
+                toks = set(re.findall(r"[.#][A-Za-z0-9_-]+", sel))
+                dark = any(set(re.findall(r"[.#][A-Za-z0-9_-]+", k)) <= toks
+                           for k in ON_DARK)
+                ground = "t0" if dark else "t3"
             if tone == ground:
-                continue                     # same tone as its ground is decorative
+                # Text painted in its own ground colour is invisible, not
+                # decorative. The first version of this gate skipped that case
+                # and so passed a page whose kicker was the same colour as the
+                # page — found by an independent review, not by me.
+                checks.append((f"text {'both'}",
+                               f"{fn} {sel[:40]} — --{tone} on its own ground",
+                               False, "1.00:1, text is invisible"))
+                continue
             skip = next((cls for k, cls in DECORATIVE.items() if k in sel), None)
             if skip:
                 pages = [ROOT / "index.html", ROOT / "en" / "index.html"]

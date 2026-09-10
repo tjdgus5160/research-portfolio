@@ -1,0 +1,13 @@
+{
+  "name": "research-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "SHP® — optically pumped magnetometry research portfolio",
+  "scripts": {
+    "gate:contrast": "node scripts/validators/contrast.mjs",
+    "gate:js": "node --check script.js && node --check minigame.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

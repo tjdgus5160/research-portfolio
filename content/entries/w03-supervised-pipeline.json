@@ -89,7 +89,7 @@
     }
   ],
   "geometry": {
-    "tolerance": "0.01 mm",
+    "tolerance": "부피 0.01 mm³ (길이 허용오차가 아닙니다)",
     "renders": [
       {
         "src": "assets/entries/w03-front.png",
@@ -129,7 +129,7 @@
       },
       {
         "name": "저장된 모델 재측정",
-        "result": "delta 0.0 mm³",
+        "result": "delta 0.0 mm³ (허용 0.01 mm³)",
         "how": "감독자가 FCStd를 XML-RPC로 다시 열어 재계산. 부피 5497.345175426, 기대값과 차이 0.0, 허용 0.01"
       },
       {

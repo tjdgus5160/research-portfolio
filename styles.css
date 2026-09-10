@@ -151,6 +151,10 @@ main{position:relative;z-index:1}
 .work{display:grid;gap:var(--px);
   grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))}
 .work article{background:var(--t0);color:var(--t3);padding:26px 22px 22px}
+/* .no is used on the light service rows and again on the dark work cards.
+   One rule cannot serve both grounds: --t1 reads on the light one and vanishes
+   on the dark one at 1.71:1. The card gets the reversed tone. */
+.work article .no{color:var(--t2)}
 .work h3{margin:12px 0 10px;font-family:var(--disp);font-size:12px;
   line-height:1.6;font-weight:400}
 .work p{margin:0;color:var(--t2);font-size:13.5px}

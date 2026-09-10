@@ -158,13 +158,25 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
             f'<div><dt>재발 방지</dt><dd>{esc(d.get("prevention",""))}</dd></div>',
             "</dl>"]))
 
-    if e.get("unknown"):
+    if e.get("correction"):
+        c = e["correction"]
         n = "08" if e.get("defect") else "07"
+        sec(n, "정정 기록", "".join([
+            f'<p class="e-q">{esc(c["what"])}</p>',
+            '<dl class="e-meta wide">',
+            f'<div><dt>언제</dt><dd>{esc(c.get("date",""))}</dd></div>',
+            f'<div><dt>왜 틀렸나</dt><dd>{esc(c.get("why",""))}</dd></div>',
+            f'<div><dt>어쩌다</dt><dd>{esc(c.get("how",""))}</dd></div>',
+            f'<div><dt>누가 찾았나</dt><dd>{esc(c.get("found_by",""))}</dd></div>',
+            "</dl>"]))
+
+    if e.get("unknown"):
+        n = str(7 + bool(e.get("defect")) + bool(e.get("correction"))).zfill(2)
         sec(n, "아직 모르는 것", '<ul class="sq e-unk">' +
             "".join(f"<li>{esc(x)}</li>" for x in e["unknown"]) + "</ul>")
 
     if e.get("artifacts"):
-        n = "09" if e.get("defect") else "08"
+        n = str(8 + bool(e.get("defect")) + bool(e.get("correction"))).zfill(2)
         rows = "".join(f'<li><code>{esc(a["path"])}</code><span>{esc(a.get("note",""))}</span></li>'
                        for a in e["artifacts"])
         sec(n, "산출물", f'<ul class="e-art">{rows}</ul>')
