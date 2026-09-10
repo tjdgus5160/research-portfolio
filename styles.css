@@ -77,7 +77,14 @@ img{image-rendering:pixelated;display:block;max-width:100%;height:auto}
   padding:0;cursor:pointer;position:relative}
 .burger span[aria-hidden]{position:absolute;inset:9px;background:var(--t3);
   clip-path:polygon(0 0,100% 0,100% 22%,0 22%,0 39%,100% 39%,100% 61%,0 61%,0 78%,100% 78%,100% 100%,0 100%)}
+/* The narrow-screen menu. START also opens it on a desktop, where it becomes
+   a panel rather than a bar drawer — otherwise the button labels an action
+   that has no visible result. */
 .menu{display:none;flex-direction:column;border-top:var(--px) solid var(--t0)}
+.menu.as-overlay{display:flex;position:fixed;right:clamp(12px,2vw,26px);
+  bottom:calc(clamp(12px,2vw,26px) + var(--px)*54);z-index:69;
+  background:var(--t3);border:var(--px) solid var(--t0);border-top-width:var(--px);
+  box-shadow:calc(var(--px)*2) calc(var(--px)*2) 0 var(--t1);min-width:calc(var(--px)*46)}
 .menu[hidden]{display:none}
 .menu a{font-family:var(--disp);font-size:11px;padding:16px 20px;color:var(--t0);
   text-decoration:none;border-bottom:var(--px) solid var(--t1)}

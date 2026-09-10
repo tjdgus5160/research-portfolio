@@ -14,7 +14,19 @@
     };
     burger.addEventListener('click', () => set(menu.hidden));
     menu.addEventListener('click', (e) => { if (e.target.matches('a')) set(false); });
-    addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+    // Escape closes the menu and returns focus to what opened it. It must not
+    // also reach the pad, which used to bind Escape to history.back() — one
+    // press closed the menu *and* left the page.
+    addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || menu.hidden) return;
+      e.stopPropagation();
+      set(false);
+      menu.classList.remove('as-overlay');
+      // .burger is display:none on a desktop; focus whichever opener is visible
+      const back = [burger, document.querySelector('.pad .start')]
+        .find((el) => el && el.offsetParent !== null);
+      back?.focus();
+    });
   }
 
   /* ── the ticker, filled with the binary the page is asked to be made of ── */
@@ -315,6 +327,9 @@
     document.body.appendChild(el);
     const steps = ['s1', 's2', 's3', 's4'];
     const clear = () => { el.className = 'wipe'; };
+    let bail = 0;
+    // a page restored from bfcache keeps the DOM it was hidden with
+    addEventListener('pageshow', (e) => { if (e.persisted) { clearTimeout(bail); clear(); } });
 
     return {
       out(go) {
@@ -324,8 +339,16 @@
           if (i === 0) snd.thunk();
         }, i * 70));
         setTimeout(go, steps.length * 70 + 40);
+        // If the navigation is blocked, refused, or simply slow, nothing else
+        // would ever take this overlay down and the reader is left looking at
+        // a covered screen. An earlier commit of mine claimed this was already
+        // handled; it was not. Uncover on a wall clock, and again if the page
+        // is restored from the back/forward cache.
+        clearTimeout(bail);
+        bail = setTimeout(() => { clear(); wipe.in(); }, 4000);
       },
       in() {
+        clearTimeout(bail);
         el.className = 'wipe on s4';
         [...steps].reverse().forEach((c, i) => setTimeout(() => {
           el.className = 'wipe on ' + c;
@@ -428,16 +451,28 @@
       goItem(1);                       // nothing selected yet — select the first
     };
 
+    // The menu is display:none above 720px, so START used to do nothing at all
+    // on a desktop. Opening it also lifts that, and marks it as the pad's own
+    // overlay so Escape and a second press both close it.
+    const openMenu = () => {
+      const open = menu.hidden;
+      menu.hidden = !open;
+      menu.classList.toggle('as-overlay', open);
+      burger?.setAttribute('aria-expanded', String(open));
+      if (open) menu.querySelector('a')?.focus(); else pad.querySelector('.start')?.focus();
+    };
+
     const act = {
       up:    () => goSection(-1),
       down:  () => goSection(1),
       left:  () => goItem(-1),
       right: () => goItem(1),
       a:     open,
+      // B steps back out of the current section rather than out of the site
       b:     () => { snd.blip(440);
-                     if (history.length > 1) history.back();
-                     else scrollTo({ top: 0, behavior: still ? 'auto' : 'smooth' }); },
-      start: () => { burger?.click(); snd.blip(880); },
+                     if (document.querySelector('.cursor')) { ii = -1; mark(); }
+                     else goSection(-1); },
+      start: () => { snd.blip(880); openMenu(); },
     };
 
     pad.addEventListener('click', (e) => {
@@ -445,14 +480,18 @@
       if (btn) act[btn.dataset.act]?.();
     });
 
+    // Backspace and Escape are the browser's and the page's respectively.
+    // Binding them to history.back() meant a stray keypress left the site.
     const KEYS = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left',
-                   ArrowRight: 'right', Enter: 'a', ' ': 'a',
-                   Backspace: 'b', Escape: 'b' };
+                   ArrowRight: 'right', Enter: 'a', ' ': 'a' };
     addEventListener('keydown', (e) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
       if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
-      // let the keyboard reach real controls; the pad only claims bare keys
-      if (e.target.closest('a, button') && (e.key === 'Enter' || e.key === ' ')) return;
+      // The pad is a shortcut for reading the page, not a replacement for
+      // keyboard navigation. While focus is on a link or a button, the arrows
+      // and Enter belong to that control and to the browser, not to us.
+      if (e.target.closest('a, button, [tabindex]')) return;
+      if (!menu.hidden || document.querySelector('.game')) return;
       const a = KEYS[e.key];
       if (!a) return;
       e.preventDefault();
