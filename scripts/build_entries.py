@@ -83,6 +83,10 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
     <nav class="bar-nav" aria-label="주요">
       <a href="../index.html#clients">← STAGE SELECT</a>
     </nav>
+    <button class="snd" type="button" aria-pressed="false" title="소리">
+      <span class="snd-px" aria-hidden="true"></span>
+      <span class="sr-only">소리 켜기 / 끄기</span>
+    </button>
   </div>
 </header>
 <main id="main">

@@ -441,3 +441,13 @@ html.moving.up .manifesto{text-shadow:0 var(--px) 0 rgba(0,0,0,.16),
 .game canvas{display:block;image-rendering:pixelated}
 .game-help{margin:0;padding:8px 4px 4px;text-align:center;font-family:var(--disp);
   font-size:8px;letter-spacing:.16em;color:var(--t1)}
+
+/* Someone can turn reduced motion on while the page is open; the media query
+   handles the CSS, this class handles what script.js has already started. */
+html.no-motion .ticker-run,
+html.no-motion .strip .on,
+html.no-motion .scrollcue,
+html.no-motion .manifesto.on,
+html.no-motion .cursor::before{animation:none}
+html.no-motion .rain{display:none}
+html.no-motion [data-r]{opacity:1;transform:none;transition:none}

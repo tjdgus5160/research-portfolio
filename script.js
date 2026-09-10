@@ -2,7 +2,21 @@
    grid; nothing animates smoothly, because the point is that it cannot. */
 (() => {
   'use strict';
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mq = matchMedia('(prefers-reduced-motion: reduce)');
+  let still = mq.matches;
+  // read once was not enough: turning it on mid-visit left every animation and
+  // the binary-rain frame loop running
+  mq.addEventListener('change', () => {
+    still = mq.matches;
+    document.documentElement.classList.toggle('no-motion', still);
+    if (still) {
+      cancelAnimationFrame(rainRaf);
+      document.querySelectorAll('[data-r]').forEach((el) => el.classList.add('r1','r2','r3'));
+      document.querySelectorAll('.svc li').forEach((el) => el.classList.add('on'));
+      document.querySelector('.screen')?.classList.add('lit');
+    }
+  });
+  let rainRaf = 0;
 
   /* ── the mobile menu ────────────────────────────────────────────────── */
   const burger = document.querySelector('.burger');
@@ -74,7 +88,8 @@
       .getPropertyValue('--t1').trim() || '#3a3a3a';
 
     const tick = (t) => {
-      raf = requestAnimationFrame(tick);
+      raf = rainRaf = requestAnimationFrame(tick);
+      if (still) { ctx.clearRect(0, 0, innerWidth, innerHeight); return; }
       if (t - last < 90) return;          // deliberately choppy, ~11 fps
       last = t;
       ctx.clearRect(0, 0, innerWidth, innerHeight);
@@ -95,7 +110,7 @@
 
     size();
     addEventListener('resize', size, { passive: true });
-    raf = requestAnimationFrame(tick);
+    raf = rainRaf = requestAnimationFrame(tick);
     addEventListener('pagehide', () => cancelAnimationFrame(raf));
   }
 
@@ -207,8 +222,11 @@
      so a returning visitor is not surprised twice. */
   const snd = (() => {
     let ctx = null, master = null;
+    // Off until asked for. It used to default to on and arm itself on the first
+    // gesture of any kind, so an ordinary click on a link started playing audio
+    // at someone who never asked for it.
     let on = false, unlocked = false;
-    try { on = localStorage.getItem('shp-snd') !== '0'; } catch (e) { on = true; }
+    try { on = localStorage.getItem('shp-snd') === '1'; } catch (e) { on = false; }
 
     const btn = document.querySelector('.snd');
     const paint = () => btn && btn.setAttribute('aria-pressed', String(on && unlocked));
@@ -272,35 +290,29 @@
       get on() { return on && unlocked; },
     };
 
-    /* The first gesture unlocks it, whatever that gesture is. This listener is
-       on the capture phase, so when the gesture *is* the sound button it runs
-       before the button's own handler — which would then immediately toggle
-       back off what this just turned on. Note which case it was and let the
-       button skip that one press. */
-    let viaButton = false;
-    const unlock = (e) => {
-      if (unlocked) return;
-      if (!ctx && !build()) return;
+    /* Only the sound control arms the audio. Browsers still require a gesture,
+       and pressing this button is one — so nothing else needs to listen, and no
+       AudioContext is constructed until someone actually asks for sound. */
+    const unlock = () => {
+      if (unlocked) return false;
+      if (!ctx && !build()) return false;
       unlocked = true;
-      viaButton = !!(e && e.target && e.target.closest && e.target.closest('.snd'));
       ctx.resume?.();
-      paint();
-      if (on) api.chime();                  // they hear the boot sound here
-      ['pointerdown', 'keydown', 'touchstart'].forEach(
-        (t) => removeEventListener(t, unlock, true));
+      return true;
     };
-    ['pointerdown', 'keydown', 'touchstart'].forEach(
-      (t) => addEventListener(t, unlock, true));
 
     if (btn) {
       btn.addEventListener('click', () => {
-        if (!unlocked) { unlock(); return; }
-        if (viaButton) { viaButton = false; return; }  // that press did the unlocking
         on = !on;
+        if (on) { unlock(); }
         try { localStorage.setItem('shp-snd', on ? '1' : '0'); } catch (e) { /* blocked */ }
         paint();
-        if (on) api.blip(1046.5);
+        if (on) api.chime();               // the boot sound, on request
       });
+    } else if (on) {
+      // A page with no control must never be able to make a noise nobody can
+      // stop. The entry pages load this same script and have no .snd button.
+      on = false;
     }
     paint();
     return api;
