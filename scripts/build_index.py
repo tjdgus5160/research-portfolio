@@ -18,6 +18,9 @@ from __future__ import annotations
 import argparse, html, json, re, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from imgsize import attrs as img_attrs
+
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "content"
 MARK_A = "<!-- entries:start -->"
@@ -65,7 +68,7 @@ def render(s: dict) -> str:
 <body>
 <div class="boot" id="boot" hidden>
   <div class="boot-screen">
-    <img class="boot-logo" src="{d}/assets/gb/wordmark.png" alt="" />
+    <img class="boot-logo" src="{d}/assets/gb/wordmark.png" alt=""{img_attrs("assets/gb/wordmark.png")} />
     <p class="boot-line" aria-hidden="true"></p>
   </div>
   <div class="boot-wipe" aria-hidden="true"></div>
@@ -122,7 +125,7 @@ def render(s: dict) -> str:
         </div>
       </div>
       <figure class="screen">
-        <img src="{d}/assets/gb/hero.png" alt="{esc(s["hero"]["alt"])}" />
+        <img src="{d}/assets/gb/hero.png" alt="{esc(s["hero"]["alt"])}"{img_attrs("assets/gb/hero.png")} fetchpriority="high" />
         <figcaption class="strip">
           <span>{esc(s["place"])}</span><span>{esc(s["hero"]["strip_right"])}</span><span class="on">{esc(s["hero"]["live"])}</span>
         </figcaption>
@@ -132,7 +135,7 @@ def render(s: dict) -> str:
   </section>
 
   <section id="about" class="slab">
-    <p class="kicker">{esc(s["about"]["kicker"])}</p>
+    <h2 class="kicker">{esc(s["about"]["kicker"])}</h2>
     <p class="say">{esc(s["about"]["say"])}</p>
     <dl class="facts">''')
     for k, v in s["about"]["facts"]:
@@ -140,37 +143,37 @@ def render(s: dict) -> str:
     A("    </dl>\n  </section>\n")
 
     A(f'  <section id="services" class="slab">\n'
-      f'    <p class="kicker">{esc(s["services"]["kicker"])}</p>\n    <ol class="svc">')
+      f'    <h2 class="kicker">{esc(s["services"]["kicker"])}</h2>\n    <ol class="svc">')
     for r in s["services"]["rows"]:
         A(f'''      <li>
         <span class="no">{esc(r["no"])}</span>
         <div class="svc-b"><h3>{esc(r["h"])}</h3>
           <p>{esc(r["p"])}</p>
           <p class="fig">{esc(r["fig"])}</p></div>
-        <img src="{d}/{esc(r["img"])}" alt="{esc(r["alt"])}" />
+        <img src="{d}/{esc(r["img"])}" alt="{esc(r["alt"])}"{img_attrs(r["img"])} loading="lazy" decoding="async" />
       </li>''')
     A("    </ol>\n  </section>\n")
 
     A(f'  <section id="clients" class="slab">\n'
-      f'    <p class="kicker">{esc(s["work"]["kicker"])}</p>\n'
+      f'    <h2 class="kicker">{esc(s["work"]["kicker"])}</h2>\n'
       f'    <div class="work">\n      {MARK_A}\n      {MARK_B}\n    </div>\n  </section>\n')
 
     A(f'  <section id="expertise" class="slab">\n'
-      f'    <p class="kicker">{esc(s["expertise"]["kicker"])}</p>\n    <div class="cols">')
+      f'    <h2 class="kicker">{esc(s["expertise"]["kicker"])}</h2>\n    <div class="cols">')
     for c in s["expertise"]["cols"]:
         items = "".join(f"<li>{esc(i)}</li>" for i in c["items"])
-        A(f'      <div><h2>{esc(c["h"])}</h2><ul class="sq">{items}</ul></div>')
+        A(f'      <div><h3>{esc(c["h"])}</h3><ul class="sq">{items}</ul></div>')
     A(f'''    </div>
     <p class="manifesto">{esc(s["expertise"]["manifesto"])}</p>
     <figure class="shield">
-      <img src="{d}/assets/gb/shield.png" alt="{esc(s["expertise"]["shield_alt"])}" />
+      <img src="{d}/assets/gb/shield.png" alt="{esc(s["expertise"]["shield_alt"])}"{img_attrs("assets/gb/shield.png")} loading="lazy" decoding="async" />
     </figure>
   </section>
 ''')
 
     A(f'  <section id="contact" class="slab end">\n'
       f'    <h2 class="sr-only">{esc(s["contact"]["sr"])}</h2>\n'
-      f'    <p class="kicker">{esc(s["contact"]["kicker"])}</p>\n'
+      f'    <h2 class="kicker">{esc(s["contact"]["kicker"])}</h2>\n'
       f'    <p class="big2">{s["contact"]["big"]}<i aria-hidden="true">▶</i></p>\n'
       f'    <ul class="chan">')
     for r in s["contact"]["rows"]:

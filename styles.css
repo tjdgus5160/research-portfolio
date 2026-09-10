@@ -94,6 +94,8 @@ main{position:relative;z-index:1}
 .slab{padding:clamp(56px,9vw,110px) clamp(14px,3vw,34px);
   border-bottom:var(--px) solid var(--t0);
   max-width:1240px;margin:0 auto}
+/* the section's name is its heading; the class only carries the look */
+h2.kicker{font-size:9px;font-weight:400}
 .kicker{margin:0 0 26px;font-family:var(--disp);font-size:9px;letter-spacing:.14em;
   color:var(--t1);display:flex;align-items:center;gap:12px}
 .kicker::after{content:"";flex:1;height:var(--px);
@@ -268,25 +270,30 @@ html.booting,html.booting body{overflow:hidden}
 
 /* ══ SCROLL-DRIVEN STATES ════════════════════════════════════════════════ */
 /* Sections arrive in three hard stops rather than sliding in. */
-[data-r]{opacity:0;transform:translateY(calc(var(--px)*5))}
-[data-r].r1{opacity:.34;transform:translateY(calc(var(--px)*3))}
-[data-r].r2{opacity:.68;transform:translateY(calc(var(--px)*1))}
-[data-r].r3{opacity:1;transform:none}
-[data-r]{transition:opacity .34s steps(3,end),transform .34s steps(3,end)}
+/* Scoped to html.js: with scripting off, or before script.js runs, none of
+   this applies and the artwork is simply there. It used to hide by default and
+   rely on JS to reveal, so a no-JS visitor got an empty hero and five clipped
+   service icons — the page's text was fine, which is what I checked, and the
+   pictures were not, which is what I did not. */
+html.js [data-r]{opacity:0;transform:translateY(calc(var(--px)*5))}
+html.js [data-r].r1{opacity:.34;transform:translateY(calc(var(--px)*3))}
+html.js [data-r].r2{opacity:.68;transform:translateY(calc(var(--px)*1))}
+html.js [data-r].r3{opacity:1;transform:none}
+html.js [data-r]{transition:opacity .34s steps(3,end),transform .34s steps(3,end)}
 
 /* Service icons load a band at a time, the way a tile map fills in. */
-.svc img{clip-path:inset(0 0 100% 0);transition:clip-path .5s steps(8,end)}
-.svc li.on img{clip-path:inset(0 0 0 0)}
+html.js .svc img{clip-path:inset(0 0 100% 0);transition:clip-path .5s steps(8,end)}
+html.js .svc li.on img{clip-path:inset(0 0 0 0)}
 /* and the row's number counts itself out in binary while it does */
 .no{font-variant-numeric:tabular-nums}
 .svc li .no::after{content:" " attr(data-bits);color:var(--t1);font-size:.85em}
 
 /* The hero screen powers up with a scanline sweep the first time it is seen. */
 .screen{position:relative}
-.screen::after{content:"";position:absolute;inset:0;background:var(--t3);
+html.js .screen::after{content:"";position:absolute;inset:0;background:var(--t3);
   transform-origin:top;transform:scaleY(1);
   transition:transform .6s steps(9,end)}
-.screen.lit::after{transform:scaleY(0)}
+html.js .screen.lit::after{transform:scaleY(0)}
 
 /* The manifesto blinks awake like a cursor line. */
 .manifesto{--cut:0}

@@ -18,6 +18,9 @@ import argparse, html, json, re, shutil, subprocess, sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from imgsize import attrs as img_attrs
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = Path("/Users/hyeon/ComfyUI/output")
 OUT = ROOT / "assets" / "gallery"
@@ -381,7 +384,8 @@ def build(check_only: bool = False) -> int:
                 dl += f"<dt>full</dt><dd>{esc(r['full'])} · {r['bytes']//1024} KB</dd>"
                 body = [
                     f'<figure data-group="{esc(group(r))}">',
-                    f'<img src="assets/gallery/{esc(r["thumb"])}" alt="{esc(r["stem"])}" loading="lazy">',
+                    f'<img src="assets/gallery/{esc(r["thumb"])}" alt="{esc(r["stem"])}"'
+                    f'{img_attrs("assets/gallery/" + r["thumb"])} loading="lazy" decoding="async">',
                     "<figcaption>",
                     f'<div class="name">{esc(r["stem"])}</div>',
                     f'<div class="tags">{"".join(tags)}</div>',

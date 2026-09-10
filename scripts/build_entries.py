@@ -17,6 +17,9 @@ from __future__ import annotations
 import argparse, html, json, re, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from imgsize import attrs as img_attrs
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "content" / "entries"
 OUT = ROOT / "work"
@@ -102,17 +105,20 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
     A("</dl></section>")
 
     def sec(n, name, body):
-        A(f'<section class="e-sec"><p class="kicker">{n} — {esc(name)}</p>{body}</section>')
+        A(f'<section class="e-sec"><h2 class="kicker">{n} — {esc(name)}</h2>{body}</section>')
 
     if e.get("question"):
         sec("01", "무엇을 물었나", f'<p class="e-q">{esc(e["question"])}</p>')
 
     if e.get("evidence"):
+        legend = '<dl class="e-legend">' + "".join(
+            f"<div>{badge(k)}<dd>{esc(v[1])}</dd></div>" for k, v in CLASSES.items()
+        ) + "</dl>"
         rows = "".join(
             f'<li>{badge(v["class"])}<div><p class="e-claim">{esc(v["claim"])}</p>'
             f'<p class="e-src">{esc(v.get("source") or v.get("reasoning",""))}</p></div></li>'
             for v in e["evidence"])
-        sec("02", "근거", f'<ul class="e-ev">{rows}</ul>')
+        sec("02", "근거", legend + f'<ul class="e-ev">{rows}</ul>')
 
     if e.get("method"):
         rows = "".join(
@@ -137,7 +143,8 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
         b = ""
         if g.get("renders"):
             b += '<div class="e-views">' + "".join(
-                f'<figure><img src="../{esc(r["src"])}" alt="{esc(r["alt"])}" loading="lazy" />'
+                f'<figure><img src="../{esc(r["src"])}" alt="{esc(r["alt"])}"'
+                f'{img_attrs(r["src"])} loading="lazy" decoding="async" />'
                 f'<figcaption><b>{esc(r["view"])}</b>{esc(r.get("note",""))}</figcaption></figure>'
                 for r in g["renders"]) + "</div>"
         if g.get("parametric"):
