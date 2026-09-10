@@ -1,0 +1,50 @@
+{
+  "reviewed": "submitted 650 Torr N2 optical pumping calculation, 2026-09-10",
+  "reproduced": {
+    "amagat": {
+      "submitted": 0.7969,
+      "recomputed": 0.7969
+    },
+    "fwhm_GHz": {
+      "submitted": 14.19,
+      "recomputed": 14.185
+    },
+    "shift_GHz": {
+      "submitted": -6.575,
+      "recomputed": -6.575
+    },
+    "centres_GHz": {
+      "F1F1": {
+        "submitted": -0.557,
+        "recomputed": -0.557
+      },
+      "F1F2": {
+        "submitted": 0.26,
+        "recomputed": 0.26
+      },
+      "F2F1": {
+        "submitted": -7.391,
+        "recomputed": -7.391
+      },
+      "F2F2": {
+        "submitted": -6.575,
+        "recomputed": -6.575
+      }
+    },
+    "doppler_100C_GHz": {
+      "submitted": 0.56,
+      "independent": 0.5597
+    }
+  },
+  "not_reproduced": [
+    "R(F=1)/R(F=2) = 1.96",
+    "steady-state and 1 ms population tables"
+  ],
+  "corrected": {
+    "excited_HFS_GHz": {
+      "submitted": 0.816656,
+      "current_source": 0.8145,
+      "note": "0.816656 = 2 x 408.328 MHz, an earlier Steck revision"
+    }
+  }
+}

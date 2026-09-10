@@ -1,0 +1,250 @@
+{
+  "no": "T/03",
+  "slug": "t03-high-pressure-pumping",
+  "title": "650 Torr N₂ 셀에서의 광펌핑",
+  "subtitle": "OPTICAL PUMPING IN A 650 TORR N2 CELL",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "reviewed calculation",
+  "summary": "고압 완충기체가 D1 선을 14 GHz로 넓히고 6.6 GHz 붉은쪽으로 밀면, 저압에서 잡은 잠금 주파수가 셀 안에서는 다른 전이 위에 놓입니다. 그 결과를 제출받아 검토한 기록.",
+  "question": "저압 포화흡수분광으로 F=2→F′=2에 잠근 레이저를 650 Torr 셀에 그대로 넣으면 무슨 일이 일어나는가. 그리고 자력계가 원하는 |F=2, m_F=+2⟩를 최대로 만들려면 어디에 맞춰야 하는가.",
+  "evidence": [
+    {
+      "claim": "650 Torr(20 °C 충전)는 0.7969 amagat",
+      "class": "CALCULATED",
+      "source": "(650/760)×(273.15/293.15) = 0.7970. 제출값 0.7969와 일치합니다."
+    },
+    {
+      "claim": "그 밀도에서 D1 FWHM은 14.19 GHz",
+      "class": "CALCULATED",
+      "source": "17.8 GHz/amagat × 0.7969 = 14.185 GHz. 계수 출처는 MEMS alkali vapor cell paper (Zotero LFQICUA7, 2025) — Rb D1 by N2, 17.8 GHz/amagat"
+    },
+    {
+      "claim": "압력 이동은 −6.575 GHz",
+      "class": "SOURCE_FACT",
+      "source": "제출받은 계산 (외부 세션, 2026-09-10). 이 항목이 검토한 대상입니다. — −8.25 GHz/amagat을 Romalis 등에 귀속. 원 논문은 유료 장벽 뒤라 제가 직접 확인하지 못했습니다."
+    },
+    {
+      "claim": "저압 F=2→F′=2 잠금 주파수는 고압 셀에서 F=1 흡수군의 한복판에 놓인다",
+      "class": "CALCULATED",
+      "source": "네 전이 중심을 제출값의 입력만으로 다시 계산해 −0.557 / +0.260 / −7.391 / −6.575 GHz를 재현했습니다. 최대 차이 1 MHz."
+    },
+    {
+      "claim": "D1 초미세 선강도는 S₁₁=1/6, S₁₂=5/6, S₂₁=S₂₂=1/2",
+      "class": "CALCULATED",
+      "source": "각 F에 대해 F′ 합이 1이 되는지 확인했습니다 — 1/6+5/6=1, 1/2+1/2=1."
+    },
+    {
+      "claim": "D1 진동자 강도 f = 0.342 31(33)",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4, input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 현행 개정판에 그대로 있습니다"
+    },
+    {
+      "claim": "100 °C 도플러 폭 0.560 GHz",
+      "class": "CALCULATED",
+      "source": "제 T/02가 독립적으로 0.5597 GHz를 냈습니다. 14.19 GHz 압력 폭에 비해 작습니다."
+    },
+    {
+      "claim": "여기상태 초미세 분리로 쓴 0.816656 GHz는 Steck의 이전 개정판 값이다",
+      "class": "CALCULATED",
+      "source": "816.656 = 2 × 408.328 MHz. 현행 rev 2.3.4의 A(5²P₁/₂)는 407.25(63) MHz이므로 2A = 814.50(126) MHz. 차이 2.156 MHz."
+    },
+    {
+      "claim": "바닥상태 이완 Γ_g = 170 s⁻¹과 quenching 지배 가정",
+      "class": "INFERRED",
+      "reasoning": "제출 계산이 스스로 '보수적으로' 넣었다고 밝힌 모델 입력입니다. 측정값이 아니며, 아래 최적 detuning은 이 가정 위에 서 있습니다."
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "밀도와 폭·이동을 다시 계산",
+      "detail": "충전 압력을 amagat으로 바꾸고 넓힘·이동 계수를 곱해 제출값을 재현했습니다."
+    },
+    {
+      "step": "02",
+      "name": "네 전이의 중심을 다시 놓는다",
+      "detail": "바닥 6.8347 GHz와 여기 0.8167 GHz 간격에서 저압 위치를 세우고, 모든 선에 같은 압력 이동을 더했습니다."
+    },
+    {
+      "step": "03",
+      "name": "입력의 출처를 되짚는다",
+      "detail": "각 숫자가 어느 문서의 어느 표에서 왔는지 확인하고, 확인되지 않는 것은 그렇게 표시했습니다."
+    },
+    {
+      "step": "04",
+      "name": "모델 가정과 결과를 분리한다",
+      "detail": "재현 가능한 산술과, 가정 위에 선 결론을 다른 증거 등급으로 나눴습니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "N₂ 밀도",
+      "value": "0.7969",
+      "unit": "amagat",
+      "class": "CALCULATED",
+      "note": "650 Torr, 20 °C 충전"
+    },
+    {
+      "name": "D1 FWHM",
+      "value": "14.19",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "17.8 GHz/amagat × 0.7969"
+    },
+    {
+      "name": "압력 이동",
+      "value": "−6.575",
+      "unit": "GHz",
+      "class": "SOURCE_FACT",
+      "note": "−8.25 GHz/amagat, 제가 원 논문을 확인하지 못한 계수"
+    },
+    {
+      "name": "F=1→F′=1 중심",
+      "value": "−0.557",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "저압 F=2→F′=2 기준"
+    },
+    {
+      "name": "F=1→F′=2 중심",
+      "value": "+0.260",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "같음"
+    },
+    {
+      "name": "F=2→F′=1 중심",
+      "value": "−7.391",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "같음"
+    },
+    {
+      "name": "F=2→F′=2 중심",
+      "value": "−6.575",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "같음"
+    },
+    {
+      "name": "R(F=1)/R(F=2) at δ=0",
+      "value": "1.96",
+      "unit": "",
+      "class": "SOURCE_FACT",
+      "note": "제출 계산의 결과. 제가 독립적으로 재현하지는 않았습니다"
+    },
+    {
+      "name": "|2,+2⟩ 최적 detuning",
+      "value": "−3.6",
+      "unit": "GHz",
+      "class": "INFERRED",
+      "note": "1–10 mW/cm²에서 −3.69 ~ −3.62로 안정적. Γ_g = 170 s⁻¹ 가정 위의 결과입니다"
+    },
+    {
+      "name": "1 ms 펄스, 20–30 mW/cm²",
+      "value": "0.915–0.959",
+      "unit": "P(2,+2)",
+      "class": "INFERRED",
+      "note": "같은 모델을 1 ms 적분. 2 mm 빔이면 0.63–0.94 mW"
+    },
+    {
+      "name": "여기 HFS 표기 차이",
+      "value": "2.156",
+      "unit": "MHz",
+      "class": "CALCULATED",
+      "note": "816.656(이전 개정판) − 814.50(현행). 전이 표에 미치는 영향은 2 MHz 수준"
+    }
+  ],
+  "geometry": {
+    "tolerance": "재현한 전이 중심의 최대 차이 1 MHz",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-650torr-pumping.png",
+        "view": "STRETCHED-STATE POPULATION",
+        "alt": "저압 F=2→F′=2 기준 detuning에 따른 |F=2,m_F=+2⟩ 정상상태 인구. 1·5·10 mW/cm² 세 곡선이 모두 −3.6 GHz 부근에서 최대가 된다",
+        "note": "제출받은 그림. 세로 점선이 저압 잠금 위치이고, 최댓값은 그보다 3.6 GHz 붉은쪽입니다"
+      }
+    ],
+    "parametric": [
+      "n[amagat] = (P[Torr]/760)·(273.15/T_fill)",
+      "FWHM = 17.8 GHz/amagat · n",
+      "shift = −8.25 GHz/amagat · n",
+      "ν(F→F′) = ν₀ + (F=1이면 +6.8347) − (F′=1이면 +0.8167) + shift"
+    ],
+    "parametric_note": "전이 중심 네 개는 이 네 줄만으로 나옵니다. 제출값을 이 식으로 다시 계산해 대조했습니다."
+  },
+  "validation": {
+    "verdict": "PASS — 산술은 재현됨, 결론은 가정에 의존",
+    "checks": [
+      {
+        "name": "밀도 환산",
+        "result": "0.7970 vs 0.7969",
+        "how": "직접 계산"
+      },
+      {
+        "name": "넓힘·이동",
+        "result": "14.185 / −6.575 GHz",
+        "how": "계수 × 밀도"
+      },
+      {
+        "name": "전이 중심 4개",
+        "result": "최대 Δ 1 MHz",
+        "how": "제출값의 입력만으로 독립 재계산"
+      },
+      {
+        "name": "선강도 규격화",
+        "result": "PASS",
+        "how": "각 F에 대한 F′ 합 = 1"
+      },
+      {
+        "name": "도플러 폭",
+        "result": "0.5597 vs 0.560 GHz",
+        "how": "제 T/02가 독립적으로 계산한 값과 비교"
+      },
+      {
+        "name": "진동자 강도",
+        "result": "0.342 31(33) 확인",
+        "how": "현행 Steck 본문에서 직접 확인"
+      },
+      {
+        "name": "여기 HFS 출처",
+        "result": "이전 개정판 값",
+        "how": "816.656 = 2 × 408.328. 현행은 407.25(63)"
+      }
+    ]
+  },
+  "correction": {
+    "date": "2026-09-10",
+    "what": "제출 계산이 여기상태 초미세 분리를 0.816656 GHz로 쓰고 Steck에 귀속했습니다. 현행 개정판 값은 814.50(126) MHz입니다.",
+    "why": "816.656은 정확히 2 × 408.328 MHz이고, 408.328은 Steck의 이전 개정판 A(5²P₁/₂)입니다. 현행 rev 2.3.4는 407.25(63) MHz를 싣습니다.",
+    "how": "지어낸 값이 아니라 개정 전 값입니다. 이 항목의 결론에 미치는 영향은 2 MHz 수준이라 실질적으로 없습니다.",
+    "found_by": "저도 같은 날 같은 값을 T/01에 썼다가 정정했습니다. 그때 만든 대조 검사가 이번에도 걸러냈습니다."
+  },
+  "unknown": [
+    "−8.25 GHz/amagat 압력 이동 계수를 원 논문에서 확인하지 못했습니다. 넓힘 계수는 서로 다른 두 문헌이 일치하지만, 이동 계수는 한 곳에서만 왔습니다.",
+    "Γ_g = 170 s⁻¹과 quenching 지배 여기상태는 측정이 아니라 모델 입력입니다. −3.6 GHz라는 최적점은 그 가정과 함께 서고 함께 무너집니다.",
+    "R(F=1)/R(F=2) = 1.96과 인구 표는 제가 독립적으로 재현하지 않았습니다. 재현한 것은 스펙트럼 쪽 산술입니다.",
+    "제출 계산이 스스로 지적했듯 셀 전체에서 펌프 세기가 균일하다고 가정했습니다. 5.5 mm 경로에서 광학 깊이가 100 °C 0.93, 120 °C 3.15, 150 °C 15.7까지 커지므로 120 °C 이상에서는 공간적 펌프 고갈을 무시할 수 없습니다.",
+    "따라서 다음 단계는 Beer–Lambert 전파와 국소 펌핑을 함께 푸는 것이고, −3.6 GHz가 공간 효과에서 얼마나 움직이는지는 아직 모릅니다."
+  ],
+  "artifacts": [
+    {
+      "path": "assets/diagrams/rb87-650torr-pumping.png",
+      "note": "제출받은 계산 결과 그림"
+    },
+    {
+      "path": "analysis/t03-review.json",
+      "note": "제가 재현한 값과 제출값의 대조표"
+    },
+    {
+      "path": "input/papers/steck-rb87-d-line-data-r2.3.4.pdf",
+      "note": "선강도·진동자 강도·초미세 상수의 출처"
+    }
+  ],
+  "en": {
+    "title": "Optical Pumping in a 650 Torr N2 Cell",
+    "summary": "High-pressure buffer gas broadens the D1 line to 14 GHz and pushes it 6.6 GHz to the red, so a lock set on a low-pressure cell lands on a different transition inside the real one. A submitted calculation, reviewed.",
+    "question": "What happens to a laser locked to F=2 to F'=2 on a low-pressure saturated-absorption setup when it is put into a 650 Torr cell — and where should it sit instead to maximise the stretched state the magnetometer actually uses?"
+  }
+}
