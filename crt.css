@@ -1,0 +1,64 @@
+/* ══ CRT / LCD PANEL ═════════════════════════════════════════════════════
+   The page had scanlines and stopped there, which reads as a filter laid over
+   a document. A panel is more than stripes: light falls off toward the corners,
+   the glass reflects, the sub-pixel grid is visible up close, and the whole
+   surface is very slightly curved. Each of those is one layer here, and every
+   one of them is pointer-events:none and aria-hidden, so none of it can ever
+   sit between a reader and the page.
+
+   Cost is deliberately bounded: all four layers are fixed-position, composited
+   on the GPU, and none of them animate on scroll. */
+
+.panel{position:fixed;inset:0;z-index:61;pointer-events:none}
+
+/* 1. the shadow mask — the RGB stripe of a real panel, at 3 logical px */
+.panel-mask{position:absolute;inset:0;opacity:.055;
+  background:repeating-linear-gradient(90deg,
+    var(--t0) 0 1px, transparent 1px 3px)}
+
+/* 2. vignette — light falls off toward the corners, and a little more at them */
+.panel-vig{position:absolute;inset:0;
+  background:
+    radial-gradient(120% 110% at 50% 50%,
+      transparent 52%, color-mix(in srgb, var(--t0) 26%, transparent) 100%),
+    radial-gradient(80% 140% at 50% 0%,
+      color-mix(in srgb, var(--t3) 12%, transparent), transparent 46%)}
+
+/* 3. glass — one broad diagonal reflection, the way a handheld catches a window */
+.panel-glass{position:absolute;inset:0;opacity:.06;
+  background:linear-gradient(118deg,
+    transparent 0 34%, var(--t3) 40% 46%, transparent 52% 100%)}
+
+/* 4. the curve — an inner shadow that reads as the screen bowing away at the
+      edges. Corners are square: a Game Boy's aperture is a rectangle. */
+.panel-curve{position:absolute;inset:0;
+  box-shadow:inset 0 0 calc(var(--px)*14) calc(var(--px)*3)
+             color-mix(in srgb, var(--t0) 30%, transparent),
+             inset 0 0 calc(var(--px)*3) calc(var(--px)*1)
+             color-mix(in srgb, var(--t0) 22%, transparent)}
+
+/* the existing scanline layer keeps its job, but softer now that it has company */
+.scan{opacity:.18}
+
+/* A screen is not a page: hold the whole document inside the aperture so the
+   panel layers describe one surface rather than floating over a scrolling one. */
+@media (min-width:900px){
+  body{
+    /* the reflection is brightest where the light enters, top-left */
+    background-image:
+      linear-gradient(160deg,
+        color-mix(in srgb, var(--t3) 55%, transparent) 0 22%,
+        transparent 60%);
+    background-attachment:fixed;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  /* none of these move, but a reader who asks for less can have less */
+  .panel-glass{display:none}
+}
+@media (prefers-contrast:more){
+  /* every one of these layers costs contrast; drop them all */
+  .panel,.scan{display:none}
+  body{background-image:none}
+}

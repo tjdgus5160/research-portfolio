@@ -56,6 +56,8 @@ def render(s: dict) -> str:
 <link rel="stylesheet" href="{d}/styles.css" />
 <link rel="stylesheet" href="{d}/entry.css" />
 <link rel="stylesheet" href="{d}/decor.css" />
+<link rel="stylesheet" href="{d}/crt.css" />
+<link rel="stylesheet" href="{d}/frames.css" />
 <script src="{d}/script.js" defer></script>
 <script src="{d}/minigame.js" defer></script>
 </head>
@@ -68,6 +70,10 @@ def render(s: dict) -> str:
   <div class="boot-wipe" aria-hidden="true"></div>
 </div>
 <p class="boot-live sr-only" role="status" aria-live="polite"></p>
+<div class="panel" aria-hidden="true">
+  <div class="panel-mask"></div><div class="panel-vig"></div>
+  <div class="panel-glass"></div><div class="panel-curve"></div>
+</div>
 <div class="scan" aria-hidden="true"></div>
 <canvas class="rain" aria-hidden="true"></canvas>
 <a class="skip" href="#main">{esc(s["skip"])}</a>

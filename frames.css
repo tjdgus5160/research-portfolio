@@ -1,0 +1,89 @@
+/* ══ 9-SLICE FRAMES ══════════════════════════════════════════════════════
+   Every panel on this site was a flat one-tone rectangle drawn with `border`.
+   That is the one thing a real handheld interface never does: its frames are
+   drawn art, with a lit edge and a shadowed one, and they stay pixel-crisp at
+   any size because the corners are never stretched.
+
+   border-image does exactly that natively — corners kept, edges tiled, no
+   JavaScript and no per-size assets. The sprites are 24x24 logical with an
+   8px inset, exported at 6x, so the slice is 48 and the border width is 8
+   logical pixels: `calc(var(--px) * 8)`.                                    */
+
+:root{
+  --frame: url("assets/gb/frame-plain.png");
+  --frame-out: url("assets/gb/frame-bevel-out.png");
+  --frame-in: url("assets/gb/frame-bevel-in.png");
+  --frame-dialog: url("assets/gb/frame-dialog.png");
+  --frame-corners: url("assets/gb/corner-marks.png");
+  --slice: 48;
+  --fw: calc(var(--px) * 8);
+}
+:root[data-pal="dmg"]{
+  --frame: url("assets/gb/dmg/frame-plain.png");
+  --frame-out: url("assets/gb/dmg/frame-bevel-out.png");
+  --frame-in: url("assets/gb/dmg/frame-bevel-in.png");
+  --frame-dialog: url("assets/gb/dmg/frame-dialog.png");
+  --frame-corners: url("assets/gb/dmg/corner-marks.png");
+}
+/* entry pages live one directory down */
+.entry{
+  --frame: url("../assets/gb/frame-plain.png");
+  --frame-out: url("../assets/gb/frame-bevel-out.png");
+  --frame-in: url("../assets/gb/frame-bevel-in.png");
+  --frame-dialog: url("../assets/gb/frame-dialog.png");
+  --frame-corners: url("../assets/gb/corner-marks.png");
+}
+:root[data-pal="dmg"] .entry{
+  --frame: url("../assets/gb/dmg/frame-plain.png");
+  --frame-out: url("../assets/gb/dmg/frame-bevel-out.png");
+  --frame-in: url("../assets/gb/dmg/frame-bevel-in.png");
+  --frame-dialog: url("../assets/gb/dmg/frame-dialog.png");
+  --frame-corners: url("../assets/gb/dmg/corner-marks.png");
+}
+
+/* The control pad is large enough to carry the 8px frame. Buttons are not:
+   an 8-logical-px frame on a 101px button is two thirds border, and on the
+   64x64 sound button it left a 0x0 content box. They keep the shadow bevel
+   until a sprite cut for their scale exists. */
+.pad{
+  border:var(--fw) solid transparent;
+  border-image:var(--frame-out) var(--slice) repeat;
+  background:var(--t3);
+  box-shadow:none;
+}
+
+/* the hero screen and the shield get the plain frame */
+.screen,
+.shield img,
+.svc img,
+.e-views figure{
+  border:var(--fw) solid transparent;
+  border-image:var(--frame) var(--slice) repeat;
+}
+
+/* the work cards and the entry tables get corner marks only */
+.work article,
+.e-scroll{
+  border:var(--fw) solid transparent;
+  border-image:var(--frame-corners) var(--slice) repeat;
+}
+
+/* the hidden mode is a dialog, so it gets the ornate one */
+.game-in{
+  border:calc(var(--px) * 8) solid transparent;
+  border-image:var(--frame-dialog) var(--slice) repeat;
+  box-shadow:none;
+}
+
+/* The frame occupies 8 logical px of border on every side, and that border is
+   already inside the card's width. Subtracting it from the padding as well took
+   the horizontal padding to -2px, which clamps to 0 and let the copy run under
+   the corner marks. The border is the inset; the padding only has to add the
+   little that is still wanted on top of it. */
+.work article{padding:calc(var(--px)*2) calc(var(--px)*2) calc(var(--px)*3)}
+
+@media (prefers-contrast:more){
+  /* a drawn frame is lower contrast than a hard rule; give the rule back */
+  .btn,.pad,.snd,.ab-b,.start,.screen,.work article,.game-in,.svc img,
+  .e-views figure,.e-scroll{border-image:none;border:var(--px) solid var(--t0)}
+}

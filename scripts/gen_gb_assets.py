@@ -36,6 +36,8 @@ PALETTE_RGB = {
 }
 PALETTE = [channel for rgb in PALETTE_RGB[""] for channel in rgb]
 BAYER = ((0, 8, 2, 10), (12, 4, 14, 6), (3, 11, 1, 9), (15, 7, 13, 5))
+FRAME_SIZE = (24, 24)
+FRAME_SLICE = 8
 
 # All 42 glyphs are drawn here by hand. Each integer is a five-bit row;
 # bit 4 is the leftmost pixel. No font files or Pillow font APIs are involved.
@@ -502,6 +504,58 @@ def wordmark():
     return image
 
 
+def frame_plain():
+    image = canvas(FRAME_SIZE)
+    ImageDraw.Draw(image).rectangle(
+        (0, 0, image.width - 1, image.height - 1), outline=GB0, width=1)
+    return image
+
+
+def frame_bevel(raised=True):
+    image = frame_plain()
+    draw = ImageDraw.Draw(image)
+    highlight, shadow = (GB3, GB1) if raised else (GB1, GB3)
+    right, bottom = image.width - 2, image.height - 2
+    # Disjoint one-pixel rules: each diagonal junction belongs to one side.
+    # Rotating 180 degrees swaps the sides exactly, including the corners.
+    draw.line([(1, bottom - 1), (1, 1), (right, 1)], fill=highlight, width=1)
+    draw.line([(right, 2), (right, bottom), (1, bottom)], fill=shadow, width=1)
+    return image
+
+
+def frame_dialog():
+    image = canvas(FRAME_SIZE)
+    draw = ImageDraw.Draw(image)
+    notch = 2
+    # Nested square-notched silhouettes give a two-pixel outer rule,
+    # one-pixel gap, one-pixel inner rule, then the unchanged GB3 fill.
+    for inset, colour in ((0, GB0), (2, GB3), (3, GB1), (4, GB3)):
+        left = top = inset
+        right, bottom = image.width - 1 - inset, image.height - 1 - inset
+        draw.polygon([
+            (left + notch, top), (right - notch, top),
+            (right - notch, top + notch), (right, top + notch),
+            (right, bottom - notch), (right - notch, bottom - notch),
+            (right - notch, bottom), (left + notch, bottom),
+            (left + notch, bottom - notch), (left, bottom - notch),
+            (left, top + notch), (left + notch, top + notch),
+        ], fill=colour)
+    return image
+
+
+def corner_marks():
+    image = canvas(FRAME_SIZE)
+    draw = ImageDraw.Draw(image)
+    # Leave the slice boundaries clear so no bracket enters an edge tile.
+    for flip_x in (False, True):
+        for flip_y in (False, True):
+            points = [(image.width - 1 - x if flip_x else x,
+                       image.height - 1 - y if flip_y else y)
+                      for x, y in ((1, 5), (1, 1), (5, 1))]
+            draw.line(points, fill=GB0, width=1)
+    return image
+
+
 ASSETS = (
     ("hero.png", (160, 144), hero, "밀봉된 vapour cell과 짧은 tip-off stem"),
     ("svc-1-optics.png", (64, 64), optics, "대각 접합면이 보이는 광학 cube 두 개"),
@@ -523,6 +577,59 @@ SPRITES = (
     ("shield-sprite.png", (96, 96), 4, shield_frames, "shield.png",
      "세 cylinder의 고정된 rim과 가장 안쪽 벽면의 회전하는 Bayer pattern"),
 )
+
+FRAMES = (
+    ("frame-plain.png", FRAME_SIZE, frame_plain, "단일 외곽선의 기본 9-slice panel", 2),
+    ("frame-bevel-out.png", FRAME_SIZE, frame_bevel, "좌상단이 밝은 돌출 9-slice bevel", 3),
+    ("frame-bevel-in.png", FRAME_SIZE, lambda: frame_bevel(False), "좌상단이 어두운 함몰 9-slice bevel", 3),
+    ("frame-dialog.png", FRAME_SIZE, frame_dialog, "네 모서리에 사각 notch가 있는 이중 9-slice frame", 3),
+    ("corner-marks.png", FRAME_SIZE, corner_marks, "네 모서리만 표시하는 L자 viewfinder bracket", 2),
+)
+
+
+def verify_frame_edges(image, name, inset):
+    """Check straight edge repeats, corner joins and fill at either scale.
+
+    Each edge is a constant cross-section along its run. Check every phase,
+    including the last-to-first repeat seam and the adjoining corner pixels;
+    matching endpoints alone would miss a stray pixel inside the edge tile.
+    """
+    width, height = image.size
+    assert width == height == 3 * inset, f"{name}: invalid 9-slice geometry"
+    centre = image.crop((inset, inset, 2 * inset, 2 * inset))
+    assert set(centre.get_flattened_data()) == {GB3}, f"{name}: centre is not GB3"
+    for side, bounds, vertical in (
+        ("top", (0, 0, width, inset), False),
+        ("bottom", (0, 2 * inset, width, height), False),
+        ("left", (0, 0, inset, height), True),
+        ("right", (2 * inset, 0, width, height), True),
+    ):
+        strip = image.crop(bounds)
+        if vertical:
+            strip = strip.transpose(Image.Transpose.TRANSPOSE)
+        edge = strip.crop((inset, 0, 2 * inset, inset))
+        profile = edge.crop((0, 0, 1, inset)).tobytes()
+        assert edge.crop((inset - 1, 0, inset, inset)).tobytes() == profile, f"{name}: {side} repeat seam breaks"
+        assert all(edge.crop((run, 0, run + 1, inset)).tobytes() == profile
+                   for run in range(inset)), f"{name}: {side} edge is not continuous along its run"
+        for join in (inset - 1, 2 * inset):
+            assert strip.crop((join, 0, join + 1, inset)).tobytes() == profile, f"{name}: {side} corner join breaks"
+        if name == "corner-marks.png":
+            assert set(edge.get_flattened_data()) == {GB3}, f"{name}: {side} edge contains a mark"
+
+
+def verify_bevel_pair():
+    raised, pressed = frame_bevel(), frame_bevel(False)
+    assert raised.transpose(Image.Transpose.ROTATE_180).tobytes() == pressed.tobytes(), "Bevel frames are not exact opposing mirrors"
+    swap = {GB3: GB1, GB1: GB3}
+    for y in range(raised.height):
+        for x in range(raised.width):
+            inset = min(x, y, raised.width - 1 - x, raised.height - 1 - y)
+            before, after = raised.getpixel((x, y)), pressed.getpixel((x, y))
+            if inset == 1:
+                assert before in swap and after == swap[before], "Bevel inner rule does not swap tones"
+            else:
+                assert before == after == (GB0 if inset == 0 else GB3), "Bevel swap changes outline or fill"
 
 
 def verify_palette(image, name, expected_count, palette_rgb):
@@ -569,12 +676,17 @@ def encode_png(image, size, description):
     return stream.getvalue()
 
 
-def export_asset(name, size, render, description, *, frame_count=1, still_name=None):
+def export_asset(name, size, render, description, *, frame_count=1, still_name=None,
+                 colour_count=None, slice_inset=None):
     logical = render()
     assert logical.size == size, f"{name}: wrong logical grid"
     assert render().tobytes() == logical.tobytes(), f"{name}: nondeterministic renderer"
     count = 2 if name in ("binary-tile.png", "noise-tile.png") else 4
+    if colour_count is not None:
+        count = colour_count
     verify_palette(logical, name, count, PALETTE_RGB[""])
+    if slice_inset is not None:
+        verify_frame_edges(logical, name, slice_inset)
     if name == "binary-tile.png":
         verify_seam(logical, binary_pixel)
     if name == "noise-tile.png":
@@ -593,6 +705,8 @@ def export_asset(name, size, render, description, *, frame_count=1, still_name=N
             decoded.load()
             assert decoded.size == size_out
             verify_palette(decoded, name, count, palette_rgb)
+            if slice_inset is not None:
+                verify_frame_edges(decoded, name, slice_inset * SCALE)
             for y in range(size[1]):
                 for x in range(size[0]):
                     block = decoded.crop((x * SCALE, y * SCALE, (x + 1) * SCALE, (y + 1) * SCALE))
@@ -606,9 +720,13 @@ def export_asset(name, size, render, description, *, frame_count=1, still_name=N
         destination = OUTPUT / directory
         destination.mkdir(parents=True, exist_ok=True)
         (destination / name).write_bytes(encoded)
-        if frame_count == 1:
+        if frame_count == 1 and slice_inset is None:
             print(f"{name}: logical {size[0]}x{size[1]} -> export {size_out[0]}x{size_out[1]}; "
                   f"{count} colours; {destination.relative_to(ROOT)}/")
+    if slice_inset is not None:
+        print(f"{name}: logical {size[0]}x{size[1]}; slice inset {slice_inset} "
+              f"(export {slice_inset * SCALE}); export {size_out[0]}x{size_out[1]}; "
+              f"{count} colours/palette; edge-tiling PASS; assets/gb/ + assets/gb/dmg/")
     if frame_count > 1:
         equality = f"PASS ({still_name}, both palettes)" if still_name else "N/A (alternating active areas)"
         print(f"{name}: {frame_count} frames; logical frame {size[0] // frame_count}x{size[1]}; "
@@ -640,7 +758,7 @@ def export_font():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS + SPRITES] + ["font5x7.json"],
+    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS + SPRITES + FRAMES] + ["font5x7.json"],
                         help="Regenerate one asset in both palettes; omit to regenerate the complete set.")
     args = parser.parse_args()
     OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -652,6 +770,12 @@ def main():
             export_asset(name, (frame_size[0] * frame_count, frame_size[1]),
                          lambda: sprite_sheet(render, frame_size, frame_count), description,
                          frame_count=frame_count, still_name=still_name)
+    if args.asset is None or args.asset in ("frame-bevel-out.png", "frame-bevel-in.png"):
+        verify_bevel_pair()
+    for name, size, render, description, colour_count in FRAMES:
+        if args.asset is None or args.asset == name:
+            export_asset(name, size, render, description, colour_count=colour_count,
+                         slice_inset=FRAME_SLICE)
     if args.asset is None or args.asset == "font5x7.json":
         export_font()
 
