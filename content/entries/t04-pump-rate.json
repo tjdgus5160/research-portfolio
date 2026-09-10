@@ -1,0 +1,210 @@
+{
+  "no": "T/04",
+  "slug": "t04-pump-rate",
+  "title": "펌핑 속도의 시간 전개",
+  "subtitle": "PUMPING RATE AGAINST TIME",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/calc_pump_rate.py",
+  "summary": "원자 하나가 초당 몇 개의 광자를 흩뿌리는지, 그리고 시료가 편극되면서 그 값이 어떻게 스스로 줄어드는지.",
+  "question": "1 ms 펌프 펄스에 빛이 얼마나 필요한가. 그 답은 '얼마나 세게'가 아니라 '얼마나 오래 흡수가 계속되는가'에 달려 있습니다 — 편극된 원자는 더 이상 σ⁺를 흡수하지 않아서, 펌프는 자기가 만든 투명함 속으로 들어갑니다.",
+  "evidence": [
+    {
+      "claim": "D1 진동자 강도 f = 0.342 31(33)",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4, input/papers/steck-rb87-d-line-data-r2.3.4.pdf"
+    },
+    {
+      "claim": "650 Torr 셀에서 최대 흡수 단면적은 4.076e-13 cm²",
+      "class": "CALCULATED",
+      "source": "σ_int = (πe²/4πε₀m_ec)·f = 9.085×10⁻³ cm²Hz, 로렌치안 최대값 σ = 2σ_int/(π·Δν), Δν = 14.19 GHz. 자유 파라미터가 없습니다."
+    },
+    {
+      "claim": "흡수 폭 14.19 GHz",
+      "class": "CALCULATED",
+      "source": "T/02·T/03에서 17.8 GHz/amagat × 0.7969 amagat"
+    },
+    {
+      "claim": "편극된 원자는 σ⁺를 더 흡수하지 않는다",
+      "class": "SOURCE_FACT",
+      "source": "mF = +2에서 ΔmF = +1은 존재하지 않는 mF′ = +3을 요구합니다 (T/01)"
+    },
+    {
+      "claim": "mF = +2에 도달하기까지 평균 산란 횟수는 약 10회",
+      "class": "CALCULATED",
+      "source": "10·20·30·50 mW/cm²에서 각각 따로 풀어 9.9 / 10.3 / 10.2 / 9.7을 얻었습니다. 네 값이 6% 안에 모인다는 것은 두 모델이 이 인자 하나만큼만 다르다는 뜻입니다."
+    },
+    {
+      "claim": "바닥상태 이완 Γ_g = 170 s⁻¹",
+      "class": "INFERRED",
+      "reasoning": "T/03이 검토 대상으로 삼은 계산의 모델 입력이고 측정값이 아닙니다. 아래의 정상상태 값은 전부 이 가정 위에 있습니다."
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "단면적을 구한다",
+      "detail": "진동자 강도에서 적분 단면적이 닫힌 형태로 나오고, 실측 선폭으로 나누면 최대 단면적이 됩니다. 맞춘 상수가 없습니다."
+    },
+    {
+      "step": "02",
+      "name": "광자 흐름을 구한다",
+      "detail": "세기를 광자 에너지로 나눕니다. 10 mW/cm²는 4.0×10¹⁶ photons/cm²/s입니다."
+    },
+    {
+      "step": "03",
+      "name": "속도를 곱한다",
+      "detail": "R = σ·Φ. 편극되지 않은 원자가 초당 흩뿌리는 광자 수이고, 10 mW/cm²에서 1.63×10⁴ s⁻¹, 즉 61 µs마다 한 번입니다."
+    },
+    {
+      "step": "04",
+      "name": "시간으로 적분한다",
+      "detail": "dP/dt = (R/10)(1−P) − Γ_g P. (1−P)가 핵심입니다 — 펌프는 아직 어두운 상태가 아닌 원자에만 작용합니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "최대 흡수 단면적",
+      "value": "4.076e-13",
+      "unit": "cm²",
+      "class": "CALCULATED",
+      "note": "650 Torr, 선 중심"
+    },
+    {
+      "name": "산란 횟수 인자",
+      "value": "10",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "네 세기에서 독립적으로 9.7–10.3"
+    },
+    {
+      "name": "R₀ @ 5 mW/cm²",
+      "value": "8.16e+03",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "편극 전 산란율, 1/R₀ = 123 µs"
+    },
+    {
+      "name": "R₀ @ 10 mW/cm²",
+      "value": "1.63e+04",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "편극 전 산란율, 1/R₀ = 61 µs"
+    },
+    {
+      "name": "R₀ @ 20 mW/cm²",
+      "value": "3.26e+04",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "편극 전 산란율, 1/R₀ = 31 µs"
+    },
+    {
+      "name": "R₀ @ 50 mW/cm²",
+      "value": "8.16e+04",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "편극 전 산란율, 1/R₀ = 12 µs"
+    },
+    {
+      "name": "시상수 τ @ 10 mW/cm²",
+      "value": "555",
+      "unit": "µs",
+      "class": "INFERRED",
+      "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.756, 정상상태 0.906"
+    },
+    {
+      "name": "시상수 τ @ 20 mW/cm²",
+      "value": "291",
+      "unit": "µs",
+      "class": "INFERRED",
+      "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.920, 정상상태 0.950"
+    },
+    {
+      "name": "시상수 τ @ 50 mW/cm²",
+      "value": "120",
+      "unit": "µs",
+      "class": "INFERRED",
+      "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.979, 정상상태 0.980"
+    }
+  ],
+  "geometry": {
+    "tolerance": "검토 대상 계산의 1 ms 값과 최대 0.005 차이",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-pump-rate.svg",
+        "view": "SCATTERING RATE",
+        "alt": "네 세기에서 원자당 광자 산란율이 시간에 따라 감소하는 곡선. 센 빛일수록 높게 시작해 빨리 떨어지고, 곡선들이 교차한다",
+        "note": "곡선이 교차하는 것이 요점입니다 — 센 빛은 자기 흡수체를 더 빨리 써버립니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-pump-population.svg",
+        "view": "POPULATION",
+        "alt": "같은 조건에서 |F=2, m_F=+2⟩ 인구가 시간에 따라 고원으로 올라가는 곡선",
+        "note": "20 mW/cm² 이상이면 1 ms가 시상수의 서너 배입니다"
+      }
+    ],
+    "parametric": [
+      "σ_int = (π e² / 4πε₀ m_e c) · f = 2.654×10⁻² · f  cm²Hz",
+      "σ_peak = 2 σ_int / (π Δν)",
+      "Φ = I / (hc/λ)",
+      "R = σ_peak · Φ",
+      "dP/dt = (R/10)(1−P) − Γ_g P",
+      "τ = 1/(R/10 + Γ_g),   P(∞) = (R/10)/(R/10 + Γ_g)"
+    ],
+    "parametric_note": "앞의 네 줄에는 맞춘 상수가 없습니다. 마지막 두 줄에만 모델 입력 두 개가 들어갑니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "검토 계산과의 1 ms 대조",
+        "result": "Δ ≤ 0.005",
+        "how": "10·20·30·50 mW/cm²에서 0.756/0.920/0.960/0.979 대 0.760/0.915/0.959/0.980"
+      },
+      {
+        "name": "산란 횟수 인자의 일관성",
+        "result": "9.7–10.3",
+        "how": "네 세기에서 각각 따로 풀었습니다. 흩어졌다면 두 모델의 차이가 이 인자로 설명되지 않는다는 뜻이었을 것입니다."
+      },
+      {
+        "name": "단면적",
+        "result": "4.076×10⁻¹³ cm²",
+        "how": "진동자 강도에서 닫힌 형태로 계산, 맞춘 값 없음"
+      },
+      {
+        "name": "극한",
+        "result": "PASS",
+        "how": "t→0에서 R(t)→R₀, t→∞에서 R(t)→R₀(1−P∞), P는 항상 0과 1 사이"
+      }
+    ]
+  },
+  "unknown": [
+    "Γ_g = 170 s⁻¹과 산란 횟수 10회는 모델 입력입니다. 시상수와 정상상태 값이 둘 다에 의존하므로, 이 값들이 틀리면 곡선의 모양이 아니라 눈금이 틀립니다.",
+    "셀 전체에서 세기가 균일하다고 가정했습니다. T/03이 지적했듯 120 °C 이상에서는 앞쪽 원자가 펌프를 먼저 먹습니다.",
+    "선 중심에 정확히 맞춘 경우입니다. T/03의 −3.6 GHz 최적 detuning에서는 단면적이 그만큼 줄어듭니다.",
+    "재펌핑 경로를 하나의 인자로 뭉뚱그렸습니다. 8개 Zeeman 준위를 각각 푸는 계산이 아닙니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/calc_pump_rate.py",
+      "note": "계산과 두 그래프. --check로 재현성 확인"
+    },
+    {
+      "path": "analysis/pump-rate.json",
+      "note": "네 세기의 R₀·τ·P(1ms)·P(∞)"
+    },
+    {
+      "path": "assets/diagrams/rb87-pump-rate.svg",
+      "note": "산란율의 시간 전개"
+    },
+    {
+      "path": "assets/diagrams/rb87-pump-population.svg",
+      "note": "인구의 시간 전개"
+    }
+  ],
+  "en": {
+    "title": "Pumping Rate Against Time",
+    "summary": "How many photons an atom scatters per second, and how that rate falls away as the sample polarises itself transparent.",
+    "question": "How much light does a 1 ms pump pulse really need? The answer turns less on how hard you push than on how long the absorption lasts — a polarised atom stops absorbing, so the pump ends up shining into transparency it created."
+  }
+}
