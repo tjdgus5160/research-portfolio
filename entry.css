@@ -108,3 +108,14 @@
   .e-nav{grid-template-columns:1fr}
   .e-nav>:last-child{text-align:left}
 }
+
+/* Level diagrams are SVG: they carry their own aspect ratio, and they take the
+   palette from the same variables as everything else, so they follow the
+   Game Boy toggle instead of being a picture of one theme. */
+/* A diagram is read, not glanced at: it gets the light ground, the full width
+   of the section, and no dark card around it. */
+.e-views:has(.fig-svg){grid-template-columns:1fr}
+.e-views .fig-svg{background:var(--t3);border:var(--px) solid var(--t0)}
+.e-views .fig-svg > svg{display:block;width:100%;height:auto;
+  padding:calc(var(--px)*3) calc(var(--px)*2)}
+.e-views .fig-svg figcaption{background:var(--t0)}

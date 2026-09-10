@@ -142,11 +142,24 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
     if g.get("renders") or g.get("parametric"):
         b = ""
         if g.get("renders"):
+            def figure(r):
+                src = r["src"]
+                if src.lower().endswith(".svg"):
+                    # An SVG loaded through <img> is an isolated document: it
+                    # cannot see the page's custom properties, so it ignores the
+                    # palette switch entirely and falls back to its defaults.
+                    # Inlined, it takes --t0..--t3 like everything else.
+                    body = (ROOT / src).read_text(encoding="utf-8")
+                    body = body.split("?>", 1)[-1].strip()
+                    return (f'<figure class="fig-svg">{body}'
+                            f'<figcaption><b>{esc(r["view"])}</b>'
+                            f'{esc(r.get("note",""))}</figcaption></figure>')
+                return (f'<figure><img src="../{esc(src)}" alt="{esc(r["alt"])}"'
+                        f'{img_attrs(src)} loading="lazy" decoding="async" />'
+                        f'<figcaption><b>{esc(r["view"])}</b>'
+                        f'{esc(r.get("note",""))}</figcaption></figure>')
             b += '<div class="e-views">' + "".join(
-                f'<figure><img src="../{esc(r["src"])}" alt="{esc(r["alt"])}"'
-                f'{img_attrs(r["src"])} loading="lazy" decoding="async" />'
-                f'<figcaption><b>{esc(r["view"])}</b>{esc(r.get("note",""))}</figcaption></figure>'
-                for r in g["renders"]) + "</div>"
+                figure(r) for r in g["renders"]) + "</div>"
         if g.get("parametric"):
             b += '<ul class="e-par">' + "".join(f"<li>{esc(x)}</li>" for x in g["parametric"]) + "</ul>"
         if g.get("parametric_note"):

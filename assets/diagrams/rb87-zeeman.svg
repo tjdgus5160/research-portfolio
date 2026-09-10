@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="t d" class="lvl">
+<title id="t">Zeeman splitting of the 87Rb ground state</title><desc id="d">In a magnetic field each hyperfine level splits into 2F+1 sublevels spaced linearly in B. F=2 has gF=+1/2 and fans upward with mF; F=1 has gF=-1/2 and fans the opposite way. The splitting per unit field is 6.998 Hz per nanotesla.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;shape-rendering:crispEdges}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;shape-rendering:crispEdges}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1.5;stroke-dasharray:4 4;
+        shape-rendering:crispEdges}
+  .arr{stroke:var(--t0,#0d0d0d);stroke-width:3;marker-end:url(#a)}
+  .arr2{stroke:var(--t1,#3a3a3a);stroke-width:1.5;stroke-dasharray:3 3;
+        marker-end:url(#b)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.06em}
+  .fill{fill:var(--t0,#0d0d0d)}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t0,#0d0d0d)"/></marker>
+  <marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t1,#3a3a3a)"/></marker>
+</defs>
+<text x="16" y="24" text-anchor="start" class='xs'>ZEEMAN SPLITTING OF THE GROUND STATE</text>
+<text x="744" y="24" text-anchor="end" class='xs'>LINEAR REGIME, B SMALL</text>
+<line x1="120" y1="340" x2="700" y2="340" class="thin"/>
+<text x="700" y="358" text-anchor="end" class='sm'>B</text>
+<line x1="120" y1="340" x2="120" y2="60" class="thin"/>
+<text x="112" y="66" text-anchor="end" class='sm'>E</text>
+<line x1="180" y1="140" x2="660" y2="88" class="l"/>
+<text x="668" y="92" text-anchor="start" class='xs'>mF = +2</text>
+<line x1="180" y1="140" x2="660" y2="114" class="thin"/>
+<text x="668" y="118" text-anchor="start" class='xs'>mF = +1</text>
+<line x1="180" y1="140" x2="660" y2="140" class="thin"/>
+<text x="668" y="144" text-anchor="start" class='xs'>mF =  0</text>
+<line x1="180" y1="140" x2="660" y2="166" class="thin"/>
+<text x="668" y="170" text-anchor="start" class='xs'>mF = -1</text>
+<line x1="180" y1="140" x2="660" y2="192" class="thin"/>
+<text x="668" y="196" text-anchor="start" class='xs'>mF = -2</text>
+<text x="126" y="134" text-anchor="start" class='sm'>F = 2</text>
+<text x="126" y="148" text-anchor="start" class='xs'>gF = +1/2</text>
+<line x1="180" y1="290" x2="660" y2="312" class="thin"/>
+<text x="668" y="316" text-anchor="start" class='xs'>mF = +1</text>
+<line x1="180" y1="290" x2="660" y2="290" class="thin"/>
+<text x="668" y="294" text-anchor="start" class='xs'>mF =  0</text>
+<line x1="180" y1="290" x2="660" y2="268" class="thin"/>
+<text x="668" y="272" text-anchor="start" class='xs'>mF = -1</text>
+<text x="126" y="284" text-anchor="start" class='sm'>F = 1</text>
+<text x="126" y="298" text-anchor="start" class='xs'>gF = -1/2</text>
+<text x="200" y="372" text-anchor="start" class='xs'>ΔE = gF mF μB B      γ/2π = |gF| μB/h = 6.998 Hz/nT for F = 2</text>
+</svg>

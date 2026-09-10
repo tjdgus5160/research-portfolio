@@ -1,0 +1,243 @@
+{
+  "no": "T/01",
+  "slug": "t01-rb87-optical-pumping",
+  "title": "⁸⁷Rb와 광펌핑",
+  "subtitle": "87Rb AND OPTICAL PUMPING",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "steck-rb87-d-line-data",
+  "summary": "자력계가 무엇을 읽는지 — ⁸⁷Rb의 준위 구조, 원편광이 원자를 한쪽으로 몰아넣는 과정, 그리고 그렇게 정렬된 스핀이 자기장 속에서 도는 속도.",
+  "question": "자기장을 재는 데 왜 하필 원자인가. 눈금은 늘어나고 자석은 늙지만, 원자가 세차운동하는 주파수는 자연상수와 자기장의 곱입니다. 그 비례를 실제로 쓰려면 세 가지가 필요합니다 — 어떤 준위가 있는지, 원자를 어떻게 한 방향으로 정렬시키는지, 정렬된 스핀이 얼마나 빨리 도는지.",
+  "evidence": [
+    {
+      "claim": "⁸⁷Rb의 핵스핀은 I = 3/2이고, 따라서 바닥상태는 F = 1과 F = 2 둘로 갈라진다",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4 (2025-08-08), input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 표 1, Nuclear Spin I = 3/2"
+    },
+    {
+      "claim": "바닥상태 초미세 분리는 6.834 682 610 904 290(90) GHz",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4 (2025-08-08), input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 표 5 및 초미세 구조 도해"
+    },
+    {
+      "claim": "D1 = 5²S₁/₂ → 5²P₁/₂, 794.978 851 156(23) nm / 377.107 463 380(11) THz",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4 (2025-08-08), input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 표 4"
+    },
+    {
+      "claim": "D2 = 5²S₁/₂ → 5²P₃/₂, 780.241 209 686(13) nm / 384.230 484 468 5(62) THz",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4 (2025-08-08), input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 표 3"
+    },
+    {
+      "claim": "F = 2의 Landé 인자는 gF = +1/2, F = 1은 gF = −1/2",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4 (2025-08-08), input/papers/steck-rb87-d-line-data-r2.3.4.pdf — 표 6, 0.70 MHz/G로 병기"
+    },
+    {
+      "claim": "σ⁺ 광자는 ΔmF = +1만 일으키고, 자발방출은 ΔmF = 0, ±1을 허용한다",
+      "class": "SOURCE_FACT",
+      "source": "전기쌍극자 선택규칙. 원편광의 각운동량 ±ħ가 원자로 전달됩니다."
+    },
+    {
+      "claim": "mF = +2는 σ⁺를 흡수할 수 없다 — 갈 곳이 없기 때문",
+      "class": "CALCULATED",
+      "source": "F′ = 2 여기 준위의 최대 mF′는 +2이므로 mF = +2에서 ΔmF = +1은 존재하지 않는 mF′ = +3을 요구합니다."
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "준위를 센다",
+      "detail": "전자 스핀과 궤도가 미세구조를 만들고(5²P₁/₂와 5²P₃/₂), 핵스핀 I = 3/2가 각각을 다시 초미세 준위로 나눕니다. F는 |J − I|부터 J + I까지이므로 바닥상태는 F = 1, 2, D1의 여기상태도 F′ = 1, 2, D2의 여기상태는 F′ = 0, 1, 2, 3입니다."
+    },
+    {
+      "step": "02",
+      "name": "자기장을 켠다",
+      "detail": "각 F 준위가 2F+1개의 mF 부준위로 갈라지고, 약한 장에서는 간격이 B에 정비례합니다. F = 2는 gF가 양수라 mF가 클수록 올라가고, F = 1은 음수라 반대로 기웁니다."
+    },
+    {
+      "step": "03",
+      "name": "원자를 한쪽으로 몬다",
+      "detail": "σ⁺ 원편광을 D1에 맞춰 쏘면 흡수마다 mF가 +1씩 올라가고 자발방출은 0 또는 ±1로 되돌립니다. 평균적으로 사다리를 올라가며, mF = +2에 도달한 원자는 더 흡수하지 못해 거기 쌓입니다."
+    },
+    {
+      "step": "04",
+      "name": "세차운동을 읽는다",
+      "detail": "정렬된 스핀은 자기장을 축으로 라머 주파수로 돕니다. 선편광 프로브가 셀을 지나며 겪는 패러데이 회전이 그 세차를 따라 진동하고, 균형 편광계가 그 진동수를 읽습니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "핵스핀 I",
+      "value": "3/2",
+      "unit": "",
+      "class": "SOURCE_FACT",
+      "note": "표 1"
+    },
+    {
+      "name": "바닥상태 초미세 분리",
+      "value": "6.834 682 610 904 290(90)",
+      "unit": "GHz",
+      "class": "SOURCE_FACT",
+      "note": "F = 2 ↔ F = 1"
+    },
+    {
+      "name": "D1 파장 (진공)",
+      "value": "794.978 851 156(23)",
+      "unit": "nm",
+      "class": "SOURCE_FACT",
+      "note": "5²S₁/₂ → 5²P₁/₂"
+    },
+    {
+      "name": "D2 파장 (진공)",
+      "value": "780.241 209 686(13)",
+      "unit": "nm",
+      "class": "SOURCE_FACT",
+      "note": "5²S₁/₂ → 5²P₃/₂"
+    },
+    {
+      "name": "D1 자연선폭",
+      "value": "2π · 5.7500(56)",
+      "unit": "MHz",
+      "class": "SOURCE_FACT",
+      "note": "수명 27.679(27) ns"
+    },
+    {
+      "name": "D2 자연선폭",
+      "value": "2π · 6.0666(18)",
+      "unit": "MHz",
+      "class": "SOURCE_FACT",
+      "note": "수명 26.2348(77) ns"
+    },
+    {
+      "name": "A(5²P₁/₂)",
+      "value": "407.25(63)",
+      "unit": "MHz",
+      "class": "SOURCE_FACT",
+      "note": "자기쌍극자 상수, 표 5"
+    },
+    {
+      "name": "F′ = 2 ↔ F′ = 1 (D1)",
+      "value": "814.50(126)",
+      "unit": "MHz",
+      "class": "CALCULATED",
+      "note": "J = 1/2, I = 3/2에서 분리 = 2A = 2 × 407.25(63)"
+    },
+    {
+      "name": "D2 여기상태 분리",
+      "value": "266.6500(90) / 156.9470(70) / 72.2180(40)",
+      "unit": "MHz",
+      "class": "SOURCE_FACT",
+      "note": "F′ = 3↔2, 2↔1, 1↔0"
+    },
+    {
+      "name": "γ/2π (F = 2)",
+      "value": "6.998",
+      "unit": "Hz/nT",
+      "class": "CALCULATED",
+      "note": "γ/2π = |gF| μB/h = 0.5 × 13.996 244 936 1 GHz/T"
+    }
+  ],
+  "geometry": {
+    "tolerance": "도해는 축척이 아닙니다 — 각 그림에 명시",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-structure.svg",
+        "view": "STRUCTURE",
+        "alt": "⁸⁷Rb의 미세·초미세 구조. 바닥상태가 F=1과 F=2로 갈라지고 D1은 F′=1,2, D2는 F′=0..3에 닿는다",
+        "note": "바닥상태 6.8 GHz와 광학 전이 377 THz의 비가 5만 5천 대 1이라 축척으로는 그릴 수 없습니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-zeeman.svg",
+        "view": "ZEEMAN",
+        "alt": "자기장에 따라 각 초미세 준위가 2F+1개로 갈라지는 모습. F=2는 위로, F=1은 아래로 벌어진다",
+        "note": "약한 장의 선형 영역. gF의 부호가 부채가 벌어지는 방향을 정합니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-pumping.svg",
+        "view": "PUMPING",
+        "alt": "σ⁺ 흡수가 mF를 +1씩 올리고 자발방출이 0 또는 ±1로 되돌리며, 원자가 mF=+2에 쌓이는 과정",
+        "note": "mF = +2가 암흑상태가 되는 이유는 mF′ = +3이 없기 때문입니다"
+      }
+    ],
+    "parametric": [
+      "F = |J − I| … J + I,  I = 3/2",
+      "5²S₁/₂ (J=1/2) → F = 1, 2",
+      "5²P₁/₂ (J=1/2) → F′ = 1, 2",
+      "5²P₃/₂ (J=3/2) → F′ = 0, 1, 2, 3",
+      "ΔE = gF mF μB B  (약한 장)",
+      "f_L = (γ/2π) · B = 6.998 Hz/nT × B"
+    ],
+    "parametric_note": "준위 개수는 가정이 아니라 I와 J에서 바로 나옵니다. 도해에 그린 개수는 이 규칙과 대조해 확인했습니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "모든 수치가 출처에 있는가",
+        "result": "PASS",
+        "how": "도해와 표의 소수점 3자리 이상 숫자를 전부 추출해 PDF 본문과 대조. 통과하지 못한 값은 유도 근거를 함께 적었습니다."
+      },
+      {
+        "name": "λ와 ν가 서로 맞는가",
+        "result": "D1 Δ < 1 Hz · D2 Δ = 216 Hz",
+        "how": "c/λ를 계산해 표에 실린 주파수와 비교"
+      },
+      {
+        "name": "준위 개수",
+        "result": "PASS",
+        "how": "F = |J−I| … J+I 규칙으로 도해의 선 개수를 대조"
+      },
+      {
+        "name": "γ/2π",
+        "result": "6.998 Hz/nT",
+        "how": "|gF| μB/h, gF = 1/2, μB/h = 13.996 244 936 1 GHz/T"
+      },
+      {
+        "name": "원본 보존",
+        "result": "sha256 0d7ecd70…",
+        "how": "input/papers/에 사본을 두고 해시를 기록"
+      }
+    ]
+  },
+  "correction": {
+    "date": "2026-09-10",
+    "what": "D1 여기상태의 초미세 분리를 816.656 MHz로 그렸다가 814.50(126) MHz로 고쳤습니다.",
+    "why": "816.656은 원본 어디에도 없습니다. 원본이 싣는 것은 자기쌍극자 상수 A(5²P₁/₂) = 407.25(63) MHz이고, J = 1/2·I = 3/2에서 F′=2와 F′=1의 간격은 2A입니다.",
+    "how": "기억에서 적었습니다. 이 사이트가 SOURCE_FACT로 표기하는 값에 대해 해서는 안 되는 일입니다.",
+    "found_by": "도해에 인쇄된 모든 숫자를 PDF 본문과 대조하는 검사. 이 값 하나만 걸렸습니다."
+  },
+  "unknown": [
+    "여기 있는 것은 전부 원자 물리이고, 실제 셀에서 무엇이 성능을 정하는지는 다릅니다 — 완충기체 압력, 벽 코팅, 셀 온도, 빛세기 넓힘은 이 문서에 없습니다.",
+    "약한 장의 선형 관계만 다뤘습니다. 장이 세지면 Breit–Rabi 영역으로 들어가 mF 간격이 균일하지 않게 됩니다.",
+    "펌핑 속도, 스핀 파괴율, 도달 가능한 편극도는 이 항목에서 계산하지 않았습니다. 그것들이 실제 감도를 정합니다."
+  ],
+  "artifacts": [
+    {
+      "path": "input/papers/steck-rb87-d-line-data-r2.3.4.pdf",
+      "note": "원본. sha256 0d7ecd70…"
+    },
+    {
+      "path": "scripts/gen_level_diagrams.py",
+      "note": "세 도해를 그리는 스크립트"
+    },
+    {
+      "path": "assets/diagrams/rb87-structure.svg",
+      "note": "미세·초미세 구조"
+    },
+    {
+      "path": "assets/diagrams/rb87-zeeman.svg",
+      "note": "제이만 분리"
+    },
+    {
+      "path": "assets/diagrams/rb87-pumping.svg",
+      "note": "광펌핑 사이클"
+    }
+  ],
+  "en": {
+    "title": "87Rb and Optical Pumping",
+    "summary": "What the magnetometer is actually reading — the level structure of 87Rb, how circular light herds the atoms into one state, and how fast that oriented spin turns in a field.",
+    "question": "Why atoms, to measure a field? A ruler stretches and a magnet ages, but the rate an atom precesses is a constant of nature multiplied by the field. Using that proportionality needs three things: which levels exist, how to line the atoms up, and how fast the aligned spin turns."
+  }
+}

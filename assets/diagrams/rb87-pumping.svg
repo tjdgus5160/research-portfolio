@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470"
+  role="img" aria-labelledby="t d" class="lvl">
+<title id="t">Optical pumping into the stretched state</title><desc id="d">Circularly polarised sigma-plus light raises mF by one on every absorption while spontaneous emission returns it by 0 or plus or minus one. Population therefore accumulates in mF = +2, which cannot absorb sigma-plus light because no mF = +3 exists. The sample ends up spin-polarised.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;shape-rendering:crispEdges}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;shape-rendering:crispEdges}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1.5;stroke-dasharray:4 4;
+        shape-rendering:crispEdges}
+  .arr{stroke:var(--t0,#0d0d0d);stroke-width:3;marker-end:url(#a)}
+  .arr2{stroke:var(--t1,#3a3a3a);stroke-width:1.5;stroke-dasharray:3 3;
+        marker-end:url(#b)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.06em}
+  .fill{fill:var(--t0,#0d0d0d)}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t0,#0d0d0d)"/></marker>
+  <marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t1,#3a3a3a)"/></marker>
+</defs>
+<text x="16" y="24" text-anchor="start" class='xs'>OPTICAL PUMPING WITH σ+ LIGHT</text>
+<text x="744" y="24" text-anchor="end" class='xs'>D1, ΔmF = +1</text>
+<line x1="86" y1="110" x2="154" y2="110" class="thin"/>
+<text x="120" y="100" text-anchor="middle" class='xs'>-2</text>
+<line x1="186" y1="110" x2="254" y2="110" class="thin"/>
+<text x="220" y="100" text-anchor="middle" class='xs'>-1</text>
+<line x1="286" y1="110" x2="354" y2="110" class="thin"/>
+<text x="320" y="100" text-anchor="middle" class='xs'>0</text>
+<line x1="386" y1="110" x2="454" y2="110" class="thin"/>
+<text x="420" y="100" text-anchor="middle" class='xs'>+1</text>
+<line x1="486" y1="110" x2="554" y2="110" class="thin"/>
+<text x="520" y="100" text-anchor="middle" class='xs'>+2</text>
+<text x="600" y="114" text-anchor="start" class='sm'>5 2P1/2  F' = 2</text>
+<line x1="86" y1="340" x2="154" y2="340" class="thin"/>
+<text x="120" y="364" text-anchor="middle" class='xs'>mF = -2</text>
+<line x1="186" y1="340" x2="254" y2="340" class="thin"/>
+<text x="220" y="364" text-anchor="middle" class='xs'>mF = -1</text>
+<line x1="286" y1="340" x2="354" y2="340" class="thin"/>
+<text x="320" y="364" text-anchor="middle" class='xs'>mF =  0</text>
+<line x1="386" y1="340" x2="454" y2="340" class="thin"/>
+<text x="420" y="364" text-anchor="middle" class='xs'>mF = +1</text>
+<line x1="486" y1="340" x2="554" y2="340" class="l"/>
+<text x="520" y="364" text-anchor="middle" class='xs'>mF = +2</text>
+<text x="600" y="344" text-anchor="start" class='sm'>5 2S1/2  F = 2</text>
+<line x1="120" y1="332" x2="208" y2="122" class="arr"/>
+<line x1="220" y1="332" x2="308" y2="122" class="arr"/>
+<line x1="320" y1="332" x2="408" y2="122" class="arr"/>
+<line x1="420" y1="332" x2="508" y2="122" class="arr"/>
+<rect x="24" y="196" width="150" height="34" fill="var(--t3,#d7d7d7)"/>
+<text x="24" y="212" text-anchor="start">σ+ absorption</text>
+<text x="24" y="226" text-anchor="start" class='xs'>ΔmF = +1 every time</text>
+<line x1="232" y1="122" x2="224" y2="330" class="arr2"/>
+<line x1="332" y1="122" x2="324" y2="330" class="arr2"/>
+<line x1="432" y1="122" x2="424" y2="330" class="arr2"/>
+<rect x="596" y="196" width="150" height="34" fill="var(--t3,#d7d7d7)"/>
+<text x="596" y="212" text-anchor="start" class='sm'>spontaneous emission</text>
+<text x="596" y="226" text-anchor="start" class='xs'>ΔmF = 0, ±1</text>
+<rect x="480" y="332" width="80" height="16" fill="none" class="dash"/>
+<text x="520" y="400" text-anchor="middle" class='xs'>mF = +2 cannot absorb σ+</text>
+<text x="520" y="412" text-anchor="middle" class='xs'>there is no mF = +3 to go to</text>
+<text x="16" y="448" text-anchor="start" class='xs'>The population walks up the ladder and stacks in the stretched state. That oriented ensemble is what the field then precesses.</text>
+</svg>

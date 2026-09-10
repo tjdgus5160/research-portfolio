@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560"
+  role="img" aria-labelledby="t d" class="lvl">
+<title id="t">87Rb D line structure</title><desc id="d">Fine and hyperfine structure of rubidium 87: the 5S1/2 ground state splits into F=1 and F=2 separated by 6.834 682 610 904 290(90) GHz; the D1 line at 794.98 nm reaches 5P1/2 with F'=1,2 and the D2 line at 780.24 nm reaches 5P3/2 with F'=0,1,2,3.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;shape-rendering:crispEdges}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;shape-rendering:crispEdges}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1.5;stroke-dasharray:4 4;
+        shape-rendering:crispEdges}
+  .arr{stroke:var(--t0,#0d0d0d);stroke-width:3;marker-end:url(#a)}
+  .arr2{stroke:var(--t1,#3a3a3a);stroke-width:1.5;stroke-dasharray:3 3;
+        marker-end:url(#b)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.06em}
+  .fill{fill:var(--t0,#0d0d0d)}
+</style>
+<defs>
+  <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t0,#0d0d0d)"/></marker>
+  <marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5"
+          orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="var(--t1,#3a3a3a)"/></marker>
+</defs>
+<text x="16" y="24" text-anchor="start" class='xs'>87Rb  D LINE STRUCTURE</text>
+<text x="744" y="24" text-anchor="end" class='xs'>SPLITTINGS NOT TO SCALE</text>
+<text x="430" y="76" text-anchor="start" class='sm'>5 2P3/2</text>
+<line x1="430" y1="96" x2="620" y2="96" class="l"/>
+<text x="628" y="100" text-anchor="start" class='sm'>F' = 3</text>
+<text x="694" y="100" text-anchor="start" class='xs'>266.650 MHz</text>
+<line x1="430" y1="128" x2="620" y2="128" class="l"/>
+<text x="628" y="132" text-anchor="start" class='sm'>F' = 2</text>
+<text x="694" y="132" text-anchor="start" class='xs'>156.947 MHz</text>
+<line x1="430" y1="152" x2="620" y2="152" class="l"/>
+<text x="628" y="156" text-anchor="start" class='sm'>F' = 1</text>
+<text x="694" y="156" text-anchor="start" class='xs'>72.218 MHz</text>
+<line x1="430" y1="168" x2="620" y2="168" class="l"/>
+<text x="628" y="172" text-anchor="start" class='sm'>F' = 0</text>
+<text x="150" y="196" text-anchor="start" class='sm'>5 2P1/2</text>
+<line x1="150" y1="216" x2="340" y2="216" class="l"/>
+<text x="348" y="220" text-anchor="start" class='sm'>F' = 2</text>
+<text x="414" y="220" text-anchor="start" class='xs'>814.50(126) MHz = 2A</text>
+<line x1="150" y1="256" x2="340" y2="256" class="l"/>
+<text x="348" y="260" text-anchor="start" class='sm'>F' = 1</text>
+<text x="280" y="424" text-anchor="start" class='sm'>5 2S1/2</text>
+<line x1="280" y1="444" x2="470" y2="444" class="l"/>
+<text x="478" y="448" text-anchor="start" class='sm'>F = 2</text>
+<line x1="280" y1="508" x2="470" y2="508" class="l"/>
+<text x="478" y="512" text-anchor="start" class='sm'>F = 1</text>
+<line x1="566" y1="444" x2="566" y2="508" class="thin"/>
+<text x="574" y="470" text-anchor="start" class='xs'>6.834 682 610 904 290(90) GHz</text>
+<text x="574" y="484" text-anchor="start" class='xs'>ground-state hyperfine splitting</text>
+<line x1="320" y1="440" x2="250" y2="262" class="arr"/>
+<text x="222" y="350" text-anchor="start">D1</text>
+<text x="200" y="366" text-anchor="start" class='xs'>794.978 851 156(23) nm</text>
+<text x="200" y="378" text-anchor="start" class='xs'>377.107 463 380(11) THz</text>
+<line x1="430" y1="440" x2="500" y2="176" class="arr"/>
+<text x="508" y="320" text-anchor="start">D2</text>
+<text x="508" y="336" text-anchor="start" class='xs'>780.241 209 686(13) nm</text>
+<text x="508" y="348" text-anchor="start" class='xs'>384.230 484 468 5(62) THz</text>
+<text x="16" y="540" text-anchor="start" class='xs'>I = 3/2   F = I ± 1/2   every figure from Steck, Rubidium 87 D Line Data, rev. 2.3.4</text>
+</svg>

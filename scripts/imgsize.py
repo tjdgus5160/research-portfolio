@@ -27,6 +27,12 @@ def size(rel: str) -> tuple[int, int] | None:
 
 
 def attrs(rel: str) -> str:
-    """` width="W" height="H"` for an <img>, or "" when the file cannot be read."""
+    """` width="W" height="H"` for an <img>, or "" when there is nothing to state.
+
+    An SVG has no intrinsic pixel size worth declaring — its viewBox already
+    fixes the aspect ratio, which is what reserving the box actually needs.
+    """
+    if rel.lower().endswith(".svg"):
+        return ""
     wh = size(rel)
     return f' width="{wh[0]}" height="{wh[1]}"' if wh else ""

@@ -16,10 +16,16 @@ import { readFile, stat } from 'node:fs/promises';
 import { extname, join, normalize } from 'node:path';
 
 const ROOT = new URL('../..', import.meta.url).pathname;
+// listed by hand once and then forgotten, which is how the theory page went
+// unchecked; derived from the directory instead
 const PAGES = ['/index.html', '/en/index.html', '/gallery.html',
+               ...(await import('node:fs')).readdirSync(
+                     new URL('../../work', import.meta.url).pathname)
+                  .filter(f => f.endsWith('.html')).map(f => '/work/' + f),
                '/work/w01-rb-cell-optics.html',
                '/work/w02-balanced-polarimeter.html',
-               '/work/w03-supervised-pipeline.html'];
+               '/work/w03-supervised-pipeline.html']
+  .filter((v, i, a) => a.indexOf(v) === i);
 const TYPES = { '.html': 'text/html; charset=utf-8', '.css': 'text/css',
                 '.js': 'text/javascript', '.mjs': 'text/javascript',
                 '.png': 'image/png', '.jpg': 'image/jpeg', '.json': 'application/json',
