@@ -299,7 +299,7 @@ html.booting,html.booting body{overflow:hidden}
    A speaker cone cut with clip-path, so the glyph cannot paint outside the
    button, and two stepped bars that only exist when sound is actually on —
    the states differ in shape, not just in tone.                             */
-.snd{width:calc(var(--px)*10);height:calc(var(--px)*9);flex:none;padding:0;
+.snd{width:calc(var(--px)*13);height:calc(var(--px)*12);flex:none;padding:0;
   border:var(--px) solid var(--t0);background:var(--t3);cursor:pointer;
   position:relative;margin-left:4px;display:grid;place-items:center}
 .snd:hover{background:var(--t0)}
@@ -318,8 +318,9 @@ html.booting,html.booting body{overflow:hidden}
 .snd[aria-pressed="true"]:hover{background:var(--t1)}
 /* muted: a bar struck through the cone */
 .snd[aria-pressed="false"]::after{content:"";position:absolute;
-  width:calc(var(--px)*7);height:var(--px);background:var(--t0);
-  transform:rotate(-45deg)}
+  left:50%;top:50%;width:calc(var(--px)*6);height:var(--px);
+  background:var(--t0);transform:translate(-50%,-50%) rotate(-45deg);
+  box-shadow:0 calc(var(--px)*-1) 0 var(--t3)}
 .snd[aria-pressed="false"]:hover::after{background:var(--t3)}
 @media (max-width:720px){ .snd{margin-left:auto} }
 
@@ -396,12 +397,13 @@ html.moving.up .manifesto{text-shadow:0 var(--px) 0 rgba(0,0,0,.16),
 
 .dpad{display:grid;grid-template-columns:repeat(3,calc(var(--px)*5));
   grid-template-rows:repeat(3,calc(var(--px)*5));gap:0}
-.d{width:100%;height:100%}
+.d{width:100%;height:100%;outline:var(--px) solid var(--t0);outline-offset:calc(var(--px)*-1)}
+.d.hub{outline:none}
 .d.up{grid-area:1/2}.d.left{grid-area:2/1}.d.hub{grid-area:2/2;background:var(--t0)}
 .d.right{grid-area:2/3}.d.down{grid-area:3/2}
 
 .ab{display:flex;gap:calc(var(--px)*2);align-items:flex-end}
-.ab-b{width:calc(var(--px)*7);height:calc(var(--px)*7);
+.ab-b{width:calc(var(--px)*11);height:calc(var(--px)*11);
   display:grid;place-items:center;font-family:var(--disp);font-size:9px}
 .ab-b.b{transform:translateY(calc(var(--px)*2))}
 .ab-b span{pointer-events:none}

@@ -15,8 +15,15 @@
   --frame-in: url("assets/gb/frame-bevel-in.png");
   --frame-dialog: url("assets/gb/frame-dialog.png");
   --frame-corners: url("assets/gb/corner-marks.png");
+  --btn-out: url("assets/gb/btn-out.png");
+  --btn-in: url("assets/gb/btn-in.png");
+  --btn-flat: url("assets/gb/btn-flat.png");
+  --tag-out: url("assets/gb/tag-out.png");
   --slice: 48;
   --fw: calc(var(--px) * 8);
+  /* the control-scale cut: 12x12 logical, 3px inset, 6x export */
+  --slice-btn: 18;
+  --bw: calc(var(--px) * 3);
 }
 :root[data-pal="dmg"]{
   --frame: url("assets/gb/dmg/frame-plain.png");
@@ -24,6 +31,10 @@
   --frame-in: url("assets/gb/dmg/frame-bevel-in.png");
   --frame-dialog: url("assets/gb/dmg/frame-dialog.png");
   --frame-corners: url("assets/gb/dmg/corner-marks.png");
+  --btn-out: url("assets/gb/dmg/btn-out.png");
+  --btn-in: url("assets/gb/dmg/btn-in.png");
+  --btn-flat: url("assets/gb/dmg/btn-flat.png");
+  --tag-out: url("assets/gb/dmg/tag-out.png");
 }
 /* entry pages live one directory down */
 .entry{
@@ -32,6 +43,10 @@
   --frame-in: url("../assets/gb/frame-bevel-in.png");
   --frame-dialog: url("../assets/gb/frame-dialog.png");
   --frame-corners: url("../assets/gb/corner-marks.png");
+  --btn-out: url("../assets/gb/btn-out.png");
+  --btn-in: url("../assets/gb/btn-in.png");
+  --btn-flat: url("../assets/gb/btn-flat.png");
+  --tag-out: url("../assets/gb/tag-out.png");
 }
 :root[data-pal="dmg"] .entry{
   --frame: url("../assets/gb/dmg/frame-plain.png");
@@ -39,12 +54,40 @@
   --frame-in: url("../assets/gb/dmg/frame-bevel-in.png");
   --frame-dialog: url("../assets/gb/dmg/frame-dialog.png");
   --frame-corners: url("../assets/gb/dmg/corner-marks.png");
+  --btn-out: url("../assets/gb/dmg/btn-out.png");
+  --btn-in: url("../assets/gb/dmg/btn-in.png");
+  --btn-flat: url("../assets/gb/dmg/btn-flat.png");
+  --tag-out: url("../assets/gb/dmg/tag-out.png");
 }
 
-/* The control pad is large enough to carry the 8px frame. Buttons are not:
-   an 8-logical-px frame on a 101px button is two thirds border, and on the
-   64x64 sound button it left a 0x0 content box. They keep the shadow bevel
-   until a sprite cut for their scale exists. */
+/* Controls now get a frame cut for their own scale: 3 logical px rather than 8.
+   The measurement that forced this is in the commit that added the panel — an
+   8px frame made a 101px button two thirds border and left the 64x64 sound
+   control with a 0x0 content box. */
+.btn,
+.snd,
+.pad .ab-b,
+.pad .start{
+  border:var(--bw) solid transparent;
+  border-image:var(--btn-out) var(--slice-btn) repeat;
+  box-shadow:none;
+}
+.btn.ghost,
+.work .btn.ghost{border-image:var(--btn-flat) var(--slice-btn) repeat}
+/* the press: the same art inverted, so it reads as one motion */
+.btn:active,
+.snd:active,
+.pad .ab-b:active,
+.pad .start:active,
+.pad button.hit,
+.pad button:active{
+  border-image:var(--btn-in) var(--slice-btn) repeat;
+  transform:translate(var(--px), var(--px));
+}
+/* the evidence-class badges get the lightest lift of all */
+.cls{border:var(--bw) solid transparent;
+     border-image:var(--tag-out) var(--slice-btn) repeat}
+
 .pad{
   border:var(--fw) solid transparent;
   border-image:var(--frame-out) var(--slice) repeat;
@@ -85,5 +128,6 @@
 @media (prefers-contrast:more){
   /* a drawn frame is lower contrast than a hard rule; give the rule back */
   .btn,.pad,.snd,.ab-b,.start,.screen,.work article,.game-in,.svc img,
-  .e-views figure,.e-scroll{border-image:none;border:var(--px) solid var(--t0)}
+  .e-views figure,.e-scroll,.cls{
+    border-image:none;border:var(--px) solid var(--t0)}
 }

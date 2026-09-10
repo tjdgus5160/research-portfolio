@@ -38,6 +38,8 @@ PALETTE = [channel for rgb in PALETTE_RGB[""] for channel in rgb]
 BAYER = ((0, 8, 2, 10), (12, 4, 14, 6), (3, 11, 1, 9), (15, 7, 13, 5))
 FRAME_SIZE = (24, 24)
 FRAME_SLICE = 8
+CONTROL_FRAME_SIZE = (12, 12)
+CONTROL_FRAME_SLICE = 3
 
 # All 42 glyphs are drawn here by hand. Each integer is a five-bit row;
 # bit 4 is the leftmost pixel. No font files or Pillow font APIs are involved.
@@ -504,15 +506,15 @@ def wordmark():
     return image
 
 
-def frame_plain():
-    image = canvas(FRAME_SIZE)
+def frame_plain(size=FRAME_SIZE):
+    image = canvas(size)
     ImageDraw.Draw(image).rectangle(
         (0, 0, image.width - 1, image.height - 1), outline=GB0, width=1)
     return image
 
 
-def frame_bevel(raised=True):
-    image = frame_plain()
+def frame_bevel(raised=True, *, size=FRAME_SIZE):
+    image = frame_plain(size)
     draw = ImageDraw.Draw(image)
     highlight, shadow = (GB3, GB1) if raised else (GB1, GB3)
     right, bottom = image.width - 2, image.height - 2
@@ -520,6 +522,16 @@ def frame_bevel(raised=True):
     # Rotating 180 degrees swaps the sides exactly, including the corners.
     draw.line([(1, bottom - 1), (1, 1), (right, 1)], fill=highlight, width=1)
     draw.line([(right, 2), (right, bottom), (1, bottom)], fill=shadow, width=1)
+    return image
+
+
+def tag_out():
+    image = canvas(CONTROL_FRAME_SIZE)
+    draw = ImageDraw.Draw(image)
+    right, bottom = image.width - 1, image.height - 1
+    # A one-pixel drop shadow outside the outline, below and to the right.
+    draw.rectangle((1, 1, right, bottom), fill=GB1)
+    draw.rectangle((0, 0, right - 1, bottom - 1), fill=GB3, outline=GB0, width=1)
     return image
 
 
@@ -586,6 +598,17 @@ FRAMES = (
     ("corner-marks.png", FRAME_SIZE, corner_marks, "네 모서리만 표시하는 L자 viewfinder bracket", 2),
 )
 
+CONTROL_FRAMES = (
+    ("btn-out.png", CONTROL_FRAME_SIZE, lambda: frame_bevel(size=CONTROL_FRAME_SIZE),
+     "작은 control용 좌상단이 밝은 돌출 9-slice bevel", 3),
+    ("btn-in.png", CONTROL_FRAME_SIZE, lambda: frame_bevel(False, size=CONTROL_FRAME_SIZE),
+     "작은 control용 좌상단이 어두운 함몰 9-slice bevel", 3),
+    ("btn-flat.png", CONTROL_FRAME_SIZE, lambda: frame_plain(CONTROL_FRAME_SIZE),
+     "ghost button용 단일 외곽선의 평면 9-slice frame", 2),
+    ("tag-out.png", CONTROL_FRAME_SIZE, tag_out,
+     "작은 badge용 단일 외곽선과 우하단 한 pixel 그림자의 9-slice frame", 3),
+)
+
 
 def verify_frame_edges(image, name, inset):
     """Check straight edge repeats, corner joins and fill at either scale.
@@ -595,31 +618,33 @@ def verify_frame_edges(image, name, inset):
     matching endpoints alone would miss a stray pixel inside the edge tile.
     """
     width, height = image.size
-    assert width == height == 3 * inset, f"{name}: invalid 9-slice geometry"
-    centre = image.crop((inset, inset, 2 * inset, 2 * inset))
+    assert 0 < 2 * inset < min(width, height), f"{name}: invalid 9-slice geometry"
+    centre = image.crop((inset, inset, width - inset, height - inset))
     assert set(centre.get_flattened_data()) == {GB3}, f"{name}: centre is not GB3"
     for side, bounds, vertical in (
         ("top", (0, 0, width, inset), False),
-        ("bottom", (0, 2 * inset, width, height), False),
+        ("bottom", (0, height - inset, width, height), False),
         ("left", (0, 0, inset, height), True),
-        ("right", (2 * inset, 0, width, height), True),
+        ("right", (width - inset, 0, width, height), True),
     ):
         strip = image.crop(bounds)
         if vertical:
             strip = strip.transpose(Image.Transpose.TRANSPOSE)
-        edge = strip.crop((inset, 0, 2 * inset, inset))
+        run_length = strip.width - 2 * inset
+        edge = strip.crop((inset, 0, strip.width - inset, inset))
         profile = edge.crop((0, 0, 1, inset)).tobytes()
-        assert edge.crop((inset - 1, 0, inset, inset)).tobytes() == profile, f"{name}: {side} repeat seam breaks"
+        assert edge.crop((run_length - 1, 0, run_length, inset)).tobytes() == profile, f"{name}: {side} repeat seam breaks"
         assert all(edge.crop((run, 0, run + 1, inset)).tobytes() == profile
-                   for run in range(inset)), f"{name}: {side} edge is not continuous along its run"
-        for join in (inset - 1, 2 * inset):
+                   for run in range(run_length)), f"{name}: {side} edge is not continuous along its run"
+        for join in (inset - 1, strip.width - inset):
             assert strip.crop((join, 0, join + 1, inset)).tobytes() == profile, f"{name}: {side} corner join breaks"
         if name == "corner-marks.png":
             assert set(edge.get_flattened_data()) == {GB3}, f"{name}: {side} edge contains a mark"
 
 
-def verify_bevel_pair():
-    raised, pressed = frame_bevel(), frame_bevel(False)
+def verify_bevel_pair(size=FRAME_SIZE):
+    raised, pressed = frame_bevel(size=size), frame_bevel(False, size=size)
+    assert raised.tobytes() != pressed.tobytes(), f"Bevel {size}: raised and pressed frames are identical"
     assert raised.transpose(Image.Transpose.ROTATE_180).tobytes() == pressed.tobytes(), "Bevel frames are not exact opposing mirrors"
     swap = {GB3: GB1, GB1: GB3}
     for y in range(raised.height):
@@ -758,7 +783,7 @@ def export_font():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS + SPRITES + FRAMES] + ["font5x7.json"],
+    parser.add_argument("--asset", choices=[entry[0] for entry in ASSETS + SPRITES + FRAMES + CONTROL_FRAMES] + ["font5x7.json"],
                         help="Regenerate one asset in both palettes; omit to regenerate the complete set.")
     args = parser.parse_args()
     OUTPUT.mkdir(parents=True, exist_ok=True)
@@ -772,10 +797,13 @@ def main():
                          frame_count=frame_count, still_name=still_name)
     if args.asset is None or args.asset in ("frame-bevel-out.png", "frame-bevel-in.png"):
         verify_bevel_pair()
-    for name, size, render, description, colour_count in FRAMES:
-        if args.asset is None or args.asset == name:
-            export_asset(name, size, render, description, colour_count=colour_count,
-                         slice_inset=FRAME_SLICE)
+    if args.asset is None or args.asset in ("btn-out.png", "btn-in.png"):
+        verify_bevel_pair(CONTROL_FRAME_SIZE)
+    for frames, slice_inset in ((FRAMES, FRAME_SLICE), (CONTROL_FRAMES, CONTROL_FRAME_SLICE)):
+        for name, size, render, description, colour_count in frames:
+            if args.asset is None or args.asset == name:
+                export_asset(name, size, render, description, colour_count=colour_count,
+                             slice_inset=slice_inset)
     if args.asset is None or args.asset == "font5x7.json":
         export_font()
 
