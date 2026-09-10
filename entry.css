@@ -11,7 +11,7 @@
 .e-meta>div{display:flex;gap:10px;align-items:baseline;padding:6px 0}
 .e-meta.wide>div{grid-template-columns:minmax(110px,.22fr) 1fr;display:grid;gap:16px;
   padding:13px 2px;border-bottom:var(--px) solid var(--t1);align-items:baseline}
-.e-meta dt{margin:0;font-family:var(--disp);font-size:9px;letter-spacing:.14em;color:var(--t2)}
+.e-meta dt{margin:0;font-family:var(--disp);font-size:9px;letter-spacing:.14em;color:var(--t1)}
 .e-meta dd{margin:0;font-family:var(--disp);font-size:11px}
 .e-meta.wide dd{font-family:var(--body);font-size:14px;color:var(--t1)}
 
@@ -24,7 +24,7 @@
 .e-ev li{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 2px;
   border-bottom:var(--px) solid var(--t1);align-items:start}
 .e-claim{margin:0 0 6px;font-size:15px}
-.e-src{margin:0;font-size:13px;color:var(--t2);word-break:break-word}
+.e-src{margin:0;font-size:13px;color:var(--t1);word-break:break-word}
 
 .cls{font-family:var(--disp);font-size:9px;letter-spacing:.06em;text-decoration:none;
   border:var(--px) solid var(--t0);padding:5px 7px;display:inline-block;
@@ -32,7 +32,7 @@
 .c-source_fact{background:var(--t0);color:var(--t3)}
 .c-calculated{background:var(--t2);color:var(--t0);border-color:var(--t0)}
 .c-inferred{background:var(--t3);color:var(--t0)}
-.c-illustrative{background:var(--t3);color:var(--t2);border-color:var(--t2);
+.c-illustrative{background:var(--t3);color:var(--t1);border-color:var(--t1);
   border-style:dashed}
 
 .e-me{list-style:none;margin:0;padding:0;border-top:var(--px) solid var(--t1)}
@@ -46,11 +46,11 @@
 .e-nums th,.e-nums td{text-align:left;padding:12px 14px 12px 2px;
   border-bottom:var(--px) solid var(--t1);vertical-align:baseline}
 .e-nums thead th{font-family:var(--disp);font-size:9px;letter-spacing:.12em;
-  color:var(--t2);border-bottom-color:var(--t0)}
+  color:var(--t1);border-bottom-color:var(--t0)}
 .e-nums tbody th{font-weight:400;white-space:nowrap}
 .e-nums .v{font-family:var(--disp);font-size:12px;white-space:nowrap;
   font-variant-numeric:tabular-nums}
-.e-nums .v i{font-style:normal;color:var(--t2);margin-left:6px;font-size:9px}
+.e-nums .v i{font-style:normal;color:var(--t1);margin-left:6px;font-size:9px}
 .e-nums .n{color:var(--t1);font-size:13px}
 
 .e-views{display:grid;gap:var(--px);
@@ -66,7 +66,7 @@
 .e-par li{display:flex;gap:11px}
 .e-par li::before{content:"";flex:none;margin-top:6px;
   width:calc(var(--px)*2);height:calc(var(--px)*2);background:var(--t0)}
-.e-note{margin:18px 0 0;font-size:13px;color:var(--t2);max-width:60ch}
+.e-note{margin:18px 0 0;font-size:13px;color:var(--t1);max-width:60ch}
 
 .e-verdict{margin:0 0 22px;font-family:var(--disp);font-size:clamp(18px,3.4vw,34px);
   background:var(--t0);color:var(--t3);display:inline-block;padding:10px 18px}
@@ -76,7 +76,7 @@
 .e-art li{display:grid;grid-template-columns:minmax(200px,.42fr) 1fr;gap:18px;
   padding:12px 2px;border-bottom:var(--px) solid var(--t1);align-items:baseline}
 .e-art code{font-family:var(--disp);font-size:10px;word-break:break-all}
-.e-art span{color:var(--t2);font-size:13px}
+.e-art span{color:var(--t1);font-size:13px}
 
 .e-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;
   padding:clamp(34px,5vw,56px) 0}
@@ -84,7 +84,7 @@
   color:var(--t0);text-decoration:none;border-bottom:var(--px) solid var(--t1);
   padding-bottom:4px}
 .e-nav a:hover{background:var(--t0);color:var(--t3);border-color:var(--t0)}
-.e-nav>:nth-child(2){text-align:center;color:var(--t2)}
+.e-nav>:nth-child(2){text-align:center;color:var(--t1)}
 .e-nav>:last-child{text-align:right}
 
 /* the stage-select meters on the index */

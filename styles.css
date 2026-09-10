@@ -57,7 +57,7 @@ img{image-rendering:pixelated;display:block;max-width:100%;height:auto}
                       0 calc(var(--px)*4), calc(var(--px)*4) calc(var(--px)*4);}
 .mark-tx{font-family:var(--disp);font-size:14px;letter-spacing:.04em}
 .bar-meta{margin:0 auto 0 6px;display:flex;align-items:center;gap:8px;
-  font-family:var(--disp);font-size:8px;color:var(--t2);letter-spacing:.06em}
+  font-family:var(--disp);font-size:8px;color:var(--t1);letter-spacing:.06em}
 .bar-meta b{width:var(--px);height:var(--px);background:var(--t2);display:block}
 .bar-nav{display:flex;align-items:center;gap:6px}
 .bar-nav a:not(.btn){font-family:var(--disp);font-size:9px;letter-spacing:.05em;
@@ -88,7 +88,7 @@ main{position:relative;z-index:1}
   border-bottom:var(--px) solid var(--t0);
   max-width:1240px;margin:0 auto}
 .kicker{margin:0 0 26px;font-family:var(--disp);font-size:9px;letter-spacing:.14em;
-  color:var(--t2);display:flex;align-items:center;gap:12px}
+  color:var(--t1);display:flex;align-items:center;gap:12px}
 .kicker::after{content:"";flex:1;height:var(--px);
   background:repeating-linear-gradient(90deg,var(--t1) 0 var(--px),
              transparent var(--px) calc(var(--px)*2))}
@@ -102,7 +102,7 @@ main{position:relative;z-index:1}
   letter-spacing:.06em}
 .big{margin:0;font-family:var(--disp);line-height:.9;letter-spacing:.02em;
   font-size:clamp(52px,12vw,132px)}
-.big span{color:var(--t2);font-size:.4em;vertical-align:super}
+.big span{color:var(--t1);font-size:.4em;vertical-align:super}
 .who{margin:18px 0 0;font-family:var(--disp);font-size:clamp(12px,1.8vw,17px);
   line-height:1.9;color:var(--t1)}
 .lede{margin:22px 0 0;max-width:40ch;color:var(--t1)}
@@ -139,12 +139,12 @@ main{position:relative;z-index:1}
 .svc li:hover{background:var(--t0);color:var(--t3)}
 .svc li:hover .no,.svc li:hover .fig{color:var(--t2)}
 .svc li:hover p{color:var(--t3)}
-.no{font-family:var(--disp);font-size:10px;color:var(--t2);letter-spacing:.04em}
+.no{font-family:var(--disp);font-size:10px;color:var(--t1);letter-spacing:.04em}
 .svc h3{margin:0 0 8px;font-family:var(--disp);font-size:clamp(13px,2vw,19px);
   line-height:1.5;font-weight:400}
 .svc p{margin:0;color:var(--t1);max-width:52ch;font-size:14px}
 .fig{margin-top:10px !important;font-family:var(--disp);font-size:8px;
-  letter-spacing:.1em;color:var(--t2)}
+  letter-spacing:.1em;color:var(--t1)}
 .svc img{width:clamp(64px,11vw,104px);border:var(--px) solid currentColor}
 
 /* ── Work ─────────────────────────────────────────────────────────────── */
@@ -163,7 +163,7 @@ main{position:relative;z-index:1}
 .cols{display:grid;gap:clamp(24px,4vw,48px);
   grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
 .cols h2{margin:0 0 16px;font-family:var(--disp);font-size:11px;
-  letter-spacing:.08em;font-weight:400;color:var(--t2)}
+  letter-spacing:.08em;font-weight:400;color:var(--t1)}
 .sq{list-style:none;margin:0;padding:0;display:grid;gap:11px}
 .sq li{display:flex;gap:11px;align-items:flex-start;font-family:var(--disp);
   font-size:9.5px;line-height:1.9;letter-spacing:.03em}
@@ -179,12 +179,12 @@ main{position:relative;z-index:1}
 .end{border-bottom:0}
 .big2{margin:0;font-family:var(--disp);font-size:clamp(26px,7vw,74px);
   line-height:1.25;letter-spacing:.01em}
-.big2 i{font-style:normal;font-size:.4em;color:var(--t2);margin-left:.3em}
+.big2 i{font-style:normal;font-size:.4em;color:var(--t1);margin-left:.3em}
 .chan{list-style:none;margin:clamp(36px,5vw,60px) 0 0;padding:0;
   border-top:var(--px) solid var(--t1)}
 .chan li{display:grid;grid-template-columns:minmax(96px,.22fr) 1fr;gap:18px;
   padding:15px 2px;border-bottom:var(--px) solid var(--t1);align-items:baseline}
-.chan span{font-family:var(--disp);font-size:9px;color:var(--t2);letter-spacing:.1em}
+.chan span{font-family:var(--disp);font-size:9px;color:var(--t1);letter-spacing:.1em}
 .chan a,.chan b{color:var(--t0);font-weight:400;text-decoration:none;
   border-bottom:var(--px) solid var(--t1);width:fit-content}
 .chan a:hover{background:var(--t0);color:var(--t3);border-color:var(--t0)}
@@ -232,7 +232,7 @@ main{position:relative;z-index:1}
   animation:drop 1.25s steps(14,end) .3s forwards}
 @keyframes drop{to{transform:translateY(0)}}
 .boot-line{margin:0;font-family:var(--disp);font-size:9px;letter-spacing:.26em;
-  color:var(--t2);opacity:0;animation:pop .01s steps(1,end) 1.62s forwards}
+  color:var(--t1);opacity:0;animation:pop .01s steps(1,end) 1.62s forwards}
 @keyframes pop{to{opacity:1}}
 /* the wipe: a hard band that sweeps down, then the whole overlay is gone */
 .boot-wipe{position:absolute;left:0;right:0;top:0;height:100%;
@@ -268,7 +268,7 @@ html.booting,html.booting body{overflow:hidden}
 .svc li.on img{clip-path:inset(0 0 0 0)}
 /* and the row's number counts itself out in binary while it does */
 .no{font-variant-numeric:tabular-nums}
-.svc li .no::after{content:" " attr(data-bits);color:var(--t2);font-size:.85em}
+.svc li .no::after{content:" " attr(data-bits);color:var(--t1);font-size:.85em}
 
 /* The hero screen powers up with a scanline sweep the first time it is seen. */
 .screen{position:relative}
@@ -326,7 +326,7 @@ html.booting,html.booting body{overflow:hidden}
   color:var(--t0);text-decoration:none;padding:8px 9px;margin-left:4px;
   border:var(--px) solid var(--t0);background:var(--t3)}
 .bar-nav .lang:hover{background:var(--t0);color:var(--t3)}
-.menu a[hreflang]{color:var(--t2)}
+.menu a[hreflang]{color:var(--t1)}
 
 /* ══ SCREEN TRANSITION ═══════════════════════════════════════════════════
    A Game Boy changes screens by filling the LCD with a dither pattern that
