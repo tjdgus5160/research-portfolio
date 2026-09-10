@@ -1,0 +1,232 @@
+{
+  "no": "T/05",
+  "slug": "t05-density-matrix",
+  "title": "밀도행렬을 실제로 푸는 과정",
+  "subtitle": "SOLVING THE DENSITY MATRIX",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/solve_density_matrix.py",
+  "summary": "T/03과 T/04이 하나의 인자로 뭉뚱그렸던 것을 준위별로 풉니다 — 8개 바닥 부준위, 8개 여기 부준위, 그리고 그 사이의 모든 쌍극자 행렬요소.",
+  "question": "광펌핑을 정직하게 풀려면 Liouville–von Neumann 방정식을 풀어야 합니다. 그런데 실제 계산은 늘 속도방정식으로 합니다. 언제 그래도 되는가, 그리고 그렇게 풀면 앞선 계산들과 같은 답이 나오는가.",
+  "evidence": [
+    {
+      "claim": "650 Torr에서는 여기상태를 단열 소거해도 된다",
+      "class": "CALCULATED",
+      "source": "충돌 폭 Γ_tot = 2π·14.19 GHz가 관심 세기에서의 라비 주파수보다 4자릿수, 바닥상태 Zeeman 분리보다 5자릿수 큽니다. 광학 결맞음이 다른 모든 것보다 훨씬 빨리 준정상값에 도달하므로 dρ_ge/dt ≈ 0으로 두고 소거할 수 있습니다."
+    },
+    {
+      "claim": "같은 충돌이 바닥상태 Zeeman 결맞음도 파괴한다",
+      "class": "INFERRED",
+      "reasoning": "그래서 인구만으로 충분합니다. 결맞음이 살아 있으면 m 부준위가 서로 결합해 속도방정식이 성립하지 않습니다."
+    },
+    {
+      "claim": "모든 쌍극자 행렬요소는 Wigner 기호에서 나온다",
+      "class": "CALCULATED",
+      "source": "⟨F′m′|d_q|Fm⟩ = ⟨F′‖d‖F⟩·(−1)^…·√(2F+1)·(F′ 1 F; −m′ q m), 그리고 ⟨F′‖d‖F⟩는 6-j로. scripts/wigner.py가 Racah 공식을 직접 구현하고 17개 항등식으로 검증합니다."
+    },
+    {
+      "claim": "핵스핀 I = 3/2, D1은 J=1/2 → J′=1/2",
+      "class": "SOURCE_FACT",
+      "source": "Steck, Rubidium 87 D Line Data, rev. 2.3.4, input/papers/steck-rb87-d-line-data-r2.3.4.pdf"
+    },
+    {
+      "claim": "모든 여기상태의 붕괴 분기비 합이 1이다 (최대 오차 2.2e-16)",
+      "class": "CALCULATED",
+      "source": "8개 여기 부준위 각각에 대해 q = −1, 0, +1 모든 경로를 더했습니다. 이것이 계수가 물리적으로 옳다는 가장 강한 증거입니다."
+    },
+    {
+      "claim": "Γ_g = 170 s⁻¹",
+      "class": "INFERRED",
+      "reasoning": "T/03이 검토한 계산의 모델 입력을 그대로 가져왔습니다. 두 계산을 비교하려면 같은 입력을 써야 합니다."
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "완전한 방정식에서 출발",
+      "detail": "dρ/dt = −(i/ħ)[H, ρ] + L[ρ], H = H₀ + H_B + H_int. 일반적으로는 광학 결맞음 ρ_ge를 함께 끌고 가야 합니다."
+    },
+    {
+      "step": "02",
+      "name": "여기상태를 단열 소거",
+      "detail": "Γ_tot ≫ Ω, Δ_Zeeman이면 dρ_ge/dt ≈ 0으로 두고 ρ_ge ≈ (iΩ_ge/2)ρ_gg/(Γ_tot/2 + iΔ)를 되넣습니다. 남는 것은 인구만의 속도방정식이고, R_{g→e} = (|Ω_ge|²/Γ_tot)·L(Δ)입니다."
+    },
+    {
+      "step": "03",
+      "name": "행렬요소를 만든다",
+      "detail": "Wigner–Eckart로 각 ⟨F′m′|d_q|Fm⟩을 구합니다. σ⁺ 흡수는 q=+1만, 자발방출은 q=−1,0,+1 전부입니다. σ⁺ 채널 12개, 붕괴 채널 36개가 나옵니다."
+    },
+    {
+      "step": "04",
+      "name": "적분한다",
+      "detail": "균등 분포에서 시작해 흡수·재방출·스핀파괴를 모두 넣고 시간 적분합니다. 매 단계 확률을 규격화해 수치 표류를 막습니다."
+    },
+    {
+      "step": "05",
+      "name": "앞선 계산과 대조한다",
+      "detail": "detuning을 훑어 최적점을 찾고, T/03이 전혀 다른 경로로 얻은 값과 비교합니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "바닥 부준위",
+      "value": "8",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "F=1의 3개와 F=2의 5개"
+    },
+    {
+      "name": "σ⁺ 흡수 채널",
+      "value": "12",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "Δm=+1을 만족하는 쌍"
+    },
+    {
+      "name": "자발방출 채널",
+      "value": "36",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "q=−1,0,+1 전부"
+    },
+    {
+      "name": "붕괴 분기비 합의 오차",
+      "value": "2.2e-16",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "여기상태 8개 각각에 대해. 배정밀도 한계입니다"
+    },
+    {
+      "name": "P(F=2, m=+2) 정상상태",
+      "value": "0.853",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "δ=0, 10 mW/cm²"
+    },
+    {
+      "name": "최적 detuning",
+      "value": "−3.5",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "1·5·10 mW/cm² 모두 같은 값"
+    },
+    {
+      "name": "T/03이 얻은 최적 detuning",
+      "value": "−3.62 ~ −3.69",
+      "unit": "GHz",
+      "class": "SOURCE_FACT",
+      "note": "코드를 공유하지 않는 독립 계산"
+    },
+    {
+      "name": "두 계산의 차이",
+      "value": "0.2",
+      "unit": "GHz 이내",
+      "class": "CALCULATED",
+      "note": "서로 다른 두 경로가 같은 답에 도달했습니다"
+    },
+    {
+      "name": "유효 산란 횟수",
+      "value": "17",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "T/04이 맞춰야 했던 값은 10. 준위별 풀이는 펌핑이 더 느리다고 말합니다"
+    }
+  ],
+  "geometry": {
+    "tolerance": "붕괴 분기비 합 오차 2.2e−16",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-dm-populations.svg",
+        "view": "GROUND-STATE DISTRIBUTION",
+        "alt": "펌핑 후 8개 바닥 Zeeman 부준위의 인구 막대그래프. F=2, m=+2에 0.76이 몰려 있다",
+        "note": "T/01의 암흑상태가 여기서 수치가 됩니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-dm-detuning.svg",
+        "view": "OPTIMUM DETUNING",
+        "alt": "세 세기에서 detuning에 따른 |F=2,m=+2⟩ 정상상태 인구. 세 곡선 모두 −3.5 GHz에서 최대",
+        "note": "T/03의 −3.6 GHz를 독립적으로 재현합니다"
+      }
+    ],
+    "parametric": [
+      "dρ/dt = −(i/ħ)[H, ρ] + L[ρ]",
+      "Γ_tot ≫ Ω, Δ_Zeeman  ⇒  dρ_ge/dt ≈ 0",
+      "ρ_ge ≈ (i Ω_ge/2) ρ_gg / (Γ_tot/2 + iΔ)",
+      "R_{g→e} = (|Ω_ge|²/Γ_tot) · L(Δ)",
+      "⟨F′m′|d_q|Fm⟩ ∝ (−1)^(F′−1+m) √(2F+1) (F′ 1 F; −m′ q m)",
+      "⟨F′‖d‖F⟩ ∝ (−1)^(F′+J+1+I) √((2F′+1)(2J+1)) {J J′ 1; F′ F I}"
+    ],
+    "parametric_note": "이 여섯 줄에 맞춘 상수가 하나도 없습니다. 모델 입력은 Γ_g 하나뿐입니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "Wigner 기호",
+        "result": "17개 항등식 통과",
+        "how": "3-j 직교성, 6-j 닫힌 형태, 열 순환·교환 대칭"
+      },
+      {
+        "name": "붕괴 분기비",
+        "result": "|합−1| ≤ 2.2e-16",
+        "how": "여기상태 8개 각각에 대해 q 전부 합산"
+      },
+      {
+        "name": "선택 규칙",
+        "result": "PASS",
+        "how": "σ⁺ 채널 전부가 m′ = m+1을 만족하는지 확인"
+      },
+      {
+        "name": "최적 detuning",
+        "result": "−3.5 대 −3.62~−3.69 GHz",
+        "how": "코드를 공유하지 않는 T/03과 비교"
+      },
+      {
+        "name": "확률 보존",
+        "result": "PASS",
+        "how": "매 시간단계에서 합이 1"
+      }
+    ]
+  },
+  "correction": {
+    "date": "2026-09-11",
+    "what": "처음 푼 결과는 인구가 m = −2에 쌓였습니다. σ⁺가 반대로 작동하고 있었습니다.",
+    "why": "Wigner–Eckart의 3-j를 (F′ 1 F; m′ q −m)으로 썼습니다. 올바른 형태는 (F′ 1 F; −m′ q m)이고, 그래야 m′ = m + q가 됩니다.",
+    "how": "부호를 뒤집어 쓴 것입니다. 붕괴 분기비 합 규칙은 잘못된 부호에서도 정확히 1을 주기 때문에, 그 검사로는 잡히지 않았습니다.",
+    "found_by": "인구가 준위 사다리의 반대쪽 끝에 쌓이는 것. 규격화 검사가 통과해도 물리가 방향을 알려줍니다."
+  },
+  "unknown": [
+    "준위별 풀이는 유효 산란 횟수 17을 내놓고, T/04이 맞춘 값은 10이었습니다. 1.7배 차이는 δ=0에서 F=2 원자가 6.6 GHz 떨어진 전이만 볼 수 있기 때문으로 보이지만, 이 설명을 따로 검증하지는 않았습니다.",
+    "Zeeman 결맞음을 무시했습니다. 650 Torr에서는 타당하지만 저압 셀에서는 그렇지 않습니다.",
+    "여기상태 안에서의 충돌 혼합을 완전 혼합으로도, 무시로도 다루지 않고 분기비만 썼습니다. 실제로는 그 중간입니다.",
+    "Γ_g = 170 s⁻¹은 여전히 모델 입력입니다. 절대 인구값은 이 수에 의존하고, 최적 detuning은 거의 의존하지 않습니다 — 세 세기에서 같은 값이 나온 것이 그 방증입니다.",
+    "여전히 셀 전체 균일 세기 가정이고, 공간 고갈은 들어가 있지 않습니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/wigner.py",
+      "note": "3-j·6-j 기호. 실행하면 17개 항등식을 검사합니다"
+    },
+    {
+      "path": "scripts/solve_density_matrix.py",
+      "note": "행렬요소 조립과 시간 적분"
+    },
+    {
+      "path": "analysis/density-matrix.json",
+      "note": "정상상태 분포, 최적 detuning, 검사 결과"
+    },
+    {
+      "path": "assets/diagrams/rb87-dm-populations.svg",
+      "note": "바닥상태 분포"
+    },
+    {
+      "path": "assets/diagrams/rb87-dm-detuning.svg",
+      "note": "detuning 훑기"
+    }
+  ],
+  "en": {
+    "title": "Solving the Density Matrix",
+    "summary": "Level by level, where T/03 and T/04 lumped everything into one factor: eight ground sublevels, eight excited ones, and every dipole matrix element between them.",
+    "question": "An honest treatment of optical pumping means the Liouville-von Neumann equation, yet every practical calculation uses rate equations. When is that allowed, and does it give the same answer?"
+  }
+}

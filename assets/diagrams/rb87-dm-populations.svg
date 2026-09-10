@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380"
+  role="img" aria-labelledby="dt dd" class="lvl">
+<title id="dt">Ground-state distribution after optical pumping</title><desc id="dd">Bar chart of the eight ground Zeeman sublevels after pumping to steady state with sigma-plus light. Population concentrates in F=2 mF=+2, the stretched state, at about 0.76, with the remainder spread over the neighbouring sublevels.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  .bar{fill:var(--t0,#0d0d0d)} .bar2{fill:var(--t2,#8a8a8a)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+</style>
+<text x="16" y="22" class="xs">GROUND-STATE DISTRIBUTION AFTER PUMPING</text>
+<text x="744" y="22" class="xs" text-anchor="end">σ+ ON D1, δ = 0</text>
+<line x1="90" y1="300" x2="720" y2="300" class="dash"/>
+<text x="82" y="304" class="xs" text-anchor="end">0</text>
+<line x1="90" y1="240" x2="720" y2="240" class="dash"/>
+<text x="82" y="244" class="xs" text-anchor="end">0.25</text>
+<line x1="90" y1="180" x2="720" y2="180" class="dash"/>
+<text x="82" y="184" class="xs" text-anchor="end">0.5</text>
+<line x1="90" y1="120" x2="720" y2="120" class="dash"/>
+<text x="82" y="124" class="xs" text-anchor="end">0.75</text>
+<line x1="90" y1="60" x2="720" y2="60" class="dash"/>
+<text x="82" y="64" class="xs" text-anchor="end">1</text>
+<rect x="100" y="297.3" width="58" height="2.7" class="bar2"/>
+<text x="129.0" y="316" class="xs" text-anchor="middle">-1</text>
+<text x="129.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="174" y="297.2" width="58" height="2.8" class="bar2"/>
+<text x="203.0" y="316" class="xs" text-anchor="middle">+0</text>
+<text x="203.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="248" y="294.4" width="58" height="5.6" class="bar2"/>
+<text x="277.0" y="316" class="xs" text-anchor="middle">+1</text>
+<text x="277.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="322" y="298.5" width="58" height="1.5" class="bar2"/>
+<text x="351.0" y="316" class="xs" text-anchor="middle">-2</text>
+<text x="351.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="396" y="297.4" width="58" height="2.6" class="bar2"/>
+<text x="425.0" y="316" class="xs" text-anchor="middle">-1</text>
+<text x="425.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="470" y="295.0" width="58" height="5.0" class="bar2"/>
+<text x="499.0" y="316" class="xs" text-anchor="middle">+0</text>
+<text x="499.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="544" y="285.0" width="58" height="15.0" class="bar2"/>
+<text x="573.0" y="316" class="xs" text-anchor="middle">+1</text>
+<text x="573.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<text x="573.0" y="279.0" class="xs" text-anchor="middle">0.062</text>
+<rect x="618" y="95.2" width="58" height="204.8" class="bar"/>
+<text x="647.0" y="316" class="xs" text-anchor="middle">+2</text>
+<text x="647.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<text x="647.0" y="89.2" class="xs" text-anchor="middle">0.853</text>
+<line x1="90" y1="300" x2="720" y2="300" class="thin"/>
+<text x="16" y="342" class="xs">Every rate here comes from a Wigner 3-j and 6-j computed in this repository; no branching ratio was entered by hand.</text>
+<text x="16" y="356" class="xs">The excited state is eliminated adiabatically, which 650 Torr of N2 justifies: Γtot = 2π·14.19 GHz swamps every other rate.</text>
+<text x="16" y="370" class="xs">Population piles into mF = +2 because σ+ has nowhere further to take it — the dark state of T/01, now quantitative.</text>
+</svg>

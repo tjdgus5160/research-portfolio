@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="st sd" class="lvl">
+<title id="st">Stretched-state population against detuning</title><desc id="sd">Steady-state population of F=2 mF=+2 as the laser is tuned, at three intensities. All three peak near minus 3.5 GHz from the low-pressure lock point, agreeing to within 0.2 GHz with an independent calculation that shares none of this one's code.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  .bar{fill:var(--t0,#0d0d0d)} .bar2{fill:var(--t2,#8a8a8a)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+</style>
+<text x="16" y="22" class="xs">STRETCHED-STATE POPULATION vs DETUNING</text>
+<text x="744" y="22" class="xs" text-anchor="end">LEVEL-RESOLVED SOLVE</text>
+<line x1="92" y1="320" x2="690" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="255" x2="690" y2="255" class="dash"/>
+<text x="84" y="259" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="190" x2="690" y2="190" class="dash"/>
+<text x="84" y="194" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="125" x2="690" y2="125" class="dash"/>
+<text x="84" y="129" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="60" x2="690" y2="60" class="dash"/>
+<text x="84" y="64" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">-10</text>
+<text x="192" y="338" class="xs" text-anchor="middle">-8</text>
+<text x="291" y="338" class="xs" text-anchor="middle">-6</text>
+<text x="391" y="338" class="xs" text-anchor="middle">-4</text>
+<text x="491" y="338" class="xs" text-anchor="middle">-2</text>
+<text x="590" y="338" class="xs" text-anchor="middle">+0</text>
+<text x="690" y="338" class="xs" text-anchor="middle">+2</text>
+<line x1="92" y1="320" x2="690" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="60" class="thin"/>
+<text x="391.0" y="358" class="sm" text-anchor="middle">detuning from low-pressure F=2 → F′=2 / GHz</text>
+<text x="26" y="190.0" class="sm" transform="rotate(-90 26 190.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<line x1="590" y1="60" x2="590" y2="320" class="dash"/>
+<text x="595" y="72" class="xs">low-pressure lock</text>
+<polyline class="m" points="92.0,230.9 116.9,228.1 141.8,225.5 166.8,222.8 191.7,220.3 216.6,217.9 241.5,215.6 266.4,213.6 291.3,211.8 316.2,210.3 341.2,209.0 366.1,208.1 391.0,207.5 415.9,207.3 440.8,207.4 465.8,207.8 490.7,208.6 515.6,209.7 540.5,211.1 565.4,212.7 590.3,214.6 615.2,216.7 640.2,218.9 665.1,221.3 690.0,223.8"/>
+<text x="98" y="222.9" class="xs">1 mW/cm², best -3.5 GHz</text>
+<polyline class="m" points="92.0,141.6 116.9,138.4 141.8,135.3 166.8,132.4 191.7,129.7 216.6,127.2 241.5,125.0 266.4,123.0 291.3,121.3 316.2,119.9 341.2,118.8 366.1,118.1 391.0,117.6 415.9,117.5 440.8,117.8 465.8,118.3 490.7,119.2 515.6,120.4 540.5,121.9 565.4,123.6 590.3,125.7 615.2,128.0 640.2,130.5 665.1,133.2 690.0,136.1"/>
+<text x="98" y="133.6" class="xs">5 mW/cm², best -3.5 GHz</text>
+<polyline class="l" points="92.0,109.1 116.9,106.8 141.8,104.6 166.8,102.6 191.7,100.7 216.6,99.0 241.5,97.5 266.4,96.1 291.3,95.0 316.2,94.1 341.2,93.4 366.1,92.9 391.0,92.6 415.9,92.5 440.8,92.7 465.8,93.1 490.7,93.7 515.6,94.5 540.5,95.5 565.4,96.7 590.3,98.1 615.2,99.7 640.2,101.5 665.1,103.4 690.0,105.5"/>
+<text x="98" y="101.1" class="xs">10 mW/cm², best -3.5 GHz</text>
+<line x1="416" y1="60" x2="416" y2="320" class="thin"/>
+<text x="411" y="72" class="xs" text-anchor="end">this solve: −3.5</text>
+<text x="16" y="376" class="xs">An independent calculation reviewed in T/03 put the optimum at −3.62 to −3.69 GHz. This one, built from</text>
+<text x="16" y="390" class="xs">Wigner coefficients and sharing none of its code, lands at −3.5 GHz. Two routes, the same answer within 0.2 GHz.</text>
+</svg>

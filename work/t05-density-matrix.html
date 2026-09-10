@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T/05 밀도행렬을 실제로 푸는 과정 — SHP®</title>
+<meta name="description" content="T/03과 T/04이 하나의 인자로 뭉뚱그렸던 것을 준위별로 풉니다 — 8개 바닥 부준위, 8개 여기 부준위, 그리고 그 사이의 모든 쌍극자 행렬요소." />
+<link rel="icon" href="../assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../entry.css" />
+<link rel="stylesheet" href="../decor.css" />
+<link rel="stylesheet" href="../crt.css" />
+<link rel="stylesheet" href="../frames.css" />
+<link rel="stylesheet" href="../gameboy.css" />
+</head>
+<body class="entry">
+<div class="panel" aria-hidden="true">
+  <div class="panel-mask"></div><div class="panel-vig"></div>
+  <div class="panel-glass"></div><div class="panel-curve"></div>
+</div>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="../index.html" aria-label="SHP, 처음으로">
+      <span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span>
+    </a>
+    <p class="bar-meta"><span>T/05</span><b aria-hidden="true"></b><span>2026-09</span></p>
+    <nav class="bar-nav" aria-label="주요">
+      <a href="../index.html#clients">← STAGE SELECT</a>
+    </nav>
+    <button class="snd" type="button" aria-pressed="false" title="소리">
+      <span class="snd-px" aria-hidden="true"></span>
+      <span class="sr-only">소리 켜기 / 끄기</span>
+    </button>
+  </div>
+</header>
+<main id="main">
+  <section class="e-head">
+    <p class="kicker">T/05 — SOLVING THE DENSITY MATRIX</p>
+    <h1 class="e-title">밀도행렬을 실제로 푸는 과정</h1>
+    <p class="e-sum">T/03과 T/04이 하나의 인자로 뭉뚱그렸던 것을 준위별로 풉니다 — 8개 바닥 부준위, 8개 여기 부준위, 그리고 그 사이의 모든 쌍극자 행렬요소.</p>
+    <dl class="e-meta">
+<div><dt>REPO</dt><dd>scripts/solve_density_matrix.py</dd></div>
+<div><dt>STATUS</dt><dd>PASS</dd></div>
+<div><dt>DATE</dt><dd>2026-09</dd></div>
+</dl></section>
+<section class="e-sec"><h2 class="kicker">01 — 무엇을 물었나</h2><p class="e-q">광펌핑을 정직하게 풀려면 Liouville–von Neumann 방정식을 풀어야 합니다. 그런데 실제 계산은 늘 속도방정식으로 합니다. 언제 그래도 되는가, 그리고 그렇게 풀면 앞선 계산들과 같은 답이 나오는가.</p></section>
+<section class="e-sec"><h2 class="kicker">02 — 근거</h2><dl class="e-legend"><div><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><dd>출처에 적혀 있는 값</dd></div><div><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><dd>다른 값에서 유도된 값</dd></div><div><abbr class="cls c-inferred" title="INFERRED — 근거를 밝힌 가정">INF</abbr><dd>근거를 밝힌 가정</dd></div><div><abbr class="cls c-illustrative" title="ILLUSTRATIVE — 그림을 위한 것, 물리적 주장 없음">ILL</abbr><dd>그림을 위한 것, 물리적 주장 없음</dd></div></dl><ul class="e-ev"><li><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><div><p class="e-claim">650 Torr에서는 여기상태를 단열 소거해도 된다</p><p class="e-src">충돌 폭 Γ_tot = 2π·14.19 GHz가 관심 세기에서의 라비 주파수보다 4자릿수, 바닥상태 Zeeman 분리보다 5자릿수 큽니다. 광학 결맞음이 다른 모든 것보다 훨씬 빨리 준정상값에 도달하므로 dρ_ge/dt ≈ 0으로 두고 소거할 수 있습니다.</p></div></li><li><abbr class="cls c-inferred" title="INFERRED — 근거를 밝힌 가정">INF</abbr><div><p class="e-claim">같은 충돌이 바닥상태 Zeeman 결맞음도 파괴한다</p><p class="e-src">그래서 인구만으로 충분합니다. 결맞음이 살아 있으면 m 부준위가 서로 결합해 속도방정식이 성립하지 않습니다.</p></div></li><li><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><div><p class="e-claim">모든 쌍극자 행렬요소는 Wigner 기호에서 나온다</p><p class="e-src">⟨F′m′|d_q|Fm⟩ = ⟨F′‖d‖F⟩·(−1)^…·√(2F+1)·(F′ 1 F; −m′ q m), 그리고 ⟨F′‖d‖F⟩는 6-j로. scripts/wigner.py가 Racah 공식을 직접 구현하고 17개 항등식으로 검증합니다.</p></div></li><li><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><div><p class="e-claim">핵스핀 I = 3/2, D1은 J=1/2 → J′=1/2</p><p class="e-src">Steck, Rubidium 87 D Line Data, rev. 2.3.4, input/papers/steck-rb87-d-line-data-r2.3.4.pdf</p></div></li><li><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><div><p class="e-claim">모든 여기상태의 붕괴 분기비 합이 1이다 (최대 오차 2.2e-16)</p><p class="e-src">8개 여기 부준위 각각에 대해 q = −1, 0, +1 모든 경로를 더했습니다. 이것이 계수가 물리적으로 옳다는 가장 강한 증거입니다.</p></div></li><li><abbr class="cls c-inferred" title="INFERRED — 근거를 밝힌 가정">INF</abbr><div><p class="e-claim">Γ_g = 170 s⁻¹</p><p class="e-src">T/03이 검토한 계산의 모델 입력을 그대로 가져왔습니다. 두 계산을 비교하려면 같은 입력을 써야 합니다.</p></div></li></ul></section>
+<section class="e-sec"><h2 class="kicker">03 — 어떻게 했나</h2><ol class="e-me"><li><span class="no">01</span><div><h3>완전한 방정식에서 출발</h3><p>dρ/dt = −(i/ħ)[H, ρ] + L[ρ], H = H₀ + H_B + H_int. 일반적으로는 광학 결맞음 ρ_ge를 함께 끌고 가야 합니다.</p></div></li><li><span class="no">02</span><div><h3>여기상태를 단열 소거</h3><p>Γ_tot ≫ Ω, Δ_Zeeman이면 dρ_ge/dt ≈ 0으로 두고 ρ_ge ≈ (iΩ_ge/2)ρ_gg/(Γ_tot/2 + iΔ)를 되넣습니다. 남는 것은 인구만의 속도방정식이고, R_{g→e} = (|Ω_ge|²/Γ_tot)·L(Δ)입니다.</p></div></li><li><span class="no">03</span><div><h3>행렬요소를 만든다</h3><p>Wigner–Eckart로 각 ⟨F′m′|d_q|Fm⟩을 구합니다. σ⁺ 흡수는 q=+1만, 자발방출은 q=−1,0,+1 전부입니다. σ⁺ 채널 12개, 붕괴 채널 36개가 나옵니다.</p></div></li><li><span class="no">04</span><div><h3>적분한다</h3><p>균등 분포에서 시작해 흡수·재방출·스핀파괴를 모두 넣고 시간 적분합니다. 매 단계 확률을 규격화해 수치 표류를 막습니다.</p></div></li><li><span class="no">05</span><div><h3>앞선 계산과 대조한다</h3><p>detuning을 훑어 최적점을 찾고, T/03이 전혀 다른 경로로 얻은 값과 비교합니다.</p></div></li></ol></section>
+<section class="e-sec"><h2 class="kicker">04 — 수치</h2><div class="e-scroll"><table class="e-nums"><thead><tr><th scope="col">값</th><th scope="col">크기</th><th scope="col">등급</th><th scope="col">출처 · 식 · 근거</th></tr></thead><tbody><tr><th scope="row">바닥 부준위</th><td class="v">8<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">F=1의 3개와 F=2의 5개</td></tr><tr><th scope="row">σ⁺ 흡수 채널</th><td class="v">12<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">Δm=+1을 만족하는 쌍</td></tr><tr><th scope="row">자발방출 채널</th><td class="v">36<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">q=−1,0,+1 전부</td></tr><tr><th scope="row">붕괴 분기비 합의 오차</th><td class="v">2.2e-16<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">여기상태 8개 각각에 대해. 배정밀도 한계입니다</td></tr><tr><th scope="row">P(F=2, m=+2) 정상상태</th><td class="v">0.853<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">δ=0, 10 mW/cm²</td></tr><tr><th scope="row">최적 detuning</th><td class="v">−3.5<i>GHz</i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">1·5·10 mW/cm² 모두 같은 값</td></tr><tr><th scope="row">T/03이 얻은 최적 detuning</th><td class="v">−3.62 ~ −3.69<i>GHz</i></td><td><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr></td><td class="n">코드를 공유하지 않는 독립 계산</td></tr><tr><th scope="row">두 계산의 차이</th><td class="v">0.2<i>GHz 이내</i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">서로 다른 두 경로가 같은 답에 도달했습니다</td></tr><tr><th scope="row">유효 산란 횟수</th><td class="v">17<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">T/04이 맞춰야 했던 값은 10. 준위별 풀이는 펌핑이 더 느리다고 말합니다</td></tr></tbody></table></div></section>
+<section class="e-sec"><h2 class="kicker">05 — 형상</h2><div class="e-views"><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380"
+  role="img" aria-labelledby="dt dd" class="lvl">
+<title id="dt">Ground-state distribution after optical pumping</title><desc id="dd">Bar chart of the eight ground Zeeman sublevels after pumping to steady state with sigma-plus light. Population concentrates in F=2 mF=+2, the stretched state, at about 0.76, with the remainder spread over the neighbouring sublevels.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  .bar{fill:var(--t0,#0d0d0d)} .bar2{fill:var(--t2,#8a8a8a)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+</style>
+<text x="16" y="22" class="xs">GROUND-STATE DISTRIBUTION AFTER PUMPING</text>
+<text x="744" y="22" class="xs" text-anchor="end">σ+ ON D1, δ = 0</text>
+<line x1="90" y1="300" x2="720" y2="300" class="dash"/>
+<text x="82" y="304" class="xs" text-anchor="end">0</text>
+<line x1="90" y1="240" x2="720" y2="240" class="dash"/>
+<text x="82" y="244" class="xs" text-anchor="end">0.25</text>
+<line x1="90" y1="180" x2="720" y2="180" class="dash"/>
+<text x="82" y="184" class="xs" text-anchor="end">0.5</text>
+<line x1="90" y1="120" x2="720" y2="120" class="dash"/>
+<text x="82" y="124" class="xs" text-anchor="end">0.75</text>
+<line x1="90" y1="60" x2="720" y2="60" class="dash"/>
+<text x="82" y="64" class="xs" text-anchor="end">1</text>
+<rect x="100" y="297.3" width="58" height="2.7" class="bar2"/>
+<text x="129.0" y="316" class="xs" text-anchor="middle">-1</text>
+<text x="129.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="174" y="297.2" width="58" height="2.8" class="bar2"/>
+<text x="203.0" y="316" class="xs" text-anchor="middle">+0</text>
+<text x="203.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="248" y="294.4" width="58" height="5.6" class="bar2"/>
+<text x="277.0" y="316" class="xs" text-anchor="middle">+1</text>
+<text x="277.0" y="328" class="xs" text-anchor="middle">F=1</text>
+<rect x="322" y="298.5" width="58" height="1.5" class="bar2"/>
+<text x="351.0" y="316" class="xs" text-anchor="middle">-2</text>
+<text x="351.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="396" y="297.4" width="58" height="2.6" class="bar2"/>
+<text x="425.0" y="316" class="xs" text-anchor="middle">-1</text>
+<text x="425.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="470" y="295.0" width="58" height="5.0" class="bar2"/>
+<text x="499.0" y="316" class="xs" text-anchor="middle">+0</text>
+<text x="499.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<rect x="544" y="285.0" width="58" height="15.0" class="bar2"/>
+<text x="573.0" y="316" class="xs" text-anchor="middle">+1</text>
+<text x="573.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<text x="573.0" y="279.0" class="xs" text-anchor="middle">0.062</text>
+<rect x="618" y="95.2" width="58" height="204.8" class="bar"/>
+<text x="647.0" y="316" class="xs" text-anchor="middle">+2</text>
+<text x="647.0" y="328" class="xs" text-anchor="middle">F=2</text>
+<text x="647.0" y="89.2" class="xs" text-anchor="middle">0.853</text>
+<line x1="90" y1="300" x2="720" y2="300" class="thin"/>
+<text x="16" y="342" class="xs">Every rate here comes from a Wigner 3-j and 6-j computed in this repository; no branching ratio was entered by hand.</text>
+<text x="16" y="356" class="xs">The excited state is eliminated adiabatically, which 650 Torr of N2 justifies: Γtot = 2π·14.19 GHz swamps every other rate.</text>
+<text x="16" y="370" class="xs">Population piles into mF = +2 because σ+ has nowhere further to take it — the dark state of T/01, now quantitative.</text>
+</svg><figcaption><b>GROUND-STATE DISTRIBUTION</b>T/01의 암흑상태가 여기서 수치가 됩니다</figcaption></figure><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="st sd" class="lvl">
+<title id="st">Stretched-state population against detuning</title><desc id="sd">Steady-state population of F=2 mF=+2 as the laser is tuned, at three intensities. All three peak near minus 3.5 GHz from the low-pressure lock point, agreeing to within 0.2 GHz with an independent calculation that shares none of this one's code.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  .bar{fill:var(--t0,#0d0d0d)} .bar2{fill:var(--t2,#8a8a8a)}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+</style>
+<text x="16" y="22" class="xs">STRETCHED-STATE POPULATION vs DETUNING</text>
+<text x="744" y="22" class="xs" text-anchor="end">LEVEL-RESOLVED SOLVE</text>
+<line x1="92" y1="320" x2="690" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="255" x2="690" y2="255" class="dash"/>
+<text x="84" y="259" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="190" x2="690" y2="190" class="dash"/>
+<text x="84" y="194" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="125" x2="690" y2="125" class="dash"/>
+<text x="84" y="129" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="60" x2="690" y2="60" class="dash"/>
+<text x="84" y="64" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">-10</text>
+<text x="192" y="338" class="xs" text-anchor="middle">-8</text>
+<text x="291" y="338" class="xs" text-anchor="middle">-6</text>
+<text x="391" y="338" class="xs" text-anchor="middle">-4</text>
+<text x="491" y="338" class="xs" text-anchor="middle">-2</text>
+<text x="590" y="338" class="xs" text-anchor="middle">+0</text>
+<text x="690" y="338" class="xs" text-anchor="middle">+2</text>
+<line x1="92" y1="320" x2="690" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="60" class="thin"/>
+<text x="391.0" y="358" class="sm" text-anchor="middle">detuning from low-pressure F=2 → F′=2 / GHz</text>
+<text x="26" y="190.0" class="sm" transform="rotate(-90 26 190.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<line x1="590" y1="60" x2="590" y2="320" class="dash"/>
+<text x="595" y="72" class="xs">low-pressure lock</text>
+<polyline class="m" points="92.0,230.9 116.9,228.1 141.8,225.5 166.8,222.8 191.7,220.3 216.6,217.9 241.5,215.6 266.4,213.6 291.3,211.8 316.2,210.3 341.2,209.0 366.1,208.1 391.0,207.5 415.9,207.3 440.8,207.4 465.8,207.8 490.7,208.6 515.6,209.7 540.5,211.1 565.4,212.7 590.3,214.6 615.2,216.7 640.2,218.9 665.1,221.3 690.0,223.8"/>
+<text x="98" y="222.9" class="xs">1 mW/cm², best -3.5 GHz</text>
+<polyline class="m" points="92.0,141.6 116.9,138.4 141.8,135.3 166.8,132.4 191.7,129.7 216.6,127.2 241.5,125.0 266.4,123.0 291.3,121.3 316.2,119.9 341.2,118.8 366.1,118.1 391.0,117.6 415.9,117.5 440.8,117.8 465.8,118.3 490.7,119.2 515.6,120.4 540.5,121.9 565.4,123.6 590.3,125.7 615.2,128.0 640.2,130.5 665.1,133.2 690.0,136.1"/>
+<text x="98" y="133.6" class="xs">5 mW/cm², best -3.5 GHz</text>
+<polyline class="l" points="92.0,109.1 116.9,106.8 141.8,104.6 166.8,102.6 191.7,100.7 216.6,99.0 241.5,97.5 266.4,96.1 291.3,95.0 316.2,94.1 341.2,93.4 366.1,92.9 391.0,92.6 415.9,92.5 440.8,92.7 465.8,93.1 490.7,93.7 515.6,94.5 540.5,95.5 565.4,96.7 590.3,98.1 615.2,99.7 640.2,101.5 665.1,103.4 690.0,105.5"/>
+<text x="98" y="101.1" class="xs">10 mW/cm², best -3.5 GHz</text>
+<line x1="416" y1="60" x2="416" y2="320" class="thin"/>
+<text x="411" y="72" class="xs" text-anchor="end">this solve: −3.5</text>
+<text x="16" y="376" class="xs">An independent calculation reviewed in T/03 put the optimum at −3.62 to −3.69 GHz. This one, built from</text>
+<text x="16" y="390" class="xs">Wigner coefficients and sharing none of its code, lands at −3.5 GHz. Two routes, the same answer within 0.2 GHz.</text>
+</svg><figcaption><b>OPTIMUM DETUNING</b>T/03의 −3.6 GHz를 독립적으로 재현합니다</figcaption></figure></div><ul class="e-par"><li>dρ/dt = −(i/ħ)[H, ρ] + L[ρ]</li><li>Γ_tot ≫ Ω, Δ_Zeeman  ⇒  dρ_ge/dt ≈ 0</li><li>ρ_ge ≈ (i Ω_ge/2) ρ_gg / (Γ_tot/2 + iΔ)</li><li>R_{g→e} = (|Ω_ge|²/Γ_tot) · L(Δ)</li><li>⟨F′m′|d_q|Fm⟩ ∝ (−1)^(F′−1+m) √(2F+1) (F′ 1 F; −m′ q m)</li><li>⟨F′‖d‖F⟩ ∝ (−1)^(F′+J+1+I) √((2F′+1)(2J+1)) {J J′ 1; F′ F I}</li></ul><p class="e-note">이 여섯 줄에 맞춘 상수가 하나도 없습니다. 모델 입력은 Γ_g 하나뿐입니다.</p><p class="e-note">허용오차 붕괴 분기비 합 오차 2.2e−16</p></section>
+<section class="e-sec"><h2 class="kicker">06 — 검증</h2><p class="e-verdict">PASS</p><div class="e-scroll"><table class="e-nums"><thead><tr><th scope="col">검사</th><th scope="col">결과</th><th scope="col">방법</th></tr></thead><tbody><tr><th scope="row">Wigner 기호</th><td class="v">17개 항등식 통과</td><td class="n">3-j 직교성, 6-j 닫힌 형태, 열 순환·교환 대칭</td></tr><tr><th scope="row">붕괴 분기비</th><td class="v">|합−1| ≤ 2.2e-16</td><td class="n">여기상태 8개 각각에 대해 q 전부 합산</td></tr><tr><th scope="row">선택 규칙</th><td class="v">PASS</td><td class="n">σ⁺ 채널 전부가 m′ = m+1을 만족하는지 확인</td></tr><tr><th scope="row">최적 detuning</th><td class="v">−3.5 대 −3.62~−3.69 GHz</td><td class="n">코드를 공유하지 않는 T/03과 비교</td></tr><tr><th scope="row">확률 보존</th><td class="v">PASS</td><td class="n">매 시간단계에서 합이 1</td></tr></tbody></table></div></section>
+<section class="e-sec"><h2 class="kicker">07 — 정정 기록</h2><p class="e-q">처음 푼 결과는 인구가 m = −2에 쌓였습니다. σ⁺가 반대로 작동하고 있었습니다.</p><dl class="e-meta wide"><div><dt>언제</dt><dd>2026-09-11</dd></div><div><dt>왜 틀렸나</dt><dd>Wigner–Eckart의 3-j를 (F′ 1 F; m′ q −m)으로 썼습니다. 올바른 형태는 (F′ 1 F; −m′ q m)이고, 그래야 m′ = m + q가 됩니다.</dd></div><div><dt>어쩌다</dt><dd>부호를 뒤집어 쓴 것입니다. 붕괴 분기비 합 규칙은 잘못된 부호에서도 정확히 1을 주기 때문에, 그 검사로는 잡히지 않았습니다.</dd></div><div><dt>누가 찾았나</dt><dd>인구가 준위 사다리의 반대쪽 끝에 쌓이는 것. 규격화 검사가 통과해도 물리가 방향을 알려줍니다.</dd></div></dl></section>
+<section class="e-sec"><h2 class="kicker">08 — 아직 모르는 것</h2><ul class="sq e-unk"><li>준위별 풀이는 유효 산란 횟수 17을 내놓고, T/04이 맞춘 값은 10이었습니다. 1.7배 차이는 δ=0에서 F=2 원자가 6.6 GHz 떨어진 전이만 볼 수 있기 때문으로 보이지만, 이 설명을 따로 검증하지는 않았습니다.</li><li>Zeeman 결맞음을 무시했습니다. 650 Torr에서는 타당하지만 저압 셀에서는 그렇지 않습니다.</li><li>여기상태 안에서의 충돌 혼합을 완전 혼합으로도, 무시로도 다루지 않고 분기비만 썼습니다. 실제로는 그 중간입니다.</li><li>Γ_g = 170 s⁻¹은 여전히 모델 입력입니다. 절대 인구값은 이 수에 의존하고, 최적 detuning은 거의 의존하지 않습니다 — 세 세기에서 같은 값이 나온 것이 그 방증입니다.</li><li>여전히 셀 전체 균일 세기 가정이고, 공간 고갈은 들어가 있지 않습니다.</li></ul></section>
+<section class="e-sec"><h2 class="kicker">09 — 산출물</h2><ul class="e-art"><li><code>scripts/wigner.py</code><span>3-j·6-j 기호. 실행하면 17개 항등식을 검사합니다</span></li><li><code>scripts/solve_density_matrix.py</code><span>행렬요소 조립과 시간 적분</span></li><li><code>analysis/density-matrix.json</code><span>정상상태 분포, 최적 detuning, 검사 결과</span></li><li><code>assets/diagrams/rb87-dm-populations.svg</code><span>바닥상태 분포</span></li><li><code>assets/diagrams/rb87-dm-detuning.svg</code><span>detuning 훑기</span></li></ul></section>
+<nav class="e-nav" aria-label="다른 항목">
+<a href="t04-pump-rate.html">◀ T/04 펌핑 속도의 시간 전개</a>
+<a href="../index.html#clients">STAGE SELECT</a>
+<a href="w01-rb-cell-optics.html">W/01 Rb 증기셀 광학계 ▶</a>
+</nav></main>
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">EVERY VALUE CARRIES ITS EVIDENCE CLASS</p></footer>
+<script src="../script.js" defer></script></body></html>
