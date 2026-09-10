@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470"
+  role="img" aria-labelledby="ct cd" class="lvl">
+<title id="ct">87Rb D1 linewidth against N2 pressure</title><desc id="cd">At 100 C the Doppler width is 0.560 GHz and does not change with pressure. Collisional broadening rises linearly at 17.8 GHz per amagat of N2, crossing the Doppler width near 35 Torr and dominating above it. The total Voigt width is the convolution of the two.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+</style>
+<text x="16" y="24" class="xs">87Rb D1 LINEWIDTH vs N2 PRESSURE</text>
+<text x="744" y="24" class="xs" text-anchor="end">CELL AT 100 C</text>
+<line x1="92" y1="380" x2="700" y2="380" class="thin"/>
+<line x1="92" y1="380" x2="92" y2="60" class="thin"/>
+<line x1="92.0" y1="380" x2="92.0" y2="385" class="thin"/>
+<text x="92.0" y="398" class="xs" text-anchor="middle">0</text>
+<line x1="244.0" y1="380" x2="244.0" y2="385" class="thin"/>
+<text x="244.0" y="398" class="xs" text-anchor="middle">50</text>
+<line x1="396.0" y1="380" x2="396.0" y2="385" class="thin"/>
+<text x="396.0" y="398" class="xs" text-anchor="middle">100</text>
+<line x1="548.0" y1="380" x2="548.0" y2="385" class="thin"/>
+<text x="548.0" y="398" class="xs" text-anchor="middle">150</text>
+<line x1="700.0" y1="380" x2="700.0" y2="385" class="thin"/>
+<text x="700.0" y="398" class="xs" text-anchor="middle">200</text>
+<line x1="87" y1="380.0" x2="700" y2="380.0" class="dash"/>
+<text x="82" y="384.0" class="xs" text-anchor="end">0</text>
+<line x1="87" y1="296.1" x2="700" y2="296.1" class="dash"/>
+<text x="82" y="300.1" class="xs" text-anchor="end">1</text>
+<line x1="87" y1="212.1" x2="700" y2="212.1" class="dash"/>
+<text x="82" y="216.1" class="xs" text-anchor="end">2</text>
+<line x1="87" y1="128.2" x2="700" y2="128.2" class="dash"/>
+<text x="82" y="132.2" class="xs" text-anchor="end">3</text>
+<text x="396.0" y="418" class="sm" text-anchor="middle">N2 pressure at fill / Torr</text>
+<text x="24" y="220.0" class="sm" transform="rotate(-90 24 220.0)" text-anchor="middle">FWHM / GHz</text>
+<polyline class="dash" fill="none" points="92.0,333.0 107.2,333.0 122.4,333.0 152.8,333.0 198.4,333.0 244.0,333.0 320.0,333.0 396.0,333.0 548.0,333.0 700.0,333.0"/>
+<polyline class="thin" fill="none" points="92.0,380.0 107.2,372.8 122.4,365.6 152.8,351.2 198.4,329.6 244.0,308.1 320.0,272.1 396.0,236.1 548.0,164.2 700.0,92.2"/>
+<polyline class="l" fill="none" points="92.0,332.8 107.2,328.8 122.4,324.6 152.8,315.5 198.4,300.2 244.0,283.5 320.0,253.1 396.0,220.8 548.0,153.2 700.0,83.7"/>
+<text x="696" y="75.7" class="sm" text-anchor="end">total (Voigt)</text>
+<text x="696" y="108.2" class="xs" text-anchor="end">collisional only</text>
+<text x="696" y="327.0" class="xs" text-anchor="end">Doppler 0.560 GHz, flat in pressure</text>
+<line x1="191.2" y1="60" x2="191.2" y2="380" class="dash"/>
+<text x="197.2" y="74" class="xs">Doppler = collisional at 33 Torr</text>
+<text x="16" y="430" class="xs">collisional = 17.8 GHz/amagat x density; density falls as 1/T, so a Torr broadens less when hot</text>
+<text x="16" y="444" class="xs">natural width 5.75 MHz is included and is invisible at this scale</text>
+<text x="16" y="458" class="xs">Voigt width measured off a numerical convolution, not from a fitting formula</text>
+</svg>

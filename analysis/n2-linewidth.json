@@ -1,0 +1,88 @@
+{
+  "cell_temperature_K": 373.15,
+  "broadening_GHz_per_amagat": 17.8,
+  "natural_FWHM_Hz": 5750000.0,
+  "doppler_FWHM_GHz": 0.559665,
+  "rows": [
+    {
+      "torr": 0,
+      "amagat": 0.0,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.0,
+      "lorentz_total_GHz": 0.00575,
+      "voigt_GHz": 0.56273
+    },
+    {
+      "torr": 5,
+      "amagat": 0.00482,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.08572,
+      "lorentz_total_GHz": 0.09147,
+      "voigt_GHz": 0.61006
+    },
+    {
+      "torr": 10,
+      "amagat": 0.00963,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.17144,
+      "lorentz_total_GHz": 0.17719,
+      "voigt_GHz": 0.66028
+    },
+    {
+      "torr": 20,
+      "amagat": 0.01926,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.34289,
+      "lorentz_total_GHz": 0.34864,
+      "voigt_GHz": 0.76899
+    },
+    {
+      "torr": 35,
+      "amagat": 0.03371,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.60006,
+      "lorentz_total_GHz": 0.60581,
+      "voigt_GHz": 0.95056
+    },
+    {
+      "torr": 50,
+      "amagat": 0.04816,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 0.85722,
+      "lorentz_total_GHz": 0.86297,
+      "voigt_GHz": 1.15033
+    },
+    {
+      "torr": 75,
+      "amagat": 0.07224,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 1.28584,
+      "lorentz_total_GHz": 1.29159,
+      "voigt_GHz": 1.51206
+    },
+    {
+      "torr": 100,
+      "amagat": 0.09632,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 1.71445,
+      "lorentz_total_GHz": 1.7202,
+      "voigt_GHz": 1.89681
+    },
+    {
+      "torr": 150,
+      "amagat": 0.14448,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 2.57167,
+      "lorentz_total_GHz": 2.57742,
+      "voigt_GHz": 2.70205
+    },
+    {
+      "torr": 200,
+      "amagat": 0.19263,
+      "doppler_GHz": 0.55966,
+      "collisional_GHz": 3.42889,
+      "lorentz_total_GHz": 3.43464,
+      "voigt_GHz": 3.53027
+    }
+  ]
+}
