@@ -8,7 +8,7 @@ Verified against closed-form values in the test at the bottom.
 """
 from __future__ import annotations
 from fractions import Fraction
-from math import factorial, sqrt
+from math import cos, factorial, sin, sqrt
 
 
 def _int(x) -> int:
@@ -73,6 +73,36 @@ def wigner_6j(j1, j2, j3, j4, j5, j6) -> float:
     return pref * s
 
 
+def wigner_d(j, mp, m, beta: float) -> float:
+    """Wigner small-d, d^j_{m'm}(beta) — the real rotation matrix about y.
+
+    T/07 needs it to tip a pumped ground state onto the equator: a rotation is
+    what turns populations into the coherences that precess. Written out rather
+    than tabulated, for the same reason as everything else in this file.
+
+        d^j_{m'm}(b) = sum_s (-1)^(m'-m+s)
+                       sqrt((j+m')!(j-m')!(j+m)!(j-m)!)
+                       / ((j+m-s)! s! (m'-m+s)! (j-m'-s)!)
+                       * cos(b/2)^(2j+m-m'-2s) * sin(b/2)^(m'-m+2s)
+    """
+    j2, mp2, m2 = _int(j), _int(mp), _int(m)
+    if abs(mp2) > j2 or abs(m2) > j2:
+        return 0.0
+    c, s_ = cos(beta / 2), sin(beta / 2)
+    pref = sqrt(factorial((j2 + mp2) // 2) * factorial((j2 - mp2) // 2)
+                * factorial((j2 + m2) // 2) * factorial((j2 - m2) // 2))
+    tot = 0.0
+    # s runs over the range where every factorial argument stays non-negative
+    for k in range(max(0, (m2 - mp2) // 2), min((j2 + m2) // 2, (j2 - mp2) // 2) + 1):
+        den = (factorial((j2 + m2) // 2 - k) * factorial(k)
+               * factorial(k + (mp2 - m2) // 2) * factorial((j2 - mp2) // 2 - k))
+        p_c = j2 + (m2 - mp2) // 2 - 2 * k          # 2j + m - m' - 2s, in halves
+        p_s = (mp2 - m2) // 2 + 2 * k
+        tot += ((-1) ** ((mp2 - m2) // 2 + k) * pref / den
+                * c ** p_c * s_ ** p_s)
+    return tot
+
+
 if __name__ == "__main__":
     # Checked against identities, not against remembered values. The first
     # version of this test compared three symbols to numbers I had written from
@@ -107,6 +137,27 @@ if __name__ == "__main__":
     a = wigner_3j(2, 1, 2, -2, 1, 1)          # columns (2,-2) (1,1) (2,1)
     check("3j cyclic shift", wigner_3j(1, 2, 2, 1, 1, -2), a)
     check("3j column swap", wigner_3j(1, 2, 2, 1, -2, 1), a * (-1) ** (2 + 1 + 2))
+
+    # Wigner d. Orthogonality holds at every angle; the explicit spin-1/2 and
+    # spin-1 matrices are textbook; d(0) is the identity and d(pi) the reversal.
+    from math import pi
+    for j in (0.5, 1, 1.5, 2):
+        n = _int(j)
+        for b in (0.3, pi / 2, 2.1):
+            for mp in range(-n, n + 1, 2):
+                s_ = sum(wigner_d(j, mp / 2, m / 2, b) ** 2 for m in range(-n, n + 1, 2))
+                check(f"d({j}) row m'={mp/2:+g} normalised at b={b:.2f}", s_, 1.0)
+    check("d(1/2) +1/2,+1/2 at pi/2", wigner_d(0.5, 0.5, 0.5, pi / 2), sqrt(2) / 2)
+    check("d(1/2) +1/2,-1/2 at pi/2", wigner_d(0.5, 0.5, -0.5, pi / 2), -sqrt(2) / 2)
+    check("d(1) 0,0 at b=0.3", wigner_d(1, 0, 0, 0.3), cos(0.3))
+    check("d(1) +1,-1 at b=0.3", wigner_d(1, 1, -1, 0.3), (1 - cos(0.3)) / 2)
+    check("d(2) +2,+2 identity at b=0", wigner_d(2, 2, 2, 0.0), 1.0)
+    check("d(2) +2,-2 reversal at b=pi", wigner_d(2, 2, -2, pi), 1.0)
+    # A spin-F state fully polarised along z, tipped onto the equator, has
+    # amplitudes sqrt(C(2F, F+m))/2^F. T/07 stands on this.
+    for m, want in ((2, 1 / 4), (1, 2 / 4), (0, sqrt(6) / 4), (-1, 2 / 4), (-2, 1 / 4)):
+        check(f"d(2) coherent-state amplitude m={m:+d}",
+              abs(wigner_d(2, m, 2, pi / 2)), want)
 
     print()
     print("  PASS" if ok else "  FAIL")

@@ -1,0 +1,312 @@
+{
+  "no": "T/07",
+  "slug": "t07-larmor-fid",
+  "title": "세차운동, 그리고 그것이 죽는 방식",
+  "subtitle": "LARMOR PRECESSION AND FREE INDUCTION DECAY",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/solve_larmor_fid.py",
+  "summary": "T/01부터 T/06까지는 원자를 편광시키는 이야기였습니다. 이건 나머지 절반 — 펌프를 끄고, 스핀을 적도로 눕히고, 그것이 흩어질 때까지 도는 것. 그 회전이 신호입니다.",
+  "question": "Zeeman 부준위는 정말 등간격입니까? 아니라면 네 개의 전이가 각자 다른 속도로 돌 텐데, 그 차이는 측정된 자기장에 얼마만큼의 오차로 나타납니까?",
+  "evidence": [
+    {
+      "claim": "g_J(5²S₁/₂) = 2.002331070(26), g_I = −0.0009951414(10)",
+      "class": "SOURCE_FACT",
+      "source": "Steck rev 2.3.4, Table 6. input/papers/steck-rb87-d-line-data-r2.3.4.pdf"
+    },
+    {
+      "claim": "μ_B = h · 1.39962449361(42) MHz/G, A(5²S₁/₂) = h · 3.417341305452145 GHz",
+      "class": "SOURCE_FACT",
+      "source": "같은 문서 Table 1(2018 CODATA)과 Table 5. ΔE_hfs = A(I+½) = 6.834682610904 GHz"
+    },
+    {
+      "claim": "g_F 식과 Breit–Rabi 식을 그대로 씁니다",
+      "class": "SOURCE_FACT",
+      "source": "같은 문서 식 (23), (26), (28). 식 (28)은 m = ±(I+½)에서만 유효한 별도 표현이고, 여기서는 식 (26)의 검산으로 씁니다"
+    },
+    {
+      "claim": "g_F(F=2) = +0.4998364, g_F(F=1) = −0.5018267",
+      "class": "CALCULATED",
+      "source": "식 (23)에 위 값들을 넣은 것. 핵항을 버리지 않았습니다 — 0.1% 수준이지만 이 계산이 다루는 효과가 그보다 작습니다"
+    },
+    {
+      "claim": "Larmor 기울기 6.99583 Hz/nT",
+      "class": "CALCULATED",
+      "source": "|g_F(2)| μ_B / h = 699583.3 Hz/G"
+    },
+    {
+      "claim": "시계 전이 이차 Zeeman 이동 575.15 Hz/G²",
+      "class": "SOURCE_FACT",
+      "source": "같은 문서 Table 6, Δω_clock/B² = 2π·575.15 Hz/G². 이 항목의 주된 검산 대상입니다"
+    },
+    {
+      "claim": "출발 인구분포는 T/05이 남긴 것을 그대로 읽습니다",
+      "class": "CALCULATED",
+      "source": "analysis/density-matrix.json의 δ=0, 10 mW/cm² 정상상태. F=2에 0.983, 그 중 0.945가 m=+2"
+    },
+    {
+      "claim": "T₂ = 1/Γ_g = 5.88 ms",
+      "class": "INFERRED",
+      "source": "Γ_g = 170 s⁻¹은 이 저장소에 있는 유일한 이완 수치이고, T/03에 세로 이완률로 들어왔습니다. 그것을 T₂로 쓰는 것은 T₁ = T₂를 가정하는 것입니다. 신뢰도 낮음"
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "정확한 준위 에너지",
+      "detail": "Breit–Rabi 식으로 8개 바닥 부준위를 직접 계산합니다. 일차 Zeeman으로 근사하지 않습니다 — 이 항목이 재려는 것이 바로 그 근사의 잔차이기 때문입니다."
+    },
+    {
+      "step": "02",
+      "name": "세 가지 방법으로 검산",
+      "detail": "m = ±2에서 식 (26)과 식 (28)이 4.8e−07 Hz 안에서 일치합니다(6.8 GHz 위에서의 상대오차 1e−16). 시계 전이 이동은 575.1459 Hz/G²가 나와 Steck의 표값 575.15와 맞습니다. 그리고 인접 Zeeman 전이의 간격은 143.7865 Hz/G²로 시계 이동의 정확히 1/4입니다 — 어디에도 넣지 않은 관계입니다."
+    },
+    {
+      "step": "03",
+      "name": "Wigner d로 눕히기",
+      "detail": "펌핑된 상태는 m 대각 상태입니다. 세차운동하는 것은 대각선 바로 옆의 결맞음이고, 그것을 만드는 것이 회전입니다. ρ′ = D ρ D†에서 ρ′_{a,b} = Σ_m d_{a,m} d_{b,m} ρ_{m,m}. d는 scripts/wigner.py에 Racah 공식으로 직접 구현했고, 규격화·d(0)=1·d(π)=반전·스핀코히런트 진폭 √C(2F,F+m)/2^F로 검사합니다."
+    },
+    {
+      "step": "04",
+      "name": "π/2에서만 성립하는 대칭",
+      "detail": "β = π/2에서 d^j_{−m′,m}(π/2) = (−1)^{j+m} d^j_{m′,m}(π/2)입니다. 부호가 m′이 아니라 합산 지표 m에만 의존하므로 위 곱 안에서 제곱되어 사라지고, (m, m−1) 결맞음의 무게가 (−m+1, −m)의 무게와 정확히 같아집니다 — 출발 인구분포가 무엇이든. 수치로 확인한 비대칭은 4.7e−16입니다."
+    },
+    {
+      "step": "05",
+      "name": "신호 만들기",
+      "detail": "S(t) = Σ w_i cos(2π f_i t) e^{−t/T₂}. 반송파가 350 kHz라 그대로는 그릴 수 없어, 일차 Larmor 주파수로 내린 동상 성분을 그립니다 — 실제 복조기가 내놓는 것이자 주파수 맞춤이 실제로 보는 것입니다."
+    },
+    {
+      "step": "06",
+      "name": "그리고 틀어보기",
+      "detail": "β를 30°에서 150°까지 훑으면서 네 선의 무게중심이 일차 Larmor에서 얼마나 벗어나는지를 nT로 환산합니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "g_F(F=2)",
+      "value": "0.4998364",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "핵항 포함. 1/2로 놓으면 0.033% 틀립니다"
+    },
+    {
+      "name": "Larmor 기울기",
+      "value": "6.99583",
+      "unit": "Hz/nT",
+      "class": "CALCULATED",
+      "note": "지구 자기장 50 μT에서 349.79 kHz"
+    },
+    {
+      "name": "식 (26) 대 식 (28)",
+      "value": "4.8e−07",
+      "unit": "Hz",
+      "class": "CALCULATED",
+      "note": "m = ±2에서 0.1~50 G 전 구간. 배정밀도 상쇄 한계"
+    },
+    {
+      "name": "시계 전이 이동",
+      "value": "575.1459",
+      "unit": "Hz/G²",
+      "class": "CALCULATED",
+      "note": "Steck 표값 575.15와 일치"
+    },
+    {
+      "name": "인접 Zeeman 간격",
+      "value": "143.7865",
+      "unit": "Hz/G²",
+      "class": "CALCULATED",
+      "note": "시계 이동의 1/4 = 143.7875. 독립적으로 나온 결과입니다"
+    },
+    {
+      "name": "50 μT에서의 간격",
+      "value": "35.95",
+      "unit": "Hz",
+      "class": "CALCULATED",
+      "note": "네 선이 108 Hz에 걸쳐 있습니다"
+    },
+    {
+      "name": "선폭",
+      "value": "54.1",
+      "unit": "Hz",
+      "class": "INFERRED",
+      "note": "1/(πT₂), T₂ = 1/Γ_g. 간격보다 넓어서 네 선이 분해되지 않습니다"
+    },
+    {
+      "name": "π/2 무게",
+      "value": "0.246 · 0.707 · 0.707 · 0.246",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "합 1.9067 = 눕히기 전의 ⟨F_z⟩. 두 값이 1e−16 안에서 같습니다"
+    },
+    {
+      "name": "π/2 무게 비대칭",
+      "value": "4.7e−16",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "이상적 |2,+2⟩, T/05 분포, 임의의 치우친 분포 모두에서"
+    },
+    {
+      "name": "틀어짐 오차",
+      "value": "0.130",
+      "unit": "nT/도",
+      "class": "CALCULATED",
+      "note": "50 μT에서. π/2 근처에서 선형이고 90°를 기준으로 반대칭"
+    },
+    {
+      "name": "5° 틀어지면",
+      "value": "0.65",
+      "unit": "nT",
+      "class": "CALCULATED",
+      "note": "50 μT의 13 ppm. 평균을 더 내도 줄지 않습니다"
+    },
+    {
+      "name": "장 의존성",
+      "value": "B²",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "0.05·0.5·1.0 G에서 0.0065·0.652·2.606 nT. 5 μT에서는 100배 작습니다"
+    },
+    {
+      "name": "F=1 선의 위치",
+      "value": "+1393",
+      "unit": "Hz",
+      "class": "CALCULATED",
+      "note": "F=2 중심에서. |g_F|가 0.40% 크고 회전 방향이 반대입니다"
+    },
+    {
+      "name": "F=1이 차지하는 신호",
+      "value": "0.26",
+      "unit": "%",
+      "class": "CALCULATED",
+      "note": "T/05 분포 기준. 선폭의 26배 떨어져 있어 겹치지 않습니다"
+    }
+  ],
+  "geometry": {
+    "tolerance": "Steck 표값과의 최대 불일치 5e−06 상대 (시계 전이 이동)",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-tip-error.svg",
+        "view": "TIP ERROR → FIELD ERROR",
+        "alt": "틀어짐 각도에 대한 겉보기 자기장 오차 곡선. 정확히 90°에서 0을 지나고 5° 벗어나면 0.65 nT",
+        "note": "이 항목의 결론입니다. 오차가 펄스 안에 있어서 반복해도 줄지 않습니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-zeeman-fan.svg",
+        "view": "SECOND-ORDER ZEEMAN",
+        "alt": "자기장에 대한 네 개의 F=2 전이 주파수에서 일차 Larmor를 뺀 값. 1 G에서 ±215 Hz까지 벌어진다",
+        "note": "간격이 시계 이동의 1/4이라는 것이 검산입니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-fid.svg",
+        "view": "THE DECAY",
+        "alt": "복조된 세차운동 신호. 이완을 끈 회색 곡선도 16 ms에서 0을 지나 음수로 내려간다",
+        "note": "회색 곡선이 죽는 것은 이완이 아니라 네 선의 맥놀이입니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-fid-spectrum.svg",
+        "view": "INSIDE THE LINE",
+        "alt": "두 가지 결맞음 시간에서의 세차운동 스펙트럼. 짧은 쪽은 하나의 봉우리, 긴 쪽은 네 개의 선",
+        "note": "구조는 분해되지 않아도 사라지지 않습니다"
+      }
+    ],
+    "parametric": [
+      "g_F = g_J·[F(F+1)−I(I+1)+J(J+1)]/[2F(F+1)] + g_I·[F(F+1)+I(I+1)−J(J+1)]/[2F(F+1)]",
+      "E = −ΔE/[2(2I+1)] + g_I μ_B m B ± (ΔE/2)·√(1 + 4mx/(2I+1) + x²),  x = (g_J−g_I)μ_B B/ΔE",
+      "ρ′_{a,b} = Σ_m d^F_{a,m}(β) d^F_{b,m}(β) ρ_{m,m}",
+      "w(m,m−1) = √(F(F+1)−m(m−1)) · ρ′_{m,m−1}",
+      "d^j_{−m′,m}(π/2) = (−1)^{j+m} d^j_{m′,m}(π/2)",
+      "S(t) = Σ w_i cos(2π f_i t) · e^{−t/T₂}"
+    ],
+    "parametric_note": "여섯 줄 중 다섯 줄이 출처에 있거나 거기서 유도됩니다. 자유롭게 고른 값은 T₂ 하나뿐입니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "Breit–Rabi 두 표현",
+        "result": "≤ 4.8e−07 Hz",
+        "how": "m = ±2에서 식 (26)과 식 (28)을 0.1·0.5·5·50 G에서 비교"
+      },
+      {
+        "name": "시계 전이 이동",
+        "result": "575.1459 대 575.15 Hz/G²",
+        "how": "F=2 m=0과 F=1 m=0의 정확한 차이를 Steck Table 6과 비교"
+      },
+      {
+        "name": "Zeeman 간격 = 시계/4",
+        "result": "143.7865 대 143.7875 Hz/G²",
+        "how": "넣지 않은 관계입니다. 대각화 결과에서 나옵니다"
+      },
+      {
+        "name": "Wigner d",
+        "result": "스핀 1/2·1·3/2·2 전부 통과",
+        "how": "행 규격화, d(0)=항등, d(π)=반전, 스핀코히런트 진폭 √C(2F,F+m)/2^F"
+      },
+      {
+        "name": "회전 후 ⟨F_x⟩",
+        "result": "|차이| = 4.4e−16",
+        "how": "π/2 회전 후의 가로 자화가 회전 전 ⟨F_z⟩와 같아야 합니다"
+      },
+      {
+        "name": "π/2 무게 대칭",
+        "result": "4.7e−16",
+        "how": "서로 다른 세 인구분포에서 w₁−w₄와 w₂−w₃"
+      },
+      {
+        "name": "B² 비례",
+        "result": "0.5→1.0 G에서 4.00배",
+        "how": "95° 틀어짐 오차를 세 자기장에서"
+      },
+      {
+        "name": "그림 프레임",
+        "result": "16개 그림의 모든 라벨이 뷰박스 안",
+        "how": "scripts/validators/svg_fit.mjs"
+      }
+    ]
+  },
+  "unknown": [
+    "T₂ = 1/Γ_g는 가정입니다. Γ_g는 세로 이완률로 들어왔고 T₁ = T₂는 일반적으로 참이 아닙니다. 선폭과 맥놀이의 상대적 비중이 여기에 직접 달려 있습니다.",
+    "스핀 교환을 넣지 않았습니다. 150 °C의 ⁸⁷Rb 밀도에서 Rb–Rb 스핀 교환은 주요 이완 경로이자 그 자체로 주파수 이동을 만듭니다. 단면적을 출처에서 확인하지 못해 계산하지 않았습니다.",
+    "빛 이동을 넣지 않았습니다. 프로브 빔이 Larmor 주파수를 옮기고, 그 크기는 프로브 세기와 detuning에 달려 있습니다. 이 항목이 재는 틀어짐 오차와 같은 크기일 수 있습니다.",
+    "틀어짐 펄스를 순간적인 것으로 다뤘습니다. 유한한 길이의 펄스는 그동안에도 세차운동하므로 실제 회전축이 기웁니다.",
+    "T/06이 보인 공간 의존성을 무시했습니다. 자기장은 균일해도 편광은 그렇지 않으므로, 셀 앞뒤가 같은 주파수에 서로 다른 진폭으로 기여합니다. 주파수는 바뀌지 않지만 신호 대 잡음은 바뀝니다.",
+    "F=1을 독립된 선으로만 다뤘습니다. 1393 Hz 떨어져 있어 겹치지는 않지만, 맞춤 구간을 넓게 잡으면 끌려갑니다.",
+    "감도를 계산하지 않았습니다. 신호는 여기 있지만 잡음이 없습니다 — 광자 산탄 잡음과 스핀 투영 잡음이 다음 차례입니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/solve_larmor_fid.py",
+      "note": "전체 풀이. --check로 재실행 동일성 검사"
+    },
+    {
+      "path": "scripts/wigner.py",
+      "note": "3-j·6-j에 이어 작은 d 행렬. 실행하면 전부 자가 검사"
+    },
+    {
+      "path": "analysis/larmor-fid.json",
+      "note": "모든 수치와 검산 결과"
+    },
+    {
+      "path": "assets/diagrams/rb87-tip-error.svg",
+      "note": "틀어짐 각도 대 자기장 오차"
+    },
+    {
+      "path": "assets/diagrams/rb87-zeeman-fan.svg",
+      "note": "이차 Zeeman 벌어짐"
+    },
+    {
+      "path": "assets/diagrams/rb87-fid.svg",
+      "note": "복조된 자유 감쇠"
+    },
+    {
+      "path": "assets/diagrams/rb87-fid-spectrum.svg",
+      "note": "선 안의 구조"
+    }
+  ],
+  "en": {
+    "title": "Precession, and How It Dies",
+    "summary": "T/01 through T/06 were about getting the atoms polarised. This is the other half: turn the pump off, tip the spins onto the equator, and let them precess until they dephase. That rotation is the signal.",
+    "question": "Are the Zeeman sublevels really evenly spaced? If not, the four transitions precess at different rates - and how much error does that put on the measured field?"
+  }
+}

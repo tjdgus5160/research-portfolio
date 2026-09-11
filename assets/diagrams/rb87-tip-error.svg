@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="tpt tpd" class="lvl">
+<title id="tpt">Field error against tip angle</title><desc id="tpd">Apparent magnetic field error against the tip angle of the pulse, passing through zero at exactly ninety degrees and rising to about 0.65 nanotesla five degrees away.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">WHAT A TIP-ANGLE ERROR COSTS</text>
+<text x="744" y="22" class="xs" text-anchor="end">50 μT, THE FIELD AT THE SURFACE</text>
+<line x1="104" y1="320.0" x2="660" y2="320.0" class="dash"/>
+<text x="96" y="324.0" class="xs" text-anchor="end">-8</text>
+<line x1="104" y1="255.5" x2="660" y2="255.5" class="dash"/>
+<text x="96" y="259.5" class="xs" text-anchor="end">-4</text>
+<line x1="104" y1="191.0" x2="660" y2="191.0" class="dash"/>
+<text x="96" y="195.0" class="xs" text-anchor="end">+0</text>
+<line x1="104" y1="126.5" x2="660" y2="126.5" class="dash"/>
+<text x="96" y="130.5" class="xs" text-anchor="end">+4</text>
+<line x1="104" y1="62.0" x2="660" y2="62.0" class="dash"/>
+<text x="96" y="66.0" class="xs" text-anchor="end">+8</text>
+<text x="104.0" y="338" class="xs" text-anchor="middle">30°</text>
+<text x="243.0" y="338" class="xs" text-anchor="middle">60°</text>
+<text x="382.0" y="338" class="xs" text-anchor="middle">90°</text>
+<text x="521.0" y="338" class="xs" text-anchor="middle">120°</text>
+<text x="660.0" y="338" class="xs" text-anchor="middle">150°</text>
+<line x1="104" y1="320" x2="660" y2="320" class="thin"/>
+<line x1="104" y1="320" x2="104" y2="62" class="thin"/>
+<text x="382.0" y="358" class="sm" text-anchor="middle">tip angle / degrees</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">apparent field error / nT</text>
+<polyline class="l" points="104.0,295.5 106.3,295.0 108.6,294.4 111.0,293.9 113.3,293.3 115.6,292.8 117.9,292.2 120.2,291.6 122.5,291.1 124.8,290.5 127.2,289.9 129.5,289.3 131.8,288.6 134.1,288.0 136.4,287.4 138.8,286.7 141.1,286.1 143.4,285.4 145.7,284.8 148.0,284.1 150.3,283.5 152.7,282.8 155.0,282.1 157.3,281.4 159.6,280.7 161.9,280.0 164.2,279.3 166.6,278.5 168.9,277.8 171.2,277.1 173.5,276.3 175.8,275.6 178.1,274.8 180.4,274.1 182.8,273.3 185.1,272.5 187.4,271.8 189.7,271.0 192.0,270.2 194.3,269.4 196.7,268.6 199.0,267.8 201.3,267.0 203.6,266.1 205.9,265.3 208.2,264.5 210.6,263.6 212.9,262.8 215.2,261.9 217.5,261.1 219.8,260.2 222.2,259.4 224.5,258.5 226.8,257.6 229.1,256.7 231.4,255.8 233.7,255.0 236.1,254.1 238.4,253.2 240.7,252.3 243.0,251.3 245.3,250.4 247.6,249.5 249.9,248.6 252.3,247.7 254.6,246.7 256.9,245.8 259.2,244.9 261.5,243.9 263.9,243.0 266.2,242.0 268.5,241.1 270.8,240.1 273.1,239.1 275.4,238.2 277.8,237.2 280.1,236.2 282.4,235.2 284.7,234.3 287.0,233.3 289.3,232.3 291.6,231.3 294.0,230.3 296.3,229.3 298.6,228.3 300.9,227.3 303.2,226.3 305.6,225.3 307.9,224.3 310.2,223.3 312.5,222.2 314.8,221.2 317.1,220.2 319.4,219.2 321.8,218.2 324.1,217.1 326.4,216.1 328.7,215.1 331.0,214.0 333.4,213.0 335.7,212.0 338.0,210.9 340.3,209.9 342.6,208.8 344.9,207.8 347.2,206.8 349.6,205.7 351.9,204.7 354.2,203.6 356.5,202.6 358.8,201.5 361.1,200.5 363.5,199.4 365.8,198.4 368.1,197.3 370.4,196.3 372.7,195.2 375.1,194.2 377.4,193.1 379.7,192.1 382.0,191.0 384.3,190.0 386.6,188.9 388.9,187.8 391.3,186.8 393.6,185.7 395.9,184.7 398.2,183.6 400.5,182.6 402.9,181.5 405.2,180.5 407.5,179.4 409.8,178.4 412.1,177.3 414.4,176.3 416.8,175.3 419.1,174.2 421.4,173.2 423.7,172.1 426.0,171.1 428.3,170.0 430.6,169.0 433.0,168.0 435.3,166.9 437.6,165.9 439.9,164.9 442.2,163.9 444.6,162.8 446.9,161.8 449.2,160.8 451.5,159.8 453.8,158.8 456.1,157.7 458.4,156.7 460.8,155.7 463.1,154.7 465.4,153.7 467.7,152.7 470.0,151.7 472.4,150.7 474.7,149.7 477.0,148.7 479.3,147.8 481.6,146.8 483.9,145.8 486.2,144.8 488.6,143.8 490.9,142.9 493.2,141.9 495.5,141.0 497.8,140.0 500.1,139.0 502.5,138.1 504.8,137.2 507.1,136.2 509.4,135.3 511.7,134.3 514.0,133.4 516.4,132.5 518.7,131.6 521.0,130.7 523.3,129.7 525.6,128.8 528.0,127.9 530.3,127.0 532.6,126.2 534.9,125.3 537.2,124.4 539.5,123.5 541.9,122.6 544.2,121.8 546.5,120.9 548.8,120.1 551.1,119.2 553.4,118.4 555.8,117.5 558.1,116.7 560.4,115.9 562.7,115.0 565.0,114.2 567.3,113.4 569.6,112.6 572.0,111.8 574.3,111.0 576.6,110.2 578.9,109.5 581.2,108.7 583.5,107.9 585.9,107.2 588.2,106.4 590.5,105.7 592.8,104.9 595.1,104.2 597.5,103.4 599.8,102.7 602.1,102.0 604.4,101.3 606.7,100.6 609.0,99.9 611.4,99.2 613.7,98.5 616.0,97.9 618.3,97.2 620.6,96.5 622.9,95.9 625.2,95.2 627.6,94.6 629.9,94.0 632.2,93.4 634.5,92.7 636.8,92.1 639.1,91.5 641.5,90.9 643.8,90.4 646.1,89.8 648.4,89.2 650.7,88.6 653.0,88.1 655.4,87.5 657.7,87.0 660.0,86.5"/>
+<line x1="382.0" y1="62" x2="382.0" y2="320" class="dash"/>
+<circle cx="382.0" cy="191.0" r="3" fill="var(--t0,#0d0d0d)"/>
+<text x="376" y="207" class="xs" text-anchor="end">exactly zero at π/2</text>
+<circle cx="405.2" cy="180.5" r="2.5" fill="var(--t0,#0d0d0d)"/>
+<text x="413" y="172" class="xs">5° off → +0.65 nT</text>
+<text x="16" y="376" class="xs">At exactly π/2 the coherence weights are symmetric whatever the pumping left behind, so the second-order Zeeman cancels out of the centroid.</text>
+<text x="16" y="390" class="xs">Away from π/2 it does not, and the field reads 0.130 nT per degree. Repeating the measurement does not help: the error is in the pulse.</text>
+<text x="16" y="404" class="xs">It scales as B², so the same pulse error costs a hundred times less at 5 μT — and four times more at 1 gauss.</text>
+</svg>

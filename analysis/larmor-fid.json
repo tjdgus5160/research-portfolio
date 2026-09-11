@@ -1,0 +1,71 @@
+{
+  "sources": {
+    "g_J": 2.00233107,
+    "g_I": -0.0009951414,
+    "mu_B_Hz_per_G": 1399624.49361,
+    "A_hfs_S_Hz": 3417341305.452145,
+    "Delta_E_hfs_Hz": 6834682610.90429,
+    "note": "Steck rev 2.3.4 Tables 1, 2, 5, 6 and equations 23, 26, 28, 29"
+  },
+  "g_F": {
+    "2": 0.49983641144999996,
+    "1": -0.5018266942499999
+  },
+  "larmor_Hz_per_G": 699583.2842635458,
+  "larmor_Hz_per_nT": 6.9958328426354575,
+  "checks": {
+    "eq26_vs_eq28_max_Hz": 0.0,
+    "clock_shift_Hz_per_G2": 575.145928,
+    "clock_shift_tabulated": 575.15,
+    "zeeman_gap_Hz_per_G2": 143.786484,
+    "quarter_of_clock": 143.7875,
+    "pi2_weight_asymmetry": 0.0,
+    "fx_after_equals_fz_before": 0.0
+  },
+  "at_0p5_G": {
+    "linear_Hz": 349791.6421317729,
+    "F2_lines_Hz": [
+      349737.728,
+      349773.663,
+      349809.61,
+      349845.568
+    ],
+    "F1_lines_Hz": [
+      351166.488,
+      351202.434
+    ],
+    "F2_minus_F1_Hz": 1392.8,
+    "adjacent_gap_Hz": 35.9466,
+    "linewidth_Hz": 54.11,
+    "F2_weights": [
+      0.246018,
+      0.707317,
+      0.707317,
+      0.246017
+    ],
+    "F1_weights": [
+      0.002435,
+      0.002435
+    ],
+    "F1_fraction_of_signal": 0.002554
+  },
+  "T2_s": 0.0058823529411764705,
+  "T2_provenance": "INFERRED. Gamma_g = 170 1/s is the only relaxation number in this repository and it entered T/03 as a longitudinal ground-state rate. Using 1/Gamma_g as T2 assumes T1 = T2.",
+  "tip_error_nT_at_50uT": {
+    "60": -3.74249,
+    "80": -1.30007,
+    "85": -0.65272,
+    "89": -0.13101,
+    "90": -0.00038,
+    "91": 0.13025,
+    "95": 0.65197,
+    "100": 1.29937,
+    "120": 3.74229
+  },
+  "tip_error_slope_nT_per_deg": 0.13039,
+  "tip_error_B_scaling": {
+    "0.05": 0.006523,
+    "0.5": 0.651968,
+    "1.0": 2.606375
+  }
+}
