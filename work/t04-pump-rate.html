@@ -62,6 +62,10 @@
   text{fill:var(--t0,#0d0d0d);font-size:11px}
   .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
   .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
 </style>
 <text x="16" y="22" class="xs">PHOTON SCATTERING RATE PER ATOM, D1 PUMP</text>
 <text x="744" y="22" class="xs" text-anchor="end">650 Torr N2</text>
@@ -110,6 +114,10 @@
   text{fill:var(--t0,#0d0d0d);font-size:11px}
   .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
   .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
 </style>
 <text x="16" y="22" class="xs">STRETCHED-STATE POPULATION P(F=2, mF=+2)</text>
 <text x="744" y="22" class="xs" text-anchor="end">Γg = 170 s⁻¹ (model input)</text>
@@ -147,7 +155,7 @@
 <text x="16" y="420" class="xs">It was solved for independently at 10, 20, 30 and 50 mW/cm² and came back 9.9, 10.3, 10.2 and 9.7.</text>
 </svg><figcaption><b>POPULATION</b>20 mW/cm² 이상이면 1 ms가 시상수의 서너 배입니다</figcaption></figure></div><ul class="e-par"><li>σ_int = (π e² / 4πε₀ m_e c) · f = 2.654×10⁻² · f  cm²Hz</li><li>σ_peak = 2 σ_int / (π Δν)</li><li>Φ = I / (hc/λ)</li><li>R = σ_peak · Φ</li><li>dP/dt = (R/10)(1−P) − Γ_g P</li><li>τ = 1/(R/10 + Γ_g),   P(∞) = (R/10)/(R/10 + Γ_g)</li></ul><p class="e-note">앞의 네 줄에는 맞춘 상수가 없습니다. 마지막 두 줄에만 모델 입력 두 개가 들어갑니다.</p><p class="e-note">허용오차 검토 대상 계산의 1 ms 값과 최대 0.005 차이</p></section>
 <section class="e-sec"><h2 class="kicker">06 — 검증</h2><p class="e-verdict">PASS</p><div class="e-scroll"><table class="e-nums"><thead><tr><th scope="col">검사</th><th scope="col">결과</th><th scope="col">방법</th></tr></thead><tbody><tr><th scope="row">검토 계산과의 1 ms 대조</th><td class="v">Δ ≤ 0.005</td><td class="n">10·20·30·50 mW/cm²에서 0.756/0.920/0.960/0.979 대 0.760/0.915/0.959/0.980</td></tr><tr><th scope="row">산란 횟수 인자의 일관성</th><td class="v">9.7–10.3</td><td class="n">네 세기에서 각각 따로 풀었습니다. 흩어졌다면 두 모델의 차이가 이 인자로 설명되지 않는다는 뜻이었을 것입니다.</td></tr><tr><th scope="row">단면적</th><td class="v">4.076×10⁻¹³ cm²</td><td class="n">진동자 강도에서 닫힌 형태로 계산, 맞춘 값 없음</td></tr><tr><th scope="row">극한</th><td class="v">PASS</td><td class="n">t→0에서 R(t)→R₀, t→∞에서 R(t)→R₀(1−P∞), P는 항상 0과 1 사이</td></tr></tbody></table></div></section>
-<section class="e-sec"><h2 class="kicker">07 — 아직 모르는 것</h2><ul class="sq e-unk"><li>Γ_g = 170 s⁻¹과 산란 횟수 10회는 모델 입력입니다. 시상수와 정상상태 값이 둘 다에 의존하므로, 이 값들이 틀리면 곡선의 모양이 아니라 눈금이 틀립니다.</li><li>셀 전체에서 세기가 균일하다고 가정했습니다. T/03이 지적했듯 120 °C 이상에서는 앞쪽 원자가 펌프를 먼저 먹습니다.</li><li>선 중심에 정확히 맞춘 경우입니다. T/03의 −3.6 GHz 최적 detuning에서는 단면적이 그만큼 줄어듭니다.</li><li>재펌핑 경로를 하나의 인자로 뭉뚱그렸습니다. 8개 Zeeman 준위를 각각 푸는 계산이 아닙니다.</li></ul></section>
+<section class="e-sec"><h2 class="kicker">07 — 아직 모르는 것</h2><ul class="sq e-unk"><li>Γ_g = 170 s⁻¹과 산란 횟수 10회는 모델 입력입니다. 시상수와 정상상태 값이 둘 다에 의존하므로, 이 값들이 틀리면 곡선의 모양이 아니라 눈금이 틀립니다.</li><li>셀 전체에서 세기가 균일하다고 가정했습니다. T/03이 지적했듯 120 °C 이상에서는 앞쪽 원자가 펌프를 먼저 먹습니다.</li><li>선 중심에 정확히 맞춘 경우입니다. T/03의 −3.6 GHz 최적 detuning에서는 단면적이 그만큼 줄어듭니다.</li><li>재펌핑 경로를 하나의 인자로 뭉뚱그렸습니다. 8개 Zeeman 준위를 각각 푸는 계산이 아닙니다.</li><li>T/06이 이 계산의 산란 횟수 10을 준위별 풀이로 재보니 5.6~5.8입니다. 여기 실린 1 ms 인구값들은 그만큼 비관적입니다.</li></ul></section>
 <section class="e-sec"><h2 class="kicker">08 — 산출물</h2><ul class="e-art"><li><code>scripts/calc_pump_rate.py</code><span>계산과 두 그래프. --check로 재현성 확인</span></li><li><code>analysis/pump-rate.json</code><span>네 세기의 R₀·τ·P(1ms)·P(∞)</span></li><li><code>assets/diagrams/rb87-pump-rate.svg</code><span>산란율의 시간 전개</span></li><li><code>assets/diagrams/rb87-pump-population.svg</code><span>인구의 시간 전개</span></li></ul></section>
 <nav class="e-nav" aria-label="다른 항목">
 <a href="t03-high-pressure-pumping.html">◀ T/03 650 Torr N₂ 셀에서의 광펌핑</a>

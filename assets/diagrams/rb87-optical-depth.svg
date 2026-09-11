@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 396"
+  role="img" aria-labelledby="odt odd" class="lvl">
+<title id="odt">Optical depth against cell temperature</title><desc id="odd">Optical depth of a 5.5 mm rubidium path against temperature, on a log scale, for natural and enriched 87Rb. Enrichment shifts the curve up by a factor of 2.5, moving the temperature at which the cell becomes optically thick down by about twenty degrees.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">OPTICAL DEPTH OF A 5.5 mm PATH</text>
+<text x="744" y="22" class="xs" text-anchor="end">LOG SCALE</text>
+<line x1="96" y1="300" x2="660" y2="300" class="dash"/>
+<text x="88" y="304" class="xs" text-anchor="end">0.01</text>
+<line x1="96" y1="240" x2="660" y2="240" class="dash"/>
+<text x="88" y="244" class="xs" text-anchor="end">0.1</text>
+<line x1="96" y1="180" x2="660" y2="180" class="dash"/>
+<text x="88" y="184" class="xs" text-anchor="end">1</text>
+<line x1="96" y1="120" x2="660" y2="120" class="dash"/>
+<text x="88" y="124" class="xs" text-anchor="end">10</text>
+<line x1="96" y1="60" x2="660" y2="60" class="dash"/>
+<text x="88" y="64" class="xs" text-anchor="end">100</text>
+<text x="96" y="318" class="xs" text-anchor="middle">60</text>
+<text x="209" y="318" class="xs" text-anchor="middle">80</text>
+<text x="322" y="318" class="xs" text-anchor="middle">100</text>
+<text x="434" y="318" class="xs" text-anchor="middle">120</text>
+<text x="547" y="318" class="xs" text-anchor="middle">140</text>
+<text x="660" y="318" class="xs" text-anchor="middle">160</text>
+<line x1="96" y1="300" x2="660" y2="300" class="thin"/>
+<line x1="96" y1="300" x2="96" y2="60" class="thin"/>
+<text x="378.0" y="338" class="sm" text-anchor="middle">cell temperature / °C</text>
+<text x="26" y="180.0" class="sm" transform="rotate(-90 26 180.0)" text-anchor="middle">optical depth</text>
+<polyline class="m" points="96.0,280.6 107.3,276.4 118.6,272.3 129.8,268.2 141.1,264.1 152.4,260.1 163.7,256.2 175.0,252.3 186.2,248.5 197.5,244.7 208.8,240.9 220.1,237.2 231.4,233.5 242.6,229.9 253.9,226.3 265.2,222.7 276.5,219.2 287.8,215.7 299.0,212.3 310.3,208.9 321.6,205.5 332.9,202.2 344.2,198.9 355.4,195.7 366.7,192.5 378.0,189.3 389.3,186.1 400.6,183.0 411.8,179.9 423.1,176.9 434.4,173.9 445.7,170.9 457.0,167.9 468.2,165.0 479.5,162.1 490.8,159.2 502.1,156.4 513.4,153.6 524.6,150.8 535.9,148.0 547.2,145.3 558.5,142.6 569.8,139.9 581.0,137.3 592.3,134.7 603.6,132.1 614.9,129.5 626.2,126.9 637.4,124.4 648.7,121.9 660.0,119.4"/>
+<text x="260" y="250.3" class="xs" text-anchor="start">natural, 27.8% 87Rb</text>
+<polyline class="l" points="96.0,256.8 107.3,252.6 118.6,248.5 129.8,244.4 141.1,240.4 152.4,236.4 163.7,232.4 175.0,228.5 186.2,224.7 197.5,220.9 208.8,217.1 220.1,213.4 231.4,209.7 242.6,206.1 253.9,202.5 265.2,198.9 276.5,195.4 287.8,192.0 299.0,188.5 310.3,185.1 321.6,181.8 332.9,178.4 344.2,175.2 355.4,171.9 366.7,168.7 378.0,165.5 389.3,162.4 400.6,159.2 411.8,156.2 423.1,153.1 434.4,150.1 445.7,147.1 457.0,144.1 468.2,141.2 479.5,138.3 490.8,135.4 502.1,132.6 513.4,129.8 524.6,127.0 535.9,124.3 547.2,121.5 558.5,118.8 569.8,116.2 581.0,113.5 592.3,110.9 603.6,108.3 614.9,105.7 626.2,103.2 637.4,100.6 648.7,98.1 660.0,95.7"/>
+<text x="225" y="197.7" class="xs" text-anchor="end">enriched, 69.3%</text>
+<line x1="96" y1="151" x2="660" y2="151" class="dash"/>
+<text x="102" y="146" class="xs">OD 3 — where an unpumped cell would go dark</text>
+<line x1="96" y1="120" x2="660" y2="120" class="thin"/>
+<text x="102" y="115" class="xs">OD 10 — where a pumped one does, at 30 mW/cm²</text>
+<text x="16" y="358" class="xs">Density from the model Steck quotes, stated accurate to ±5% over 298–550 K. Cross section from T/04.</text>
+<text x="16" y="372" class="xs">The gap between the curves is one assumption: whether the cell is isotopically enriched. It moves the useful temperature by ~20 °C.</text>
+<text x="16" y="386" class="xs">The two thresholds differ because a polarised atom stops absorbing. Bleaching buys about 20 °C of headroom over the unpumped estimate.</text>
+</svg>

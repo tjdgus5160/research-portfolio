@@ -2,6 +2,9 @@
    grid; nothing animates smoothly, because the point is that it cannot. */
 (() => {
   'use strict';
+  // Everything that hides content is scoped to html.js, so nothing is hidden
+  // unless this line has run. Set before anything else touches the DOM.
+  document.documentElement.classList.add('js');
   const mq = matchMedia('(prefers-reduced-motion: reduce)');
   let still = mq.matches;
   // read once was not enough: turning it on mid-visit left every animation and

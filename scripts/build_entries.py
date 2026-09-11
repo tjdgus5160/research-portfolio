@@ -190,16 +190,21 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
             "</dl>"]))
 
     if e.get("correction"):
-        c = e["correction"]
+        # One entry can be corrected more than once, so this takes a list as
+        # well as a single record. Newest first; nothing is ever replaced.
+        cs = e["correction"]
+        cs = cs if isinstance(cs, list) else [cs]
+        cs = sorted(cs, key=lambda c: c.get("date", ""), reverse=True)
         n = "08" if e.get("defect") else "07"
-        sec(n, "정정 기록", "".join([
-            f'<p class="e-q">{esc(c["what"])}</p>',
-            '<dl class="e-meta wide">',
-            f'<div><dt>언제</dt><dd>{esc(c.get("date",""))}</dd></div>',
-            f'<div><dt>왜 틀렸나</dt><dd>{esc(c.get("why",""))}</dd></div>',
-            f'<div><dt>어쩌다</dt><dd>{esc(c.get("how",""))}</dd></div>',
-            f'<div><dt>누가 찾았나</dt><dd>{esc(c.get("found_by",""))}</dd></div>',
-            "</dl>"]))
+        sec(n, "정정 기록", "".join(
+            "".join([
+                f'<p class="e-q">{esc(c["what"])}</p>',
+                '<dl class="e-meta wide">',
+                f'<div><dt>언제</dt><dd>{esc(c.get("date",""))}</dd></div>',
+                f'<div><dt>왜 틀렸나</dt><dd>{esc(c.get("why",""))}</dd></div>',
+                f'<div><dt>어쩌다</dt><dd>{esc(c.get("how",""))}</dd></div>',
+                f'<div><dt>누가 찾았나</dt><dd>{esc(c.get("found_by",""))}</dd></div>',
+                "</dl>"]) for c in cs))
 
     if e.get("unknown"):
         n = str(7 + bool(e.get("defect")) + bool(e.get("correction"))).zfill(2)

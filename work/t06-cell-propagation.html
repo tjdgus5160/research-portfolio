@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko" data-pal="mono">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>T/06 셀 안에서 빛이 줄어들 때 — SHP®</title>
+<meta name="description" content="T/03과 T/04이 둘 다 다음 차례로 지목한 것 — 펌프 세기가 셀 전체에서 균일하다는 가정을 걷어냅니다. 빔과 원자를 함께 적분하면, 셀은 스스로 길을 뚫습니다." />
+<link rel="icon" href="../assets/gb/wordmark.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../entry.css" />
+<link rel="stylesheet" href="../decor.css" />
+<link rel="stylesheet" href="../crt.css" />
+<link rel="stylesheet" href="../frames.css" />
+<link rel="stylesheet" href="../gameboy.css" />
+</head>
+<body class="entry">
+<div class="panel" aria-hidden="true">
+  <div class="panel-mask"></div><div class="panel-vig"></div>
+  <div class="panel-glass"></div><div class="panel-curve"></div>
+</div>
+<a class="skip" href="#main">본문으로 건너뛰기</a>
+<header class="bar">
+  <div class="bar-in">
+    <a class="mark" href="../index.html" aria-label="SHP, 처음으로">
+      <span class="mark-px" aria-hidden="true"></span><span class="mark-tx">SHP®</span>
+    </a>
+    <p class="bar-meta"><span>T/06</span><b aria-hidden="true"></b><span>2026-09</span></p>
+    <nav class="bar-nav" aria-label="주요">
+      <a href="../index.html#clients">← STAGE SELECT</a>
+    </nav>
+    <button class="snd" type="button" aria-pressed="false" title="소리">
+      <span class="snd-px" aria-hidden="true"></span>
+      <span class="sr-only">소리 켜기 / 끄기</span>
+    </button>
+  </div>
+</header>
+<main id="main">
+  <section class="e-head">
+    <p class="kicker">T/06 — SPATIAL PUMP DEPLETION</p>
+    <h1 class="e-title">셀 안에서 빛이 줄어들 때</h1>
+    <p class="e-sum">T/03과 T/04이 둘 다 다음 차례로 지목한 것 — 펌프 세기가 셀 전체에서 균일하다는 가정을 걷어냅니다. 빔과 원자를 함께 적분하면, 셀은 스스로 길을 뚫습니다.</p>
+    <dl class="e-meta">
+<div><dt>REPO</dt><dd>scripts/solve_cell_propagation.py</dd></div>
+<div><dt>STATUS</dt><dd>PASS</dd></div>
+<div><dt>DATE</dt><dd>2026-09</dd></div>
+</dl></section>
+<section class="e-sec"><h2 class="kicker">01 — 무엇을 물었나</h2><p class="e-q">앞쪽 원자가 펌프를 먼저 먹습니다. 그러면 뒤쪽은 언제부터 어두워지고, T/03이 찾은 −3.6 GHz 최적 detuning은 그 때문에 어디로 옮겨갑니까?</p></section>
+<section class="e-sec"><h2 class="kicker">02 — 근거</h2><dl class="e-legend"><div><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><dd>출처에 적혀 있는 값</dd></div><div><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><dd>다른 값에서 유도된 값</dd></div><div><abbr class="cls c-inferred" title="INFERRED — 근거를 밝힌 가정">INF</abbr><dd>근거를 밝힌 가정</dd></div><div><abbr class="cls c-illustrative" title="ILLUSTRATIVE — 그림을 위한 것, 물리적 주장 없음">ILL</abbr><dd>그림을 위한 것, 물리적 주장 없음</dd></div></dl><ul class="e-ev"><li><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><div><p class="e-claim">Rb 증기압은 Steck 식 1을 그대로 씁니다</p><p class="e-src">Steck, Rubidium 87 D Line Data rev 2.3.4, 식 (1). log10 Pv = 2.881 + 4.312 − 4040/T (액체상). 문서가 스스로 298–550 K에서 ±5% 정확도라고 명시합니다. input/papers/steck-rb87-d-line-data-r2.3.4.pdf</p></div></li><li><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><div><p class="e-claim">천연 존재비 η(87Rb) = 27.83(2)%</p><p class="e-src">같은 문서 Table 2. 녹는점 39.30 °C도 같은 표에서 왔고, 고체상 식으로 넘어가는 경계로 씁니다</p></div></li><li><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><div><p class="e-claim">단면적 σ₀ = 4.076e−13 cm²와 Γ_g = 170 s⁻¹은 T/04에서 그대로 받습니다</p><p class="e-src">σ₀는 f = 0.34231과 14.19 GHz 폭에서 나온 로렌츠 봉우리. 여기서 다시 계산하지 않고 (λ²/2π)(Γ/Γ_tot)로 독립 확인만 했습니다 — 두 경로가 4.0758e−17 m²와 4.0759e−17 m²로 일치합니다</p></div></li><li><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr><div><p class="e-claim">흡수체는 T/05의 8준위 풀이 그 자체입니다</p><p class="e-src">scripts/solve_density_matrix.py를 import합니다. (1 − P) 인자로 대신하지 않은 이유는 아래 method 03에 있습니다</p></div></li><li><abbr class="cls c-source_fact" title="SOURCE_FACT — 출처에 적혀 있는 값">SRC</abbr><div><p class="e-claim">셀 길이 5.5 mm</p><p class="e-src">T/03이 검토한 제출 계산이 명시한 활성 경로 길이</p></div></li><li><abbr class="cls c-inferred" title="INFERRED — 근거를 밝힌 가정">INF</abbr><div><p class="e-claim">이 셀이 동위원소 농축된 셀인지는 확인하지 못했습니다</p><p class="e-src">T/03의 광학 깊이는 천연 존재비로 계산한 값의 2.49배입니다. 온도와 무관하게 일정한 비이므로 흩어진 오차가 아니라 하나의 온도 비의존 인자입니다. 0.2783 × 2.49 = 0.693은 흔한 농축도이고, 자기측정용 셀은 보통 70% 이상입니다. 다만 밀도 규격화가 다른 것일 수도 있습니다. 확정하지 않고 양쪽을 모두 보고합니다</p></div></li></ul></section>
+<section class="e-sec"><h2 class="kicker">03 — 어떻게 했나</h2><ol class="e-me"><li><span class="no">01</span><div><h3>밀도를 온도에서</h3><p>Steck 식 1로 증기압을 구하고 n = P/kT. 녹는점 위아래로 식이 갈립니다. 100 °C에서 전체 Rb 6.01e12 cm⁻³.</p></div></li><li><span class="no">02</span><div><h3>셀을 층으로 자르기</h3><p>5.5 mm를 40층으로 나눕니다. 각 층은 자기 자신의 8개 바닥 부준위 인구를 가집니다.</p></div></li><li><span class="no">03</span><div><h3>(1 − P)를 쓰지 않기</h3><p>부분적으로 펌핑된 층은 &#x27;편광된 원자&#x27;와 &#x27;편광되지 않은 원자&#x27;의 혼합이 아닙니다. F=1에 남은 인구는 6.8 GHz 떨어진 선에서 흡수하고, F=2의 중간 m 준위들은 각자 다른 세기로 흡수합니다. 그래서 각 층의 흡수계수는 α = n σ₀ Σ A(g,e) P[g]로, T/05의 Wigner 계수에서 직접 나옵니다.</p></div></li><li><span class="no">04</span><div><h3>매 시간단계마다 빔을 앞에서 뒤로</h3><p>I_{k+1} = I_k exp(−α_k dz). 층이 받는 것은 앞면 세기가 아니라 층 평균 (I_k − I_{k+1})/(α_k dz)입니다.</p></div></li><li><span class="no">05</span><div><h3>그리고 원자를 시간으로</h3><p>각 층을 자기 국소 세기로 dt만큼 전진시킵니다. 둘 중 어느 것도 먼저 풀 수 없습니다 — 흡수가 빔을 줄이고, 줄어든 빔이 편광을 바꾸고, 편광이 다시 흡수를 바꿉니다.</p></div></li><li><span class="no">06</span><div><h3>격자 수렴 확인</h3><p>nz를 20에서 80까지, nt를 600에서 8000까지 올려도 셀 평균은 0.7987에서 움직이지 않습니다. 맨 뒷층 하나만 0.244에서 0.225로 흐르길래, 보고하는 값을 마지막 한 층에서 마지막 10분의 1로 바꿨습니다.</p></div></li></ol></section>
+<section class="e-sec"><h2 class="kicker">04 — 수치</h2><div class="e-scroll"><table class="e-nums"><thead><tr><th scope="col">값</th><th scope="col">크기</th><th scope="col">등급</th><th scope="col">출처 · 식 · 근거</th></tr></thead><tbody><tr><th scope="row">층 수 / 시간단계</th><td class="v">40 / 2000<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">셀 평균이 소수점 넷째 자리까지 수렴하는 지점</td></tr><tr><th scope="row">OD (120 °C, 농축 가정)</th><td class="v">3.15<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">T/03이 &#x27;여기서부터 공간 고갈을 무시할 수 없다&#x27;고 적은 지점</td></tr><tr><th scope="row">그런데 120 °C 셀 평균 P</th><td class="v">0.980<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">앞 0.9808, 뒤 10분의 1 0.9786. 사실상 균일합니다</td></tr><tr><th scope="row">균일성이 깨지는 곳</th><td class="v">OD ≈ 10<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">30 mW/cm²에서. 농축 가정으로 약 141 °C. 펌핑되지 않은 셀의 OD ≈ 3보다 20 °C 높습니다</td></tr><tr><th scope="row">150 °C 셀 평균 P</th><td class="v">0.799<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">앞 0.981, 뒤 10분의 1 0.277. 여기서 비로소 깨집니다</td></tr><tr><th scope="row">150 °C 투과율</th><td class="v">0.129<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">OD 15.7이면 펌핑 없이는 exp(−15.7) = 1.5e−7입니다. 표백이 여섯 자릿수를 벌어줍니다</td></tr><tr><th scope="row">천연 존재비였다면 150 °C 평균</th><td class="v">0.977<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">공간 고갈이 문제가 되는지 자체가 농축 여부에 달려 있습니다</td></tr><tr><th scope="row">최적 detuning, 30 mW/cm²</th><td class="v">−3.75<i>GHz</i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">OD 0.24에서도 OD 15.7에서도 같습니다. 움직이지 않습니다</td></tr><tr><th scope="row">최적 detuning, 10 mW/cm², OD 15.7</th><td class="v">−2.75<i>GHz</i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">1 GHz 움직입니다. 공명에서 멀어지는 쪽이 아니라 가까워지는 쪽으로</td></tr><tr><th scope="row">봉우리 깊이</th><td class="v">1 ~ 12<i>%</i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">−10 ~ +2 GHz 창에서 최고점이 최저점보다 높은 정도. 날카로운 표적이 아닙니다</td></tr><tr><th scope="row">분해된 OD / 선세기 OD (δ=0)</th><td class="v">0.692<i></i></td><td><abbr class="cls c-calculated" title="CALCULATED — 다른 값에서 유도된 값">CALC</abbr></td><td class="n">압력 이동이 F=2 선을 6.6 GHz 밀어놓았기 때문에, 저압 잠금점에서 실제 감쇠는 n σ₀ L의 0.69배입니다</td></tr></tbody></table></div></section>
+<section class="e-sec"><h2 class="kicker">05 — 형상</h2><div class="e-views"><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="blt bld" class="lvl">
+<title id="blt">The bleaching front</title><desc id="bld">Stretched-state population against depth at five times during a one millisecond pulse at 150 degrees. The polarised region starts at the entrance window and advances into the cell as each layer stops absorbing.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">THE BLEACHING FRONT, 150 °C</text>
+<text x="744" y="22" class="xs" text-anchor="end">OD 15.7, 30 mW/cm²</text>
+<line x1="92" y1="320" x2="636" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="256" x2="636" y2="256" class="dash"/>
+<text x="84" y="260" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="191" x2="636" y2="191" class="dash"/>
+<text x="84" y="195" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="126" x2="636" y2="126" class="dash"/>
+<text x="84" y="130" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="62" x2="636" y2="62" class="dash"/>
+<text x="84" y="66" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">0</text>
+<text x="191" y="338" class="xs" text-anchor="middle">1</text>
+<text x="290" y="338" class="xs" text-anchor="middle">2</text>
+<text x="389" y="338" class="xs" text-anchor="middle">3</text>
+<text x="488" y="338" class="xs" text-anchor="middle">4</text>
+<text x="587" y="338" class="xs" text-anchor="middle">5</text>
+<line x1="92" y1="320" x2="636" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="62" class="thin"/>
+<text x="364.0" y="358" class="sm" text-anchor="middle">depth into the cell / mm</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<polyline class="m" points="92.0,227.0 105.9,237.9 119.9,247.4 133.8,255.4 147.8,262.0 161.7,267.5 175.7,271.9 189.6,275.4 203.6,278.2 217.5,280.4 231.5,282.1 245.4,283.4 259.4,284.4 273.3,285.2 287.3,285.8 301.2,286.3 315.2,286.6 329.1,286.9 343.1,287.1 357.0,287.2 371.0,287.4 384.9,287.5 398.9,287.5 412.8,287.6 426.8,287.6 440.7,287.6 454.7,287.7 468.6,287.7 482.6,287.7 496.5,287.7 510.5,287.7 524.4,287.7 538.4,287.7 552.3,287.7 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,178.4 105.9,192.8 119.9,206.7 133.8,219.6 147.8,231.4 161.7,241.7 175.7,250.6 189.6,258.1 203.6,264.3 217.5,269.3 231.5,273.3 245.4,276.6 259.4,279.1 273.3,281.1 287.3,282.6 301.2,283.8 315.2,284.7 329.1,285.4 343.1,286.0 357.0,286.4 371.0,286.7 384.9,287.0 398.9,287.1 412.8,287.3 426.8,287.4 440.7,287.5 454.7,287.5 468.6,287.6 482.6,287.6 496.5,287.7 510.5,287.7 524.4,287.7 538.4,287.7 552.3,287.7 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,117.2 105.9,127.9 119.9,140.0 133.8,153.2 147.8,167.2 161.7,181.6 175.7,195.9 189.6,209.5 203.6,222.2 217.5,233.7 231.5,243.7 245.4,252.3 259.4,259.5 273.3,265.4 287.3,270.2 301.2,274.1 315.2,277.1 329.1,279.5 343.1,281.4 357.0,282.9 371.0,284.0 384.9,284.9 398.9,285.6 412.8,286.1 426.8,286.5 440.7,286.8 454.7,287.0 468.6,287.2 482.6,287.3 496.5,287.4 510.5,287.5 524.4,287.6 538.4,287.6 552.3,287.6 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,71.0 105.9,72.3 119.9,73.8 133.8,75.7 147.8,78.1 161.7,81.1 175.7,84.8 189.6,89.3 203.6,94.9 217.5,101.6 231.5,109.7 245.4,119.1 259.4,129.9 273.3,142.0 287.3,155.3 301.2,169.3 315.2,183.6 329.1,197.8 343.1,211.3 357.0,223.9 371.0,235.1 384.9,244.9 398.9,253.3 412.8,260.3 426.8,266.1 440.7,270.8 454.7,274.5 468.6,277.5 482.6,279.8 496.5,281.6 510.5,283.0 524.4,284.1 538.4,285.0 552.3,285.6 566.3,286.1 580.2,286.5 594.2,286.8 608.1,287.0 622.1,287.2 636.0,287.3"/>
+<polyline class="l" points="92.0,67.0 105.9,67.0 119.9,67.1 133.8,67.1 147.8,67.2 161.7,67.3 175.7,67.4 189.6,67.5 203.6,67.7 217.5,67.9 231.5,68.1 245.4,68.4 259.4,68.8 273.3,69.2 287.3,69.8 301.2,70.6 315.2,71.6 329.1,72.8 343.1,74.3 357.0,76.2 371.0,78.6 384.9,81.6 398.9,85.3 412.8,89.8 426.8,95.4 440.7,102.1 454.7,110.2 468.6,119.6 482.6,130.4 496.5,142.6 510.5,155.8 524.4,169.8 538.4,184.1 552.3,198.3 566.3,211.8 580.2,224.2 594.2,235.4 608.1,245.2 622.1,253.5 636.0,260.5"/>
+<text x="654" y="263.5" class="xs">1 ms</text>
+<text x="654" y="290.3" class="xs">0.5 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="299.3" class="dash"/>
+<text x="654" y="305.3" class="xs">0.2 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="314.3" class="dash"/>
+<text x="654" y="320.3" class="xs">0.1 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="329.3" class="dash"/>
+<text x="654" y="335.3" class="xs">0.05 ms</text>
+<text x="16" y="376" class="xs">A thick cell does not polarise all over at once. The front tenth clears first, stops absorbing, and hands the beam to the next tenth.</text>
+<text x="16" y="390" class="xs">At 0.2 ms the back is untouched; by 1 ms the front has swept nine tenths of the way through. Nothing in the model puts it there.</text>
+</svg><figcaption><b>THE BLEACHING FRONT</b>이 계산에서 가장 볼 만한 그림입니다. 모델 안에 이런 파면을 넣은 것은 없습니다</figcaption></figure><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="pft pfd" class="lvl">
+<title id="pft">Polarisation through the cell</title><desc id="pfd">Stretched-state population against depth into a 5.5 mm cell after a one millisecond pump pulse, at four temperatures. Up to an optical depth of about three the profile is flat; at an optical depth of sixteen it falls away through the second half of the cell.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">POLARISATION THROUGH THE CELL AFTER A 1 ms PULSE</text>
+<text x="744" y="22" class="xs" text-anchor="end">30 mW/cm² AT THE WINDOW</text>
+<line x1="92" y1="320" x2="636" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="256" x2="636" y2="256" class="dash"/>
+<text x="84" y="260" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="191" x2="636" y2="191" class="dash"/>
+<text x="84" y="195" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="126" x2="636" y2="126" class="dash"/>
+<text x="84" y="130" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="62" x2="636" y2="62" class="dash"/>
+<text x="84" y="66" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">0</text>
+<text x="191" y="338" class="xs" text-anchor="middle">1</text>
+<text x="290" y="338" class="xs" text-anchor="middle">2</text>
+<text x="389" y="338" class="xs" text-anchor="middle">3</text>
+<text x="488" y="338" class="xs" text-anchor="middle">4</text>
+<text x="587" y="338" class="xs" text-anchor="middle">5</text>
+<line x1="92" y1="320" x2="636" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="62" class="thin"/>
+<text x="364.0" y="358" class="sm" text-anchor="middle">depth into the cell / mm</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.0 147.8,67.0 161.7,67.0 175.7,67.0 189.6,67.0 203.6,67.0 217.5,67.0 231.5,67.1 245.4,67.1 259.4,67.1 273.3,67.1 287.3,67.1 301.2,67.1 315.2,67.1 329.1,67.1 343.1,67.1 357.0,67.2 371.0,67.2 384.9,67.2 398.9,67.2 412.8,67.2 426.8,67.2 440.7,67.3 454.7,67.3 468.6,67.3 482.6,67.3 496.5,67.3 510.5,67.3 524.4,67.4 538.4,67.4 552.3,67.4 566.3,67.4 580.2,67.5 594.2,67.5 608.1,67.5 622.1,67.5 636.0,67.6"/>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.1 147.8,67.1 161.7,67.1 175.7,67.2 189.6,67.2 203.6,67.3 217.5,67.3 231.5,67.4 245.4,67.4 259.4,67.5 273.3,67.6 287.3,67.7 301.2,67.8 315.2,68.0 329.1,68.1 343.1,68.3 357.0,68.5 371.0,68.7 384.9,69.0 398.9,69.3 412.8,69.6 426.8,70.0 440.7,70.5 454.7,71.0 468.6,71.6 482.6,72.3 496.5,73.1 510.5,74.0 524.4,75.1 538.4,76.3 552.3,77.7 566.3,79.3 580.2,81.1 594.2,83.1 608.1,85.5 622.1,88.1 636.0,91.1"/>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.1 147.8,67.1 161.7,67.2 175.7,67.2 189.6,67.3 203.6,67.4 217.5,67.5 231.5,67.6 245.4,67.7 259.4,67.9 273.3,68.1 287.3,68.3 301.2,68.6 315.2,68.9 329.1,69.3 343.1,69.8 357.0,70.3 371.0,71.0 384.9,71.8 398.9,72.8 412.8,73.9 426.8,75.3 440.7,76.9 454.7,78.9 468.6,81.2 482.6,84.0 496.5,87.2 510.5,91.0 524.4,95.4 538.4,100.6 552.3,106.5 566.3,113.2 580.2,120.8 594.2,129.2 608.1,138.5 622.1,148.5 636.0,159.0"/>
+<polyline class="l" points="92.0,67.0 105.9,67.0 119.9,67.1 133.8,67.1 147.8,67.2 161.7,67.3 175.7,67.4 189.6,67.5 203.6,67.7 217.5,67.9 231.5,68.1 245.4,68.4 259.4,68.8 273.3,69.2 287.3,69.8 301.2,70.6 315.2,71.6 329.1,72.8 343.1,74.3 357.0,76.2 371.0,78.6 384.9,81.6 398.9,85.3 412.8,89.8 426.8,95.4 440.7,102.1 454.7,110.2 468.6,119.6 482.6,130.4 496.5,142.6 510.5,155.8 524.4,169.8 538.4,184.1 552.3,198.3 566.3,211.8 580.2,224.2 594.2,235.4 608.1,245.2 622.1,253.5 636.0,260.5"/>
+<text x="658" y="67.6" class="xs">120 °C</text>
+<text x="658" y="79.6" class="xs">OD 3.2</text>
+<line x1="636" y1="91.1" x2="654" y2="89.6" class="dash"/>
+<text x="658" y="93.6" class="xs">140 °C</text>
+<text x="658" y="105.6" class="xs">OD 9.4</text>
+<text x="658" y="159.0" class="xs">145 °C</text>
+<text x="658" y="171.0" class="xs">OD 12.2</text>
+<text x="658" y="260.5" class="xs">150 °C</text>
+<text x="658" y="272.5" class="xs">OD 15.7</text>
+<text x="16" y="376" class="xs">The front polarises the same way at every temperature. What changes is how far the bleaching front gets in 1 ms.</text>
+<text x="16" y="390" class="xs">80 and 100 °C are not drawn: at OD 0.2 and 0.9 they lie exactly on the 120 °C line.</text>
+<text x="16" y="404" class="xs">Each slab is the eight-sublevel solve of T/05, so the stretched state is genuinely dark and the vapour opens a channel for itself.</text>
+</svg><figcaption><b>PROFILE AT 1 ms</b>80과 100 °C는 120 °C 선 위에 정확히 겹쳐서 그리지 않았습니다</figcaption></figure><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="dtt dtd" class="lvl">
+<title id="dtt">Cell-mean polarisation against detuning</title><desc id="dtd">Cell-averaged stretched-state population against pump detuning, for a thin and a thick cell at two intensities, with beam depletion included. The marked maxima sit within one gigahertz of the uniform-cell answer, and every curve is shallow.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">CELL-MEAN POLARISATION vs DETUNING, WITH PROPAGATION</text>
+<text x="744" y="22" class="xs" text-anchor="end">1 ms PULSE</text>
+<line x1="92" y1="320" x2="660" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="256" x2="660" y2="256" class="dash"/>
+<text x="84" y="260" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="191" x2="660" y2="191" class="dash"/>
+<text x="84" y="195" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="126" x2="660" y2="126" class="dash"/>
+<text x="84" y="130" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="62" x2="660" y2="62" class="dash"/>
+<text x="84" y="66" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">-10</text>
+<text x="187" y="338" class="xs" text-anchor="middle">-8</text>
+<text x="281" y="338" class="xs" text-anchor="middle">-6</text>
+<text x="376" y="338" class="xs" text-anchor="middle">-4</text>
+<text x="471" y="338" class="xs" text-anchor="middle">-2</text>
+<text x="565" y="338" class="xs" text-anchor="middle">+0</text>
+<text x="660" y="338" class="xs" text-anchor="middle">+2</text>
+<line x1="92" y1="320" x2="660" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="62" class="thin"/>
+<text x="376.0" y="358" class="sm" text-anchor="middle">detuning from low-pressure F=2 → F′=2 / GHz</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">cell mean P(F=2, mF=+2)</text>
+<line x1="388" y1="62" x2="388" y2="320" class="thin"/>
+<text x="383" y="312" class="xs" text-anchor="end">uniform cell: −3.75</text>
+<polyline class="m" points="92.0,69.0 103.8,68.7 115.7,68.4 127.5,68.2 139.3,68.0 151.2,67.8 163.0,67.6 174.8,67.5 186.7,67.3 198.5,67.2 210.3,67.0 222.2,66.9 234.0,66.8 245.8,66.7 257.7,66.6 269.5,66.5 281.3,66.4 293.2,66.3 305.0,66.3 316.8,66.2 328.7,66.2 340.5,66.1 352.3,66.1 364.2,66.1 376.0,66.1 387.8,66.1 399.7,66.1 411.5,66.1 423.3,66.1 435.2,66.1 447.0,66.1 458.8,66.2 470.7,66.2 482.5,66.3 494.3,66.4 506.2,66.4 518.0,66.5 529.8,66.6 541.7,66.7 553.5,66.8 565.3,67.0 577.2,67.1 589.0,67.3 600.8,67.4 612.7,67.6 624.5,67.8 636.3,68.0 648.2,68.2 660.0,68.5"/>
+<circle cx="387.8" cy="66.1" r="3" fill="var(--t0,#0d0d0d)"/>
+<polyline class="m" points="92.0,108.1 103.8,105.9 115.7,103.8 127.5,101.8 139.3,99.9 151.2,98.1 163.0,96.3 174.8,94.7 186.7,93.1 198.5,91.6 210.3,90.2 222.2,88.9 234.0,87.8 245.8,86.7 257.7,85.7 269.5,84.8 281.3,83.9 293.2,83.2 305.0,82.6 316.8,82.0 328.7,81.6 340.5,81.2 352.3,80.9 364.2,80.7 376.0,80.6 387.8,80.6 399.7,80.6 411.5,80.7 423.3,80.9 435.2,81.2 447.0,81.6 458.8,82.0 470.7,82.6 482.5,83.2 494.3,83.9 506.2,84.7 518.0,85.5 529.8,86.5 541.7,87.6 553.5,88.7 565.3,89.9 577.2,91.2 589.0,92.6 600.8,94.1 612.7,95.7 624.5,97.4 636.3,99.1 648.2,100.9 660.0,102.8"/>
+<circle cx="387.8" cy="80.6" r="3" fill="var(--t0,#0d0d0d)"/>
+<polyline class="l" points="92.0,118.5 103.8,117.9 115.7,117.3 127.5,116.8 139.3,116.2 151.2,115.8 163.0,115.3 174.8,114.9 186.7,114.5 198.5,114.1 210.3,113.8 222.2,113.5 234.0,113.2 245.8,113.0 257.7,112.7 269.5,112.5 281.3,112.4 293.2,112.2 305.0,112.1 316.8,111.9 328.7,111.8 340.5,111.8 352.3,111.7 364.2,111.6 376.0,111.6 387.8,111.6 399.7,111.6 411.5,111.7 423.3,111.7 435.2,111.8 447.0,111.9 458.8,112.0 470.7,112.1 482.5,112.2 494.3,112.4 506.2,112.6 518.0,112.8 529.8,113.1 541.7,113.3 553.5,113.6 565.3,113.9 577.2,114.3 589.0,114.6 600.8,115.0 612.7,115.5 624.5,115.9 636.3,116.4 648.2,116.9 660.0,117.5"/>
+<circle cx="387.8" cy="111.6" r="3" fill="var(--t0,#0d0d0d)"/>
+<polyline class="l" points="92.0,236.2 103.8,236.0 115.7,235.8 127.5,235.6 139.3,235.3 151.2,235.1 163.0,234.9 174.8,234.7 186.7,234.6 198.5,234.4 210.3,234.2 222.2,234.1 234.0,233.9 245.8,233.8 257.7,233.6 269.5,233.5 281.3,233.4 293.2,233.3 305.0,233.2 316.8,233.1 328.7,233.0 340.5,232.9 352.3,232.9 364.2,232.8 376.0,232.8 387.8,232.7 399.7,232.7 411.5,232.7 423.3,232.7 435.2,232.7 447.0,232.7 458.8,232.7 470.7,232.7 482.5,232.7 494.3,232.8 506.2,232.8 518.0,232.9 529.8,232.9 541.7,233.0 553.5,233.1 565.3,233.2 577.2,233.3 589.0,233.4 600.8,233.5 612.7,233.6 624.5,233.7 636.3,233.8 648.2,234.0 660.0,234.1"/>
+<circle cx="435.2" cy="232.7" r="3" fill="var(--t0,#0d0d0d)"/>
+<line x1="93" y1="69.0" x2="104" y2="155.0" class="dash"/>
+<text x="108" y="158.0" class="xs">30 mW/cm², OD 0.2 — best -3.75 GHz, swing 1%</text>
+<line x1="93" y1="108.1" x2="104" y2="177.0" class="dash"/>
+<text x="108" y="180.0" class="xs">10 mW/cm², OD 0.2 — best -3.75 GHz, swing 11%</text>
+<line x1="93" y1="118.5" x2="104" y2="199.0" class="dash"/>
+<text x="108" y="202.0" class="xs">30 mW/cm², OD 15.7 — best -3.75 GHz, swing 3%</text>
+<line x1="93" y1="236.2" x2="104" y2="221.0" class="dash"/>
+<text x="108" y="224.0" class="xs">10 mW/cm², OD 15.7 — best -2.75 GHz, swing 4%</text>
+<text x="16" y="376" class="xs">At 30 mW/cm² the optimum does not move at all between OD 0.2 and OD 16. At 10 mW/cm² it moves 1 GHz — and toward resonance, not away from it.</text>
+<text x="16" y="390" class="xs">Detuning buys penetration, but only for a beam strong enough to bleach a path. A weak beam in a thick cell is set by its front layers.</text>
+<text x="16" y="404" class="xs">Every peak here is shallow. The marked maximum stands 1 to 12 per cent above the worst point in a twelve gigahertz window.</text>
+</svg><figcaption><b>OPTIMUM vs OPTICAL DEPTH</b>T/03이 남긴 질문에 대한 답입니다</figcaption></figure><figure class="fig-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 396"
+  role="img" aria-labelledby="odt odd" class="lvl">
+<title id="odt">Optical depth against cell temperature</title><desc id="odd">Optical depth of a 5.5 mm rubidium path against temperature, on a log scale, for natural and enriched 87Rb. Enrichment shifts the curve up by a factor of 2.5, moving the temperature at which the cell becomes optically thick down by about twenty degrees.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">OPTICAL DEPTH OF A 5.5 mm PATH</text>
+<text x="744" y="22" class="xs" text-anchor="end">LOG SCALE</text>
+<line x1="96" y1="300" x2="660" y2="300" class="dash"/>
+<text x="88" y="304" class="xs" text-anchor="end">0.01</text>
+<line x1="96" y1="240" x2="660" y2="240" class="dash"/>
+<text x="88" y="244" class="xs" text-anchor="end">0.1</text>
+<line x1="96" y1="180" x2="660" y2="180" class="dash"/>
+<text x="88" y="184" class="xs" text-anchor="end">1</text>
+<line x1="96" y1="120" x2="660" y2="120" class="dash"/>
+<text x="88" y="124" class="xs" text-anchor="end">10</text>
+<line x1="96" y1="60" x2="660" y2="60" class="dash"/>
+<text x="88" y="64" class="xs" text-anchor="end">100</text>
+<text x="96" y="318" class="xs" text-anchor="middle">60</text>
+<text x="209" y="318" class="xs" text-anchor="middle">80</text>
+<text x="322" y="318" class="xs" text-anchor="middle">100</text>
+<text x="434" y="318" class="xs" text-anchor="middle">120</text>
+<text x="547" y="318" class="xs" text-anchor="middle">140</text>
+<text x="660" y="318" class="xs" text-anchor="middle">160</text>
+<line x1="96" y1="300" x2="660" y2="300" class="thin"/>
+<line x1="96" y1="300" x2="96" y2="60" class="thin"/>
+<text x="378.0" y="338" class="sm" text-anchor="middle">cell temperature / °C</text>
+<text x="26" y="180.0" class="sm" transform="rotate(-90 26 180.0)" text-anchor="middle">optical depth</text>
+<polyline class="m" points="96.0,280.6 107.3,276.4 118.6,272.3 129.8,268.2 141.1,264.1 152.4,260.1 163.7,256.2 175.0,252.3 186.2,248.5 197.5,244.7 208.8,240.9 220.1,237.2 231.4,233.5 242.6,229.9 253.9,226.3 265.2,222.7 276.5,219.2 287.8,215.7 299.0,212.3 310.3,208.9 321.6,205.5 332.9,202.2 344.2,198.9 355.4,195.7 366.7,192.5 378.0,189.3 389.3,186.1 400.6,183.0 411.8,179.9 423.1,176.9 434.4,173.9 445.7,170.9 457.0,167.9 468.2,165.0 479.5,162.1 490.8,159.2 502.1,156.4 513.4,153.6 524.6,150.8 535.9,148.0 547.2,145.3 558.5,142.6 569.8,139.9 581.0,137.3 592.3,134.7 603.6,132.1 614.9,129.5 626.2,126.9 637.4,124.4 648.7,121.9 660.0,119.4"/>
+<text x="260" y="250.3" class="xs" text-anchor="start">natural, 27.8% 87Rb</text>
+<polyline class="l" points="96.0,256.8 107.3,252.6 118.6,248.5 129.8,244.4 141.1,240.4 152.4,236.4 163.7,232.4 175.0,228.5 186.2,224.7 197.5,220.9 208.8,217.1 220.1,213.4 231.4,209.7 242.6,206.1 253.9,202.5 265.2,198.9 276.5,195.4 287.8,192.0 299.0,188.5 310.3,185.1 321.6,181.8 332.9,178.4 344.2,175.2 355.4,171.9 366.7,168.7 378.0,165.5 389.3,162.4 400.6,159.2 411.8,156.2 423.1,153.1 434.4,150.1 445.7,147.1 457.0,144.1 468.2,141.2 479.5,138.3 490.8,135.4 502.1,132.6 513.4,129.8 524.6,127.0 535.9,124.3 547.2,121.5 558.5,118.8 569.8,116.2 581.0,113.5 592.3,110.9 603.6,108.3 614.9,105.7 626.2,103.2 637.4,100.6 648.7,98.1 660.0,95.7"/>
+<text x="225" y="197.7" class="xs" text-anchor="end">enriched, 69.3%</text>
+<line x1="96" y1="151" x2="660" y2="151" class="dash"/>
+<text x="102" y="146" class="xs">OD 3 — where an unpumped cell would go dark</text>
+<line x1="96" y1="120" x2="660" y2="120" class="thin"/>
+<text x="102" y="115" class="xs">OD 10 — where a pumped one does, at 30 mW/cm²</text>
+<text x="16" y="358" class="xs">Density from the model Steck quotes, stated accurate to ±5% over 298–550 K. Cross section from T/04.</text>
+<text x="16" y="372" class="xs">The gap between the curves is one assumption: whether the cell is isotopically enriched. It moves the useful temperature by ~20 °C.</text>
+<text x="16" y="386" class="xs">The two thresholds differ because a polarised atom stops absorbing. Bleaching buys about 20 °C of headroom over the unpumped estimate.</text>
+</svg><figcaption><b>OPTICAL DEPTH vs TEMPERATURE</b>두 문턱선의 차이가 표백이 벌어주는 여유입니다</figcaption></figure></div><ul class="e-par"><li>dI/dz = −n₈₇ σ₀ a(P, δ) I</li><li>a(P, δ) = Σ_{g,e} 3 |d₊₁(g,e)|² L(δ; F_g, F_e) P_g</li><li>a → 1  (편광 없음, 초미세 미분해)  ⟺  α → n σ₀</li><li>I_slab = (I_k − I_{k+1}) / (α_k dz)</li><li>dP_g/dt = Σ 유입 − Σ 유출 + Γ_g (1/8 − P_g)</li><li>n(T) = P_v(T) / kT,   P_v from Steck eq. 1</li></ul><p class="e-note">여섯 줄 중 자유 인자는 없습니다. Γ_g 하나가 모델 입력이고 나머지는 앞 항목들에서 옵니다.</p><p class="e-note">허용오차 셀 평균 격자 수렴 오차 &lt; 1e−4 (nz 20→80, nt 600→8000)</p></section>
+<section class="e-sec"><h2 class="kicker">06 — 검증</h2><p class="e-verdict">PASS</p><div class="e-scroll"><table class="e-nums"><thead><tr><th scope="col">검사</th><th scope="col">결과</th><th scope="col">방법</th></tr></thead><tbody><tr><th scope="row">속도 눈금 ↔ 단면적</th><td class="v">미분해 극한 a = 1.000000</td><td class="n">모든 초미세 성분을 한 주파수에 놓고 편광되지 않은 바닥상태로 흡수 합산. σ₀·flux와 같아야 함</td></tr><tr><th scope="row">단면적 독립 확인</th><td class="v">4.0758e−17 대 4.0759e−17 m²</td><td class="n">f = 0.34231 경로와 (λ²/2π)(Γ_nat/Γ_tot) 경로</td></tr><tr><th scope="row">얇은 셀 극한</th><td class="v">OD 0.24에서 최적 −3.75 GHz, swing 1.1%</td><td class="n">전파를 켠 채로 얻은 값이 T/05의 균일 셀 답과 같은 격자에서 일치</td></tr><tr><th scope="row">격자 수렴</th><td class="v">셀 평균 0.7987, nz 20→80 / nt 600→8000에서 불변</td><td class="n">가장 가파른 경우(150 °C)에서 5개 격자</td></tr><tr><th scope="row">확률 보존</th><td class="v">PASS</td><td class="n">모든 층, 모든 시간단계에서 8개 인구의 합이 1</td></tr><tr><th scope="row">그림 프레임</th><td class="v">12개 그림의 모든 라벨이 뷰박스 안</td><td class="n">scripts/validators/svg_fit.mjs — 브라우저에서 각 텍스트의 경계상자를 측정</td></tr></tbody></table></div></section>
+<section class="e-sec"><h2 class="kicker">07 — 발견된 결함</h2><p class="e-q">(1 − P) 두준위 근사로 먼저 푼 결과는 150 °C에서 셀 뒤쪽 편광 0.000, 투과율 0.000이었습니다. 준위별로 풀면 각각 0.277과 0.129입니다.</p><dl class="e-meta wide"><div><dt>찾은 방법</dt><dd>T/05을 import해서 같은 문제를 다시 푼 것. 두 답이 정성적으로 달랐습니다 — 하나는 셀이 막혀 있다고, 다른 하나는 뚫린다고 말합니다.</dd></div><div><dt>원인</dt><dd>두준위 그림에서는 흡수가 (1 − P)로만 줄어들고, 뒷층은 빛을 못 받아 P = 0에 머물며 계속 흡수합니다. 스스로 갇힙니다. 실제로는 D1에서 F=2, m=+2가 진짜 암흑 상태라 앞층이 완전히 투명해지고, 표백 파면이 뒤로 전달됩니다.</dd></div><div><dt>수정</dt><dd>흡수계수를 T/05의 8준위 인구에서 직접 계산하도록 바꿨습니다. N_CYCLE = 10이라는 모델 입력도 함께 사라졌습니다.</dd></div><div><dt>재발 방지</dt><dd>이 항목의 그림 하나는 파면 자체입니다. 두준위 모델은 그런 그림을 만들 수 없습니다.</dd></div></dl></section>
+<section class="e-sec"><h2 class="kicker">08 — 정정 기록</h2><p class="e-q">T/03이 &#x27;120 °C 이상에서는 공간적 펌프 고갈을 무시할 수 없다&#x27;고 적었습니다. 30 mW/cm²에서 120 °C 셀은 앞 0.9808, 뒤 0.9786으로 사실상 균일합니다.</p><dl class="e-meta wide"><div><dt>언제</dt><dd>2026-09-11</dd></div><div><dt>왜 틀렸나</dt><dd>OD ≈ 3을 문턱으로 삼은 것은 펌핑되지 않은 증기의 감쇠입니다. 펌핑된 증기는 스스로 투명해지므로 문턱이 OD ≈ 10, 온도로는 약 20 °C 위로 올라갑니다.</dd></div><div><dt>어쩌다</dt><dd>T/03 시점에는 전파 계산이 없었고, 광학 깊이만으로 추정한 것입니다. 방향은 맞고 지점이 틀렸습니다.</dd></div><div><dt>누가 찾았나</dt><dd>이 항목의 온도 훑기. 120 °C부터 155 °C까지 5 °C 간격으로 풀어보니 무릎이 140–150 °C 사이에 있습니다.</dd></div></dl></section>
+<section class="e-sec"><h2 class="kicker">09 — 아직 모르는 것</h2><ul class="sq e-unk"><li>Γ_g = 170 s⁻¹은 여전히 모델 입력입니다. 표백이 얼마나 멀리 가는지가 여기에 직접 달려 있습니다.</li><li>농축 여부를 확정하지 못했습니다. 천연 존재비라면 150 °C에서도 셀 평균이 0.977이고 이 항목의 주제 자체가 사라집니다. 셀 사양서가 필요합니다.</li><li>빔을 평면파로 보았습니다. 실제 가우시안 빔은 가장자리가 약해서 반경 방향으로도 같은 문제가 생기고, 그쪽은 풀지 않았습니다.</li><li>확산을 넣지 않았습니다. 650 Torr에서 원자는 1 ms 동안 수십 µm밖에 못 가지만, 표백 파면의 폭이 그 정도라면 파면을 무디게 만듭니다. Rb–N₂ 확산계수를 출처에서 확인하지 못해 계산하지 않았습니다.</li><li>σ₀ = (λ²/2π)(Γ/Γ_tot)가 압력으로 넓혀진 선에 그대로 쓰인다고 가정했습니다. 충돌이 세기를 재분배하지 않는다는 뜻이며, 확인하지 않았습니다.</li><li>1 ms 펄스 한 번만 봤습니다. 반복률이 높으면 앞층이 펄스 사이에 완전히 이완되지 않아 파면이 더 빨리 갑니다.</li></ul></section>
+<section class="e-sec"><h2 class="kicker">10 — 산출물</h2><ul class="e-art"><li><code>scripts/solve_cell_propagation.py</code><span>전체 풀이. --check로 재실행 동일성 검사</span></li><li><code>analysis/cell-propagation.json</code><span>모든 수치. 온도 훑기와 detuning 훑기 포함</span></li><li><code>assets/diagrams/rb87-cell-bleach.svg</code><span>표백 파면</span></li><li><code>assets/diagrams/rb87-cell-profile.svg</code><span>1 ms 후 깊이별 편광</span></li><li><code>assets/diagrams/rb87-cell-detuning.svg</code><span>전파를 포함한 detuning 의존성</span></li><li><code>assets/diagrams/rb87-optical-depth.svg</code><span>온도에 대한 광학 깊이, 두 존재비</span></li><li><code>scripts/validators/svg_fit.mjs</code><span>그림 라벨이 프레임을 벗어나지 않는지 검사</span></li></ul></section>
+<nav class="e-nav" aria-label="다른 항목">
+<a href="t05-density-matrix.html">◀ T/05 밀도행렬을 실제로 푸는 과정</a>
+<a href="../index.html#clients">STAGE SELECT</a>
+<a href="w01-rb-cell-optics.html">W/01 Rb 증기셀 광학계 ▶</a>
+</nav></main>
+<footer class="foot"><p class="brand">PARK SEONGHYEON®</p><p class="credit">EVERY VALUE CARRIES ITS EVIDENCE CLASS</p></footer>
+<script src="../script.js" defer></script></body></html>

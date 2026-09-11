@@ -113,13 +113,24 @@ def lorentz(detuning: float, Fg: int, Fe: int) -> float:
     return 1.0 / (1.0 + x * x)
 
 
+# R0 is handed in as sigma_0 * photon flux, with T/04's sigma_0 = 4.076e-17 m^2.
+# That sigma_0 is the DEGENERACY-AVERAGED cross section: (lambda^2/2pi)(Gamma/Gamma_tot),
+# already a third of the 3*lambda^2/2pi a closed, polarisation-matched transition
+# gets. The |d_q|^2 below are normalised so that (1/8) sum_g sum_e sum_q = 1, so
+# summing only q=+1 averages to exactly 1/3 -- applying the same polarisation
+# average a second time. The unresolved-hyperfine limit is the test: put every
+# component at one frequency and an unpolarised atom must absorb at sigma_0 * flux,
+# i.e. the weighted strength must come to 1, not 1/3.
+POL_AVG = 3.0
+
+
 def rates(R0: float, detuning: float):
     """Absorption rate per (ground, excited) pair, and decay branching."""
     absorb, decay = strengths()
     A = {}
     for (gi, ei), s in absorb.items():
         Fg, Fe = GROUND[gi][0], EXCITED[ei][0]
-        A[(gi, ei)] = R0 * s * lorentz(detuning, Fg, Fe)
+        A[(gi, ei)] = R0 * POL_AVG * s * lorentz(detuning, Fg, Fe)
     B = {}
     for ei in range(len(EXCITED)):
         tot = sum(v for (e, g), v in decay.items() if e == ei)
@@ -173,6 +184,10 @@ def svg_wrap(w, h, body, title, desc, ids):
   text{{fill:var(--t0,#0d0d0d);font-size:11px}}
   .sm{{font-size:9px;fill:var(--t1,#3a3a3a)}}
   .xs{{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}}
 </style>
 {body}
 </svg>
@@ -204,8 +219,9 @@ def fig_populations(final: list[float]) -> str:
     b.append(f'<text x="16" y="{H-10}" class="xs">Population piles into mF = +2 because σ+ has nowhere further to take it — the dark state of T/01, now quantitative.</text>')
     return svg_wrap(W, H, "\n".join(b), "Ground-state distribution after optical pumping",
         "Bar chart of the eight ground Zeeman sublevels after pumping to steady state with "
-        "sigma-plus light. Population concentrates in F=2 mF=+2, the stretched state, at about "
-        "0.76, with the remainder spread over the neighbouring sublevels.", ("dt", "dd"))
+        f"sigma-plus light. Population concentrates in F=2 mF=+2, the stretched state, at "
+        f"{final[GROUND.index((2, 2))]:.3f}, with the remainder spread over the neighbouring "
+        "sublevels.", ("dt", "dd"))
 
 
 def fig_detuning(scan: list[dict]) -> str:
@@ -226,23 +242,47 @@ def fig_detuning(scan: list[dict]) -> str:
     b.append(f'<text x="{(L+R)/2}" y="{BOT+38}" class="sm" text-anchor="middle">detuning from low-pressure F=2 → F′=2 / GHz</text>')
     b.append(f'<text x="26" y="{(TOP+BOT)/2}" class="sm" transform="rotate(-90 26 {(TOP+BOT)/2})" text-anchor="middle">P(F=2, mF=+2)</text>')
     b.append(f'<line x1="{sx(0):.0f}" y1="{TOP}" x2="{sx(0):.0f}" y2="{BOT}" class="dash"/>')
-    b.append(f'<text x="{sx(0)+5:.0f}" y="{TOP+12}" class="xs">low-pressure lock</text>')
-    for i, s in enumerate(scan):
+    b.append(f'<text x="{sx(0)+5:.0f}" y="{BOT-8}" class="xs">low-pressure lock</text>')
+    # Curves first, labels after. SVG paints in document order, so a label
+    # emitted next to its own curve is still overdrawn by every curve below it
+    # in the loop -- which is what happened once the corrected rate scale pushed
+    # 5 and 10 mW/cm2 together near the top of the frame.
+    labels, floor_y = [], TOP
+    for i, s in enumerate(sorted(scan, key=lambda s: -s["P"][0])):
         pts = " ".join(f"{sx(d):.1f},{BOT-(BOT-TOP)*p:.1f}" for d, p in zip(s["d"], s["P"]))
-        b.append(f'<polyline class="{"l" if i == len(scan)-1 else "m"}" points="{pts}"/>')
-        # the labels sat on the "low-pressure lock" marker; park them at the
-        # left edge where all three curves are well separated
-        y = BOT - (BOT - TOP) * s["P"][0] - 8
-        b.append(f'<text x="{L+6}" y="{y:.1f}" class="xs">'
-                 f'{s["I"]:g} mW/cm², best {s["best"]:+.1f} GHz</text>')
+        b.append(f'<polyline class="{"l" if i == 0 else "m"}" points="{pts}"/>')
+        # The top curve is labelled above itself and the rest below: correcting
+        # the rate scale left only 16 px between 5 and 10 mW/cm2 at this edge,
+        # which is not enough to fit a label under the higher of the two.
+        cy = BOT - (BOT - TOP) * s["P"][0]
+        y = cy - 6 if i == 0 else max(cy + 16, floor_y)
+        floor_y = y + 24
+        labels.append(f'<text x="{L+6}" y="{y:.1f}" class="xs">'
+                      f'{s["I"]:g} mW/cm², best {s["best"]:+.1f} GHz</text>')
+    b += labels
     b.append(f'<line x1="{sx(-3.5):.0f}" y1="{TOP}" x2="{sx(-3.5):.0f}" y2="{BOT}" class="thin"/>')
-    b.append(f'<text x="{sx(-3.5)-5:.0f}" y="{TOP+12}" class="xs" text-anchor="end">this solve: −3.5</text>')
+    b.append(f'<text x="{sx(-3.5)-5:.0f}" y="{BOT-8}" class="xs" text-anchor="end">this solve: −3.5</text>')
     b.append(f'<text x="16" y="{H-24}" class="xs">An independent calculation reviewed in T/03 put the optimum at −3.62 to −3.69 GHz. This one, built from</text>')
     b.append(f'<text x="16" y="{H-10}" class="xs">Wigner coefficients and sharing none of its code, lands at −3.5 GHz. Two routes, the same answer within 0.2 GHz.</text>')
     return svg_wrap(W, H, "\n".join(b), "Stretched-state population against detuning",
         "Steady-state population of F=2 mF=+2 as the laser is tuned, at three intensities. All "
         "three peak near minus 3.5 GHz from the low-pressure lock point, agreeing to within 0.2 "
         "GHz with an independent calculation that shares none of this one's code.", ("st", "sd"))
+
+
+def n_cycle_matching(R0: float, p_1ms: float) -> float:
+    """How many scattered photons T/04's one-factor model needs to reproduce this.
+
+    T/04 wrote R_eff = R0/n_cycle and carried n_cycle = 10 as a model input. The
+    level-resolved solve does not need it, so it can be measured instead: find
+    the R_eff whose single-rate curve passes through the same 1 ms population.
+    """
+    lo, hi = 1.0, R0
+    for _ in range(200):
+        R = 0.5 * (lo + hi)
+        p = R / (R + GAMMA_G) * (1 - math.exp(-(R + GAMMA_G) * 1e-3))
+        lo, hi = (R, hi) if p < p_1ms else (lo, R)
+    return R0 / (0.5 * (lo + hi))
 
 
 def main() -> int:
@@ -270,6 +310,8 @@ def main() -> int:
         "checks": {
             "decay_branching_sums_to_one": max(abs(v - 1) for v in sums.values()),
             "sigma_plus_raises_m": all(EXCITED[e][1] == GROUND[g][1] + 1 for (g, e) in absorb),
+            "unresolved_limit_absorbs_at_sigma0":
+                round(POL_AVG * sum(absorb.values()) / len(GROUND), 12),
             "absorption_channels": len(absorb), "decay_channels": len(decay),
         },
         "steady_state_delta0_10mW": dict(zip([f"F{F}m{m:+d}" for F, m in GROUND],
@@ -278,6 +320,11 @@ def main() -> int:
         "reviewed_T03_optimum_GHz": {"1": -3.69, "5": -3.63, "10": -3.62},
         "one_ms_populations_delta0": {
             str(I): round(evolve(1.631e3 * I, 0.0, 1e-3, n=8000)["stretched"][-1], 4)
+            for I in (10, 20, 30, 50)},
+        "n_cycle_matching_T04": {
+            str(I): round(n_cycle_matching(
+                1.631e3 * I,
+                evolve(1.631e3 * I, 0.0, 1e-3, n=8000)["stretched"][-1]), 2)
             for I in (10, 20, 30, 50)},
     }
     files = {

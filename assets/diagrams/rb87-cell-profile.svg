@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="pft pfd" class="lvl">
+<title id="pft">Polarisation through the cell</title><desc id="pfd">Stretched-state population against depth into a 5.5 mm cell after a one millisecond pump pulse, at four temperatures. Up to an optical depth of about three the profile is flat; at an optical depth of sixteen it falls away through the second half of the cell.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">POLARISATION THROUGH THE CELL AFTER A 1 ms PULSE</text>
+<text x="744" y="22" class="xs" text-anchor="end">30 mW/cm² AT THE WINDOW</text>
+<line x1="92" y1="320" x2="636" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="256" x2="636" y2="256" class="dash"/>
+<text x="84" y="260" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="191" x2="636" y2="191" class="dash"/>
+<text x="84" y="195" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="126" x2="636" y2="126" class="dash"/>
+<text x="84" y="130" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="62" x2="636" y2="62" class="dash"/>
+<text x="84" y="66" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">0</text>
+<text x="191" y="338" class="xs" text-anchor="middle">1</text>
+<text x="290" y="338" class="xs" text-anchor="middle">2</text>
+<text x="389" y="338" class="xs" text-anchor="middle">3</text>
+<text x="488" y="338" class="xs" text-anchor="middle">4</text>
+<text x="587" y="338" class="xs" text-anchor="middle">5</text>
+<line x1="92" y1="320" x2="636" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="62" class="thin"/>
+<text x="364.0" y="358" class="sm" text-anchor="middle">depth into the cell / mm</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.0 147.8,67.0 161.7,67.0 175.7,67.0 189.6,67.0 203.6,67.0 217.5,67.0 231.5,67.1 245.4,67.1 259.4,67.1 273.3,67.1 287.3,67.1 301.2,67.1 315.2,67.1 329.1,67.1 343.1,67.1 357.0,67.2 371.0,67.2 384.9,67.2 398.9,67.2 412.8,67.2 426.8,67.2 440.7,67.3 454.7,67.3 468.6,67.3 482.6,67.3 496.5,67.3 510.5,67.3 524.4,67.4 538.4,67.4 552.3,67.4 566.3,67.4 580.2,67.5 594.2,67.5 608.1,67.5 622.1,67.5 636.0,67.6"/>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.1 147.8,67.1 161.7,67.1 175.7,67.2 189.6,67.2 203.6,67.3 217.5,67.3 231.5,67.4 245.4,67.4 259.4,67.5 273.3,67.6 287.3,67.7 301.2,67.8 315.2,68.0 329.1,68.1 343.1,68.3 357.0,68.5 371.0,68.7 384.9,69.0 398.9,69.3 412.8,69.6 426.8,70.0 440.7,70.5 454.7,71.0 468.6,71.6 482.6,72.3 496.5,73.1 510.5,74.0 524.4,75.1 538.4,76.3 552.3,77.7 566.3,79.3 580.2,81.1 594.2,83.1 608.1,85.5 622.1,88.1 636.0,91.1"/>
+<polyline class="m" points="92.0,67.0 105.9,67.0 119.9,67.0 133.8,67.1 147.8,67.1 161.7,67.2 175.7,67.2 189.6,67.3 203.6,67.4 217.5,67.5 231.5,67.6 245.4,67.7 259.4,67.9 273.3,68.1 287.3,68.3 301.2,68.6 315.2,68.9 329.1,69.3 343.1,69.8 357.0,70.3 371.0,71.0 384.9,71.8 398.9,72.8 412.8,73.9 426.8,75.3 440.7,76.9 454.7,78.9 468.6,81.2 482.6,84.0 496.5,87.2 510.5,91.0 524.4,95.4 538.4,100.6 552.3,106.5 566.3,113.2 580.2,120.8 594.2,129.2 608.1,138.5 622.1,148.5 636.0,159.0"/>
+<polyline class="l" points="92.0,67.0 105.9,67.0 119.9,67.1 133.8,67.1 147.8,67.2 161.7,67.3 175.7,67.4 189.6,67.5 203.6,67.7 217.5,67.9 231.5,68.1 245.4,68.4 259.4,68.8 273.3,69.2 287.3,69.8 301.2,70.6 315.2,71.6 329.1,72.8 343.1,74.3 357.0,76.2 371.0,78.6 384.9,81.6 398.9,85.3 412.8,89.8 426.8,95.4 440.7,102.1 454.7,110.2 468.6,119.6 482.6,130.4 496.5,142.6 510.5,155.8 524.4,169.8 538.4,184.1 552.3,198.3 566.3,211.8 580.2,224.2 594.2,235.4 608.1,245.2 622.1,253.5 636.0,260.5"/>
+<text x="658" y="67.6" class="xs">120 °C</text>
+<text x="658" y="79.6" class="xs">OD 3.2</text>
+<line x1="636" y1="91.1" x2="654" y2="89.6" class="dash"/>
+<text x="658" y="93.6" class="xs">140 °C</text>
+<text x="658" y="105.6" class="xs">OD 9.4</text>
+<text x="658" y="159.0" class="xs">145 °C</text>
+<text x="658" y="171.0" class="xs">OD 12.2</text>
+<text x="658" y="260.5" class="xs">150 °C</text>
+<text x="658" y="272.5" class="xs">OD 15.7</text>
+<text x="16" y="376" class="xs">The front polarises the same way at every temperature. What changes is how far the bleaching front gets in 1 ms.</text>
+<text x="16" y="390" class="xs">80 and 100 °C are not drawn: at OD 0.2 and 0.9 they lie exactly on the 120 °C line.</text>
+<text x="16" y="404" class="xs">Each slab is the eight-sublevel solve of T/05, so the stretched state is genuinely dark and the vapour opens a channel for itself.</text>
+</svg>

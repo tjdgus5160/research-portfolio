@@ -99,6 +99,10 @@ def svg_wrap(w, h, body, title, desc, ids="pt pd"):
   text{{fill:var(--t0,#0d0d0d);font-size:11px}}
   .sm{{font-size:9px;fill:var(--t1,#3a3a3a)}}
   .xs{{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}}
 </style>
 {body}
 </svg>

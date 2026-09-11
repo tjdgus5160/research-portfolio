@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="blt bld" class="lvl">
+<title id="blt">The bleaching front</title><desc id="bld">Stretched-state population against depth at five times during a one millisecond pulse at 150 degrees. The polarised region starts at the entrance window and advances into the cell as each layer stops absorbing.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  /* A label that lands on a gridline or a curve is unreadable. Paint the
+     ground colour behind the glyphs first, then the glyphs. */
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">THE BLEACHING FRONT, 150 °C</text>
+<text x="744" y="22" class="xs" text-anchor="end">OD 15.7, 30 mW/cm²</text>
+<line x1="92" y1="320" x2="636" y2="320" class="dash"/>
+<text x="84" y="324" class="xs" text-anchor="end">0</text>
+<line x1="92" y1="256" x2="636" y2="256" class="dash"/>
+<text x="84" y="260" class="xs" text-anchor="end">0.25</text>
+<line x1="92" y1="191" x2="636" y2="191" class="dash"/>
+<text x="84" y="195" class="xs" text-anchor="end">0.5</text>
+<line x1="92" y1="126" x2="636" y2="126" class="dash"/>
+<text x="84" y="130" class="xs" text-anchor="end">0.75</text>
+<line x1="92" y1="62" x2="636" y2="62" class="dash"/>
+<text x="84" y="66" class="xs" text-anchor="end">1</text>
+<text x="92" y="338" class="xs" text-anchor="middle">0</text>
+<text x="191" y="338" class="xs" text-anchor="middle">1</text>
+<text x="290" y="338" class="xs" text-anchor="middle">2</text>
+<text x="389" y="338" class="xs" text-anchor="middle">3</text>
+<text x="488" y="338" class="xs" text-anchor="middle">4</text>
+<text x="587" y="338" class="xs" text-anchor="middle">5</text>
+<line x1="92" y1="320" x2="636" y2="320" class="thin"/>
+<line x1="92" y1="320" x2="92" y2="62" class="thin"/>
+<text x="364.0" y="358" class="sm" text-anchor="middle">depth into the cell / mm</text>
+<text x="26" y="191.0" class="sm" transform="rotate(-90 26 191.0)" text-anchor="middle">P(F=2, mF=+2)</text>
+<polyline class="m" points="92.0,227.0 105.9,237.9 119.9,247.4 133.8,255.4 147.8,262.0 161.7,267.5 175.7,271.9 189.6,275.4 203.6,278.2 217.5,280.4 231.5,282.1 245.4,283.4 259.4,284.4 273.3,285.2 287.3,285.8 301.2,286.3 315.2,286.6 329.1,286.9 343.1,287.1 357.0,287.2 371.0,287.4 384.9,287.5 398.9,287.5 412.8,287.6 426.8,287.6 440.7,287.6 454.7,287.7 468.6,287.7 482.6,287.7 496.5,287.7 510.5,287.7 524.4,287.7 538.4,287.7 552.3,287.7 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,178.4 105.9,192.8 119.9,206.7 133.8,219.6 147.8,231.4 161.7,241.7 175.7,250.6 189.6,258.1 203.6,264.3 217.5,269.3 231.5,273.3 245.4,276.6 259.4,279.1 273.3,281.1 287.3,282.6 301.2,283.8 315.2,284.7 329.1,285.4 343.1,286.0 357.0,286.4 371.0,286.7 384.9,287.0 398.9,287.1 412.8,287.3 426.8,287.4 440.7,287.5 454.7,287.5 468.6,287.6 482.6,287.6 496.5,287.7 510.5,287.7 524.4,287.7 538.4,287.7 552.3,287.7 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,117.2 105.9,127.9 119.9,140.0 133.8,153.2 147.8,167.2 161.7,181.6 175.7,195.9 189.6,209.5 203.6,222.2 217.5,233.7 231.5,243.7 245.4,252.3 259.4,259.5 273.3,265.4 287.3,270.2 301.2,274.1 315.2,277.1 329.1,279.5 343.1,281.4 357.0,282.9 371.0,284.0 384.9,284.9 398.9,285.6 412.8,286.1 426.8,286.5 440.7,286.8 454.7,287.0 468.6,287.2 482.6,287.3 496.5,287.4 510.5,287.5 524.4,287.6 538.4,287.6 552.3,287.6 566.3,287.7 580.2,287.7 594.2,287.7 608.1,287.7 622.1,287.7 636.0,287.7"/>
+<polyline class="m" points="92.0,71.0 105.9,72.3 119.9,73.8 133.8,75.7 147.8,78.1 161.7,81.1 175.7,84.8 189.6,89.3 203.6,94.9 217.5,101.6 231.5,109.7 245.4,119.1 259.4,129.9 273.3,142.0 287.3,155.3 301.2,169.3 315.2,183.6 329.1,197.8 343.1,211.3 357.0,223.9 371.0,235.1 384.9,244.9 398.9,253.3 412.8,260.3 426.8,266.1 440.7,270.8 454.7,274.5 468.6,277.5 482.6,279.8 496.5,281.6 510.5,283.0 524.4,284.1 538.4,285.0 552.3,285.6 566.3,286.1 580.2,286.5 594.2,286.8 608.1,287.0 622.1,287.2 636.0,287.3"/>
+<polyline class="l" points="92.0,67.0 105.9,67.0 119.9,67.1 133.8,67.1 147.8,67.2 161.7,67.3 175.7,67.4 189.6,67.5 203.6,67.7 217.5,67.9 231.5,68.1 245.4,68.4 259.4,68.8 273.3,69.2 287.3,69.8 301.2,70.6 315.2,71.6 329.1,72.8 343.1,74.3 357.0,76.2 371.0,78.6 384.9,81.6 398.9,85.3 412.8,89.8 426.8,95.4 440.7,102.1 454.7,110.2 468.6,119.6 482.6,130.4 496.5,142.6 510.5,155.8 524.4,169.8 538.4,184.1 552.3,198.3 566.3,211.8 580.2,224.2 594.2,235.4 608.1,245.2 622.1,253.5 636.0,260.5"/>
+<text x="654" y="263.5" class="xs">1 ms</text>
+<text x="654" y="290.3" class="xs">0.5 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="299.3" class="dash"/>
+<text x="654" y="305.3" class="xs">0.2 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="314.3" class="dash"/>
+<text x="654" y="320.3" class="xs">0.1 ms</text>
+<line x1="636" y1="287.7" x2="650" y2="329.3" class="dash"/>
+<text x="654" y="335.3" class="xs">0.05 ms</text>
+<text x="16" y="376" class="xs">A thick cell does not polarise all over at once. The front tenth clears first, stops absorbing, and hands the beam to the next tenth.</text>
+<text x="16" y="390" class="xs">At 0.2 ms the back is untouched; by 1 ms the front has swept nine tenths of the way through. Nothing in the model puts it there.</text>
+</svg>
