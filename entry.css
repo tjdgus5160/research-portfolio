@@ -8,11 +8,15 @@
 .e-sum{margin:20px 0 0;max-width:56ch;font-size:clamp(15px,1.7vw,18px);color:var(--t1)}
 .e-meta{margin:30px 0 0;display:flex;flex-wrap:wrap;gap:0 34px}
 .e-meta.wide{display:grid;gap:0;margin-top:22px}
-.e-meta>div{display:flex;gap:10px;align-items:baseline;padding:6px 0}
+.e-meta>div{display:flex;gap:10px;align-items:baseline;padding:6px 0;min-width:0}
 .e-meta.wide>div{grid-template-columns:minmax(110px,.22fr) 1fr;display:grid;gap:16px;
   padding:13px 2px;border-bottom:var(--px) solid var(--t1);align-items:baseline}
 .e-meta dt{margin:0;font-family:var(--disp);font-size:9px;letter-spacing:.14em;color:var(--t1)}
-.e-meta dd{margin:0;font-family:var(--disp);font-size:11px}
+/* A repo path is one long token with no break opportunity, and the display
+   face has no hyphenation to fall back on; at 360px scripts/solve_cell_-
+   propagation.py alone pushed the page 68px wide. */
+.e-meta dd{margin:0;font-family:var(--disp);font-size:11px;
+  overflow-wrap:anywhere;min-width:0}
 .e-meta.wide dd{font-family:var(--body);font-size:14px;color:var(--t1)}
 
 .e-sec{padding:clamp(40px,6vw,74px) 0;border-bottom:var(--px) solid var(--t0)}
@@ -119,3 +123,75 @@
 .e-views .fig-svg > svg{display:block;width:100%;height:auto;
   padding:calc(var(--px)*3) calc(var(--px)*2)}
 .e-views .fig-svg figcaption{background:var(--t0)}
+
+/* ── typeset mathematics ──────────────────────────────────────────────────
+   The equations are MathML, rendered once by scripts/render_math.mjs and
+   inlined at build. No KaTeX stylesheet and no webfonts: the browser lays the
+   math out itself, so it inherits --t0..--t3 and the palette switch like any
+   other element, and it is still there with scripting off.
+
+   Maths wants a maths face. `math` is the CSS generic family for exactly this
+   and resolves to whatever the platform ships; the named faces are the usual
+   ones on systems that have TeX or Office installed, and a serif is a far
+   better last resort than the pixel display face, which has no italic and no
+   glyphs for most of these symbols. */
+.e-eq{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:var(--px)}
+/* min-width:0 is load-bearing. A grid item defaults to min-width:auto, so the
+   track sizes itself to the widest formula and the overflow-x below never gets
+   a chance to engage -- the page scrolls sideways instead of the equation. */
+.eq{border:var(--px) solid var(--t0);background:var(--t3);padding:16px 18px 14px;
+  min-width:0}
+/* Not the display face: these labels mix Korean with Latin, and Press Start 2P
+   has no Hangul, so half of every label would fall back to a different face at
+   a different apparent size. */
+.eq-name{margin:0 0 4px;font-size:13px;font-weight:600;letter-spacing:.01em;
+  color:var(--t0);line-height:1.6}
+.eq-math{overflow-x:auto;overflow-y:hidden;padding:6px 0 10px;min-width:0;
+  scrollbar-width:thin;scrollbar-color:var(--t1) var(--t3)}
+/* A formula wider than the box is clipped with no hint that it continues, which
+   on a phone is most of them. The scrollbar is the hint, so it is drawn in the
+   palette rather than left to the platform to hide. */
+.eq-math::-webkit-scrollbar{height:calc(var(--px)*2)}
+.eq-math::-webkit-scrollbar-track{background:var(--t3);
+  box-shadow:inset 0 var(--px) 0 var(--t2)}
+.eq-math::-webkit-scrollbar-thumb{background:var(--t1)}
+.eq-math math{font-family:math,"STIX Two Math","Cambria Math","Latin Modern Math",
+  Georgia,serif;font-size:17px;color:var(--t0)}
+/* KaTeX emits display="block", so the browser centres each formula in its box,
+   which is what a display equation wants. */
+.eq-math math[display="block"]{margin:0}
+/* The evidence badge is sized for the numbers table, where it is a column of
+   its own. Here it sits inline in a one-line provenance strip. */
+.eq-src .cls{font-size:7px;padding:3px 5px;border-width:var(--px)}
+.eq-src{margin:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+  font-size:12px;line-height:1.6;color:var(--t1);
+  border-top:var(--px) solid var(--t2);padding-top:9px}
+.eq-held{font-family:var(--disp);font-size:7px;letter-spacing:.1em;color:var(--t3);
+  background:var(--t1);padding:3px 5px}
+.eq-note{margin:9px 0 0;font-size:12.5px;line-height:1.75;color:var(--t1);max-width:72ch}
+
+/* ── what each source actually is, and how far you can check it ─────────── */
+.e-bib{list-style:none;margin:0;padding:0;display:grid;gap:var(--px)}
+.e-bib>li{border:var(--px) solid var(--t1);padding:15px 17px;min-width:0}
+.bib-h{margin:0 0 7px;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.bib-h b{font-family:var(--disp);font-size:7px;letter-spacing:.1em;padding:4px 6px;
+  color:var(--t3);background:var(--t1)}
+.bib-h b.held-disk{background:var(--t0)}
+.bib-h b.held-named,.bib-h b.held-standard{color:var(--t0);background:none;
+  box-shadow:inset 0 0 0 var(--px) var(--t1)}
+.bib-label{font-size:14px;line-height:1.5;color:var(--t0);flex:1 1 18ch}
+.bib-n{font-family:var(--disp);font-size:8px;letter-spacing:.06em;color:var(--t1)}
+.bib-meta{margin:0;font-size:12.5px;line-height:1.7;color:var(--t1)}
+.bib-detail{font-style:italic}
+.bib-au::before{content:" · "}
+.bib-link{margin:6px 0 0;font-size:12px;word-break:break-all}
+.bib-link a{color:var(--t0)}
+.bib-link code{font-size:11px;color:var(--t1)}
+.bib-held{margin:8px 0 0;font-family:var(--disp);font-size:8px;letter-spacing:.05em;
+  line-height:1.9;color:var(--t1)}
+.bib-note{margin:8px 0 0;font-size:12.5px;line-height:1.75;color:var(--t1);max-width:72ch}
+
+@media (max-width:720px){
+  .eq{padding:13px 14px 12px}
+  .eq-math math{font-size:15px}
+}

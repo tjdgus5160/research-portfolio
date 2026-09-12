@@ -143,13 +143,61 @@
         "note": "20 mW/cm² 이상이면 1 ms가 시상수의 서너 배입니다"
       }
     ],
-    "parametric": [
-      "σ_int = (π e² / 4πε₀ m_e c) · f = 2.654×10⁻² · f  cm²Hz",
-      "σ_peak = 2 σ_int / (π Δν)",
-      "Φ = I / (hc/λ)",
-      "R = σ_peak · Φ",
-      "dP/dt = (R/10)(1−P) − Γ_g P",
-      "τ = 1/(R/10 + Γ_g),   P(∞) = (R/10)/(R/10 + Γ_g)"
+    "equations": [
+      {
+        "tex": "\\Gamma \\;=\\; \\frac{e^2\\omega_0^2}{2\\pi\\varepsilon_0 m_e c^3}\\,\\frac{2J+1}{2J'+1}\\,f",
+        "name": "진동자 세기와 붕괴율의 관계",
+        "src": "steck",
+        "where": "식 (4)",
+        "class": "SOURCE_FACT",
+        "note": "이 식이 표 4의 f = 0.34231과 Γ = 2π·5.7500 MHz를 묶습니다. Steck은 이 식을 [24]에 돌립니다."
+      },
+      {
+        "tex": "\\sigma_{\\mathrm{int}} \\;=\\; \\frac{\\pi e^2}{4\\pi\\varepsilon_0 m_e c}\\,f \\;=\\; 2.654\\times10^{-2}\\,f \\ \\ \\mathrm{cm^2\\,Hz}",
+        "name": "적분 흡수 단면적",
+        "src": "standard",
+        "where": "고전 진동자 세기(Ladenburg) 관계",
+        "class": "SOURCE_FACT",
+        "note": "선 모양과 무관하게 단면적의 적분값을 고정합니다. Steck에는 이 형태로 나오지 않지만 식 (4)와 같은 물리이고, 아래 σ₀ 검산이 둘을 잇습니다."
+      },
+      {
+        "tex": "\\sigma_{\\mathrm{peak}} \\;=\\; \\frac{2\\,\\sigma_{\\mathrm{int}}}{\\pi\\,\\Delta\\nu} \\;=\\; 4.076\\times10^{-13}\\ \\mathrm{cm^2}",
+        "name": "봉우리 단면적",
+        "src": "standard",
+        "where": "FWHM Δν의 로렌치안 규격화",
+        "class": "CALCULATED",
+        "note": "Δν = 14.19 GHz는 T/03에서 옵니다. 압력이 선을 넓히면 적분값은 그대로이고 봉우리만 낮아집니다."
+      },
+      {
+        "tex": "\\sigma_0 \\;=\\; \\frac{3\\lambda^2}{2\\pi}\\cdot\\frac{\\Gamma_{\\mathrm{nat}}}{\\Gamma_{\\mathrm{tot}}}\\cdot\\frac13 \\;=\\; 4.0758\\times10^{-17}\\ \\mathrm{m^2}",
+        "name": "같은 값으로 가는 두 번째 길",
+        "src": "steck",
+        "where": "식 (62)와 식 (44)·(45)",
+        "class": "CALCULATED",
+        "note": "식 (62)의 σ₀ = 3λ²/2π는 닫힌 순환 전이의 값입니다. 식 (44)가 주는 1/3이 겹침 평균이고, Γ(자연폭)/Γ(전체)가 압력 넓힘입니다. 위의 진동자 세기 경로가 4.0759e−17을 주므로 두 경로가 다섯 자리까지 일치합니다 — 이것이 T/05의 눈금 정정을 잡은 검산입니다."
+      },
+      {
+        "tex": "\\Phi \\;=\\; \\frac{I}{hc/\\lambda} \\qquad R \\;=\\; \\sigma_{\\mathrm{peak}}\\,\\Phi",
+        "name": "광자 선속과 산란 속도",
+        "src": "standard",
+        "where": "정의",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "\\frac{dP}{dt} \\;=\\; \\frac{R}{n_{\\mathrm{cyc}}}\\,(1 - P) \\;-\\; \\Gamma_g\\,P",
+        "name": "한 인자로 뭉뚱그린 펌핑 속도방정식",
+        "src": "standard",
+        "where": "이 저장소의 모델",
+        "class": "INFERRED",
+        "note": "n(cyc) = 10은 검토한 제출 계산의 모델 입력입니다. T/05가 준위별로 풀어 이 값을 재보니 5.6~5.8이 나왔습니다 — 즉 이 식은 펌핑을 1.8배 비관적으로 봅니다."
+      },
+      {
+        "tex": "\\tau \\;=\\; \\left(\\frac{R}{n_{\\mathrm{cyc}}} + \\Gamma_g\\right)^{-1} \\qquad P(\\infty) \\;=\\; \\frac{R/n_{\\mathrm{cyc}}}{R/n_{\\mathrm{cyc}} + \\Gamma_g}",
+        "name": "시상수와 정상상태",
+        "src": "standard",
+        "where": "위 식의 해석해",
+        "class": "CALCULATED"
+      }
     ],
     "parametric_note": "앞의 네 줄에는 맞춘 상수가 없습니다. 마지막 두 줄에만 모델 입력 두 개가 들어갑니다."
   },

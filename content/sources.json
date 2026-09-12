@@ -1,0 +1,65 @@
+{
+  "_note": "content/entries/*.json의 모든 수식이 여기 있는 id 하나를 가리킵니다. held는 독자가 실제로 어디까지 확인할 수 있는지를 말합니다: disk는 input/papers에 있고, zotero는 저자의 문헌 라이브러리에 있으며 이 주장들을 위해 읽었고, named는 갖고 있는 다른 출처가 지목했을 뿐 이 저장소에는 없으며, standard는 원전 없이 항등식 검사로 대신한다는 뜻입니다. scripts/validators/validate_math.py가 모든 수식의 출처가 이 파일에서 풀리는지 검사합니다.",
+  "steck": {
+    "label": "Steck, Rubidium 87 D Line Data",
+    "detail": "revision 2.3.4, 21 November 2023",
+    "authors": "D. A. Steck",
+    "kind": "reference data compilation",
+    "held": "disk",
+    "path": "input/papers/steck-rb87-d-line-data-r2.3.4.pdf",
+    "sha256": "0d7ecd708e44ad950db280cbf980b16090660646f5e530e544ae78ccd6385c3b",
+    "url": "https://steck.us/alkalidata",
+    "note": "식에 번호가 붙어 있어서, 아래 인용은 전부 특정 식 번호를 가리킵니다. 다만 Steck 자체가 편찬물입니다 — Steck이 어떤 식을 원 논문에 돌리는 경우, 그 사실을 각 수식의 설명에 적었습니다.",
+    "short": "Steck, Rb-87 D Line Data r2.3.4"
+  },
+  "fabricant2023": {
+    "label": "How to build a magnetometer with thermal atomic vapor: a tutorial",
+    "detail": "New J. Phys. 25, 025001 (2023)",
+    "authors": "A. Fabricant, I. Novikova, G. Bison",
+    "kind": "tutorial review",
+    "held": "zotero",
+    "doi": "10.1088/1367-2630/acb840",
+    "url": "https://doi.org/10.1088/1367-2630/acb840",
+    "note": "오픈 액세스. 잡음 한계(식 17–20과 부록 B), 그리고 T/07이 독립적으로 도달한 계통오차가 문헌에서 어떤 이름으로 불리고 어느 논문이 원전인지 확인하기 위해 읽었습니다.",
+    "short": "Fabricant et al. 2023, NJP 25 025001"
+  },
+  "hunter2018": {
+    "label": "Free-Induction-Decay Magnetometer Based on a Microfabricated Cs Vapor Cell",
+    "detail": "Phys. Rev. Applied 10, 014002 (2018)",
+    "authors": "D. Hunter, S. Piccolomo, J. D. Pritchard, N. L. Brockie, T. E. Dyer, E. Riis",
+    "kind": "primary research",
+    "held": "zotero",
+    "doi": "10.1103/PhysRevApplied.10.014002",
+    "url": "https://doi.org/10.1103/PhysRevApplied.10.014002",
+    "note": "세슘 셀입니다. 여기 나오는 16.64 MHz/Torr 환산은 Cs D1 선에 대한 것이고, Pitz, Wertepny & Perram, Phys. Rev. A 80, 062718 (2009)에서 왔습니다. 루비듐 계수가 아닙니다. T/02가 이것을 Rb 값의 독립 확인으로 썼습니다 — 그 항목의 정정 기록을 보십시오.",
+    "short": "Hunter et al. 2018, PRApplied 10 014002"
+  },
+  "wang2025": {
+    "label": "The fabrication of MEMS alkali metal vapor cells based on ultrafast laser welding for single beam magnetometer",
+    "detail": "Microsystems & Nanoengineering 11, 153 (2025)",
+    "authors": "Y. Wang, M. Yu, Y. Chen, Y. Ma, X. Han, Y. Xia, J. Guo, P. Yang, Q. Lin, S. Ding, L. Zhao",
+    "kind": "primary research, secondary for the coefficient used here",
+    "held": "zotero",
+    "doi": "10.1038/s41378-025-00976-6",
+    "url": "https://doi.org/10.1038/s41378-025-00976-6",
+    "note": "측정한 36.50 GHz 폭을 2.05 amagat으로 바꾸는 데 Rb D1의 N₂ 압력 넓힘 계수 17.8 GHz/amagat을 쓰고, 그 계수를 자기 참고문헌 43번인 Seltzer의 박사논문에 돌립니다. 즉 이 저장소가 그 수를 읽은 곳이지, 그 수가 측정된 곳이 아닙니다.",
+    "short": "Wang et al. 2025, Microsyst. Nanoeng. 11 153"
+  },
+  "seltzer2008": {
+    "label": "Developments in alkali-metal atomic magnetometry",
+    "detail": "PhD thesis, Princeton University (2008)",
+    "authors": "S. J. Seltzer",
+    "kind": "thesis, primary for the buffer-gas coefficients",
+    "held": "named",
+    "url": "https://www.proquest.com/docview/275671021",
+    "note": "갖고 있지 않습니다. wang2025의 참고문헌 43번이 17.8 GHz/amagat의 출처로 지목한 문헌이고, 그 참고문헌 항목은 직접 확인했습니다. 다만 Seltzer가 그 수를 어느 원 측정에서 가져왔는지는 이 저장소가 모릅니다 — 논문을 열어보지 않았습니다. 알칼리–완충기체의 넓힘·이동·스핀파괴·확산 계수를 모아놓은 표준 편찬물이므로, 끝내 추적하지 못한 −8.25 GHz/amagat 이동 계수도 같은 표에 있을 가능성이 높습니다. 이 논문 하나를 구하면 여러 항목의 미해결 항목이 한꺼번에 닫힙니다.",
+    "short": "Seltzer 2008, Princeton 박사논문"
+  },
+  "standard": {
+    "label": "표준 결과 — 원전을 이 저장소가 갖고 있지 않음",
+    "kind": "textbook",
+    "held": "standard",
+    "note": "논란의 여지가 없고 인용할 논문을 특정하기에는 너무 오래된 결과들에 씁니다: 3-j·6-j·Wigner d의 Racah 공식, Liouville–von Neumann 방정식, Beer–Lambert 흡수, Voigt 프로파일, 도플러 폭, amagat 정의. 갖고 있지도 않은 교과서를 인용하는 것보다 갖고 있지 않다고 적는 편이 낫습니다. 대신 이들은 전부 기계적으로 검사합니다 — 해당 항목의 검증 절을 보십시오.",
+    "short": "표준 결과"
+  }
+}

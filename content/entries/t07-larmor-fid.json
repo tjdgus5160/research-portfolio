@@ -48,6 +48,11 @@
       "claim": "T₂ = 1/Γ_g = 5.88 ms",
       "class": "INFERRED",
       "source": "Γ_g = 170 s⁻¹은 이 저장소에 있는 유일한 이완 수치이고, T/03에 세로 이완률로 들어왔습니다. 그것을 T₂로 쓰는 것은 T₁ = T₂를 가정하는 것입니다. 신뢰도 낮음"
+    },
+    {
+      "claim": "여기서 계산한 틀어짐 오차는 문헌에서 heading error로 불리는 계통오차입니다",
+      "class": "SOURCE_FACT",
+      "source": "Fabricant, Novikova & Bison, New J. Phys. 25, 025001 (2023), doi:10.1088/1367-2630/acb840, 4.2.5절: '…heading errors caused by orientation-dependent light shifts and the nonlinear Zeeman effect'. 그 튜토리얼이 원전으로 드는 세 논문은 Oelsner et al., Phys. Rev. A 99, 013420 (2019); Lee et al., Phys. Rev. A 103, 063103 (2021); Bao et al., Phys. Rev. Lett. 120, 033202 (2018). 세 편 모두 이 저장소에 없습니다. 이 계산은 그 문헌을 보지 않고 Breit–Rabi에서 출발했고, 이름을 나중에 찾았습니다."
     }
   ],
   "method": [
@@ -180,6 +185,13 @@
       "unit": "%",
       "class": "CALCULATED",
       "note": "T/05 분포 기준. 선폭의 26배 떨어져 있어 겹치지 않습니다"
+    },
+    {
+      "name": "문헌에서의 이름",
+      "value": "heading error",
+      "unit": "",
+      "class": "SOURCE_FACT",
+      "note": "비선형 Zeeman에서 오는 부분. 빛 이동에서 오는 부분은 여기서 계산하지 않았습니다"
     }
   ],
   "geometry": {
@@ -210,13 +222,102 @@
         "note": "구조는 분해되지 않아도 사라지지 않습니다"
       }
     ],
-    "parametric": [
-      "g_F = g_J·[F(F+1)−I(I+1)+J(J+1)]/[2F(F+1)] + g_I·[F(F+1)+I(I+1)−J(J+1)]/[2F(F+1)]",
-      "E = −ΔE/[2(2I+1)] + g_I μ_B m B ± (ΔE/2)·√(1 + 4mx/(2I+1) + x²),  x = (g_J−g_I)μ_B B/ΔE",
-      "ρ′_{a,b} = Σ_m d^F_{a,m}(β) d^F_{b,m}(β) ρ_{m,m}",
-      "w(m,m−1) = √(F(F+1)−m(m−1)) · ρ′_{m,m−1}",
-      "d^j_{−m′,m}(π/2) = (−1)^{j+m} d^j_{m′,m}(π/2)",
-      "S(t) = Σ w_i cos(2π f_i t) · e^{−t/T₂}"
+    "equations": [
+      {
+        "tex": "g_J \\;=\\; g_L\\,\\frac{J(J+1) - S(S+1) + L(L+1)}{2J(J+1)} \\;+\\; g_S\\,\\frac{J(J+1) + S(S+1) - L(L+1)}{2J(J+1)}",
+        "name": "미세구조 Landé 인자",
+        "src": "steck",
+        "where": "식 (21)",
+        "class": "SOURCE_FACT",
+        "note": "Steck은 이 식을 [32]에 돌립니다. 5²S₁/₂에 대해서는 표 6이 측정값 2.002331070(26)을 주므로 그것을 씁니다."
+      },
+      {
+        "tex": "g_F \\;=\\; g_J\\,\\frac{F(F+1) - I(I+1) + J(J+1)}{2F(F+1)} \\;+\\; g_I\\,\\frac{F(F+1) + I(I+1) - J(J+1)}{2F(F+1)}",
+        "name": "초미세 Landé 인자",
+        "src": "steck",
+        "where": "식 (23)",
+        "class": "SOURCE_FACT",
+        "note": "Steck은 두 번째 항을 버린 근사형도 함께 주지만, 여기서는 버리지 않습니다 — 0.1% 수준이고 이 항목이 재는 효과가 그보다 작습니다."
+      },
+      {
+        "tex": "E_{|J=1/2,\\,m_J;\\,I,\\,m_I\\rangle} \\;=\\; -\\frac{\\Delta E_{\\mathrm{hfs}}}{2(2I+1)} \\;+\\; g_I \\mu_B m B\\;\\pm\\; \\frac{\\Delta E_{\\mathrm{hfs}}}{2}\\left(1 + \\frac{4mx}{2I+1} + x^2\\right)^{1/2}",
+        "name": "Breit–Rabi 공식",
+        "src": "steck",
+        "where": "식 (26)",
+        "class": "SOURCE_FACT",
+        "note": "Steck은 이 식을 [24, 36, 37]에 돌립니다. D 전이의 바닥상태 다중항에만 적용됩니다. 여기서 m = mᵢ ± ½이고, ± 부호는 식 안의 것과 같은 것을 씁니다."
+      },
+      {
+        "tex": "x \\;=\\; \\frac{(g_J - g_I)\\,\\mu_B\\,B}{\\Delta E_{\\mathrm{hfs}}} \\qquad \\Delta E_{\\mathrm{hfs}} = A_{\\mathrm{hfs}}\\left(I + \\tfrac12\\right)",
+        "name": "Breit–Rabi의 무차원 장세기",
+        "src": "steck",
+        "where": "식 (27)과 그 앞 문장",
+        "class": "SOURCE_FACT",
+        "note": "A(5²S₁/₂) = h · 3.417341305452145 GHz (표 5)이므로 ΔE(hfs) = 6.834682610904 GHz입니다."
+      },
+      {
+        "tex": "E_{|J=1/2\\rangle} \\;=\\; \\Delta E_{\\mathrm{hfs}}\\,\\frac{I}{2I+1} \\;\\pm\\; \\frac12\\,(g_J + 2I g_I)\\,\\mu_B B\\qquad \\text{at } m = \\pm\\!\\left(I + \\tfrac12\\right)",
+        "name": "검산용 — 부호 모호성이 없는 형태",
+        "src": "steck",
+        "where": "식 (28)",
+        "class": "SOURCE_FACT",
+        "note": "m = ±2에서만 유효합니다. 식 (26)과 0.1~50 G에서 4.8e−07 Hz 안에 일치하는 것이 이 구현의 첫 번째 검사입니다."
+      },
+      {
+        "tex": "\\Delta\\omega_{\\mathrm{clock}} \\;=\\; \\frac{(g_J - g_I)^2\\,\\mu_B^2}{2\\hbar\\,\\Delta E_{\\mathrm{hfs}}}\\;B^2",
+        "name": "검산용 — 시계 전이의 이차 Zeeman",
+        "src": "steck",
+        "where": "식 (29), 표 6이 2π·575.15 Hz/G²로 표로도 줌",
+        "class": "SOURCE_FACT",
+        "note": "표값이 있는 덕분에 구현 전체를 한 수로 검사할 수 있습니다. 이 계산은 575.1459 Hz/G²를 줍니다."
+      },
+      {
+        "tex": "\\Delta f_{\\mathrm{adj}} \\;=\\; \\frac{1}{4}\\,\\frac{\\Delta\\omega_{\\mathrm{clock}}}{2\\pi B^2} \\;=\\; 143.79\\ \\mathrm{Hz/G^2}",
+        "name": "인접 Zeeman 전이의 벌어짐",
+        "src": "standard",
+        "where": "식 (26)을 대각화한 결과",
+        "class": "CALCULATED",
+        "note": "정확히 시계 이동의 1/4이라는 관계는 코드 어디에도 넣지 않았습니다. 대각화에서 나오고, 표값과 맞기 때문에 검산이 됩니다."
+      },
+      {
+        "tex": "\\rho'_{a,b} \\;=\\; \\sum_m d^{F}_{a,m}(\\beta)\\; d^{F}_{b,m}(\\beta)\\; \\rho_{m,m}",
+        "name": "펌핑된 상태를 눕히기",
+        "src": "standard",
+        "where": "ρ′ = DρD†, Wigner d는 Racah 공식",
+        "class": "CALCULATED",
+        "note": "출발 상태는 m 대각이므로 세차운동하는 결맞음이 없습니다. 그것을 만드는 것이 회전입니다. d는 scripts/wigner.py가 직접 계산하고 자가 검사합니다."
+      },
+      {
+        "tex": "w(m,\\,m\\!-\\!1) \\;=\\; \\sqrt{F(F+1) - m(m-1)}\\;\\;\\rho'_{m,\\,m-1}",
+        "name": "각 결맞음이 신호에 실리는 무게",
+        "src": "standard",
+        "where": "⟨m|F₊|m−1⟩의 표준 행렬요소",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "d^{\\,j}_{-m',\\,m}\\!\\left(\\tfrac{\\pi}{2}\\right) \\;=\\; (-1)^{\\,j+m}\\; d^{\\,j}_{m',\\,m}\\!\\left(\\tfrac{\\pi}{2}\\right)",
+        "name": "π/2에서만 성립하는 대칭 — 이 항목의 핵심",
+        "src": "standard",
+        "where": "Wigner d의 대칭성, β = π/2에서만",
+        "class": "CALCULATED",
+        "note": "부호가 m′이 아니라 합산 지표 m에만 의존합니다. 위 곱 안에서 제곱되어 사라지므로, (m, m−1)의 무게가 (−m+1, −m)의 무게와 정확히 같아집니다 — 출발 인구분포가 무엇이든. 그래서 이차 Zeeman이 무게중심에서 정확히 상쇄됩니다. β ≠ π/2에서는 성립하지 않습니다."
+      },
+      {
+        "tex": "S(t) \\;=\\; \\sum_i w_i \\cos\\!\\big(2\\pi f_i t\\big)\\; e^{-t/T_2}",
+        "name": "자유 감쇠 신호",
+        "src": "standard",
+        "where": "네 결맞음의 합",
+        "class": "INFERRED",
+        "note": "T₂ = 1/Γ(g)는 이 항목에서 자유롭게 고른 유일한 수입니다. Γ(g)는 세로 이완률로 들어왔으므로 T₁ = T₂를 가정하는 셈입니다."
+      },
+      {
+        "tex": "\\delta B_{\\mathrm{PN}} \\propto \\frac{1}{\\sqrt{N\\,T_2\\,t}} \\qquad \\delta B_{\\mathrm{SN}} \\propto \\frac{1}{\\sqrt{\\Phi\\,t}}",
+        "name": "아직 계산하지 않은 것 — 잡음 한계",
+        "src": "fabricant2023",
+        "where": "식 (17)과 (18), 유도는 부록 B",
+        "class": "SOURCE_FACT",
+        "note": "스핀 투영 잡음과 광자 산탄 잡음. 이 항목은 신호를 계산했을 뿐 잡음은 계산하지 않았으므로 감도를 말할 수 없습니다. 다음 차례이고, 출처는 이미 여기 있습니다."
+      }
     ],
     "parametric_note": "여섯 줄 중 다섯 줄이 출처에 있거나 거기서 유도됩니다. 자유롭게 고른 값은 T₂ 하나뿐입니다."
   },
@@ -272,7 +373,9 @@
     "틀어짐 펄스를 순간적인 것으로 다뤘습니다. 유한한 길이의 펄스는 그동안에도 세차운동하므로 실제 회전축이 기웁니다.",
     "T/06이 보인 공간 의존성을 무시했습니다. 자기장은 균일해도 편광은 그렇지 않으므로, 셀 앞뒤가 같은 주파수에 서로 다른 진폭으로 기여합니다. 주파수는 바뀌지 않지만 신호 대 잡음은 바뀝니다.",
     "F=1을 독립된 선으로만 다뤘습니다. 1393 Hz 떨어져 있어 겹치지는 않지만, 맞춤 구간을 넓게 잡으면 끌려갑니다.",
-    "감도를 계산하지 않았습니다. 신호는 여기 있지만 잡음이 없습니다 — 광자 산탄 잡음과 스핀 투영 잡음이 다음 차례입니다."
+    "heading error의 나머지 절반인 빛 이동 기여를 계산하지 않았습니다. 튜토리얼은 두 원인을 나란히 놓습니다. 프로브가 만드는 가짜 자기장의 크기가 여기서 잰 0.130 nT/도와 같은 자릿수일 수 있습니다.",
+    "Bao 2018은 비선형 Zeeman을 억제하는 방법을 제목에 걸고 있습니다. 이 계산은 그 효과의 크기만 재고 억제는 다루지 않았습니다.",
+    "감도를 계산하지 않았습니다. 신호는 여기 있지만 잡음이 없습니다. 스핀 투영 잡음과 광자 산탄 잡음의 식은 이 항목의 마지막 수식으로 이미 적어두었고(Fabricant 2023 식 17·18), 다음 차례입니다."
   ],
   "artifacts": [
     {

@@ -166,11 +166,46 @@
         "note": "제출받은 그림. 세로 점선이 저압 잠금 위치이고, 최댓값은 그보다 3.6 GHz 붉은쪽입니다"
       }
     ],
-    "parametric": [
-      "n[amagat] = (P[Torr]/760)·(273.15/T_fill)",
-      "FWHM = 17.8 GHz/amagat · n",
-      "shift = −8.25 GHz/amagat · n",
-      "ν(F→F′) = ν₀ + (F=1이면 +6.8347) − (F′=1이면 +0.8167) + shift"
+    "equations": [
+      {
+        "tex": "n_{\\mathrm{am}} \\;=\\; \\frac{650\\ \\mathrm{Torr}}{760\\ \\mathrm{Torr}}\\cdot\\frac{273.15\\ \\mathrm{K}}{T_{\\mathrm{fill}}} \\;=\\; 0.7969",
+        "name": "이 셀의 완충기체 밀도",
+        "src": "standard",
+        "where": "amagat 정의, T(봉입) = 293.15 K",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "\\Delta\\nu_L \\;=\\; \\left(17.8\\ \\frac{\\mathrm{GHz}}{\\mathrm{amg}}\\right)\\times 0.7969 \\;=\\; 14.19\\ \\mathrm{GHz}",
+        "name": "여기서 나오는 선폭",
+        "src": "wang2025",
+        "where": "T/02와 같은 계수",
+        "class": "CALCULATED",
+        "note": "원 출처는 Seltzer 2008이며 이 저장소에 없습니다."
+      },
+      {
+        "tex": "\\delta\\nu_{\\mathrm{shift}} \\;=\\; \\left(-8.25\\ \\frac{\\mathrm{GHz}}{\\mathrm{amg}}\\right)\\times 0.7969 \\;=\\; -6.575\\ \\mathrm{GHz}",
+        "name": "압력 이동",
+        "src": "seltzer2008",
+        "where": "추적하지 못했습니다",
+        "class": "INFERRED",
+        "note": "이 항목에서 출처를 대지 못하는 유일한 수입니다. 검토한 제출 계산이 쓴 값이고, 원 논문을 확인하지 못했습니다. 넓힘 계수 17.8이 Seltzer 논문에서 왔으므로 이동 계수도 같은 표에 있을 가능성이 높지만, 확인하기 전까지는 INFERRED입니다. 최적 detuning이 −3.5 GHz 근처에 오는 것이 전적으로 이 수에 달려 있습니다."
+      },
+      {
+        "tex": "\\nu(F \\to F') \\;=\\; \\nu_0 \\;+\\; \\delta_{F,1}\\,\\Delta^{g}_{\\mathrm{hfs}} \\;-\\; \\delta_{F',1}\\,\\Delta^{e}_{\\mathrm{hfs}} \\;+\\; \\delta\\nu_{\\mathrm{shift}}",
+        "name": "네 개의 초미세 전이 중심",
+        "src": "steck",
+        "where": "표 5의 A 상수, ΔE(hfs) = A(I+½)",
+        "class": "CALCULATED",
+        "note": "Δ(바닥 초미세) = 6.834682610904 GHz는 A(5²S₁/₂)×2에서. Δ(여기 초미세) = 2A(5²P₁/₂) = 814.50(126) MHz — 개정판마다 다르므로 아래 정정 기록을 보십시오."
+      },
+      {
+        "tex": "\\frac{\\Delta\\nu_L}{\\Delta^{g}_{\\mathrm{hfs}}} \\;=\\; \\frac{14.19}{6.835} \\;=\\; 2.08",
+        "name": "왜 초미세구조가 사라지는가",
+        "src": "standard",
+        "where": "위 두 값의 비",
+        "class": "CALCULATED",
+        "note": "선폭이 바닥상태 분리의 두 배입니다. 네 전이가 하나의 봉우리로 뭉치고, 그래서 detuning 하나로 F=1과 F=2를 동시에 다루게 됩니다."
+      }
     ],
     "parametric_note": "전이 중심 네 개는 이 네 줄만으로 나옵니다. 제출값을 이 식으로 다시 계산해 대조했습니다."
   },

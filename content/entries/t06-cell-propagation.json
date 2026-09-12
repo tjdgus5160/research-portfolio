@@ -179,13 +179,70 @@
         "note": "두 문턱선의 차이가 표백이 벌어주는 여유입니다"
       }
     ],
-    "parametric": [
-      "dI/dz = −n₈₇ σ₀ a(P, δ) I",
-      "a(P, δ) = Σ_{g,e} 3 |d₊₁(g,e)|² L(δ; F_g, F_e) P_g",
-      "a → 1  (편광 없음, 초미세 미분해)  ⟺  α → n σ₀",
-      "I_slab = (I_k − I_{k+1}) / (α_k dz)",
-      "dP_g/dt = Σ 유입 − Σ 유출 + Γ_g (1/8 − P_g)",
-      "n(T) = P_v(T) / kT,   P_v from Steck eq. 1"
+    "equations": [
+      {
+        "tex": "\\log_{10} P_v \\;=\\; 2.881 + 4.312 - \\frac{4040}{T} \\qquad (\\text{액체상, Torr})",
+        "name": "Rb 증기압",
+        "src": "steck",
+        "where": "식 (1), 액체상",
+        "class": "SOURCE_FACT",
+        "note": "Steck은 이 모형을 [5]에 돌리고, 298–550 K에서 ±5%보다 나은 정확도라고 명시합니다. 39.30 °C(표 2) 아래로는 고체상 식 2.881 + 4.857 − 4215/T를 씁니다."
+      },
+      {
+        "tex": "n(T) \\;=\\; \\frac{P_v(T)}{k_B T} \\qquad n_{87}(T) \\;=\\; \\eta\\; n(T)",
+        "name": "수밀도와 동위원소 분율",
+        "src": "steck",
+        "where": "표 2의 η(⁸⁷Rb) = 27.83(2)%",
+        "class": "CALCULATED",
+        "note": "η는 천연 존재비입니다. 이 셀이 농축 셀인지는 확정하지 못했고, 두 경우를 모두 보고합니다."
+      },
+      {
+        "tex": "\\frac{dI}{dz} \\;=\\; -\\,n_{87}\\,\\sigma_0\\,a(P,\\delta)\\,I",
+        "name": "Beer–Lambert, 단 편광된 원자는 빼고",
+        "src": "standard",
+        "where": "흡수의 정의",
+        "class": "CALCULATED",
+        "note": "보통의 Beer–Lambert와 다른 곳은 a(P,δ) 하나입니다. 그것이 층마다 달라지고 시간에 따라 변하기 때문에 이 문제가 결합됩니다."
+      },
+      {
+        "tex": "a(P,\\delta) \\;=\\; 3\\sum_{g,\\,e} \\big|d_{+1}(g,e)\\big|^{2}\\;\\mathcal{L}(\\delta;F_g,F_e)\\;P_g",
+        "name": "부분적으로 펌핑된 증기가 실제로 흡수하는 양",
+        "src": "steck",
+        "where": "식 (35)·(36)의 행렬요소와 식 (39)의 규격화",
+        "class": "CALCULATED",
+        "note": "(1 − P)로 대신하지 않은 이유가 여기 있습니다. F=1에 남은 인구는 6.8 GHz 떨어진 선에서 흡수하고, F=2의 중간 m 준위는 각자 다른 세기로 흡수합니다."
+      },
+      {
+        "tex": "a \\longrightarrow 1 \\quad (\\text{편광 없음, 초미세 미분해}) \\qquad\\Longleftrightarrow\\qquad \\alpha \\longrightarrow n_{87}\\,\\sigma_0",
+        "name": "눈금이 맞는지 보는 극한",
+        "src": "standard",
+        "where": "T/05의 미분해 극한 검사와 같은 것",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "I_{\\mathrm{slab}} \\;=\\; \\frac{I_k - I_{k+1}}{\\alpha_k\\, dz}",
+        "name": "층이 실제로 받는 세기",
+        "src": "standard",
+        "where": "지수 감쇠의 층 평균",
+        "class": "CALCULATED",
+        "note": "앞면 세기를 쓰면 두꺼운 층에서 펌핑을 과대평가합니다."
+      },
+      {
+        "tex": "\\frac{dP_g}{dt} \\;=\\; \\sum_{\\text{유입}} - \\sum_{\\text{유출}} \\;+\\; \\Gamma_g\\!\\left(\\tfrac18 - P_g\\right)",
+        "name": "각 층의 8개 인구",
+        "src": "standard",
+        "where": "T/05의 속도방정식을 층마다",
+        "class": "CALCULATED",
+        "note": "유입·유출은 T/05의 A와 B 행렬입니다. 마지막 항이 균일 분포로 되돌리는 스핀 파괴입니다."
+      },
+      {
+        "tex": "\\mathrm{OD} \\;=\\; n_{87}\\,\\sigma_0\\,L \\qquad L = 5.5\\ \\mathrm{mm}",
+        "name": "광학 깊이",
+        "src": "standard",
+        "where": "위 두 식에서 a = 1로 놓은 것",
+        "class": "CALCULATED",
+        "note": "이것은 선세기 전체가 한 주파수에 있다고 본 값입니다. 저압 잠금점에서 실제 감쇠는 압력 이동 때문에 이 값의 0.69배입니다."
+      }
     ],
     "parametric_note": "여섯 줄 중 자유 인자는 없습니다. Γ_g 하나가 모델 입력이고 나머지는 앞 항목들에서 옵니다."
   },

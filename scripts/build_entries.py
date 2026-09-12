@@ -33,6 +33,78 @@ CLASSES = {
     "ILLUSTRATIVE": ("ILL", "그림을 위한 것, 물리적 주장 없음"),
 }
 
+MATH = json.loads((ROOT / "content" / "math.json").read_text())
+SOURCES = json.loads((ROOT / "content" / "sources.json").read_text())
+
+# How much a reader can actually check, per source. The label is deliberately
+# blunt: "named" means this repository cites it but does not hold it.
+HELD = {"disk":     ("HELD",  "이 저장소에 있습니다"),
+        "zotero":   ("READ",  "저자의 문헌 라이브러리에 있고, 이 주장을 위해 읽었습니다"),
+        "named":    ("NAMED", "이 저장소에 없습니다. 갖고 있는 다른 출처가 지목한 것입니다"),
+        "standard": ("STD",   "원전을 갖고 있지 않습니다. 대신 항등식으로 검사합니다")}
+
+
+def equations(eqs: list[dict]) -> str:
+    """Typeset math plus, for every line, where it came from.
+
+    The MathML is rendered once by scripts/render_math.mjs and cached, so this
+    build needs no node and no network, and an edited formula that was never
+    re-typeset fails the gate rather than silently shipping the old one.
+    """
+    out = []
+    for q in eqs:
+        src = SOURCES.get(q["src"], {})
+        held, _ = HELD.get(src.get("held", ""), ("?", ""))
+        where = f' — {esc(q["where"])}' if q.get("where") else ""
+        out.append(
+            '<li class="eq">'
+            + (f'<p class="eq-name">{esc(q["name"])}</p>' if q.get("name") else "")
+            + f'<div class="eq-math">{MATH[q["tex"]]}</div>'
+            + '<p class="eq-src">'
+            + badge(q["class"])
+            + f'<span class="eq-held">{held}</span>'
+            + f'<span>{esc(src.get("short") or src.get("label", q["src"]))}'
+              f'{where}</span></p>'
+            + (f'<p class="eq-note">{esc(q["note"])}</p>' if q.get("note") else "")
+            + "</li>")
+    return f'<ul class="e-eq">{"".join(out)}</ul>'
+
+
+def bibliography(eqs: list[dict], ev: list[dict]) -> str:
+    """Every source this entry leans on, once, with what can be checked."""
+    used = [q["src"] for q in eqs]
+    seen, rows = [], []
+    for k in used:
+        if k in seen:
+            continue
+        seen.append(k)
+        v = SOURCES[k]
+        held, held_note = HELD[v["held"]]
+        n = sum(1 for q in eqs if q["src"] == k)
+        bits = []
+        if v.get("detail"):
+            bits.append(f'<span class="bib-detail">{esc(v["detail"])}</span>')
+        if v.get("authors"):
+            bits.append(f'<span class="bib-au">{esc(v["authors"])}</span>')
+        link = ""
+        if v.get("doi"):
+            link = f'<a href="https://doi.org/{esc(v["doi"])}">doi:{esc(v["doi"])}</a>'
+        elif v.get("url"):
+            link = f'<a href="{esc(v["url"])}">{esc(v["url"])}</a>'
+        if v.get("path"):
+            link += f' <code>{esc(v["path"])}</code>'
+        rows.append(
+            f'<li><p class="bib-h"><b class="held-{esc(v["held"])}">{held}</b>'
+            f'<span class="bib-label">{esc(v["label"])}</span>'
+            f'<span class="bib-n">수식 {n}개</span></p>'
+            + ("".join(bits) and f'<p class="bib-meta">{" ".join(bits)}</p>')
+            + (f'<p class="bib-link">{link}</p>' if link else "")
+            + f'<p class="bib-held">{esc(held_note)}</p>'
+            + (f'<p class="bib-note">{esc(v["note"])}</p>' if v.get("note") else "")
+            + "</li>")
+    return f'<ul class="e-bib">{"".join(rows)}</ul>'
+
+
 def esc(x) -> str:
     return html.escape(str(x), quote=True)
 
@@ -104,11 +176,18 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
     A(f'<div><dt>DATE</dt><dd>{esc(e.get("date","—"))}</dd></div>')
     A("</dl></section>")
 
-    def sec(n, name, body):
-        A(f'<section class="e-sec"><h2 class="kicker">{n} — {esc(name)}</h2>{body}</section>')
+    # Section numbers used to be computed as 7 + bool(defect) + bool(correction),
+    # which had to be kept in step by hand in four places. A counter cannot drift.
+    n_sec = 0
+
+    def sec(name, body):
+        nonlocal n_sec
+        n_sec += 1
+        A(f'<section class="e-sec"><h2 class="kicker">{n_sec:02d} — {esc(name)}</h2>'
+          f'{body}</section>')
 
     if e.get("question"):
-        sec("01", "무엇을 물었나", f'<p class="e-q">{esc(e["question"])}</p>')
+        sec("무엇을 물었나", f'<p class="e-q">{esc(e["question"])}</p>')
 
     if e.get("evidence"):
         legend = '<dl class="e-legend">' + "".join(
@@ -118,14 +197,14 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
             f'<li>{badge(v["class"])}<div><p class="e-claim">{esc(v["claim"])}</p>'
             f'<p class="e-src">{esc(v.get("source") or v.get("reasoning",""))}</p></div></li>'
             for v in e["evidence"])
-        sec("02", "근거", legend + f'<ul class="e-ev">{rows}</ul>')
+        sec("근거", legend + f'<ul class="e-ev">{rows}</ul>')
 
     if e.get("method"):
         rows = "".join(
             f'<li><span class="no">{esc(m["step"])}</span>'
             f'<div><h3>{esc(m["name"])}</h3><p>{esc(m["detail"])}</p></div></li>'
             for m in e["method"])
-        sec("03", "어떻게 했나", f'<ol class="e-me">{rows}</ol>')
+        sec("어떻게 했나", f'<ol class="e-me">{rows}</ol>')
 
     if e.get("numbers"):
         rows = "".join(
@@ -133,7 +212,7 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
             f'<td class="v">{esc(n["value"])}<i>{esc(n.get("unit",""))}</i></td>'
             f'<td>{badge(n["class"])}</td><td class="n">{esc(n.get("note",""))}</td></tr>'
             for n in e["numbers"])
-        sec("04", "수치", '<div class="e-scroll"><table class="e-nums">'
+        sec("수치", '<div class="e-scroll"><table class="e-nums">'
             '<thead><tr><th scope="col">값</th><th scope="col">크기</th>'
             '<th scope="col">등급</th><th scope="col">출처 · 식 · 근거</th></tr></thead>'
             f'<tbody>{rows}</tbody></table></div>')
@@ -160,27 +239,31 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
                         f'{esc(r.get("note",""))}</figcaption></figure>')
             b += '<div class="e-views">' + "".join(
                 figure(r) for r in g["renders"]) + "</div>"
+        if g.get("equations"):
+            b += equations(g["equations"])
+        # W/01-W/03 carry CAD parameter relations here, not mathematics; those
+        # stay plain text rather than being forced through a typesetter.
         if g.get("parametric"):
             b += '<ul class="e-par">' + "".join(f"<li>{esc(x)}</li>" for x in g["parametric"]) + "</ul>"
         if g.get("parametric_note"):
             b += f'<p class="e-note">{esc(g["parametric_note"])}</p>'
         if g.get("tolerance"):
             b += f'<p class="e-note">허용오차 {esc(g["tolerance"])}</p>'
-        sec("05", "형상", b)
+        sec("그림과 수식" if g.get("equations") else "형상", b)
 
     v = e.get("validation") or {}
     if v.get("checks"):
         rows = "".join(
             f'<tr><th scope="row">{esc(c["name"])}</th><td class="v">{esc(c["result"])}</td>'
             f'<td class="n">{esc(c.get("how",""))}</td></tr>' for c in v["checks"])
-        sec("06", "검증", f'<p class="e-verdict">{esc(v.get("verdict","—"))}</p>'
+        sec("검증", f'<p class="e-verdict">{esc(v.get("verdict","—"))}</p>'
             '<div class="e-scroll"><table class="e-nums"><thead><tr>'
             '<th scope="col">검사</th><th scope="col">결과</th><th scope="col">방법</th>'
             f'</tr></thead><tbody>{rows}</tbody></table></div>')
 
     if e.get("defect"):
         d = e["defect"]
-        sec("07", "발견된 결함", "".join([
+        sec("발견된 결함", "".join([
             f'<p class="e-q">{esc(d["what"])}</p>',
             '<dl class="e-meta wide">',
             f'<div><dt>찾은 방법</dt><dd>{esc(d.get("found_by",""))}</dd></div>',
@@ -195,8 +278,7 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
         cs = e["correction"]
         cs = cs if isinstance(cs, list) else [cs]
         cs = sorted(cs, key=lambda c: c.get("date", ""), reverse=True)
-        n = "08" if e.get("defect") else "07"
-        sec(n, "정정 기록", "".join(
+        sec("정정 기록", "".join(
             "".join([
                 f'<p class="e-q">{esc(c["what"])}</p>',
                 '<dl class="e-meta wide">',
@@ -207,15 +289,17 @@ def page(e: dict, prev: dict | None, nxt: dict | None) -> str:
                 "</dl>"]) for c in cs))
 
     if e.get("unknown"):
-        n = str(7 + bool(e.get("defect")) + bool(e.get("correction"))).zfill(2)
-        sec(n, "아직 모르는 것", '<ul class="sq e-unk">' +
+        sec("아직 모르는 것", '<ul class="sq e-unk">' +
             "".join(f"<li>{esc(x)}</li>" for x in e["unknown"]) + "</ul>")
 
     if e.get("artifacts"):
-        n = str(8 + bool(e.get("defect")) + bool(e.get("correction"))).zfill(2)
         rows = "".join(f'<li><code>{esc(a["path"])}</code><span>{esc(a.get("note",""))}</span></li>'
                        for a in e["artifacts"])
-        sec(n, "산출물", f'<ul class="e-art">{rows}</ul>')
+        sec("산출물", f'<ul class="e-art">{rows}</ul>')
+
+    if (e.get("geometry") or {}).get("equations"):
+        sec("이 항목이 기대고 있는 출처",
+            bibliography(e["geometry"]["equations"], e.get("evidence") or []))
 
     A('<nav class="e-nav" aria-label="다른 항목">')
     A(f'<a href="{esc(prev["slug"])}.html">◀ {esc(prev["no"])} {esc(prev["title"])}</a>'

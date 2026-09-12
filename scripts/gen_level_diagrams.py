@@ -11,10 +11,10 @@ to scale would be a lie: the ground-state hyperfine splitting is 6.8 GHz and the
 optical transition is 377 THz, a ratio of 55,000 to 1. The scale is written on
 each figure instead.
 
-    python3 scripts/gen_level_diagrams.py
+    python3 scripts/gen_level_diagrams.py [--check]
 """
 from __future__ import annotations
-import sys
+import argparse, sys
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "assets" / "diagrams"
@@ -205,12 +205,25 @@ def pumping() -> str:
 
 
 def main() -> int:
+    # This used to take no arguments at all, so running it with --check in the
+    # gate suite silently REWROTE the diagrams and reported success. It agreed
+    # with what was on disk, but a check that cannot fail is not a check.
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--check", action="store_true")
+    a = ap.parse_args()
+
+    files = {OUT / f"{name}.svg": fn()
+             for name, fn in (("rb87-structure", structure),
+                              ("rb87-zeeman", zeeman),
+                              ("rb87-pumping", pumping))}
+    if a.check:
+        same = all(f.exists() and f.read_text() == v for f, v in files.items())
+        print("  up to date" if same else "  WOULD CHANGE")
+        return 0 if same else 1
     OUT.mkdir(parents=True, exist_ok=True)
-    for name, fn in (("rb87-structure", structure),
-                     ("rb87-zeeman", zeeman),
-                     ("rb87-pumping", pumping)):
-        (OUT / f"{name}.svg").write_text(fn(), encoding="utf-8")
-        print(f"  {name}.svg")
+    for f, v in files.items():
+        f.write_text(v, encoding="utf-8")
+        print(f"  {f.name}")
     return 0
 
 

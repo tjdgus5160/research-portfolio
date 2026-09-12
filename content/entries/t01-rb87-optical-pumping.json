@@ -161,13 +161,60 @@
         "note": "mF = +2가 암흑상태가 되는 이유는 mF′ = +3이 없기 때문입니다"
       }
     ],
-    "parametric": [
-      "F = |J − I| … J + I,  I = 3/2",
-      "5²S₁/₂ (J=1/2) → F = 1, 2",
-      "5²P₁/₂ (J=1/2) → F′ = 1, 2",
-      "5²P₃/₂ (J=3/2) → F′ = 0, 1, 2, 3",
-      "ΔE = gF mF μB B  (약한 장)",
-      "f_L = (γ/2π) · B = 6.998 Hz/nT × B"
+    "equations": [
+      {
+        "tex": "\\vec{F} = \\vec{J} + \\vec{I}",
+        "name": "전자 각운동량과 핵스핀의 결합",
+        "src": "steck",
+        "where": "식 (13)",
+        "class": "SOURCE_FACT",
+        "note": "⁸⁷Rb는 I = 3/2입니다 (Steck 표 2)."
+      },
+      {
+        "tex": "|J - I| \\;\\le\\; F \\;\\le\\; J + I",
+        "name": "F가 가질 수 있는 값",
+        "src": "steck",
+        "where": "식 (14)",
+        "class": "SOURCE_FACT"
+      },
+      {
+        "tex": "5^2S_{1/2}\\ (J=\\tfrac12)\\;\\Longrightarrow\\; F = 1,\\,2",
+        "name": "바닥상태 다중항",
+        "src": "steck",
+        "where": "식 (14)에 I=3/2, J=1/2",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "5^2P_{1/2}\\ (J=\\tfrac12)\\;\\Longrightarrow\\; F' = 1,\\,2 \\qquad5^2P_{3/2}\\ (J=\\tfrac32)\\;\\Longrightarrow\\; F' = 0,\\,1,\\,2,\\,3",
+        "name": "D1과 D2의 여기상태 다중항",
+        "src": "steck",
+        "where": "같은 식, J = 1/2와 3/2",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "\\hat{H}_B \\;=\\; \\mu_B\\, g_F\\, \\frac{\\hat{F}_z}{\\hbar}\\, B_z",
+        "name": "약한 장에서의 Zeeman 해밀토니안",
+        "src": "steck",
+        "where": "식 (22)",
+        "class": "SOURCE_FACT",
+        "note": "초미세 분리보다 작은 장에서 F가 좋은 양자수일 때. Steck은 이 식을 [36]에 돌립니다."
+      },
+      {
+        "tex": "\\Delta E_{|F\\,m_F\\rangle} \\;=\\; \\mu_B\\, g_F\\, m_F\\, B_z",
+        "name": "Zeeman 부준위의 선형 분리",
+        "src": "steck",
+        "where": "식 (24)",
+        "class": "SOURCE_FACT",
+        "note": "일차 섭동입니다. 이차항이 무엇을 하는지는 T/07이 계산합니다."
+      },
+      {
+        "tex": "f_L \\;=\\; \\frac{|g_F|\\,\\mu_B}{h}\\,B \\;=\\; 6.99583\\ \\mathrm{Hz/nT}\\times B",
+        "name": "Larmor 주파수",
+        "src": "steck",
+        "where": "식 (23)·(24)와 표 1·6의 상수",
+        "class": "CALCULATED",
+        "note": "g(F) 인자는 T/07에서 핵항까지 포함해 계산합니다."
+      }
     ],
     "parametric_note": "준위 개수는 가정이 아니라 I와 J에서 바로 나옵니다. 도해에 그린 개수는 이 규칙과 대조해 확인했습니다."
   },
