@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="ttt ttd" class="lvl">
+<title id="ttt">Longitudinal and transverse lifetimes</title><desc id="ttd">Longitudinal and transverse spin lifetimes against cell temperature on a log scale. They are comparable at eighty degrees and differ by more than a hundredfold at a hundred and fifty, because spin exchange broadens only the transverse component.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">T₁ AND T₂ ARE NOT THE SAME NUMBER</text>
+<text x="744" y="22" class="xs" text-anchor="end">LOG SCALE, 0.5 G</text>
+<line x1="100" y1="320.0" x2="640" y2="320.0" class="dash"/>
+<text x="92" y="324.0" class="xs" text-anchor="end">0.01</text>
+<line x1="100" y1="255.5" x2="640" y2="255.5" class="dash"/>
+<text x="92" y="259.5" class="xs" text-anchor="end">0.1</text>
+<line x1="100" y1="191.0" x2="640" y2="191.0" class="dash"/>
+<text x="92" y="195.0" class="xs" text-anchor="end">1</text>
+<line x1="100" y1="126.5" x2="640" y2="126.5" class="dash"/>
+<text x="92" y="130.5" class="xs" text-anchor="end">10</text>
+<line x1="100" y1="62.0" x2="640" y2="62.0" class="dash"/>
+<text x="92" y="66.0" class="xs" text-anchor="end">100</text>
+<text x="100.0" y="338" class="xs" text-anchor="middle">80</text>
+<text x="235.0" y="338" class="xs" text-anchor="middle">100</text>
+<text x="370.0" y="338" class="xs" text-anchor="middle">120</text>
+<text x="505.0" y="338" class="xs" text-anchor="middle">140</text>
+<text x="640.0" y="338" class="xs" text-anchor="middle">160</text>
+<line x1="100" y1="320" x2="640" y2="320" class="thin"/>
+<line x1="100" y1="320" x2="100" y2="62" class="thin"/>
+<text x="370.0" y="358" class="sm" text-anchor="middle">cell temperature / °C</text>
+<text x="24" y="191.0" class="sm" transform="rotate(-90 24 191.0)" text-anchor="middle">시간 / ms</text>
+<polyline class="m" points="100.0,111.5 113.5,111.6 127.0,111.7 140.5,111.8 154.0,111.9 167.5,112.1 181.0,112.2 194.5,112.3 208.0,112.4 221.5,112.5 235.0,112.7 248.5,112.8 262.0,113.0 275.5,113.1 289.0,113.3 302.5,113.4 316.0,113.6 329.5,113.8 343.0,114.0 356.5,114.3 370.0,114.5 383.5,114.8 397.0,115.0 410.5,115.3 424.0,115.6 437.5,116.0 451.0,116.3 464.5,116.7 478.0,117.1 491.5,117.6 505.0,118.1 518.5,118.6 532.0,119.1 545.5,119.7 559.0,120.4 572.5,121.0 586.0,121.7 599.5,122.5 613.0,123.3 626.5,124.1 640.0,125.0"/>
+<text x="646" y="128.0" class="xs">T₁ — 세로 완화</text>
+<polyline class="l" points="100.0,147.4 113.5,150.5 127.0,153.6 140.5,156.7 154.0,159.9 167.5,163.2 181.0,166.5 194.5,169.8 208.0,173.1 221.5,176.4 235.0,179.8 248.5,183.1 262.0,186.5 275.5,189.8 289.0,193.1 302.5,196.5 316.0,199.8 329.5,203.0 343.0,206.3 356.5,209.5 370.0,212.8 383.5,216.0 397.0,219.1 410.5,222.3 424.0,225.4 437.5,228.5 451.0,231.6 464.5,234.6 478.0,237.6 491.5,240.6 505.0,243.6 518.5,246.6 532.0,249.5 545.5,252.4 559.0,255.2 572.5,258.1 586.0,260.9 599.5,263.7 613.0,266.4 626.5,269.2 640.0,271.9"/>
+<text x="646" y="274.9" class="xs">T₂ — 스핀 교환이 지배</text>
+<line x1="100" y1="141.4" x2="640" y2="141.4" class="thin"/>
+<text x="108" y="135.4" class="xs">T/07이 쓴 T₂ = 5.88 ms (= 1/170)</text>
+<text x="16" y="376" class="xs">T/07은 Γ_g가 세로 이완률인데 그것을 T₂로 썼습니다 — T₁ = T₂를 가정한 것입니다. Seltzer 식 2.135는 그렇지 않다고 말합니다.</text>
+<text x="16" y="390" class="xs">Rb–Rb 스핀 교환이 T₂를 따로 갉아먹고, 그 속도는 증기 밀도를 따라 지수적으로 커집니다.</text>
+<text x="16" y="404" class="xs">100 °C에서 T₁ 16.4 ms에 T₂ 1.49 ms, 150 °C에서는 12.2 ms에 0.09 ms. 뜨거울수록 신호는 세지고 선은 넓어집니다.</text>
+</svg>

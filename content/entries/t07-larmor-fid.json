@@ -42,12 +42,12 @@
     {
       "claim": "출발 인구분포는 T/05이 남긴 것을 그대로 읽습니다",
       "class": "CALCULATED",
-      "source": "analysis/density-matrix.json의 δ=0, 10 mW/cm² 정상상태. F=2에 0.983, 그 중 0.945가 m=+2"
+      "source": "analysis/density-matrix.json의 δ=0, 10 mW/cm² 정상상태. F=2에 0.994, 그 중 0.980이 m=+2"
     },
     {
-      "claim": "T₂ = 1/Γ_g = 5.88 ms",
-      "class": "INFERRED",
-      "source": "Γ_g = 170 s⁻¹은 이 저장소에 있는 유일한 이완 수치이고, T/03에 세로 이완률로 들어왔습니다. 그것을 T₂로 쓰는 것은 T₁ = T₂를 가정하는 것입니다. 신뢰도 낮음"
+      "claim": "T₂ = 1.49 ms (100 °C), T₁ = 16.4 ms",
+      "class": "CALCULATED",
+      "source": "T/08. 1/T₂ = 1/T₁ + R_SE/q_SE (Seltzer 식 2.135), q_SE = 8 (식 4.14). 이 셀에서는 Rb–Rb 스핀 교환 항이 세로 항의 열 배입니다. 예전에는 T₂ = 1/Γ_g = 5.88 ms로 두었는데, 그것은 T₁ = T₂를 가정한 것이고 Γ_g 값 자체도 틀렸습니다."
     },
     {
       "claim": "여기서 계산한 틀어짐 오차는 문헌에서 heading error로 불리는 계통오차입니다",
@@ -132,14 +132,14 @@
     },
     {
       "name": "선폭",
-      "value": "54.1",
+      "value": "213",
       "unit": "Hz",
-      "class": "INFERRED",
-      "note": "1/(πT₂), T₂ = 1/Γ_g. 간격보다 넓어서 네 선이 분해되지 않습니다"
+      "class": "CALCULATED",
+      "note": "1/(πT₂), T₂ = 1.49 ms는 T/08이 계산한 값입니다. 인접 간격 35.9 Hz의 여섯 배라 네 선은 전혀 분해되지 않습니다"
     },
     {
       "name": "π/2 무게",
-      "value": "0.246 · 0.707 · 0.707 · 0.246",
+      "value": "0.249 · 0.734 · 0.734 · 0.249",
       "unit": "",
       "class": "CALCULATED",
       "note": "합 1.9067 = 눕히기 전의 ⟨F_z⟩. 두 값이 1e−16 안에서 같습니다"
@@ -153,14 +153,14 @@
     },
     {
       "name": "틀어짐 오차",
-      "value": "0.130",
+      "value": "0.133",
       "unit": "nT/도",
       "class": "CALCULATED",
       "note": "50 μT에서. π/2 근처에서 선형이고 90°를 기준으로 반대칭"
     },
     {
       "name": "5° 틀어지면",
-      "value": "0.65",
+      "value": "0.66",
       "unit": "nT",
       "class": "CALCULATED",
       "note": "50 μT의 13 ppm. 평균을 더 내도 줄지 않습니다"
@@ -181,7 +181,7 @@
     },
     {
       "name": "F=1이 차지하는 신호",
-      "value": "0.26",
+      "value": "0.09",
       "unit": "%",
       "class": "CALCULATED",
       "note": "T/05 분포 기준. 선폭의 26배 떨어져 있어 겹치지 않습니다"
@@ -192,6 +192,20 @@
       "unit": "",
       "class": "SOURCE_FACT",
       "note": "비선형 Zeeman에서 오는 부분. 빛 이동에서 오는 부분은 여기서 계산하지 않았습니다"
+    },
+    {
+      "name": "T₁ (참고)",
+      "value": "16.4",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "T₂와 11배 차이. 둘을 같다고 본 것이 이 항목의 원래 오류입니다"
+    },
+    {
+      "name": "T₂",
+      "value": "1.49",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "100 °C. Rb–Rb 스핀 교환이 지배합니다 (T/08)"
     }
   ],
   "geometry": {
@@ -305,10 +319,10 @@
       {
         "tex": "S(t) \\;=\\; \\sum_i w_i \\cos\\!\\big(2\\pi f_i t\\big)\\; e^{-t/T_2}",
         "name": "자유 감쇠 신호",
-        "src": "standard",
-        "where": "네 결맞음의 합",
-        "class": "INFERRED",
-        "note": "T₂ = 1/Γ(g)는 이 항목에서 자유롭게 고른 유일한 수입니다. Γ(g)는 세로 이완률로 들어왔으므로 T₁ = T₂를 가정하는 셈입니다."
+        "src": "seltzer2008",
+        "where": "식 (2.135)와 (4.14)",
+        "class": "CALCULATED",
+        "note": "T₂는 더 이상 자유 인자가 아닙니다. 1/T₂ = 1/T₁ + R_SE/q_SE이고, 이 셀에서는 스핀 교환 항이 지배합니다 — 100 °C에서 T₁ 16.4 ms에 T₂ 1.49 ms. 처음에는 T₂ = 1/Γ_g = 5.88 ms로 두었는데, 그것은 T₁ = T₂를 가정한 데다 Γ_g 자체도 틀린 값이었습니다."
       },
       {
         "tex": "\\delta B_{\\mathrm{PN}} \\propto \\frac{1}{\\sqrt{N\\,T_2\\,t}} \\qquad \\delta B_{\\mathrm{SN}} \\propto \\frac{1}{\\sqrt{\\Phi\\,t}}",
@@ -367,8 +381,7 @@
     ]
   },
   "unknown": [
-    "T₂ = 1/Γ_g는 가정입니다. Γ_g는 세로 이완률로 들어왔고 T₁ = T₂는 일반적으로 참이 아닙니다. 선폭과 맥놀이의 상대적 비중이 여기에 직접 달려 있습니다.",
-    "스핀 교환을 넣지 않았습니다. 150 °C의 ⁸⁷Rb 밀도에서 Rb–Rb 스핀 교환은 주요 이완 경로이자 그 자체로 주파수 이동을 만듭니다. 단면적을 출처에서 확인하지 못해 계산하지 않았습니다.",
+    "T₂는 이제 계산된 값이지만 q_SE = 8은 큰 자기장·낮은 편광 극한입니다. π/2 직후에는 편광이 높아 스핀 교환이 부분적으로 억제되므로 실제 T₂는 1.49 ms보다 길 수 있습니다. 그 중간 영역은 풀지 않았습니다.",
     "빛 이동을 넣지 않았습니다. 프로브 빔이 Larmor 주파수를 옮기고, 그 크기는 프로브 세기와 detuning에 달려 있습니다. 이 항목이 재는 틀어짐 오차와 같은 크기일 수 있습니다.",
     "틀어짐 펄스를 순간적인 것으로 다뤘습니다. 유한한 길이의 펄스는 그동안에도 세차운동하므로 실제 회전축이 기웁니다.",
     "T/06이 보인 공간 의존성을 무시했습니다. 자기장은 균일해도 편광은 그렇지 않으므로, 셀 앞뒤가 같은 주파수에 서로 다른 진폭으로 기여합니다. 주파수는 바뀌지 않지만 신호 대 잡음은 바뀝니다.",
@@ -411,5 +424,14 @@
     "title": "Precession, and How It Dies",
     "summary": "T/01 through T/06 were about getting the atoms polarised. This is the other half: turn the pump off, tip the spins onto the equator, and let them precess until they dephase. That rotation is the signal.",
     "question": "Are the Zeeman sublevels really evenly spaced? If not, the four transitions precess at different rates - and how much error does that put on the measured field?"
-  }
+  },
+  "correction": [
+    {
+      "date": "2026-09-13",
+      "what": "T₂ = 1/Γ_g = 5.88 ms로 두었습니다. 두 겹으로 틀렸습니다 — Γ_g가 170이 아니라 61이고, 애초에 T₂는 1/Γ_g가 아닙니다. 100 °C에서 T₂는 1.49 ms이고 선폭은 54 Hz가 아니라 213 Hz입니다.",
+      "why": "Γ_g는 세로 이완률입니다. Seltzer 식 (2.135)는 1/T₂ = 1/T₁ + R_SE/q_SE로, 스핀 교환이 가로 성분만 따로 갉아먹습니다. 이 셀에서는 그 항이 세로 항의 열 배입니다.",
+      "how": "이 저장소에 완화 수치가 Γ_g 하나뿐이어서 그것을 양쪽에 썼고, 그 사실을 미해결 목록에 적어두었습니다. 적어둔 것과 고친 것은 다른 일입니다.",
+      "found_by": "Seltzer 논문을 입수해 T/08을 계산한 것. 자유 감쇠 그림의 결론도 뒤집혔습니다 — 예전에는 Zeeman 어긋남과 이완이 비슷하다고 적었는데, 실제로는 이완이 열한 배 빠릅니다."
+    }
+  ]
 }

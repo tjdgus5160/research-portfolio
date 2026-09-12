@@ -4,7 +4,7 @@
   "abundance_source": "Steck rev 2.3.4 Table 2, eta(87Rb) = 27.83(2)%",
   "cell_length_m": 0.0055,
   "sigma_m2": 4.076e-17,
-  "gamma_g_per_s": 170.0,
+  "gamma_g_per_s": 61.0,
   "rate_per_mW_cm2": 1631.2218053416195,
   "absorber": "eight ground sublevels from scripts/solve_density_matrix.py",
   "enrichment_note": "T/03's optical depths are 2.49x these at natural abundance, at every temperature. A constant ratio is one temperature-independent factor, and 0.2783 x 2.49 = 0.693 is an ordinary enrichment. It could equally sit in a differently normalised density. Not established here; both are reported.",
@@ -39,114 +39,114 @@
   "after_1ms_30mW_enriched": {
     "80": {
       "OD": 0.241,
-      "front": 0.9808,
-      "back_decile": 0.9807,
-      "mean": 0.9807,
-      "transmission": 0.9971
+      "front": 0.9928,
+      "back_decile": 0.9928,
+      "mean": 0.9928,
+      "transmission": 0.9989
     },
     "100": {
       "OD": 0.934,
-      "front": 0.9808,
-      "back_decile": 0.9804,
-      "mean": 0.9806,
-      "transmission": 0.9886
+      "front": 0.9928,
+      "back_decile": 0.9926,
+      "mean": 0.9927,
+      "transmission": 0.9958
     },
     "120": {
       "OD": 3.152,
-      "front": 0.9808,
-      "back_decile": 0.9786,
-      "mean": 0.9798,
-      "transmission": 0.9609
+      "front": 0.9928,
+      "back_decile": 0.9914,
+      "mean": 0.9923,
+      "transmission": 0.985
     },
     "150": {
       "OD": 15.675,
-      "front": 0.9807,
-      "back_decile": 0.2765,
-      "mean": 0.7987,
-      "transmission": 0.1285
+      "front": 0.9928,
+      "back_decile": 0.3306,
+      "mean": 0.8344,
+      "transmission": 0.1923
     }
   },
   "after_1ms_30mW_natural": {
     "80": {
       "OD": 0.0966,
-      "front": 0.9808,
-      "back_decile": 0.9808,
-      "mean": 0.9808,
-      "transmission": 0.9988
+      "front": 0.9928,
+      "back_decile": 0.9928,
+      "mean": 0.9928,
+      "transmission": 0.9996
     },
     "100": {
       "OD": 0.3752,
-      "front": 0.9808,
-      "back_decile": 0.9806,
-      "mean": 0.9807,
-      "transmission": 0.9954
+      "front": 0.9928,
+      "back_decile": 0.9928,
+      "mean": 0.9928,
+      "transmission": 0.9983
     },
     "120": {
       "OD": 1.2659,
-      "front": 0.9808,
-      "back_decile": 0.9802,
-      "mean": 0.9805,
-      "transmission": 0.9846
+      "front": 0.9928,
+      "back_decile": 0.9925,
+      "mean": 0.9927,
+      "transmission": 0.9942
     },
     "150": {
       "OD": 6.295,
-      "front": 0.9808,
-      "back_decile": 0.9674,
-      "mean": 0.9767,
-      "transmission": 0.9139
+      "front": 0.9928,
+      "back_decile": 0.9829,
+      "mean": 0.9899,
+      "transmission": 0.9631
     }
   },
   "bleaching_front_150C": {
     "0.05ms": {
-      "front": 0.3606,
+      "front": 0.3612,
       "mid": 0.1265,
       "back": 0.125
     },
     "0.1ms": {
-      "front": 0.5489,
+      "front": 0.5511,
       "mid": 0.129,
       "back": 0.125
     },
     "0.2ms": {
-      "front": 0.7861,
-      "mid": 0.1395,
+      "front": 0.7919,
+      "mid": 0.1397,
       "back": 0.1251
     },
     "0.5ms": {
-      "front": 0.9649,
-      "mid": 0.3291,
-      "back": 0.1266
+      "front": 0.9761,
+      "mid": 0.3443,
+      "back": 0.1268
     },
     "1ms": {
-      "front": 0.9807,
-      "mid": 0.9357,
-      "back": 0.2306
+      "front": 0.9928,
+      "mid": 0.959,
+      "back": 0.2725
     }
   },
   "detuning_with_propagation": {
     "30mW_80C": {
       "OD": 0.24,
       "best_GHz": -3.75,
-      "peak": 0.9843,
-      "swing_over_window": 0.0114
+      "peak": 0.9943,
+      "swing_over_window": 0.0052
     },
     "30mW_150C": {
       "OD": 15.68,
       "best_GHz": -3.75,
-      "peak": 0.8077,
-      "swing_over_window": 0.0331
+      "peak": 0.8447,
+      "swing_over_window": 0.0347
     },
     "10mW_80C": {
       "OD": 0.24,
       "best_GHz": -3.75,
-      "peak": 0.928,
-      "swing_over_window": 0.1148
+      "peak": 0.9535,
+      "swing_over_window": 0.1087
     },
     "10mW_150C": {
       "OD": 15.68,
       "best_GHz": -2.75,
-      "peak": 0.3385,
-      "swing_over_window": 0.0408
+      "peak": 0.3514,
+      "swing_over_window": 0.0405
     }
   },
   "uniform_cell_optimum_GHz": {
@@ -160,58 +160,58 @@
     {
       "Tc": 120,
       "OD": 3.15,
-      "back_decile": 0.9786,
-      "mean": 0.9798,
-      "transmission": 0.9609
+      "back_decile": 0.9914,
+      "mean": 0.9923,
+      "transmission": 0.985
     },
     {
       "Tc": 125,
       "OD": 4.19,
-      "back_decile": 0.9767,
-      "mean": 0.9792,
-      "transmission": 0.9471
+      "back_decile": 0.99,
+      "mean": 0.9918,
+      "transmission": 0.9792
     },
     {
       "Tc": 130,
       "OD": 5.53,
-      "back_decile": 0.9721,
-      "mean": 0.9779,
-      "transmission": 0.9272
+      "back_decile": 0.9865,
+      "mean": 0.9908,
+      "transmission": 0.97
     },
     {
       "Tc": 135,
       "OD": 7.24,
-      "back_decile": 0.9578,
-      "mean": 0.9744,
-      "transmission": 0.8938
+      "back_decile": 0.9757,
+      "mean": 0.9882,
+      "transmission": 0.9516
     },
     {
       "Tc": 140,
       "OD": 9.43,
-      "back_decile": 0.9032,
-      "mean": 0.9626,
-      "transmission": 0.8148
+      "back_decile": 0.9343,
+      "mean": 0.9793,
+      "transmission": 0.8975
     },
     {
       "Tc": 145,
       "OD": 12.2,
-      "back_decile": 0.6829,
-      "mean": 0.9172,
-      "transmission": 0.5563
+      "back_decile": 0.7552,
+      "mean": 0.9435,
+      "transmission": 0.6799
     },
     {
       "Tc": 150,
       "OD": 15.68,
-      "back_decile": 0.2765,
-      "mean": 0.7987,
-      "transmission": 0.1285
+      "back_decile": 0.3306,
+      "mean": 0.8344,
+      "transmission": 0.1923
     },
     {
       "Tc": 155,
       "OD": 20.03,
-      "back_decile": 0.1363,
-      "mean": 0.6592,
-      "transmission": 0.0075
+      "back_decile": 0.1417,
+      "mean": 0.6901,
+      "transmission": 0.0122
     }
   ]
 }

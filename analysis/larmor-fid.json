@@ -36,36 +36,37 @@
     ],
     "F2_minus_F1_Hz": 1392.8,
     "adjacent_gap_Hz": 35.9466,
-    "linewidth_Hz": 54.11,
+    "linewidth_Hz": 213.3,
     "F2_weights": [
-      0.246018,
-      0.707317,
-      0.707317,
-      0.246017
+      0.248603,
+      0.734093,
+      0.734092,
+      0.248602
     ],
     "F1_weights": [
-      0.002435,
-      0.002435
+      0.00093,
+      0.00093
     ],
-    "F1_fraction_of_signal": 0.002554
+    "F1_fraction_of_signal": 0.000946
   },
-  "T2_s": 0.0058823529411764705,
-  "T2_provenance": "INFERRED. Gamma_g = 170 1/s is the only relaxation number in this repository and it entered T/03 as a longitudinal ground-state rate. Using 1/Gamma_g as T2 assumes T1 = T2.",
+  "T2_s": 0.0014923,
+  "T1_s": 0.016385,
+  "T2_provenance": "CALCULATED by T/08 from Seltzer's Table A.2 cross sections. At 100 C the longitudinal lifetime is 16.4 ms but the transverse one is 1.49 ms, because Rb-Rb spin exchange broadens only the transverse component (Seltzer eqs. 2.135 and 4.14). This entry first used 1/Gamma_g = 5.88 ms for T2, which assumed T1 = T2 and was wrong in both directions at once.",
   "tip_error_nT_at_50uT": {
-    "60": -3.74249,
-    "80": -1.30007,
-    "85": -0.65272,
-    "89": -0.13101,
-    "90": -0.00038,
-    "91": 0.13025,
-    "95": 0.65197,
-    "100": 1.29937,
-    "120": 3.74229
+    "60": -3.81299,
+    "80": -1.32456,
+    "85": -0.66501,
+    "89": -0.13348,
+    "90": -0.00039,
+    "91": 0.1327,
+    "95": 0.66425,
+    "100": 1.32385,
+    "120": 3.81279
   },
-  "tip_error_slope_nT_per_deg": 0.13039,
+  "tip_error_slope_nT_per_deg": 0.13285,
   "tip_error_B_scaling": {
-    "0.05": 0.006523,
-    "0.5": 0.651968,
-    "1.0": 2.606375
+    "0.05": 0.006646,
+    "0.5": 0.66425,
+    "1.0": 2.655471
   }
 }

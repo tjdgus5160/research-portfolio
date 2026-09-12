@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="bgt bgd" class="lvl">
+<title id="bgt">Ground-state relaxation budget</title><desc id="bgd">Contributions to the ground-state relaxation rate against cell temperature: spin destruction by nitrogen, wall diffusion, and rubidium-rubidium collisions, summing to about 60 per second where 170 had been assumed.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">WHERE THE GROUND-STATE RELAXATION COMES FROM</text>
+<text x="744" y="22" class="xs" text-anchor="end">650 Torr N₂, 5.5 mm CELL</text>
+<line x1="96" y1="320.0" x2="618" y2="320.0" class="dash"/>
+<text x="88" y="324.0" class="xs" text-anchor="end">0</text>
+<line x1="96" y1="255.5" x2="618" y2="255.5" class="dash"/>
+<text x="88" y="259.5" class="xs" text-anchor="end">50</text>
+<line x1="96" y1="191.0" x2="618" y2="191.0" class="dash"/>
+<text x="88" y="195.0" class="xs" text-anchor="end">100</text>
+<line x1="96" y1="126.5" x2="618" y2="126.5" class="dash"/>
+<text x="88" y="130.5" class="xs" text-anchor="end">150</text>
+<line x1="96" y1="62.0" x2="618" y2="62.0" class="dash"/>
+<text x="88" y="66.0" class="xs" text-anchor="end">200</text>
+<text x="96.0" y="338" class="xs" text-anchor="middle">80</text>
+<text x="226.5" y="338" class="xs" text-anchor="middle">100</text>
+<text x="357.0" y="338" class="xs" text-anchor="middle">120</text>
+<text x="487.5" y="338" class="xs" text-anchor="middle">140</text>
+<text x="618.0" y="338" class="xs" text-anchor="middle">160</text>
+<line x1="96" y1="320" x2="618" y2="320" class="thin"/>
+<line x1="96" y1="320" x2="96" y2="62" class="thin"/>
+<text x="357.0" y="358" class="sm" text-anchor="middle">cell temperature / °C</text>
+<text x="24" y="191.0" class="sm" transform="rotate(-90 24 191.0)" text-anchor="middle">rate / s⁻¹</text>
+<polyline class="m" points="96.0,278.9 109.0,278.8 122.1,278.7 135.2,278.6 148.2,278.5 161.2,278.4 174.3,278.2 187.3,278.1 200.4,278.0 213.4,277.9 226.5,277.8 239.6,277.7 252.6,277.6 265.6,277.4 278.7,277.3 291.8,277.2 304.8,277.1 317.9,277.0 330.9,276.9 343.9,276.8 357.0,276.7 370.1,276.6 383.1,276.4 396.1,276.3 409.2,276.2 422.2,276.1 435.3,276.0 448.4,275.9 461.4,275.8 474.4,275.7 487.5,275.6 500.6,275.5 513.6,275.4 526.6,275.3 539.7,275.1 552.8,275.0 565.8,274.9 578.9,274.8 591.9,274.7 605.0,274.6 618.0,274.5"/>
+<polyline class="m" points="96.0,285.8 109.0,285.7 122.1,285.6 135.2,285.5 148.2,285.4 161.2,285.3 174.3,285.2 187.3,285.1 200.4,285.0 213.4,284.9 226.5,284.8 239.6,284.7 252.6,284.6 265.6,284.5 278.7,284.4 291.8,284.3 304.8,284.3 317.9,284.2 330.9,284.1 343.9,284.0 357.0,283.9 370.1,283.8 383.1,283.7 396.1,283.6 409.2,283.5 422.2,283.4 435.3,283.3 448.4,283.2 461.4,283.2 474.4,283.1 487.5,283.0 500.6,282.9 513.6,282.8 526.6,282.7 539.7,282.6 552.8,282.5 565.8,282.4 578.9,282.4 591.9,282.3 605.0,282.2 618.0,282.1"/>
+<polyline class="m" points="96.0,319.7 109.0,319.6 122.1,319.6 135.2,319.5 148.2,319.4 161.2,319.3 174.3,319.2 187.3,319.1 200.4,319.0 213.4,318.8 226.5,318.7 239.6,318.5 252.6,318.3 265.6,318.1 278.7,317.8 291.8,317.5 304.8,317.2 317.9,316.8 330.9,316.4 343.9,315.9 357.0,315.4 370.1,314.8 383.1,314.2 396.1,313.5 409.2,312.7 422.2,311.9 435.3,310.9 448.4,309.8 461.4,308.7 474.4,307.4 487.5,305.9 500.6,304.4 513.6,302.6 526.6,300.7 539.7,298.7 552.8,296.4 565.8,293.8 578.9,291.1 591.9,288.1 605.0,284.8 618.0,281.2"/>
+<polyline class="l" points="96.0,244.4 109.0,244.1 122.1,243.8 135.2,243.6 148.2,243.3 161.2,243.0 174.3,242.7 187.3,242.3 200.4,242.0 213.4,241.6 226.5,241.3 239.6,240.9 252.6,240.5 265.6,240.0 278.7,239.6 291.8,239.1 304.8,238.5 317.9,238.0 330.9,237.3 343.9,236.7 357.0,236.0 370.1,235.2 383.1,234.4 396.1,233.5 409.2,232.5 422.2,231.4 435.3,230.2 448.4,229.0 461.4,227.6 474.4,226.1 487.5,224.5 500.6,222.7 513.6,220.8 526.6,218.7 539.7,216.4 552.8,213.9 565.8,211.2 578.9,208.3 591.9,205.1 605.0,201.6 618.0,197.8"/>
+<text x="638" y="200.8" class="xs">1/T₁ = 합</text>
+<text x="638" y="277.5" class="xs">R_SD(N₂)/q</text>
+<line x1="618" y1="281.2" x2="634" y2="287.5" class="dash"/>
+<text x="638" y="291.5" class="xs">R_SD(Rb–Rb)/q</text>
+<line x1="618" y1="282.1" x2="634" y2="301.5" class="dash"/>
+<text x="638" y="305.5" class="xs">R_wall</text>
+<line x1="96" y1="100.7" x2="618" y2="100.7" class="thin"/>
+<text x="104" y="94.7" class="xs">Γ_g = 170 s⁻¹ — T/03부터 T/07까지 가정한 값</text>
+<text x="16" y="376" class="xs">단면적은 전부 Seltzer 논문 표 A.2의 루비듐 열입니다. 자유 인자는 없고, 이 셀의 기하와 충전 밀도만 들어갑니다.</text>
+<text x="16" y="390" class="xs">지배적인 것은 N₂와의 스핀 파괴이고, 벽 확산이 그 다음입니다. Rb–Rb는 150 °C가 넘어서야 끼어듭니다.</text>
+<text x="16" y="404" class="xs">가정했던 170은 실제의 두세 배입니다. 그만큼 펌핑은 여태 적어둔 것보다 쉽습니다.</text>
+</svg>

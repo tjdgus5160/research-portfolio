@@ -55,7 +55,12 @@ OUT_JSON = ROOT / "analysis" / "density-matrix.json"
 
 I_NUC = 1.5          # Steck table 1
 J_G, J_E = 0.5, 0.5  # 5S1/2 -> 5P1/2, the D1 line
-GAMMA_G = 170.0      # 1/s, model input carried over from the reviewed T/03
+# Gamma_g is no longer a model input. T/08 computes it from Seltzer's Table A.2
+# cross sections and his eqs. 2.130-2.134 and 2.151: for this 650 Torr, 5.5 mm
+# cell it is 61.0 1/s at 100 C, not the 170 that every entry from T/03 onward
+# assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
+# 100 C is quoted here because that is the temperature this calculation uses.
+GAMMA_G = 61.0
 
 GROUND = [(1, m) for m in (-1, 0, 1)] + [(2, m) for m in (-2, -1, 0, 1, 2)]
 EXCITED = [(1, m) for m in (-1, 0, 1)] + [(2, m) for m in (-2, -1, 0, 1, 2)]

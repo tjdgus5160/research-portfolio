@@ -33,8 +33,19 @@ K_B = 1.380649e-23
 H, C = 6.62607015e-34, 299792458.0
 LAMBDA_D1 = 794.978851156e-9
 SIGMA_650 = 4.076e-13 * 1e-4     # m^2, from T/04
-GAMMA_G = 170.0                  # 1/s, model input carried through
-N_CYCLE = 10.0                   # from T/04's four-intensity solve
+# Gamma_g is no longer a model input. T/08 computes it from Seltzer's Table A.2
+# cross sections and his eqs. 2.130-2.134 and 2.151: for this 650 Torr, 5.5 mm
+# cell it is 61.0 1/s at 100 C, not the 170 that every entry from T/03 onward
+# assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
+# 100 C is quoted here because that is the temperature this calculation uses.
+GAMMA_G = 61.0
+# N_CYCLE was 10, an unexplained model input. T/08 identifies it as the nuclear
+# slowing-down factor of Seltzer's Table 2.5: q = (6 + 2P^2)/(1 + P^2) for
+# I = 3/2, running from 6 unpolarised to 4 fully polarised. T/05 had already
+# measured 5.58-5.77 for it without knowing what it was. This one-rate model
+# needs a single number, so it uses the unpolarised value -- the pumping run
+# starts there and most of the climb happens near it.
+N_CYCLE = 6.0
 L_CELL = 5.5e-3                  # m, the active path named in T/03
 T_MELT = 312.46                  # K, Steck: melting point 39.31 C
 

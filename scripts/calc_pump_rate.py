@@ -40,14 +40,25 @@ E, EPS0, ME, C, H = (1.602176634e-19, 8.8541878128e-12,
 F_D1 = 0.34231                 # Steck rev 2.3.4, D1 absorption oscillator strength
 LAMBDA_D1 = 794.978851156e-9   # Steck rev 2.3.4
 FWHM_650 = 14.19e9             # 17.8 GHz/amagat x 0.7969 amagat, from T/02 and T/03
-GAMMA_G = 170.0                # 1/s. Model input from the reviewed T/03 calculation.
+# Gamma_g is no longer a model input. T/08 computes it from Seltzer's Table A.2
+# cross sections and his eqs. 2.130-2.134 and 2.151: for this 650 Torr, 5.5 mm
+# cell it is 61.0 1/s at 100 C, not the 170 that every entry from T/03 onward
+# assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
+# 100 C is quoted here because that is the temperature this calculation uses.
+GAMMA_G = 61.0
 # Scattering events per atom to reach mF = +2. Not guessed and not tuned to one
 # number: solved for separately at 10, 20, 30 and 50 mW/cm2 against the reviewed
 # T/03 populations, which returned 9.9, 10.3, 10.2 and 9.7. Four independent
 # solves landing within 6% of each other means the two models differ by exactly
 # this one factor and nothing else — had they scattered, the disagreement would
 # have been somewhere the factor could not absorb.
-N_CYCLE = 10.0
+# N_CYCLE was 10, an unexplained model input. T/08 identifies it as the nuclear
+# slowing-down factor of Seltzer's Table 2.5: q = (6 + 2P^2)/(1 + P^2) for
+# I = 3/2, running from 6 unpolarised to 4 fully polarised. T/05 had already
+# measured 5.58-5.77 for it without knowing what it was. This one-rate model
+# needs a single number, so it uses the unpolarised value -- the pumping run
+# starts there and most of the climb happens near it.
+N_CYCLE = 6.0
 
 
 def sigma_peak(fwhm_hz: float) -> float:

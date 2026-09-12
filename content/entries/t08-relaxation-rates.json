@@ -1,0 +1,388 @@
+{
+  "no": "T/08",
+  "slug": "t08-relaxation-rates",
+  "title": "가정했던 상수를 마침내 계산하다",
+  "subtitle": "THE RELAXATION RATES, COMPUTED AT LAST",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/solve_relaxation.py",
+  "summary": "Γ_g = 170 s⁻¹은 T/03부터 T/07까지 다섯 항목이 그대로 들고 다닌 모델 입력이었고, 다섯 항목 모두 '이 수가 틀리면 눈금이 틀린다'고 적어두었습니다. 필요한 단면적이 전부 Seltzer 논문 표 A.2에 있습니다. 계산해 보니 170이 아닙니다.",
+  "question": "이 저장소에서 가정으로 남아 있던 유일한 물리 상수는 얼마입니까? 그리고 그것이 틀렸다면 앞의 계산들은 어느 방향으로 틀렸습니까?",
+  "evidence": [
+    {
+      "claim": "Rb–N₂ 스핀 파괴 단면적 σ = 1×10⁻²² cm²",
+      "class": "SOURCE_FACT",
+      "source": "Seltzer, Developments in Alkali-Metal Atomic Magnetometry, 박사논문, Princeton 2008, 표 A.2 루비듐 열. 그 표가 원 측정으로 드는 것은 Kadlecek et al. (1998)과 Allred et al. (2002). input/papers/seltzer-alkali-metal-magnetometry-2008.pdf"
+    },
+    {
+      "claim": "Rb–Rb 스핀 파괴 1.6×10⁻¹⁷ cm², 스핀 교환 1.9×10⁻¹⁴ cm²",
+      "class": "SOURCE_FACT",
+      "source": "같은 표. 스핀 파괴는 Walker & Happer (1997), Kadlecek et al. (1998); 스핀 교환은 Ressler et al. (1969), Aleksandrov et al. (1999)"
+    },
+    {
+      "claim": "N₂ 안에서의 Rb 확산계수 D₀ = 0.19 cm²/s (1 amagat, 273 K)",
+      "class": "SOURCE_FACT",
+      "source": "같은 표. Franz & Sooriamoorthi (1974), Franz & Volk (1976, 1982), Silver (1984). T/02가 '이 기계의 어떤 문헌에서도 찾지 못했다'고 적었던 값입니다"
+    },
+    {
+      "claim": "Rb(5²P₁/₂)–N₂ quenching 단면적 5.8×10⁻¹⁵ cm²",
+      "class": "SOURCE_FACT",
+      "source": "같은 표와 표 2.3. McGillis & Krause (1967, 1968), Hrycyshyn & Krause (1970)"
+    },
+    {
+      "claim": "17.8 GHz/amagat과 −8.25 GHz/amagat은 둘 다 표 A.2에 있고, 둘 다 Romalis et al. (1997)에서 옵니다",
+      "class": "SOURCE_FACT",
+      "source": "표 A.2의 Γ(N₂, D1)과 Δν₀(N₂, D1) 행. 표 옆 주석이 'Rb data from Romalis et al. (1997)'이라고 명시합니다. T/03이 끝내 추적하지 못했던 이동 계수가 이것입니다"
+    },
+    {
+      "claim": "핵 감속 인자 q는 I=3/2에서 (6+2P²)/(1+P²)",
+      "class": "SOURCE_FACT",
+      "source": "같은 논문 표 2.5, Appelt et al. (1998) 계산. 편광이 없을 때 6, 완전 편광에서 2I+1 = 4"
+    },
+    {
+      "claim": "완화율 식은 1/T₁ = (1/q)(R_SD + R_OP + R_pr) + R_wall",
+      "class": "SOURCE_FACT",
+      "source": "같은 논문 식 (2.133). 충돌률은 식 (2.130) R = nσv, 상대 열속도는 식 (2.131)–(2.132)"
+    },
+    {
+      "claim": "셀 내부를 한 변 5.5 mm 정육면체로 보았습니다",
+      "class": "INFERRED",
+      "source": "W/01이 주는 외곽 치수는 7.5 mm 정육면체이고 T/03이 쓰는 활성 경로는 5.5 mm입니다. 벽 두께 1 mm를 뜻하므로 내부를 5.5 mm 정육면체로 잡았습니다. 측정한 값이 아닙니다. 벽 완화율이 1/L²로 들어가므로 이 추정이 틀리면 그만큼 틀립니다"
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "충돌률",
+      "detail": "R = n σ v̄, v̄ = √(8k_BT/πM), 1/M = 1/m + 1/m′. 단면적은 표 A.2, 밀도는 완충기체 쪽이 충전 amagat에서, 루비듐 쪽이 증기압 곡선에서 나옵니다."
+    },
+    {
+      "step": "02",
+      "name": "벽까지의 확산",
+      "detail": "Seltzer는 구형 셀을 풀어 1/T_wall = D(π/R)²을 얻고 '임의의 기하에 대해서도 같은 방식으로 풀 수 있다'고 적습니다. 직육면체의 최저 확산 모드는 Dπ²(1/a²+1/b²+1/c²)이고, 이 셀은 정육면체이므로 3Dπ²/L²입니다."
+    },
+    {
+      "step": "03",
+      "name": "확산계수의 온도 의존성",
+      "detail": "논문은 D = D₀p₀/p라는 압력 의존성만 주고 D₀을 1 amagat, 273 K에서 인용합니다. 밀도가 고정된 상태에서는 평균자유행로가 고정이고 평균 열속도가 온도의 제곱근을 따르므로, 확산계수도 온도의 제곱근으로 커집니다. 흔히 쓰는 D = D₀(T/T₀)^{3/2}(p₀/p) 형태도 같은 밀도에서 압력이 온도에 비례하므로 같은 결과를 줍니다."
+    },
+    {
+      "step": "04",
+      "name": "합치기",
+      "detail": "1/T₁ = (R_SD^N₂ + R_SD^self)/q + R_wall. 펌핑과 프로브 항은 뺍니다 — 펌프가 상대해야 하는 완화율이 T/04의 속도방정식에서 Γ_g가 뜻하는 것이기 때문입니다."
+    },
+    {
+      "step": "05",
+      "name": "T₂는 따로",
+      "detail": "식 (2.135): 1/T₂ = 1/T₁ + R_SE/q_SE + R_gr. 스핀 교환은 가로 성분만 갉아먹습니다. 큰 자기장·낮은 편광 극한에서 q_SE = 3(2I+1)²/(2I(2I−1)) = 8입니다(식 4.14)."
+    },
+    {
+      "step": "06",
+      "name": "논문 자체로 검산",
+      "detail": "같은 코드로 Seltzer 그림 2.23의 예 — 헬륨 속 ³⁹K, 373 K, 반지름 2.5 cm 구형 셀 — 을 풀면 최적 압력이 0.90 amg(q=4) 또는 1.10 amg(q=6)이고 선폭은 0.19–0.23 Hz입니다. 본인이 적은 값은 '약 1 amg'이고 그림의 세로축은 1.0 Hz에서 끝납니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "Γ_g, 80 °C",
+      "value": "58.6",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "가정값 170의 0.34배"
+    },
+    {
+      "name": "Γ_g, 100 °C",
+      "value": "61.0",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "이 값으로 T/04·T/05·T/06·T/07을 다시 돌렸습니다"
+    },
+    {
+      "name": "Γ_g, 150 °C",
+      "value": "82.2",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "여기서도 170의 절반이 안 됩니다"
+    },
+    {
+      "name": "가장 큰 기여",
+      "value": "N₂ 스핀 파괴",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "100 °C에서 32.7 s⁻¹ (감속 인자로 나눈 뒤)"
+    },
+    {
+      "name": "그 다음",
+      "value": "벽으로의 확산",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "27.3 s⁻¹. 온도에 거의 무관합니다"
+    },
+    {
+      "name": "Rb–Rb 기여",
+      "value": "1.0",
+      "unit": "s⁻¹ @100 °C",
+      "class": "CALCULATED",
+      "note": "150 °C에서 18, 160 °C에서 30으로 급히 커집니다"
+    },
+    {
+      "name": "최적 N₂ 밀도",
+      "value": "0.73",
+      "unit": "amagat",
+      "class": "CALCULATED",
+      "note": "100 °C 기준. 20 °C에서 충전한다면 593 Torr"
+    },
+    {
+      "name": "이 셀",
+      "value": "0.797",
+      "unit": "amagat (650 Torr)",
+      "class": "SOURCE_FACT",
+      "note": "T/03의 충전 조건"
+    },
+    {
+      "name": "그래서 손해는",
+      "value": "0.42",
+      "unit": "%",
+      "class": "CALCULATED",
+      "note": "최적점 대비 완화율. 사실상 최적입니다"
+    },
+    {
+      "name": "T₁, 100 °C",
+      "value": "16.4",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "세로 완화"
+    },
+    {
+      "name": "T₂, 100 °C",
+      "value": "1.49",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "가로. 스핀 교환이 11배 차이를 냅니다"
+    },
+    {
+      "name": "T₂, 150 °C",
+      "value": "0.091",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "T₁ 12.2 ms에 대해. 130배"
+    },
+    {
+      "name": "핵 감속 인자",
+      "value": "6.00 → 4.00",
+      "unit": "",
+      "class": "SOURCE_FACT",
+      "note": "편광 0에서 1까지. T/04은 이것을 10으로 들고 있었습니다"
+    },
+    {
+      "name": "T/05가 독립적으로 잰 값",
+      "value": "5.58 ~ 5.83",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "무엇인지 모른 채 재현했습니다. 곡선 위에 정확히 놓입니다"
+    },
+    {
+      "name": "quenching 속도",
+      "value": "7.6×10⁹",
+      "unit": "s⁻¹",
+      "class": "CALCULATED",
+      "note": "자연 붕괴 3.6×10⁷의 210배. T/03이 '여기상태는 quenching이 지배한다'고 가정한 것이 맞습니다"
+    },
+    {
+      "name": "논문 그림 2.23 재현",
+      "value": "0.90 ~ 1.10",
+      "unit": "amagat",
+      "class": "CALCULATED",
+      "note": "Seltzer 본인이 적은 값은 '약 1 amg'"
+    }
+  ],
+  "geometry": {
+    "tolerance": "논문의 자체 예제와 최적 압력 0.90–1.10 amg 대 '약 1 amg'",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-relax-budget.svg",
+        "view": "WHERE IT COMES FROM",
+        "alt": "온도에 대한 완화율 기여도. N₂ 스핀 파괴와 벽 확산이 각각 30 s⁻¹ 근처이고 합이 60~95, 가정했던 170 선은 훨씬 위에 있다",
+        "note": "가정값이 얼마나 위에 있었는지가 한눈에 보입니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-relax-q.svg",
+        "view": "n_cycle WAS q",
+        "alt": "편광에 대한 핵 감속 인자 곡선. 6에서 4로 떨어지고, T/05가 잰 5.58–5.83 띠가 곡선 위에 놓이며, T/04이 가정한 10은 그래프 꼭대기 밖에 있다",
+        "note": "맞춰진 상수가 아니라 표에 적힌 값이었습니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-relax-t1t2.svg",
+        "view": "T₁ IS NOT T₂",
+        "alt": "온도에 대한 T₁과 T₂ 로그 그래프. 80 °C에서 17 ms와 4.7 ms, 150 °C에서 12 ms와 0.09 ms로 벌어진다",
+        "note": "T/07이 둘을 같다고 본 것이 여기서 깨집니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-relax-optimum.svg",
+        "view": "HOW MUCH NITROGEN",
+        "alt": "완충기체 밀도에 대한 완화율. 벽 확산은 1/n으로 줄고 N₂ 스핀 파괴는 n으로 늘어 0.73 amagat에서 최소가 되며, 이 셀의 0.797이 그 옆에 있다",
+        "note": "T/02가 '근거 없이 말할 수 없다'고 남겨둔 질문의 답입니다"
+      }
+    ],
+    "equations": [
+      {
+        "tex": "R \\;=\\; n\\,\\sigma\\,\\bar{v} \\qquad \\bar{v} \\;=\\; \\sqrt{\\frac{8k_BT}{\\pi M}} \\qquad \\frac{1}{M} = \\frac{1}{m} + \\frac{1}{m'}",
+        "name": "충돌률과 상대 열속도",
+        "src": "seltzer2008",
+        "where": "식 (2.130)–(2.132)",
+        "class": "SOURCE_FACT"
+      },
+      {
+        "tex": "\\frac{1}{T_1} \\;=\\; \\frac{1}{q}\\Big(R_{\\mathrm{SD}} + R_{\\mathrm{OP}} + R_{\\mathrm{pr}}\\Big) \\;+\\; R_{\\mathrm{wall}}",
+        "name": "세로 완화",
+        "src": "seltzer2008",
+        "where": "식 (2.133)",
+        "class": "SOURCE_FACT",
+        "note": "R_OP와 R_pr은 뺍니다. 펌프가 상대해야 하는 완화가 Γ_g이므로 펌프 자신은 거기 들어가지 않습니다."
+      },
+      {
+        "tex": "R_{\\mathrm{SD}} \\;=\\; R^{\\mathrm{Self}}_{\\mathrm{SD}} + R^{B}_{\\mathrm{SD}} + R^{Q}_{\\mathrm{SD}}",
+        "name": "스핀 파괴의 세 경로",
+        "src": "seltzer2008",
+        "where": "식 (2.134)",
+        "class": "SOURCE_FACT",
+        "note": "이 셀에서는 완충기체 항이 지배하고 알칼리끼리의 항은 150 °C가 넘어서야 끼어듭니다."
+      },
+      {
+        "tex": "q(P) \\;=\\; \\frac{6 + 2P^2}{1 + P^2} \\qquad (I = \\tfrac32) \\qquad q \\to 2I+1 = 4 \\ \\ (P \\to 1)",
+        "name": "핵 감속 인자 — T/04의 n_cycle",
+        "src": "seltzer2008",
+        "where": "표 2.5, Appelt et al. (1998) 계산",
+        "class": "SOURCE_FACT",
+        "note": "핵이 각운동량을 붙들고 있어서 전자 스핀 하나를 뒤집는 데 광자가 여러 개 듭니다. T/04은 이것을 10으로 가정했고, T/05는 정체를 모른 채 5.58–5.83으로 쟀습니다."
+      },
+      {
+        "tex": "\\frac{1}{T_{\\mathrm{wall}}} \\;=\\; D\\left(\\frac{\\pi}{R}\\right)^{2} \\ \\ (\\text{구}) \\qquad\\Longrightarrow\\qquad D\\,\\pi^{2}\\!\\left(\\frac{1}{a^2}+\\frac{1}{b^2}+\\frac{1}{c^2}\\right) \\ \\ (\\text{직육면체})",
+        "name": "벽까지의 확산",
+        "src": "seltzer2008",
+        "where": "식 (2.151); 직육면체는 같은 방식의 확장",
+        "class": "CALCULATED",
+        "note": "논문은 구를 풀고 '임의의 기하에 대해서도 같은 방식으로'라고 적습니다. 이 셀은 정육면체이므로 3Dπ²/L²."
+      },
+      {
+        "tex": "D \\;=\\; D_0\\,\\frac{p_0}{p} \\;=\\; \\frac{D_0}{n_{\\mathrm{am}}}\\sqrt{\\frac{T}{273\\ \\mathrm{K}}}",
+        "name": "확산계수",
+        "src": "seltzer2008",
+        "where": "식 (2.146) 다음 문단, D₀은 표 A.2",
+        "class": "CALCULATED",
+        "note": "논문은 압력 의존성만 명시합니다. 밀도가 고정이면 평균자유행로가 고정이고 평균 열속도가 온도의 제곱근을 따르므로, 확산계수도 온도의 제곱근으로 커집니다."
+      },
+      {
+        "tex": "\\frac{1}{T_2} \\;=\\; \\frac{1}{T_1} \\;+\\; \\frac{R_{\\mathrm{SE}}}{q_{\\mathrm{SE}}} \\;+\\; R_{\\mathrm{gr}}\\qquad q_{\\mathrm{SE}} = \\frac{3(2I+1)^2}{2I(2I-1)} = 8",
+        "name": "가로 완화는 다르다",
+        "src": "seltzer2008",
+        "where": "식 (2.135), q_SE는 식 (4.14)",
+        "class": "SOURCE_FACT",
+        "note": "스핀 교환은 세로 성분을 건드리지 않고 가로 성분만 갉아먹습니다. T/07이 T₁ = T₂로 놓은 것이 여기서 깨집니다. 자기장 기울기 항 R(gr)은 이 계산에서 0으로 두었습니다."
+      },
+      {
+        "tex": "n_{\\mathrm{opt}} \\;=\\; \\sqrt{\\frac{q\\,D_0\\sqrt{T/T_0}\\;\\pi^2\\,(3/L^2)}{n_{\\mathrm{amg}}\\,\\sigma^{N_2}_{\\mathrm{SD}}\\,\\bar{v}}}",
+        "name": "최적 완충기체 밀도",
+        "src": "standard",
+        "where": "위 두 항의 합을 n에 대해 최소화",
+        "class": "CALCULATED",
+        "note": "벽 항은 1/n, 스핀 파괴 항은 n으로 가므로 곱이 일정하고 합에 최소가 있습니다. 100 °C에서 0.73 amagat."
+      },
+      {
+        "tex": "R_Q \\;=\\; n_Q\\,\\sigma_Q\\,\\bar{v} \\;=\\; 7.6\\times10^{9}\\ \\mathrm{s^{-1}} \\;\\gg\\; \\Gamma_{\\mathrm{nat}} = 3.6\\times10^{7}\\ \\mathrm{s^{-1}}",
+        "name": "quenching이 정말 지배하는가",
+        "src": "seltzer2008",
+        "where": "식 (2.59), σ_Q는 표 2.3과 A.2",
+        "class": "CALCULATED",
+        "note": "210배입니다. T/03이 근거 없이 가정했던 '여기상태는 quenching 지배'가 맞습니다."
+      }
+    ],
+    "parametric_note": "아홉 줄 전부 출처가 있거나 거기서 유도됩니다. 자유롭게 고른 값은 셀 내부 치수 5.5 mm 하나뿐입니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "논문의 자체 예제",
+        "result": "0.90–1.10 amg 대 '약 1 amg'",
+        "how": "같은 코드로 그림 2.23(He 속 ³⁹K, 373 K, 반지름 2.5 cm 구형 셀)을 풀어 비교"
+      },
+      {
+        "name": "그 예제의 선폭",
+        "result": "0.19–0.23 Hz",
+        "how": "그림 2.23의 세로축은 1.0 Hz에서 끝납니다"
+      },
+      {
+        "name": "증기압 상수",
+        "result": "일치",
+        "how": "Seltzer 표 A.3(Rb: 녹는점 39.3 °C, 고체 4.857/4215, 액체 4.312/4040)과 Steck 식 (1)을 비교"
+      },
+      {
+        "name": "감속 인자 ↔ T/05",
+        "result": "5.58–5.83이 6→4 곡선 안",
+        "how": "서로의 존재를 모르는 두 계산. 한쪽은 표에서, 한쪽은 8준위 풀이에서"
+      },
+      {
+        "name": "quenching 가정",
+        "result": "210배",
+        "how": "R_Q를 자연 선폭 Γ = 2π·5.75 MHz와 비교"
+      },
+      {
+        "name": "그림 프레임",
+        "result": "20개 그림의 모든 라벨이 뷰박스 안",
+        "how": "scripts/validators/svg_fit.mjs"
+      }
+    ]
+  },
+  "correction": {
+    "date": "2026-09-13",
+    "what": "Γ_g = 170 s⁻¹은 실제의 두세 배였고, n_cycle = 10은 4~6이어야 했습니다. 이 두 수를 고쳐 T/04·T/05·T/06·T/07을 전부 다시 돌렸습니다.",
+    "why": "둘 다 검토한 제출 계산에서 온 모델 입력이고, 필요한 단면적이 이 저장소에 없어서 확인할 수 없었습니다. 그래서 다섯 항목이 그것을 그대로 들고 다니면서 '이 수가 틀리면 눈금이 틀린다'고 적어두었습니다.",
+    "how": "출처를 구하지 못한 채로 계산을 진행한 것입니다. 방향은 옳았습니다 — 미해결 목록에 정확히 이 항목이 적혀 있었고, 논문이 들어오자 그 목록이 그대로 작업 지시가 되었습니다.",
+    "found_by": "Seltzer 논문을 입수한 것. 표 A.2 한 장이 여섯 항목의 미해결 항목을 동시에 풀었습니다."
+  },
+  "unknown": [
+    "셀 내부 치수 5.5 mm 정육면체는 추정입니다. 벽 완화가 1/L²로 들어가므로, 내부가 실제로 5.0 mm라면 벽 항이 21% 커집니다. 셀 사양서가 필요합니다.",
+    "셀에 스템(봉입 꼭지)이 있으면 확산 부피가 달라집니다. 최저 모드 계산은 매끈한 정육면체를 가정합니다.",
+    "q_SE = 8은 큰 자기장·낮은 편광 극한입니다. FID 직후에는 편광이 높아 스핀 교환이 부분적으로 억제되므로, 실제 T₂는 여기 적은 값과 그보다 긴 값 사이 어딘가입니다. 그 사이를 풀지 않았습니다.",
+    "자기장 기울기 항 R_gr을 0으로 두었습니다. 실제 셀에서는 히터와 차폐가 만드는 기울기가 있습니다.",
+    "벽 코팅을 가정하지 않았습니다. 벽이 완전히 탈편광시킨다고 보았고, 이것이 벽 항의 상한입니다.",
+    "온도는 셀 전체에서 균일하다고 보았습니다. T/06이 보였듯 빛은 균일하지 않고, 히터도 마찬가지입니다.",
+    "표 A.2의 값들에 불확실도가 붙어 있지 않습니다. σ(N₂ 스핀 파괴)는 문헌마다 편차가 큰 양으로 알려져 있는데, 여기서는 한 값만 씁니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/solve_relaxation.py",
+      "note": "전체 계산. --check로 재실행 동일성 검사"
+    },
+    {
+      "path": "analysis/relaxation.json",
+      "note": "모든 수치와 논문 자체 예제 재현 결과"
+    },
+    {
+      "path": "input/papers/seltzer-alkali-metal-magnetometry-2008.pdf",
+      "note": "표 A.2가 275쪽"
+    },
+    {
+      "path": "assets/diagrams/rb87-relax-budget.svg",
+      "note": "완화율의 출처별 기여"
+    },
+    {
+      "path": "assets/diagrams/rb87-relax-q.svg",
+      "note": "핵 감속 인자와 T/05가 잰 값"
+    },
+    {
+      "path": "assets/diagrams/rb87-relax-t1t2.svg",
+      "note": "T₁과 T₂"
+    },
+    {
+      "path": "assets/diagrams/rb87-relax-optimum.svg",
+      "note": "최적 완충기체 밀도"
+    }
+  ],
+  "en": {
+    "title": "The Constant We Had Been Assuming",
+    "summary": "Gamma_g = 170 per second was a model input that five entries carried unchanged, each of them noting that their scale stood or fell with it. Every cross section needed to compute it is in Seltzer's Table A.2. It is not 170.",
+    "question": "What is the one physical constant this repository still had to assume - and if it is wrong, which way were the earlier answers wrong?"
+  }
+}

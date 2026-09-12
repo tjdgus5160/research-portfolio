@@ -35,9 +35,9 @@
       "source": "10·20·30·50 mW/cm²에서 각각 따로 풀어 9.9 / 10.3 / 10.2 / 9.7을 얻었습니다. 네 값이 6% 안에 모인다는 것은 두 모델이 이 인자 하나만큼만 다르다는 뜻입니다."
     },
     {
-      "claim": "바닥상태 이완 Γ_g = 170 s⁻¹",
-      "class": "INFERRED",
-      "reasoning": "T/03이 검토 대상으로 삼은 계산의 모델 입력이고 측정값이 아닙니다. 아래의 정상상태 값은 전부 이 가정 위에 있습니다."
+      "claim": "바닥상태 이완 Γ_g = 61.0 s⁻¹ (100 °C)",
+      "class": "CALCULATED",
+      "reasoning": "Γ_g는 T/08이 Seltzer 표 A.2의 단면적과 그의 식 (2.130)–(2.134)·(2.151)로 계산합니다. 이 셀에서 100 °C 기준 61.0 s⁻¹입니다. 예전에는 170 s⁻¹을 모델 입력으로 들고 있었습니다."
     }
   ],
   "method": [
@@ -107,21 +107,21 @@
     },
     {
       "name": "시상수 τ @ 10 mW/cm²",
-      "value": "555",
+      "value": "360",
       "unit": "µs",
       "class": "INFERRED",
       "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.756, 정상상태 0.906"
     },
     {
       "name": "시상수 τ @ 20 mW/cm²",
-      "value": "291",
+      "value": "182",
       "unit": "µs",
       "class": "INFERRED",
       "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.920, 정상상태 0.950"
     },
     {
       "name": "시상수 τ @ 50 mW/cm²",
-      "value": "120",
+      "value": "73",
       "unit": "µs",
       "class": "INFERRED",
       "note": "1/(R/10 + Γ_g). 1 ms 후 P = 0.979, 정상상태 0.980"
@@ -186,10 +186,10 @@
       {
         "tex": "\\frac{dP}{dt} \\;=\\; \\frac{R}{n_{\\mathrm{cyc}}}\\,(1 - P) \\;-\\; \\Gamma_g\\,P",
         "name": "한 인자로 뭉뚱그린 펌핑 속도방정식",
-        "src": "standard",
-        "where": "이 저장소의 모델",
-        "class": "INFERRED",
-        "note": "n(cyc) = 10은 검토한 제출 계산의 모델 입력입니다. T/05가 준위별로 풀어 이 값을 재보니 5.6~5.8이 나왔습니다 — 즉 이 식은 펌핑을 1.8배 비관적으로 봅니다."
+        "src": "seltzer2008",
+        "where": "표 2.5",
+        "class": "SOURCE_FACT",
+        "note": "n(cyc)는 자유 인자가 아니라 핵 감속 인자 q였습니다. I=3/2에서 편광 없을 때 6, 완전 편광에서 4입니다. 10이 아닙니다. Γ_g도 마찬가지로 170이 아니라 61.0 s⁻¹ (100 °C)이고, 둘 다 T/08이 계산합니다. 이 항목의 수치는 고친 값으로 다시 돌렸습니다."
       },
       {
         "tex": "\\tau \\;=\\; \\left(\\frac{R}{n_{\\mathrm{cyc}}} + \\Gamma_g\\right)^{-1} \\qquad P(\\infty) \\;=\\; \\frac{R/n_{\\mathrm{cyc}}}{R/n_{\\mathrm{cyc}} + \\Gamma_g}",
@@ -227,7 +227,7 @@
     ]
   },
   "unknown": [
-    "Γ_g = 170 s⁻¹과 산란 횟수 10회는 모델 입력입니다. 시상수와 정상상태 값이 둘 다에 의존하므로, 이 값들이 틀리면 곡선의 모양이 아니라 눈금이 틀립니다.",
+    "Γ_g와 n(cyc)는 이제 가정이 아닙니다 — 61.0 s⁻¹과 6입니다(T/08). 이 항목의 모든 수치를 그 값으로 다시 계산했고, 예전 값들은 펌핑을 비관적으로 보고 있었습니다.",
     "셀 전체에서 세기가 균일하다고 가정했습니다. T/03이 지적했듯 120 °C 이상에서는 앞쪽 원자가 펌프를 먼저 먹습니다.",
     "선 중심에 정확히 맞춘 경우입니다. T/03의 −3.6 GHz 최적 detuning에서는 단면적이 그만큼 줄어듭니다.",
     "재펌핑 경로를 하나의 인자로 뭉뚱그렸습니다. 8개 Zeeman 준위를 각각 푸는 계산이 아닙니다.",
@@ -255,5 +255,14 @@
     "title": "Pumping Rate Against Time",
     "summary": "How many photons an atom scatters per second, and how that rate falls away as the sample polarises itself transparent.",
     "question": "How much light does a 1 ms pump pulse really need? The answer turns less on how hard you push than on how long the absorption lasts — a polarised atom stops absorbing, so the pump ends up shining into transparency it created."
-  }
+  },
+  "correction": [
+    {
+      "date": "2026-09-13",
+      "what": "두 모델 입력이 모두 틀렸습니다. 5 mW/cm²의 1 ms 인구는 0.519가 아니라 0.726, 시상수는 1015 µs가 아니라 704 µs입니다.",
+      "why": "Γ_g = 170 s⁻¹은 실제의 세 배에 가깝고(61.0), n_cycle = 10은 핵 감속 인자 q이며 그 값은 6에서 4 사이입니다. 둘 다 펌핑을 실제보다 어렵게 보이게 만듭니다.",
+      "how": "둘 다 검토한 제출 계산의 입력이었고, 확인에 필요한 단면적이 이 저장소에 없었습니다. 그 사실을 미해결 목록에 적어두고 진행했습니다.",
+      "found_by": "Seltzer 논문을 입수해 T/08을 계산한 것."
+    }
+  ]
 }

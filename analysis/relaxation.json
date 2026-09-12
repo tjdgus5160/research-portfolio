@@ -1,0 +1,146 @@
+{
+  "sources": {
+    "cross_sections": "Seltzer, Developments in Alkali-Metal Atomic Magnetometry, PhD thesis, Princeton 2008, Table A.2, rubidium column",
+    "sigma_SD_N2_cm2": 1e-22,
+    "sigma_SD_self_cm2": 1.6e-17,
+    "sigma_SE_self_cm2": 1.9e-14,
+    "sigma_Q_N2_cm2": 5.8e-15,
+    "D0_N2_cm2_s": 0.19,
+    "equations": "Seltzer eqs. 2.130-2.135, 2.146-2.151, 4.14; Table 2.5",
+    "geometry_note": "Interior taken as a 5.5 mm cube: W/01 gives a 7.5 mm outer cube and T/03 a 5.5 mm active path, which implies ~1 mm walls. INFERRED, not measured."
+  },
+  "cell": {
+    "n_amagat": 0.7969,
+    "fill_Torr_at_293K": 650,
+    "L_m": 0.0055
+  },
+  "by_temperature": {
+    "80": {
+      "T": 353.15,
+      "n_rb": 1.5486827649475686e+18,
+      "R_SD_N2": 127.3532,
+      "R_SD_self": 1.0279,
+      "R_SD": 128.381,
+      "R_wall": 26.5353,
+      "R_SE": 1220.5765,
+      "q": 4.0,
+      "q_SE": 8.0,
+      "inv_T1": 58.6306,
+      "inv_T2": 211.2026,
+      "T1": 0.0171,
+      "T2": 0.0047
+    },
+    "100": {
+      "T": 373.15,
+      "n_rb": 6.014382066813582e+18,
+      "R_SD_N2": 130.9097,
+      "R_SD_self": 4.1032,
+      "R_SD": 135.0129,
+      "R_wall": 27.2764,
+      "R_SE": 4872.5427,
+      "q": 4.0,
+      "q_SE": 8.0,
+      "inv_T1": 61.0296,
+      "inv_T2": 670.0974,
+      "T1": 0.0164,
+      "T2": 0.0015
+    },
+    "120": {
+      "T": 393.15,
+      "n_rb": 2.0290155038944043e+19,
+      "R_SD_N2": 134.3722,
+      "R_SD_self": 14.2087,
+      "R_SD": 148.5809,
+      "R_wall": 27.9978,
+      "R_SE": 16872.8104,
+      "q": 4.0,
+      "q_SE": 8.0,
+      "inv_T1": 65.143,
+      "inv_T2": 2174.2443,
+      "T1": 0.0154,
+      "T2": 0.0005
+    },
+    "150": {
+      "T": 423.15,
+      "n_rb": 1.0089823874524247e+20,
+      "R_SD_N2": 139.4047,
+      "R_SD_self": 73.3027,
+      "R_SD": 212.7074,
+      "R_wall": 29.0464,
+      "R_SE": 87046.9741,
+      "q": 4.0,
+      "q_SE": 8.0,
+      "inv_T1": 82.2232,
+      "inv_T2": 10963.095,
+      "T1": 0.0122,
+      "T2": 0.0001
+    }
+  },
+  "gamma_g": {
+    "assumed_since_T03": 170.0,
+    "computed": {
+      "80": 58.6,
+      "100": 61.0,
+      "120": 65.1,
+      "150": 82.2
+    },
+    "note": "2 to 3 times smaller than the value carried through T/03-T/07"
+  },
+  "T1_T2_ms": {
+    "80": {
+      "T1": 17.056,
+      "T2": 4.7348
+    },
+    "100": {
+      "T1": 16.385,
+      "T2": 1.4923
+    },
+    "120": {
+      "T1": 15.351,
+      "T2": 0.4599
+    },
+    "150": {
+      "T1": 12.162,
+      "T2": 0.0912
+    }
+  },
+  "T07_assumed_T2_ms": 5.882352941176471,
+  "slowing_down_factor": {
+    "q_unpolarised": 6.0,
+    "q_full": 4.0,
+    "T04_assumed_n_cycle": 10.0,
+    "T05_measured_independently": {
+      "10": 5.83,
+      "20": 5.8,
+      "30": 5.65,
+      "50": 5.58
+    },
+    "note": "T/04's n_cycle is the nuclear slowing-down factor of Seltzer table 2.5. T/05 solved the eight sublevels and measured 5.58-5.77 without knowing what it was; the table says 6 unpolarised falling to 4 fully polarised."
+  },
+  "optimum_buffer_gas": {
+    "at_100C_amagat": 0.7275,
+    "at_100C_fill_Torr_at_293K": 593.4,
+    "inv_T1_at_optimum": 59.76,
+    "inv_T1_at_optimum_excl_self": 59.76,
+    "inv_T1_this_cell_excl_self": 60.0,
+    "penalty_percent": 0.42,
+    "penalty_note": "Rb-Rb spin destruction does not depend on the nitrogen fill, so it is excluded from both sides. Including it would only dilute the fraction."
+  },
+  "check_against_thesis_figure_2_23": {
+    "q=4": {
+      "optimum_amg": 0.902,
+      "inv_T1": 1.432,
+      "linewidth_Hz": 0.228
+    },
+    "q=6": {
+      "optimum_amg": 1.105,
+      "inv_T1": 1.169,
+      "linewidth_Hz": 0.186
+    }
+  },
+  "quenching": {
+    "sigma_cm2": 5.8e-15,
+    "R_Q_per_s_at_100C": 7592764310.6982,
+    "note": "Seltzer eq. 2.59. Compare with the 5.75 MHz natural width: quenching is faster than radiative decay by a wide margin, which is what T/03 assumed when it called the excited state quenching-dominated."
+  }
+}

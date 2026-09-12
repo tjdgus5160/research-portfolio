@@ -43,7 +43,12 @@ G_I = -0.0009951414              # Table 6: nuclear g-factor
 DE_HFS_HZ = A_HFS_HZ * (I_NUC + 0.5)      # Steck below eq. 26: DE_hfs = A(I + 1/2)
 CLOCK_SHIFT_HZ_G2 = 575.15       # Table 6, quoted as 2*pi * 575.15 Hz/G^2
 
-GAMMA_G = 170.0                  # 1/s, the same model input carried from T/03
+# Gamma_g is no longer a model input. T/08 computes it from Seltzer's Table A.2
+# cross sections and his eqs. 2.130-2.134 and 2.151: for this 650 Torr, 5.5 mm
+# cell it is 61.0 1/s at 100 C, not the 170 that every entry from T/03 onward
+# assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
+# 100 C is quoted here because that is the temperature this calculation uses.
+GAMMA_G = 61.0
 
 
 def g_F(F: float) -> float:
@@ -249,7 +254,7 @@ def fig_fid(run_t2: dict, run_inf: dict, t2: float) -> str:
          f'<text x="{W-16}" y="22" class="xs" text-anchor="end">0.5 G, π/2 TIP</text>']
     _frame(b, L, R, TOP, BOT,
            [(v, sy(v * amp)) for v in (-1, -0.5, 0, 0.5, 1)],
-           [(x * 5, sx(x * 5e-3)) for x in range(5)],
+           [(x * 2, sx(x * 2e-3)) for x in range(5)],
            "in-phase quadrature", "time after the tip / ms",
            lambda v: f"{v:+g}", lambda v: f"{v:g}")
     for key, run, cls in (("dephase", run_inf, "m"), ("demod", run_t2, "l")):
@@ -265,8 +270,8 @@ def fig_fid(run_t2: dict, run_inf: dict, t2: float) -> str:
     b.append(f'<text x="{sx(tl)+6:.0f}" y="{sy(-amp*0.35):.0f}" class="xs">'
              f'exp(−t/T₂), T₂ = {t2*1e3:.2f} ms</text>')
     b.append(f'<text x="16" y="{H-38}" class="xs">The carrier is 350 kHz. What is drawn is what a demodulator leaves: four tones at −54, −18, +18 and +54 Hz beating against each other.</text>')
-    b.append(f'<text x="16" y="{H-24}" class="xs">The grey curve is the same signal with relaxation switched off. It still dies, and crosses zero at 16 ms — that is the Zeeman splitting alone.</text>')
-    b.append(f'<text x="16" y="{H-10}" class="xs">At this field the two mechanisms are comparable, so a single exponential fit to the envelope reads a T₂ shorter than the real one.</text>')
+    b.append(f'<text x="16" y="{H-24}" class="xs">The grey curve is the same signal with relaxation off: Zeeman dephasing alone would take about 16 ms, and then reverse the sign.</text>')
+    b.append(f'<text x="16" y="{H-10}" class="xs">Relaxation wins by eleven times, so the envelope is a clean exponential. This entry first used T₂ = 5.88 ms and called the two comparable.</text>')
     return svg_wrap(W, H, "\n".join(b), "Free induction decay",
         "Demodulated precession signal against time, with and without relaxation. The trace "
         "without relaxation still decays and reverses, because the four Zeeman transitions "
@@ -353,7 +358,13 @@ def main() -> int:
     pops = {2: {m: ss[f"F2m{m:+d}"] for m in (2, 1, 0, -1, -2)},
             1: {m: ss[f"F1m{m:+d}"] for m in (1, 0, -1)}}
 
-    T2 = 1.0 / GAMMA_G                    # INFERRED; see the entry's unknown list
+    # T2 is NOT 1/Gamma_g. Gamma_g is the longitudinal rate; Seltzer eq. 2.135
+    # adds a spin-exchange term that only touches the transverse component, and
+    # in this cell that term dominates. T/08 computes both; this reads the
+    # answer rather than assuming T1 = T2, which is what this entry did first.
+    rel = json.loads((ROOT / "analysis" / "relaxation.json").read_text())
+    T2 = rel["T1_T2_ms"]["100"]["T2"] * 1e-3
+    T1 = rel["T1_T2_ms"]["100"]["T1"] * 1e-3
     T2_LONG = 0.06
     B = 0.5                               # gauss, roughly the field at the surface
 
@@ -406,10 +417,13 @@ def main() -> int:
             "F1_fraction_of_signal": round(
                 sum(tipped_coherences(pops[1], math.pi / 2, 1))
                 / sum(tipped_coherences(pops[2])), 6)},
-        "T2_s": T2,
-        "T2_provenance": ("INFERRED. Gamma_g = 170 1/s is the only relaxation number in "
-                          "this repository and it entered T/03 as a longitudinal ground-state "
-                          "rate. Using 1/Gamma_g as T2 assumes T1 = T2."),
+        "T2_s": T2, "T1_s": T1,
+        "T2_provenance": ("CALCULATED by T/08 from Seltzer's Table A.2 cross sections. "
+                          "At 100 C the longitudinal lifetime is 16.4 ms but the transverse "
+                          "one is 1.49 ms, because Rb-Rb spin exchange broadens only the "
+                          "transverse component (Seltzer eqs. 2.135 and 4.14). This entry "
+                          "first used 1/Gamma_g = 5.88 ms for T2, which assumed T1 = T2 and "
+                          "was wrong in both directions at once."),
         "tip_error_nT_at_50uT": {str(d): round(field_error_nT(pops[2], B, math.radians(d)), 5)
                                  for d in (60, 80, 85, 89, 90, 91, 95, 100, 120)},
         "tip_error_slope_nT_per_deg": round(
@@ -421,7 +435,7 @@ def main() -> int:
         OUT_JSON: json.dumps(payload, indent=2) + "\n",
         OUT_SVG / "rb87-zeeman-fan.svg": fig_fan(),
         OUT_SVG / "rb87-fid.svg": fig_fid(
-            fid(B, pops[2], T2, 20e-3), fid(B, pops[2], 1e9, 20e-3), T2),
+            fid(B, pops[2], T2, 8e-3), fid(B, pops[2], 1e9, 8e-3), T2),
         OUT_SVG / "rb87-fid-spectrum.svg": fig_spectrum(
             spectrum(B, pops, T2_LONG, 150.0), spectrum(B, pops, T2, 150.0), T2, T2_LONG),
         OUT_SVG / "rb87-tip-error.svg": fig_tip(pops[2], B, degs),

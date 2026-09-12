@@ -47,13 +47,15 @@
   },
   "seltzer2008": {
     "label": "Developments in alkali-metal atomic magnetometry",
-    "detail": "PhD thesis, Princeton University (2008)",
+    "detail": "PhD thesis, Princeton University, November 2008. Advisor: M. V. Romalis",
     "authors": "S. J. Seltzer",
     "kind": "thesis, primary for the buffer-gas coefficients",
-    "held": "named",
+    "held": "disk",
     "url": "https://www.proquest.com/docview/275671021",
-    "note": "갖고 있지 않습니다. wang2025의 참고문헌 43번이 17.8 GHz/amagat의 출처로 지목한 문헌이고, 그 참고문헌 항목은 직접 확인했습니다. 다만 Seltzer가 그 수를 어느 원 측정에서 가져왔는지는 이 저장소가 모릅니다 — 논문을 열어보지 않았습니다. 알칼리–완충기체의 넓힘·이동·스핀파괴·확산 계수를 모아놓은 표준 편찬물이므로, 끝내 추적하지 못한 −8.25 GHz/amagat 이동 계수도 같은 표에 있을 가능성이 높습니다. 이 논문 하나를 구하면 여러 항목의 미해결 항목이 한꺼번에 닫힙니다.",
-    "short": "Seltzer 2008, Princeton 박사논문"
+    "note": "2026-09-13에 입수했습니다. 그 전까지 이 저장소는 이 논문을 '다른 출처가 지목했을 뿐 갖고 있지 않은' 것으로 표시했고, 그동안 막혀 있던 항목이 여섯 개였습니다. 표 A.2 한 장이 그것을 전부 풉니다 — Rb–N₂ 넓힘·이동, 스핀 파괴, 스핀 교환, quenching 단면적, 그리고 N₂ 안에서의 Rb 확산계수. 표 A.3의 증기압 상수는 Steck 식 (1)과 자릿수까지 같습니다. 이 논문 자체도 편찬물이라, 각 수치가 어느 원 측정에서 왔는지 표 안에 적어둡니다.",
+    "short": "Seltzer 2008, Princeton 박사논문",
+    "path": "input/papers/seltzer-alkali-metal-magnetometry-2008.pdf",
+    "sha256": "d76ebc9b38d4aed891a95ad0d22c53897c76135e4d7027150bb73082e08ef26b"
   },
   "standard": {
     "label": "표준 결과 — 원전을 이 저장소가 갖고 있지 않음",
