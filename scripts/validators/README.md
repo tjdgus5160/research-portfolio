@@ -86,3 +86,48 @@ and writes `content/math.json`. MathML rather than KaTeX's HTML: no stylesheet,
 no webfonts, it inherits `--t0..--t3` so it follows the palette switch, and it
 survives with scripting off. The cache is committed so the site builds without
 node; `--check` fails if an equation was edited without re-rendering.
+
+## Superseded: `validate_site.py`
+
+**Do not run it. Every failure it reports is false.**
+
+It checks a directory layout this site no longer has: it globs
+`assets/css/*.css`, `assets/js/*.js` and expects `assets/css/tokens.css`. The
+CSS and JS live at the repository root (`styles.css`, `entry.css`, `script.js`),
+so those globs match nothing and the checks fail vacuously. Three of them are
+accessibility checks, and all three features are in fact implemented — verified
+in a browser on 2026-09-13:
+
+| what it reports missing | what is actually there |
+|---|---|
+| a visible focus state | `:focus-visible` in `styles.css`, measured as a 4px solid outline |
+| reduced motion honoured | `script.js` reads the media query; zero elements animate under `reducedMotion: reduce` |
+| wide content scroll container | `overflow-x: auto` on `.e-scroll` and `.eq-math`, measured as computed style |
+
+It also audits `v2.html`, `v3.html` and `awwwards-study.html`, which are
+untracked files left in the working tree by another agent and are not part of
+the site.
+
+What replaced it, by concern: `contrast.mjs` for colour and `page_width.mjs` for
+scroll containers — both of which measure the rendered page instead of grepping
+source — and `validate_copy.py` for content.
+
+## Superseded: `validate_content.py`
+
+Looks for `content/entries/01-rb-cell-optics.json` and
+`02-balanced-polarimeter.json`. Those were renamed to `w01-` and `w02-` when the
+theory entries arrived and needed a prefix of their own, so it fails on two
+files that have not existed under those names for some time.
+
+Replaced by `validate_math.py` (sources, citations, artifact paths),
+`build_entries.py --check` (the pages match their JSON) and `validate_copy.py`
+(the required copy is present).
+
+---
+
+Both are left in place rather than deleted, for the same reason
+`validate_structure.py` is: re-baselining or deleting a gate is the author's
+call, not the supervisor's. But note the asymmetry — `validate_structure.py`
+fails because the design deliberately changed, whereas these two fail because
+they are looking in the wrong place. A check that cannot pass teaches you to
+ignore checks.

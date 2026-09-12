@@ -39,13 +39,10 @@ SIGMA_650 = 4.076e-13 * 1e-4     # m^2, from T/04
 # assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
 # 100 C is quoted here because that is the temperature this calculation uses.
 GAMMA_G = 61.0
-# N_CYCLE was 10, an unexplained model input. T/08 identifies it as the nuclear
-# slowing-down factor of Seltzer's Table 2.5: q = (6 + 2P^2)/(1 + P^2) for
-# I = 3/2, running from 6 unpolarised to 4 fully polarised. T/05 had already
-# measured 5.58-5.77 for it without knowing what it was. This one-rate model
-# needs a single number, so it uses the unpolarised value -- the pumping run
-# starts there and most of the climb happens near it.
-N_CYCLE = 6.0
+# There is no n_cycle here. T/04 needed one because it lumped the whole
+# pumping cycle into a single rate; this integrates the eight sublevels, so
+# the slowing-down factor emerges instead of being supplied. T/08 shows what
+# it is: Seltzer's table 2.5, 6 unpolarised falling to 4.
 L_CELL = 5.5e-3                  # m, the active path named in T/03
 T_MELT = 312.46                  # K, Steck: melting point 39.31 C
 

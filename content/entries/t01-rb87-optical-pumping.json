@@ -5,7 +5,7 @@
   "subtitle": "87Rb AND OPTICAL PUMPING",
   "status": "complete",
   "date": "2026-09",
-  "repo": "steck-rb87-d-line-data",
+  "repo": "scripts/gen_level_diagrams.py",
   "summary": "자력계가 무엇을 읽는지 — ⁸⁷Rb의 준위 구조, 원편광이 원자를 한쪽으로 몰아넣는 과정, 그리고 그렇게 정렬된 스핀이 자기장 속에서 도는 속도.",
   "question": "자기장을 재는 데 왜 하필 원자인가. 눈금은 늘어나고 자석은 늙지만, 원자가 세차운동하는 주파수는 자연상수와 자기장의 곱입니다. 그 비례를 실제로 쓰려면 세 가지가 필요합니다 — 어떤 준위가 있는지, 원자를 어떻게 한 방향으로 정렬시키는지, 정렬된 스핀이 얼마나 빨리 도는지.",
   "evidence": [

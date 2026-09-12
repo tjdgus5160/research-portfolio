@@ -2,9 +2,13 @@
 """Draw the 87Rb level structure and the optical-pumping cycle.
 
 SVG rather than pixels: a level diagram is mostly labelled lines, and text has
-to stay readable when someone zooms. It still obeys the site's rules — four
-tones through the CSS variables, so the diagrams follow the palette switch, and
-every coordinate on a whole multiple of the same grid the rest of the page uses.
+to stay readable when someone zooms. It still obeys the site's palette rule —
+four tones through the CSS variables, so the diagrams follow the palette switch.
+
+It does NOT sit on the page's 8-unit grid, and this docstring used to claim it
+did. Only 75 of 286 coordinates are multiples of 8; all of them are even. The
+claim came with a `G = 8` constant that no line of code ever read, so nothing
+was enforcing it and nothing noticed.
 
 Splittings are drawn to a stated, non-linear scale. A diagram that claimed to be
 to scale would be a lie: the ground-state hyperfine splitting is 6.8 GHz and the
@@ -18,7 +22,6 @@ import argparse, sys
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "assets" / "diagrams"
-G = 8                                   # one grid step, in SVG user units
 
 def svg(w: int, h: int, body: str, title: str, desc: str) -> str:
     return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}"

@@ -23,7 +23,7 @@ Two things make the answer more than one number:
     python3 scripts/solve_larmor_fid.py [--check]
 """
 from __future__ import annotations
-import argparse, importlib.util, json, math, sys
+import argparse, json, math, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -48,7 +48,8 @@ CLOCK_SHIFT_HZ_G2 = 575.15       # Table 6, quoted as 2*pi * 575.15 Hz/G^2
 # cell it is 61.0 1/s at 100 C, not the 170 that every entry from T/03 onward
 # assumed. The value is temperature dependent (58.6 at 80 C, 82.2 at 150 C);
 # 100 C is quoted here because that is the temperature this calculation uses.
-GAMMA_G = 61.0
+# No Gamma_g here either: T2 is read from T/08's relaxation.json, and the
+# longitudinal rate never enters the precession signal on its own.
 
 
 def g_F(F: float) -> float:

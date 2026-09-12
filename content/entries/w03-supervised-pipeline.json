@@ -5,6 +5,7 @@
   "subtitle": "SUPERVISED VALIDATION PIPELINE",
   "status": "complete",
   "date": "2026-09",
+  "repo": "research-agent",
   "summary": "만드는 에이전트와 검사하는 에이전트를 구조적으로 분리하고, 그 분리가 실제로 결함을 잡아내는지 끝까지 돌려본 기록.",
   "question": "연구 산출물을 만든 쪽이 스스로 검사하면, 통과는 증거가 아니라 의견이 됩니다. 만드는 권한과 검사하는 권한을 물리적으로 갈라놓으면 그 문제가 사라지는지 — 그리고 갈라놓은 검사가 실제로 무언가를 잡아내는지 — 확인하려 했습니다.",
   "evidence": [

@@ -12,4 +12,3 @@ __pycache__/
 
 # stray reference screenshots kept out of the tree
 awwwards-*.png
-node_modules/

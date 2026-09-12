@@ -35,7 +35,6 @@ AMG = 2.69e25                 # m^-3. Seltzer footnote: 1 amg = 2.69e19 cm^-3
 M_RB = 86.909180520 * U       # Steck table 2
 M_N2 = 28.0134 * U
 I_NUC = 1.5
-W_HF = 2 * math.pi * 6.834682610904e9
 
 # ── Seltzer thesis, Table A.2, rubidium column. cm^2 -> m^2, cm^2/s -> m^2/s ──
 SIG_SD_N2 = 1e-22 * 1e-4      # Rb-N2 spin destruction   (Kadlecek 1998; Allred 2002)

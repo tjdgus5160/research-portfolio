@@ -167,10 +167,6 @@ h2.kicker{font-size:9px;font-weight:400}
 .work h3{margin:12px 0 10px;font-family:var(--disp);font-size:12px;
   line-height:1.6;font-weight:400}
 .work p{margin:0;color:var(--t2);font-size:13.5px}
-.meter{display:flex;gap:var(--px);margin-top:22px}
-.meter::before{content:"";flex:none;width:100%;height:calc(var(--px)*3);
-  background:repeating-linear-gradient(90deg,var(--t3) 0 calc(var(--px)*3),
-             transparent calc(var(--px)*3) calc(var(--px)*5))}
 
 /* ── Principles ───────────────────────────────────────────────────────── */
 .cols{display:grid;gap:clamp(24px,4vw,48px);
@@ -453,7 +449,6 @@ html.moving.up .manifesto{text-shadow:0 var(--px) 0 rgba(0,0,0,.16),
    handles the CSS, this class handles what script.js has already started. */
 html.no-motion .ticker-run,
 html.no-motion .strip .on,
-html.no-motion .scrollcue,
 html.no-motion .manifesto.on,
 html.no-motion .cursor::before{animation:none}
 html.no-motion .rain{display:none}

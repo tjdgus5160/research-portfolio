@@ -5,7 +5,7 @@
   "subtitle": "OPTICAL PUMPING IN A 650 TORR N2 CELL",
   "status": "complete",
   "date": "2026-09",
-  "repo": "reviewed calculation",
+  "repo": "analysis/t03-review.json",
   "summary": "고압 완충기체가 D1 선을 14 GHz로 넓히고 6.6 GHz 붉은쪽으로 밀면, 저압에서 잡은 잠금 주파수가 셀 안에서는 다른 전이 위에 놓입니다. 그 결과를 제출받아 검토한 기록.",
   "question": "저압 포화흡수분광으로 F=2→F′=2에 잠근 레이저를 650 Torr 셀에 그대로 넣으면 무슨 일이 일어나는가. 그리고 자력계가 원하는 |F=2, m_F=+2⟩를 최대로 만들려면 어디에 맞춰야 하는가.",
   "evidence": [

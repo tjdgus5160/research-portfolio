@@ -94,6 +94,30 @@ def main() -> int:
     for k in sorted(set(src) - used):
         ck("sources", f"{k}: is actually cited", False, "in the registry, used by nothing")
 
+    # ── artifacts point at files that exist ──────────────────────────────
+    # Entries list artifact paths relative to the repository named in their
+    # `repo` field, which is not always this one. W/03 had no repo field at all,
+    # so six paths sat on the page with nothing saying where to find them.
+    OTHER = {"opm-freecad-cli": Path("/Users/hyeon/Projects/opm-freecad-cli"),
+             "research-agent": Path("/Users/hyeon/orca/projects/research-agent")}
+    for f in sorted(ENTRIES.glob("*.json")):
+        e = json.loads(f.read_text())
+        repo = e.get("repo") or ""
+        ck("artifacts", f"{e['no']}: names where its work lives", bool(repo),
+           "" if repo else "no repo field, so its artifact paths resolve nowhere")
+        root = next((v for k, v in OTHER.items() if repo.startswith(k)), ROOT)
+        # Only this repository's own paths can be checked from here; a path in
+        # another checkout is verified when that checkout is present.
+        if root is ROOT:
+            for a in e.get("artifacts", []):
+                ck("artifacts", f"{e['no']}: {a['path']}", (root / a["path"]).exists(),
+                   "" if (root / a["path"]).exists() else "not in this repository")
+        elif root.exists():
+            for a in e.get("artifacts", []):
+                ck("artifacts", f"{e['no']}: {a['path']} in {repo}",
+                   (root / a["path"]).exists(),
+                   "" if (root / a["path"]).exists() else f"not in {repo}")
+
     # ── the cache holds nothing stale ────────────────────────────────────
     tex = {q["tex"] for f in ENTRIES.glob("*.json")
            for q in (((json.loads(f.read_text()).get("geometry") or {}).get("equations")) or [])

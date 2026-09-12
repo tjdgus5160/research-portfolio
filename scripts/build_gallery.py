@@ -14,7 +14,7 @@ are written once and never re-derived.
     python3 scripts/build_gallery.py --check    # report drift, write nothing
 """
 from __future__ import annotations
-import argparse, html, json, re, shutil, subprocess, sys
+import argparse, html, json, re, sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -24,7 +24,6 @@ from imgsize import attrs as img_attrs
 ROOT = Path(__file__).resolve().parent.parent
 SRC = Path("/Users/hyeon/ComfyUI/output")
 OUT = ROOT / "assets" / "gallery"
-PAGE = ROOT / "gallery.html"
 MANIFEST = OUT / "manifest.json"
 THUMB_W = 720
 JPEG_Q = 82

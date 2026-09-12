@@ -380,7 +380,7 @@ def main() -> int:
                 f.write_text(body, encoding="utf-8")
     # The English index links back up out of en/ to the same pages.
     idx = splice(entries, a.check)
-    idx |= splice(entries, a.check, ROOT / "en" / "index.html", "en", "../work/")
+    idx |= splice(entries, a.check, EN_INDEX, "en", "../work/")
     verb = "would change" if a.check else "wrote"
     print(f"{len(entries)} entries · {verb} {len(changed)} page(s)"
           f"{' + index' if idx else ''}"
