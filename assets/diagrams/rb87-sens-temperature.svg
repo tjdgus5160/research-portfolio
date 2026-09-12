@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 414"
+  role="img" aria-labelledby="svt svd" class="lvl">
+<title id="svt">Noise density against cell temperature</title><desc id="svd">Photon shot noise and spin projection noise against cell temperature on a log scale. The photon-limited curve has a minimum near eighty degrees; the spin projection floor is more than twenty times lower and almost flat.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">WHERE TO RUN THE CELL</text>
+<text x="744" y="22" class="xs" text-anchor="end">50 µW 프로브, 1 ms 펌프</text>
+<line x1="104" y1="316.0" x2="636" y2="316.0" class="dash"/>
+<text x="96" y="320.0" class="xs" text-anchor="end">1 fT</text>
+<line x1="104" y1="231.3" x2="636" y2="231.3" class="dash"/>
+<text x="96" y="235.3" class="xs" text-anchor="end">10 fT</text>
+<line x1="104" y1="146.7" x2="636" y2="146.7" class="dash"/>
+<text x="96" y="150.7" class="xs" text-anchor="end">100 fT</text>
+<line x1="104" y1="62.0" x2="636" y2="62.0" class="dash"/>
+<text x="96" y="66.0" class="xs" text-anchor="end">1 pT</text>
+<text x="104.0" y="334" class="xs" text-anchor="middle">60</text>
+<text x="237.0" y="334" class="xs" text-anchor="middle">80</text>
+<text x="370.0" y="334" class="xs" text-anchor="middle">100</text>
+<text x="503.0" y="334" class="xs" text-anchor="middle">120</text>
+<text x="636.0" y="334" class="xs" text-anchor="middle">140</text>
+<line x1="104" y1="316" x2="636" y2="316" class="thin"/>
+<line x1="104" y1="316" x2="104" y2="62" class="thin"/>
+<text x="370.0" y="354" class="sm" text-anchor="middle">cell temperature / °C</text>
+<text x="24" y="189.0" class="sm" transform="rotate(-90 24 189.0)" text-anchor="middle">잡음 밀도 / T·Hz^(−1/2)</text>
+<polyline class="l" points="104.0,167.0 110.7,168.6 117.3,170.1 124.0,171.6 130.6,173.0 137.2,174.3 143.9,175.5 150.6,176.6 157.2,177.7 163.8,178.6 170.5,179.5 177.2,180.3 183.8,181.1 190.4,181.7 197.1,182.3 203.8,182.8 210.4,183.2 217.1,183.6 223.7,183.8 230.3,184.0 237.0,184.1 243.7,184.2 250.3,184.2 256.9,184.1 263.6,183.9 270.2,183.7 276.9,183.4 283.6,183.1 290.2,182.7 296.9,182.2 303.5,181.7 310.1,181.2 316.8,180.5 323.4,179.9 330.1,179.1 336.8,178.4 343.4,177.5 350.1,176.7 356.7,175.8 363.4,174.8 370.0,173.9 376.6,172.8 383.3,171.8 389.9,170.7 396.6,169.6 403.2,168.4 409.9,167.2 416.6,166.0 423.2,164.8 429.9,163.5 436.5,162.2 443.1,160.9 449.8,159.5 456.4,158.1 463.1,156.8 469.8,155.3 476.4,153.9 483.1,152.5 489.7,151.0 496.4,149.5 503.0,148.0 509.6,146.5 516.3,144.9 523.0,143.4 529.6,141.8 536.2,140.2 542.9,138.6 549.5,137.0 556.2,135.4 562.9,133.8 569.5,132.2 576.1,130.5 582.8,128.9 589.5,127.2 596.1,125.5 602.8,123.8 609.4,122.2 616.0,120.5 622.7,118.8 629.4,117.1 636.0,115.4"/>
+<polyline class="m" points="104.0,286.2 110.7,287.1 117.3,287.9 124.0,288.8 130.6,289.6 137.2,290.3 143.9,291.1 150.6,291.8 157.2,292.5 163.8,293.1 170.5,293.7 177.2,294.3 183.8,294.8 190.4,295.4 197.1,295.8 203.8,296.3 210.4,296.8 217.1,297.2 223.7,297.6 230.3,297.9 237.0,298.3 243.7,298.6 250.3,298.9 256.9,299.2 263.6,299.5 270.2,299.7 276.9,300.0 283.6,300.2 290.2,300.4 296.9,300.6 303.5,300.8 310.1,301.0 316.8,301.1 323.4,301.3 330.1,301.4 336.8,301.5 343.4,301.6 350.1,301.7 356.7,301.8 363.4,301.9 370.0,302.0 376.6,302.1 383.3,302.2 389.9,302.2 396.6,302.3 403.2,302.3 409.9,302.4 416.6,302.4 423.2,302.5 429.9,302.5 436.5,302.5 443.1,302.6 449.8,302.6 456.4,302.6 463.1,302.6 469.8,302.7 476.4,302.7 483.1,302.7 489.7,302.7 496.4,302.7 503.0,302.7 509.6,302.7 516.3,302.7 523.0,302.7 529.6,302.7 536.2,302.7 542.9,302.7 549.5,302.7 556.2,302.7 562.9,302.7 569.5,302.7 576.1,302.7 582.8,302.7 589.5,302.7 596.1,302.7 602.8,302.7 609.4,302.7 616.0,302.7 622.7,302.6 629.4,302.6 636.0,302.6"/>
+<circle cx="243.7" cy="184.2" r="4" fill="var(--t0,#0d0d0d)"/>
+<text x="244" y="172" class="xs" text-anchor="middle">81 °C — 36 fT/√Hz</text>
+<text x="556" y="105" class="xs">광자 산탄 잡음 한계</text>
+<text x="343" y="277" class="xs">스핀 투영 잡음 — 원자 자체의 한계</text>
+<line x1="370" y1="316" x2="370" y2="307" class="thin"/>
+<line x1="503" y1="316" x2="503" y2="307" class="thin"/>
+<text x="16" y="376" class="xs">차가우면 원자가 모자라 신호가 작고, 뜨거우면 스핀 교환이 T₂를 먼저 죽입니다. 그 사이에 최소가 있습니다.</text>
+<text x="16" y="390" class="xs">최적은 81 °C입니다 — T/03부터 T/06까지가 예로 들어온 100~150 °C보다 한참 아래입니다.</text>
+<text x="16" y="404" class="xs">두 곡선이 20배 넘게 벌어져 있습니다. 이 셀은 원자가 아니라 광자에 막혀 있고, 그래서 프로브 출력이 아직 이깁니다.</text>
+</svg>

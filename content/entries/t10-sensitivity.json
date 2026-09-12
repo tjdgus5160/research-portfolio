@@ -1,0 +1,327 @@
+{
+  "no": "T/10",
+  "slug": "t10-sensitivity",
+  "title": "그래서 얼마나 작은 자기장을 볼 수 있나",
+  "subtitle": "THE SENSITIVITY, AND WHERE TO RUN THE CELL",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/solve_sensitivity.py",
+  "summary": "T/09가 신호를 계산했고 T/08이 그것이 얼마나 빨리 죽는지 계산했습니다. 잡음은 아무도 계산하지 않았습니다. 셋을 합치면 답이 나오고, 그 답이 가리키는 운전 온도는 이 저장소가 여태 예로 들어온 곳이 아닙니다.",
+  "question": "자기장은 주파수에서 나옵니다. 한 번의 자유 감쇠에서 주파수를 얼마나 정확히 읽을 수 있고, 그 정확도가 가장 좋은 셀 온도는 어디입니까?",
+  "evidence": [
+    {
+      "claim": "감쇠하는 사인파에서 주파수를 읽는 정확도에는 Cramér–Rao 하한이 있습니다",
+      "class": "SOURCE_FACT",
+      "source": "Hunter et al., Phys. Rev. Applied 10, 014002 (2018), 식 (4)·(5)·(7). σ²(ω) ≥ 24C/[(A/σ)²NT_r²]이고 C가 감쇠 보정입니다. 세슘 FID 자력계 논문이지만 이 하한 자체는 원자 종류와 무관합니다."
+    },
+    {
+      "claim": "그 논문의 수치로 이 구현이 2 pT/√Hz를 재현합니다",
+      "class": "CALCULATED",
+      "source": "논문의 값(진폭 20 mrad, 잡음 50 µrad, γ₂ ≈ 1.5 kHz, 표본율 2 MHz, 관측 0.6 ms, 측정 시간 1 ms)을 넣으면 1.9 pT/√Hz가 나옵니다. 논문이 적은 값은 ≥ 2입니다."
+    },
+    {
+      "claim": "최적 관측 창은 2/γ₂",
+      "class": "CALCULATED",
+      "source": "같은 논문이 적어둔 규칙입니다. 여기서 창을 훑어보니 펌프 시간을 빼고 계산하면 정확히 2.0·T₂에서 최소가 되고, 1 ms 펌프를 넣으면 2.15·T₂로 조금 밀립니다."
+    },
+    {
+      "claim": "광자 산탄 잡음 δ⟨θ⟩ = √(1/2Φ), 스핀 투영 잡음 δ⟨F_x⟩ = √(2F_z T₂/N)",
+      "class": "SOURCE_FACT",
+      "source": "Seltzer 박사논문 식 (2.164)와 (2.159), §2.8. Fabricant et al. 2023의 식 (17)·(18)이 같은 축척을 줍니다."
+    },
+    {
+      "claim": "T₂는 T/08, 회전 진폭은 T/09, 자기회전비는 T/07에서 받습니다",
+      "class": "CALCULATED",
+      "source": "세 항목을 import합니다. 값을 옮겨 적지 않았으므로 그쪽이 정정되면 이 항목이 따라 바뀝니다."
+    },
+    {
+      "claim": "프로브 출력 50 µW와 표본율 2 MHz는 고른 값입니다",
+      "class": "INFERRED",
+      "source": "측정한 값이 아닙니다. 감도는 프로브 출력의 제곱근에 반비례하고(80.6 / 36.0 / 18.0 fT/√Hz at 10 / 50 / 200 µW), 최적 온도는 출력과 무관하게 81 °C에 머뭅니다. 표본율은 Hunter의 오실로스코프와 같은 값을 썼습니다."
+    },
+    {
+      "claim": "π/2 이후 가로 편광 0.983, 프로브 부피 0.0389 cm³",
+      "class": "CALCULATED",
+      "source": "앞의 것은 T/07이 잰 ⟨F_x⟩ = 1.9654를 F = 2로 나눈 것 — 늘어난 상태에서 ⟨S_z⟩ = ½이므로 P = ⟨F⟩/2입니다. 뒤의 것은 W/01의 보어 지름 3 mm와 셀 길이 5.5 mm"
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "신호 대 잡음",
+      "detail": "진폭은 T/09의 최적 detuning에서의 회전각에 π/2 이후 가로 편광을 곱한 값. 잡음은 프로브의 광자 통계 — 표본당 σ = √(f_s/4Φ)입니다."
+    },
+    {
+      "step": "02",
+      "name": "하한 계산",
+      "detail": "σ²(ω) ≥ 24C/[(A/σ)²NT_r²]. N은 표본 수, C는 신호가 감쇠하면서 잃는 정보를 보정합니다. 주파수를 자기장으로 바꾸는 것은 T/07의 6.99583 Hz/nT입니다."
+    },
+    {
+      "step": "03",
+      "name": "죽은 시간을 세기",
+      "detail": "잡음 밀도 ρ = σ_B√(2T)에서 T는 관측 창이 아니라 주기입니다 — 다음 측정 전에 다시 펌핑해야 하기 때문입니다. T/04이 1 ms에 0.92까지 올린다고 했으므로 1 ms를 씁니다. 이것을 관측 창으로 두면 펌프가 공짜라고 가정하는 셈입니다."
+    },
+    {
+      "step": "04",
+      "name": "창 길이 확인",
+      "detail": "논문이 적은 2/γ₂가 여기서도 맞는지 훑었습니다. 펌프를 빼면 정확히 2·T₂, 넣으면 2.15·T₂입니다."
+    },
+    {
+      "step": "05",
+      "name": "온도를 훑기",
+      "detail": "60 °C에서 140 °C까지 1 °C 간격으로. 각 온도마다 T/08의 T₂와 T/09의 최적 detuning을 다시 구합니다."
+    },
+    {
+      "step": "06",
+      "name": "원자 쪽 한계도 함께",
+      "detail": "스핀 투영 잡음을 식 (2.159)에서 자기장으로 옮깁니다. δB = √(2/(F_z N T₂))/γ이고, 스핀 교환이 지배하면 N·T₂가 온도에 무관해지므로 이 한계는 평평해집니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "논문 값 재현",
+      "value": "1.9",
+      "unit": "pT/√Hz",
+      "class": "CALCULATED",
+      "note": "Hunter가 적은 값은 ≥ 2. 구현을 확인하는 유일한 외부 기준점입니다"
+    },
+    {
+      "name": "최적 셀 온도",
+      "value": "81",
+      "unit": "°C",
+      "class": "CALCULATED",
+      "note": "T/03부터 T/06까지가 예로 들어온 100~150 °C보다 한참 아래입니다"
+    },
+    {
+      "name": "거기서의 감도",
+      "value": "36.0",
+      "unit": "fT/√Hz",
+      "class": "CALCULATED",
+      "note": "50 µW 프로브, 1 ms 펌프, 2 MHz 표본"
+    },
+    {
+      "name": "그때 T₂",
+      "value": "4.49",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "T/08에서. 100 °C의 1.49 ms보다 세 배 깁니다"
+    },
+    {
+      "name": "신호 대 잡음",
+      "value": "1015",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "회전 진폭 대 표본당 각도 잡음. 최적 detuning은 9.1 GHz"
+    },
+    {
+      "name": "측정 주기",
+      "value": "10.0",
+      "unit": "ms",
+      "class": "CALCULATED",
+      "note": "관측 2·T₂에 펌프 1 ms. 초당 100번의 자기장 측정"
+    },
+    {
+      "name": "스핀 투영 한계",
+      "value": "1.6",
+      "unit": "fT/√Hz",
+      "class": "CALCULATED",
+      "note": "원자 자체의 한계. 온도에 거의 무관합니다"
+    },
+    {
+      "name": "둘 사이의 거리",
+      "value": "22",
+      "unit": "배",
+      "class": "CALCULATED",
+      "note": "이 셀은 원자가 아니라 광자에 막혀 있습니다. 프로브 출력이 아직 이깁니다"
+    },
+    {
+      "name": "최적 관측 창",
+      "value": "2.0",
+      "unit": "× T₂",
+      "class": "CALCULATED",
+      "note": "펌프를 빼고. 논문이 적은 2/γ₂ 그대로입니다"
+    },
+    {
+      "name": "펌프를 넣으면",
+      "value": "2.15",
+      "unit": "× T₂",
+      "class": "CALCULATED",
+      "note": "조금 밀립니다. 2·T₂를 그대로 써도 손해는 보이지 않습니다"
+    },
+    {
+      "name": "프로브 출력 의존성",
+      "value": "1/√P",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "10 / 50 / 200 µW에서 80.6 / 36.0 / 18.0 fT/√Hz. 최적 온도는 움직이지 않습니다"
+    },
+    {
+      "name": "해석적 최적 조건",
+      "value": "bn = 2a",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "γ₂ = a + bn, 진폭 ∝ n으로 두고 미분. 약 77 °C를 가리킵니다"
+    },
+    {
+      "name": "그런데 실제로는",
+      "value": "81",
+      "unit": "°C",
+      "class": "CALCULATED",
+      "note": "최적 detuning이 온도를 따라 움직여 진폭이 n보다 빨리 자라기 때문입니다"
+    }
+  ],
+  "geometry": {
+    "tolerance": "논문 값 1.9 대 ≥2.0 pT/√Hz, 창 규칙 2.0 대 2",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-sens-temperature.svg",
+        "view": "WHERE TO RUN IT",
+        "alt": "온도에 대한 광자 산탄 잡음과 스핀 투영 잡음. 앞의 것은 81 °C에서 36 fT/√Hz로 최소가 되고 뒤의 것은 20배 아래에서 거의 평평하다",
+        "note": "이 항목의 결론이자 이 저장소 전체의 결론입니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-sens-mechanism.svg",
+        "view": "WHY THERE IS AN OPTIMUM",
+        "alt": "신호 진폭과 감쇠율의 3/2제곱, 그리고 둘의 비. 앞의 것은 밀도를 따라 자라고 뒤의 것이 더 빨리 자라 그 사이에 최소가 생긴다",
+        "note": "최소가 왜 거기 있는지"
+      },
+      {
+        "src": "assets/diagrams/rb87-sens-window.svg",
+        "view": "HOW LONG TO WATCH",
+        "alt": "관측 창 길이에 대한 잡음 밀도. 펌프 시간을 빼면 정확히 2·T₂에서 최소",
+        "note": "논문이 적은 규칙을 여기서 다시 확인합니다"
+      }
+    ],
+    "equations": [
+      {
+        "tex": "\\sigma^2_{\\omega} \\;\\ge\\; \\frac{24\\,C}{(A/\\sigma)^2\\,N\\,T_r^{2}}",
+        "name": "Cramér–Rao 하한",
+        "src": "hunter2018",
+        "where": "식 (4)",
+        "class": "SOURCE_FACT",
+        "note": "A/σ는 신호 대 잡음, N은 표본 수, T_r는 관측 창입니다. 이보다 잘 읽을 수는 없습니다 — 맞춤 방법이 무엇이든."
+      },
+      {
+        "tex": "C \\;=\\; \\frac{N^{3}}{12}\\cdot\\frac{(1-z^{2})^{3}\\,(1-z^{2N})}{z^{2}(1-z^{2N})^{2} - N^{2}z^{2N}(1-z^{2})^{2}}\\ ,\\qquad z = e^{-\\gamma_2/f_s}",
+        "name": "감쇠가 정보를 얼마나 앗아가는가",
+        "src": "hunter2018",
+        "where": "식 (5)",
+        "class": "SOURCE_FACT",
+        "note": "신호가 죽은 뒤의 표본은 잡음만 담고 있습니다. C가 그것을 셈에 넣습니다."
+      },
+      {
+        "tex": "\\rho_B \\;=\\; \\sigma_B\\sqrt{2T_{\\mathrm{cycle}}}\\ ,\\qquad T_{\\mathrm{cycle}} = T_r + T_{\\mathrm{pump}}",
+        "name": "잡음 밀도",
+        "src": "hunter2018",
+        "where": "식 (7)",
+        "class": "CALCULATED",
+        "note": "T는 관측 창이 아니라 주기입니다. 논문 그림 7(a)의 파형은 0.6 ms인데 하한은 '측정 시간 1 ms'로 적혀 있습니다 — 그 차이가 펌프입니다. T_r를 그대로 넣으면 펌프가 공짜라고 가정하게 됩니다."
+      },
+      {
+        "tex": "\\delta\\langle\\theta\\rangle_{\\mathrm{rms}} \\;=\\; \\sqrt{\\frac{1}{2\\Phi}}\\qquad\\Longrightarrow\\qquad \\sigma_\\theta = \\sqrt{\\frac{f_s}{4\\Phi}}",
+        "name": "광자 산탄 잡음",
+        "src": "seltzer2008",
+        "where": "식 (2.164)",
+        "class": "CALCULATED",
+        "note": "논문은 스펙트럼 밀도를 줍니다. 표본율 f_s로 받으면 대역이 f_s/2이므로 표본 하나의 분산이 f_s/4Φ입니다. Hunter의 50 µrad와 2 MHz를 넣으면 프로브 44 µW가 나오는데, 그 실험에 맞는 크기입니다."
+      },
+      {
+        "tex": "\\delta\\langle F_x\\rangle_{\\mathrm{rms}} \\;=\\; \\sqrt{\\frac{2F_zT_2}{N}}\\qquad\\Longrightarrow\\qquad \\delta B \\;=\\; \\frac{1}{\\gamma}\\sqrt{\\frac{2}{F_z\\,N\\,T_2}}",
+        "name": "스핀 투영 잡음",
+        "src": "seltzer2008",
+        "where": "식 (2.159)",
+        "class": "CALCULATED",
+        "note": "가로 스핀의 불확정이 T₂ 동안 세차 각도 오차로 읽힙니다. δB ∝ 1/√(N·T₂)이고, 스핀 교환이 지배하면 N ∝ n, T₂ ∝ 1/n이라 곱이 상수가 되어 이 한계가 온도에 무관해집니다."
+      },
+      {
+        "tex": "\\sigma_B \\;\\propto\\; \\frac{\\gamma_2^{3/2}}{A}\\ ,\\qquad \\gamma_2 = a + bn\\ ,\\qquad A \\propto n",
+        "name": "왜 최적이 존재하는가",
+        "src": "standard",
+        "where": "위 하한을 T_r = 2/γ₂에서 평가",
+        "class": "CALCULATED",
+        "note": "낮은 온도에서는 a가 지배해 1/n으로 좋아지고, 높은 온도에서는 bn이 지배해 n^(1/2)로 나빠집니다."
+      },
+      {
+        "tex": "\\frac{d}{dn}\\left[\\frac{(a+bn)^{3/2}}{n}\\right] = 0 \\;\\Longrightarrow\\; bn = 2a",
+        "name": "해석적 최적 조건",
+        "src": "standard",
+        "where": "위 식을 미분",
+        "class": "CALCULATED",
+        "note": "스핀 교환 항이 나머지의 두 배가 되는 곳입니다. T/08의 값으로 약 77 °C이고, 수치 최적은 81 °C입니다 — 최적 detuning이 함께 움직여 A가 n보다 조금 빨리 자라기 때문입니다."
+      }
+    ],
+    "parametric_note": "일곱 줄 중 셋이 Hunter, 둘이 Seltzer의 식 번호를 답니다. 마지막 두 줄만 이 저장소의 계산입니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "논문 값 재현",
+        "result": "1.9 대 ≥ 2.0 pT/√Hz",
+        "how": "Hunter의 측정값을 그대로 넣어 그의 결론을 다시 계산"
+      },
+      {
+        "name": "최적 창 규칙",
+        "result": "2.0·T₂ 대 논문의 2/γ₂",
+        "how": "창을 0.2·T₂에서 6·T₂까지 훑어 최소를 찾음"
+      },
+      {
+        "name": "프로브 출력 축척",
+        "result": "1/√P",
+        "how": "10 / 50 / 200 µW에서 80.6 / 36.0 / 18.0 fT/√Hz — 비가 정확히 √5와 2"
+      },
+      {
+        "name": "최적 온도의 출력 무관성",
+        "result": "세 출력 모두 81 °C",
+        "how": "프로브 출력은 σ_θ만 균일하게 바꾸므로 최적점을 옮기지 않아야 합니다"
+      },
+      {
+        "name": "해석과 수치",
+        "result": "77 대 81 °C",
+        "how": "bn = 2a 조건과 전체 훑기. 차이의 원인을 확인했습니다"
+      },
+      {
+        "name": "그림 프레임",
+        "result": "26개 그림의 모든 라벨이 뷰박스 안",
+        "how": "scripts/validators/svg_fit.mjs"
+      }
+    ]
+  },
+  "unknown": [
+    "프로브 출력 50 µW와 표본율 2 MHz는 고른 값입니다. 감도의 절대값이 전적으로 앞의 것에 달려 있습니다 — 최적 온도는 그렇지 않습니다.",
+    "프로브가 스스로 편광을 파괴하는 것(Seltzer 식 2.133의 R(pr))을 넣지 않았습니다. 출력을 올리면 산탄 잡음은 줄지만 이 항이 커지므로, 실제로는 출력에도 최적이 있습니다. 그것을 풀지 않았으므로 '출력을 올리면 계속 좋아진다'는 여기 결론은 그 지점까지만 참입니다.",
+    "프로브의 빛 이동도 넣지 않았습니다. Seltzer가 세 번째 양자 잡음원으로 드는 것이고(§2.8.3), T/07이 heading error의 나머지 절반으로 남겨둔 것과 같은 물리입니다.",
+    "셀 안에서 편광과 온도가 균일하다고 보았습니다. T/06은 앞의 것이 그렇지 않다고 했습니다.",
+    "펌프 시간 1 ms는 T/04의 한 조건에서 가져온 값이고, 펌프 세기와 함께 최적화하지 않았습니다. 더 센 펌프는 죽은 시간을 줄이지만 편광 파괴를 늘립니다.",
+    "자기장 기울기 항 R(gr)을 0으로 두었습니다. 실제 셀에서는 히터와 차폐가 기울기를 만듭니다.",
+    "이 하한은 잡음이 백색이라고 가정합니다. 실제 계에는 레이저 세기 잡음과 전자 잡음이 저주파에서 훨씬 큽니다 — Hunter도 측정한 잡음 바닥(3 pT/√Hz)이 하한(2)보다 높습니다.",
+    "최적 온도 81 °C는 이 셀의 기하와 650 Torr 충전에 매인 값입니다. T/08이 보였듯 충전 압력을 바꾸면 벽 항과 N₂ 항의 균형이 달라지고, 그러면 이 온도도 움직입니다. 두 최적화를 함께 풀지 않았습니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/solve_sensitivity.py",
+      "note": "전체 계산. --check로 재실행 동일성 검사"
+    },
+    {
+      "path": "analysis/sensitivity.json",
+      "note": "온도별 값과 두 검산"
+    },
+    {
+      "path": "assets/diagrams/rb87-sens-temperature.svg",
+      "note": "온도에 대한 두 잡음 한계"
+    },
+    {
+      "path": "assets/diagrams/rb87-sens-mechanism.svg",
+      "note": "최적이 생기는 이유"
+    },
+    {
+      "path": "assets/diagrams/rb87-sens-window.svg",
+      "note": "관측 창 길이"
+    }
+  ],
+  "en": {
+    "title": "How Small a Field Can It See",
+    "summary": "T/09 computed the signal and T/08 computed how fast it dies. Neither computed noise, so neither could say how well the field is known. Putting the three together points at an operating temperature this repository has not been using.",
+    "question": "The field comes from a frequency. How precisely can one decaying sinusoid give it up, and at what cell temperature is that best?"
+  }
+}

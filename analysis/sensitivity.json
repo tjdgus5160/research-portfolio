@@ -1,0 +1,97 @@
+{
+  "sources": {
+    "crlb": "Hunter et al., Phys. Rev. Applied 10, 014002 (2018), eqs. 4, 5 and 7. A caesium FID magnetometer; the bound itself is species independent.",
+    "noise_floors": "Seltzer thesis eqs. 2.159 (spin projection) and 2.164 (photon shot). Fabricant et al. 2023 eqs. 17-18 give the same scalings.",
+    "inputs": "T2 from T/08, rotation amplitude from T/09, gyromagnetic ratio from T/07."
+  },
+  "model_inputs": {
+    "probe_uW": 50.0,
+    "sample_rate_Hz": 2000000.0,
+    "pump_dead_time_s": 0.001,
+    "P_x_after_tip": 0.983,
+    "probe_volume_cm3": 0.038877209088173686,
+    "bore_m": 0.003,
+    "note": "Probe power and sample rate are chosen, not measured -- both are INFERRED. The sensitivity goes as the inverse square root of probe power, and the optimum temperature does not move with it."
+  },
+  "check_against_hunter": {
+    "inputs": "A 20 mrad, sigma 50 urad, gamma2 1.5 kHz, fs 2 MHz, Tr 0.6 ms, T 1 ms",
+    "computed_pT_rtHz": 1.9,
+    "published_pT_rtHz": 2.0
+  },
+  "optimum": {
+    "T_c": 81,
+    "rho_photon_fT_rtHz": 36.0,
+    "rho_spin_fT_rtHz": 1.6,
+    "T2_ms": 4.487,
+    "snr": 1015.0,
+    "detuning_GHz": 9.12,
+    "cycle_ms": 9.97
+  },
+  "by_temperature": {
+    "60": {
+      "T2_ms": 11.228,
+      "snr": 246.0,
+      "rho_photon_fT": 57.6,
+      "rho_spin_fT": 2.25
+    },
+    "70": {
+      "T2_ms": 7.722,
+      "snr": 509.0,
+      "rho_photon_fT": 40.9,
+      "rho_spin_fT": 1.83
+    },
+    "80": {
+      "T2_ms": 4.735,
+      "snr": 958.0,
+      "rho_photon_fT": 36.1,
+      "rho_spin_fT": 1.62
+    },
+    "90": {
+      "T2_ms": 2.699,
+      "snr": 1629.0,
+      "rho_photon_fT": 38.5,
+      "rho_spin_fT": 1.51
+    },
+    "100": {
+      "T2_ms": 1.492,
+      "snr": 2524.0,
+      "rho_photon_fT": 47.7,
+      "rho_spin_fT": 1.46
+    },
+    "110": {
+      "T2_ms": 0.823,
+      "snr": 3656.0,
+      "rho_photon_fT": 65.6,
+      "rho_spin_fT": 1.44
+    },
+    "120": {
+      "T2_ms": 0.46,
+      "snr": 5066.0,
+      "rho_photon_fT": 96.5,
+      "rho_spin_fT": 1.43
+    },
+    "130": {
+      "T2_ms": 0.262,
+      "snr": 6815.0,
+      "rho_photon_fT": 148.4,
+      "rho_spin_fT": 1.43
+    },
+    "140": {
+      "T2_ms": 0.153,
+      "snr": 8971.0,
+      "rho_photon_fT": 234.2,
+      "rho_spin_fT": 1.44
+    }
+  },
+  "readout_window": {
+    "source_rule": "Hunter: T_r ~ 2/gamma2",
+    "found_without_dead_time": 2.0,
+    "found_with_1ms_pump": 2.15
+  },
+  "probe_power_scaling": {
+    "10": 80.6,
+    "50": 36.0,
+    "200": 18.0
+  },
+  "photon_vs_spin_at_optimum": 22.5
+}
