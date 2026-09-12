@@ -1,0 +1,93 @@
+{
+  "equations": "Seltzer thesis eqs. 2.63-2.69 (rotation from circular birefringence), 2.73-2.81 (Kramers-Kronig to the index), 2.82 (complex Lorentzian), 2.87 (the D1/D2 result). Constants from Steck tables 3 and 4.",
+  "validity_of_complex_lorentzian": {
+    "Gamma_L_Hz": 14190000000.0,
+    "Doppler_FWHM_Hz": 512000000.0,
+    "ratio": 27.7,
+    "note": "Seltzer states the substitution needs Gamma_L >> Gamma_G."
+  },
+  "cross_check_against_T04": {
+    "sigma_peak_D1_cm2": 4.0758639747091176e-13,
+    "T04_published_cm2": 4.076e-13,
+    "ratio": 0.999967,
+    "note": "T/04 reached this from the oscillator strength and a Lorentzian normalisation. This reaches it from the refractive index through Kramers-Kronig. Different route, same number."
+  },
+  "on_D2_line_centre": {
+    "note": "The rotation is exactly zero on resonance because Im[L] is odd. What little is left at 100 C is the far tail of D1, 7.12 THz away.",
+    "residual_mrad": -0.4653
+  },
+  "by_temperature": {
+    "80": {
+      "n87_m3": 1.073237156108665e+18,
+      "best_detuning_GHz": 8.98,
+      "theta_mrad": 59.35,
+      "OD_at_optimum": 0.1879,
+      "signal_mrad": 49.18,
+      "theta_on_D2_centre_mrad": -0.1198,
+      "OD_on_D2_centre": 0.489
+    },
+    "100": {
+      "n87_m3": 4.167966772301812e+18,
+      "best_detuning_GHz": 14.26,
+      "theta_mrad": 188.89,
+      "OD_at_optimum": 0.3768,
+      "signal_mrad": 129.58,
+      "theta_on_D2_centre_mrad": -0.4653,
+      "OD_on_D2_centre": 1.899
+    },
+    "120": {
+      "n87_m3": 1.406107744198822e+19,
+      "best_detuning_GHz": 25.42,
+      "theta_mrad": 413.18,
+      "OD_at_optimum": 0.463,
+      "signal_mrad": 260.04,
+      "theta_on_D2_centre_mrad": -1.5699,
+      "OD_on_D2_centre": 6.407
+    },
+    "150": {
+      "n87_m3": 6.9922479450453025e+19,
+      "best_detuning_GHz": 56.42,
+      "theta_mrad": 978.29,
+      "OD_at_optimum": 0.496,
+      "signal_mrad": 595.74,
+      "theta_on_D2_centre_mrad": -7.8065,
+      "OD_on_D2_centre": 31.86
+    }
+  },
+  "optimum_is_half": {
+    "analytic": "Far from the line theta ~ A n/d and OD ~ B n/d^2. Setting d/dd [ (An/d) exp(-Bn/d^2) ] = 0 gives d^2 = 2Bn, and OD = Bn/d^2 = 1/2 -- free of n, Gamma, f and l.",
+    "numeric": {
+      "1e16": {
+        "OD": 0.0023,
+        "detuning_GHz": 7.1,
+        "at_scan_edge": false
+      },
+      "1e17": {
+        "OD": 0.0223,
+        "detuning_GHz": 7.2,
+        "at_scan_edge": false
+      },
+      "1e18": {
+        "OD": 0.1783,
+        "detuning_GHz": 8.8,
+        "at_scan_edge": false
+      },
+      "1e19": {
+        "OD": 0.4475,
+        "detuning_GHz": 21.5,
+        "at_scan_edge": false
+      },
+      "1e20": {
+        "OD": 0.4994,
+        "detuning_GHz": 67.4,
+        "at_scan_edge": false
+      },
+      "1e21": {
+        "OD": 0.5138,
+        "detuning_GHz": 211.2,
+        "at_scan_edge": false
+      }
+    }
+  },
+  "D1_D2_separation_THz": 7.123
+}

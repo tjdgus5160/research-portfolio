@@ -1,0 +1,320 @@
+{
+  "no": "T/09",
+  "slug": "t09-faraday-rotation",
+  "title": "스핀을 실제로 읽는 방법",
+  "subtitle": "FARADAY ROTATION AND THE PROBE",
+  "status": "complete",
+  "date": "2026-09",
+  "repo": "scripts/solve_faraday.py",
+  "summary": "T/01부터 T/08까지는 편광을 만들고 세차운동시킵니다. 검출기가 무엇을 보는지는 한 번도 계산하지 않았습니다. 편광된 증기는 원형 복굴절체이고, 그래서 프로브의 편광면이 돌아갑니다. 그 각도가 신호입니다.",
+  "question": "프로브를 어느 주파수에 두어야 합니까? 선 중심이 흡수가 가장 큰 곳인데, 회전은 거기서 정확히 0입니다.",
+  "evidence": [
+    {
+      "claim": "회전각은 두 원편광 성분의 굴절률 차이에서 나옵니다",
+      "class": "SOURCE_FACT",
+      "source": "Seltzer 박사논문 식 (2.63)–(2.69). 선편광을 반대 헬리시티의 원편광 둘로 분해하면, 각각 다른 굴절률을 만나 위상이 갈라지고 합이 돌아갑니다. 논문은 이 유도를 Erickson (2000)의 준고전 계산에 돌리고, 양자역학적 취급은 Opechowski (1953)라고 적습니다."
+    },
+    {
+      "claim": "굴절률은 흡수 단면적에서 Kramers–Kronig로 나옵니다",
+      "class": "SOURCE_FACT",
+      "source": "같은 논문 식 (2.76)–(2.81). 유전율의 실수부와 허수부가 쌍을 이루므로, 흡수 프로파일을 알면 굴절률이 정해집니다. 이것이 회전과 흡수가 같은 선 하나에서 나온다는 뜻입니다."
+    },
+    {
+      "claim": "복소 로렌치안으로 Voigt를 대체해도 되는 조건은 Γ(압력) ≫ Γ(도플러)",
+      "class": "SOURCE_FACT",
+      "source": "같은 논문 식 (2.82)와 그 아래 문장. 이 셀은 압력 폭 14.19 GHz에 도플러 폭 0.51 GHz로 비가 27.7이므로 안전합니다. 이 비는 매 실행 출력됩니다."
+    },
+    {
+      "claim": "D1과 D2의 진동자 세기 0.34231(33)과 0.69577(20), 파장 794.978851156 nm와 780.241209686 nm",
+      "class": "SOURCE_FACT",
+      "source": "Steck rev 2.3.4 표 4와 표 3. 고전 전자 반지름 2.8179403262e−15 m는 표 1"
+    },
+    {
+      "claim": "이 계산의 흡수 규격화가 T/04와 여섯 자리까지 일치합니다",
+      "class": "CALCULATED",
+      "source": "여기서 D1 선 중심의 단면적은 σ = 2 rₑ c f / Γ(압력) = 4.0759e−13 cm². T/04은 진동자 세기와 로렌치안 규격화라는 다른 경로로 4.076e−13을 얻었습니다. 굴절률 경로와 단면적 경로가 같은 수에 도달합니다 — 이 항목의 분산과 흡수가 같은 눈금 위에 있다는 증거입니다."
+    },
+    {
+      "claim": "설정 파일의 780.24 nm는 레이저 detuning이 아닙니다",
+      "class": "INFERRED",
+      "source": "W/01이 인용하는 configs/opm_sensor.yaml의 해당 줄은 waveplate.targets입니다 — 파장판이 1.00 파장의 지연을 주는 설계 파장이지, 레이저를 어디에 둘지가 아닙니다. 최적 detuning은 100 °C에서 D2로부터 14.3 GHz, 파장으로 0.029 nm 차이입니다. 파장판 사양이 신경 쓸 크기가 아니지만, 신호가 있느냐 없느냐를 가르는 차이입니다. 설정 파일 어디에도 레이저 detuning은 없습니다."
+    }
+  ],
+  "method": [
+    {
+      "step": "01",
+      "name": "선편광을 두 조각으로",
+      "detail": "ŷ로 편광된 빛을 (ŷ+iẑ)와 (ŷ−iẑ)의 합으로 씁니다. 각각이 σ⁺와 σ⁻입니다. 길이 l을 지나면 각자 exp(iωn±l/c)를 곱해 받습니다."
+    },
+    {
+      "step": "02",
+      "name": "공통 위상을 버리기",
+      "detail": "두 지수의 평균은 전체 위상이라 편광면을 돌리지 않습니다. 차이만 남기면 E(l) = E₀(cos θ ŷ − sin θ ẑ)이고, θ = (πνl/c)(n₊ − n₋)입니다."
+    },
+    {
+      "step": "03",
+      "name": "굴절률을 흡수에서 얻기",
+      "detail": "Kramers–Kronig로 n(ν) = 1 + (n rₑ c²f/4ν)·Im[V(ν−ν₀)]. 여기서 Im이 붙는 것이 핵심입니다 — 흡수는 Re를 따르고 굴절은 Im을 따릅니다."
+    },
+    {
+      "step": "04",
+      "name": "편광된 증기가 복굴절인 이유",
+      "detail": "σ⁺와 σ⁻는 서로 다른 바닥 부준위에서 흡수됩니다. 인구가 같으면 두 굴절률이 같고 회전이 없습니다. P(x) = ρ(+½) − ρ(−½)이 0이 아닐 때만 돌아갑니다."
+    },
+    {
+      "step": "05",
+      "name": "두 D선을 함께",
+      "detail": "θ = (π/2) l n rₑ c P(x) ( −f(D1)·Im[V(ν−ν(D1))] + ½ f(D2)·Im[V(ν−ν(D2))] ). 부호가 반대입니다 — 두 선 사이에 프로브를 두면 회전이 서로 상쇄됩니다."
+    },
+    {
+      "step": "06",
+      "name": "통과한 것만 세기",
+      "detail": "검출기에 닿는 것은 θ가 아니라 θ·e^(−OD)입니다. 이 곱을 detuning에 대해 최대화하는 것이 이 항목이 푸는 문제입니다."
+    }
+  ],
+  "numbers": [
+    {
+      "name": "D1–D2 간격",
+      "value": "7.1225",
+      "unit": "THz",
+      "class": "CALCULATED",
+      "note": "두 선의 회전이 반대 부호이므로, D2의 빨강쪽은 서로 상쇄되는 방향입니다"
+    },
+    {
+      "name": "Γ(압력) / 도플러 폭",
+      "value": "27.7",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "복소 로렌치안 치환의 조건. 논문이 Γ(압력) ≫ Γ(도플러)를 요구합니다"
+    },
+    {
+      "name": "D2 선 중심의 회전",
+      "value": "−0.47",
+      "unit": "mrad",
+      "class": "CALCULATED",
+      "note": "100 °C, P=1. 정확히 0이 아닌 이유는 7.12 THz 떨어진 D1의 꼬리뿐입니다"
+    },
+    {
+      "name": "같은 곳의 광학 깊이",
+      "value": "1.90",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "흡수는 최대인데 신호는 0입니다. 프로브를 선 중심에 두면 빛만 잃습니다"
+    },
+    {
+      "name": "최적 detuning, 80 °C",
+      "value": "8.98",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "D2에서 파랑쪽. 신호 49 mrad"
+    },
+    {
+      "name": "최적 detuning, 100 °C",
+      "value": "14.26",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "회전 189 mrad 중 130 mrad가 살아 나옵니다"
+    },
+    {
+      "name": "최적 detuning, 150 °C",
+      "value": "56.42",
+      "unit": "GHz",
+      "class": "CALCULATED",
+      "note": "뜨거울수록 더 멀리 물러나야 합니다. 신호 596 mrad"
+    },
+    {
+      "name": "최적점의 광학 깊이",
+      "value": "1/2",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "밀도·선폭·진동자 세기·셀 길이에 무관합니다. 해석적으로 나오고 수치로 확인됩니다"
+    },
+    {
+      "name": "10²⁰ m⁻³에서 수치로",
+      "value": "0.4994",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "여섯 자릿수에 걸쳐 훑어 1/2로 수렴합니다"
+    },
+    {
+      "name": "파장으로 본 최적 detuning",
+      "value": "0.029",
+      "unit": "nm",
+      "class": "CALCULATED",
+      "note": "100 °C 기준. 파장판 사양에는 안 보이는 크기이고, 신호에는 전부입니다"
+    },
+    {
+      "name": "T/04과의 단면적 일치",
+      "value": "0.999967",
+      "unit": "",
+      "class": "CALCULATED",
+      "note": "굴절률 경로와 진동자 세기 경로. 서로 코드를 공유하지 않습니다"
+    }
+  ],
+  "geometry": {
+    "tolerance": "T/04의 단면적과 6자리 일치, 최적 광학 깊이 0.4991 대 해석값 0.5",
+    "renders": [
+      {
+        "src": "assets/diagrams/rb87-faraday-lineshape.svg",
+        "view": "ODD AND EVEN",
+        "alt": "D2 부근의 회전각과 광학 깊이. 회전은 홀함수로 공명에서 0을 지나고 흡수는 짝함수로 거기서 최대",
+        "note": "이 항목 전체가 이 한 장에 있습니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-faraday-signal.svg",
+        "view": "WHAT SURVIVES",
+        "alt": "네 온도에서 detuning에 대한 θ·e^(−OD). 각 곡선이 하나의 최대를 갖고 그 점들이 광학 깊이 0.4~0.5에 모인다",
+        "note": "가까우면 흡수되고 멀면 회전이 죽습니다"
+      },
+      {
+        "src": "assets/diagrams/rb87-faraday-half.svg",
+        "view": "ALWAYS ONE HALF",
+        "alt": "밀도 여섯 자릿수에 걸친 최적점의 광학 깊이. 아래에서 1/2로 수렴한다",
+        "note": "해석적으로 유도되는 값에 수치가 수렴합니다"
+      }
+    ],
+    "equations": [
+      {
+        "tex": "\\vec{E}(0) \\;=\\; \\frac{E_0}{4}e^{i\\omega t}(\\hat{y}+i\\hat{z}) \\;+\\; \\frac{E_0}{4}e^{i\\omega t}(\\hat{y}-i\\hat{z}) \\;+\\; \\mathrm{c.c.}",
+        "name": "선편광을 두 원편광으로",
+        "src": "seltzer2008",
+        "where": "식 (2.63)",
+        "class": "SOURCE_FACT"
+      },
+      {
+        "tex": "\\theta \\;=\\; \\frac{\\pi\\nu l}{c}\\Big[\\,n_+(\\nu) - n_-(\\nu)\\,\\Big]\\qquad \\vec{E}(l) = E_0\\big(\\cos\\theta\\,\\hat{y} - \\sin\\theta\\,\\hat{z}\\big)",
+        "name": "그래서 편광면이 돈다",
+        "src": "seltzer2008",
+        "where": "식 (2.68)–(2.69)",
+        "class": "SOURCE_FACT",
+        "note": "두 굴절률이 같으면 θ = 0입니다. 복굴절이 있어야 회전이 있습니다."
+      },
+      {
+        "tex": "\\mathrm{Re}[\\varepsilon(\\nu)] = 1 + \\frac{1}{\\pi}\\,\\mathcal{P}\\!\\!\\int_{-\\infty}^{\\infty}\\frac{\\mathrm{Im}[\\varepsilon(\\nu')]}{\\nu'-\\nu}\\,d\\nu'",
+        "name": "Kramers–Kronig",
+        "src": "seltzer2008",
+        "where": "식 (2.76), 논문은 Jackson (1999)을 듭니다",
+        "class": "SOURCE_FACT",
+        "note": "흡수를 알면 굴절률이 따라옵니다. 두 개를 따로 재는 것이 아니라 하나가 다른 하나를 결정합니다."
+      },
+      {
+        "tex": "n(\\nu) \\;=\\; 1 + \\left(\\frac{n\\,r_e c^2 f}{4\\nu}\\right)\\mathrm{Im}\\big[V(\\nu-\\nu_0)\\big]",
+        "name": "굴절률",
+        "src": "seltzer2008",
+        "where": "식 (2.81)",
+        "class": "SOURCE_FACT",
+        "note": "Im이 붙는 것이 이 항목의 전부입니다 — 흡수는 Re를 따릅니다."
+      },
+      {
+        "tex": "L(\\nu-\\nu_0) \\;=\\; \\frac{\\Gamma_L/2\\pi \\;+\\; i(\\nu-\\nu_0)/\\pi}{(\\nu-\\nu_0)^2 + (\\Gamma_L/2)^2}",
+        "name": "복소 로렌치안",
+        "src": "seltzer2008",
+        "where": "식 (2.82)",
+        "class": "SOURCE_FACT",
+        "note": "실수부는 공명에서 최대인 짝함수, 허수부는 공명에서 0인 홀함수입니다. Γ(압력) ≫ Γ(도플러)일 때 Voigt를 이것으로 바꿔도 됩니다 — 이 셀은 비가 27.7입니다."
+      },
+      {
+        "tex": "\\theta \\;=\\; \\frac{\\pi}{2}\\,l\\,n\\,r_e c\\,P_x\\left(-f_{D1}\\,\\mathrm{Im}[V(\\nu-\\nu_{D1})]\\;+\\;\\tfrac12 f_{D2}\\,\\mathrm{Im}[V(\\nu-\\nu_{D2})]\\right)",
+        "name": "두 D선을 합친 회전각",
+        "src": "seltzer2008",
+        "where": "식 (2.87)",
+        "class": "SOURCE_FACT",
+        "note": "P(x) = 2⟨S(x)⟩는 프로브 진행 방향의 편광입니다. 두 항의 부호가 반대이므로 D1과 D2 사이에서는 회전이 상쇄됩니다."
+      },
+      {
+        "tex": "\\sigma_0 \\;=\\; \\frac{2\\,r_e\\,c\\,f}{\\Gamma_L} \\;=\\; 4.0759\\times10^{-13}\\ \\mathrm{cm^2}",
+        "name": "같은 규격화에서 나오는 단면적",
+        "src": "standard",
+        "where": "위 식에서 Re[L]을 공명에서 평가",
+        "class": "CALCULATED",
+        "note": "T/04이 진동자 세기에서 얻은 4.076e−13과 여섯 자리까지 같습니다. 굴절률 쪽과 흡수 쪽이 같은 눈금 위에 있다는 확인입니다."
+      },
+      {
+        "tex": "S(\\delta) \\;=\\; \\theta(\\delta)\\,e^{-\\mathrm{OD}(\\delta)}\\qquad \\theta \\approx \\frac{An}{\\delta},\\quad \\mathrm{OD} \\approx \\frac{Bn}{\\delta^{2}}",
+        "name": "검출기에 닿는 것",
+        "src": "standard",
+        "where": "|δ| ≫ Γ(압력)/2 극한",
+        "class": "CALCULATED"
+      },
+      {
+        "tex": "\\frac{dS}{d\\delta} = 0 \\;\\Longrightarrow\\; \\delta^{2} = 2Bn\\;\\Longrightarrow\\; \\mathrm{OD} = \\frac{Bn}{\\delta^{2}} = \\frac{1}{2}",
+        "name": "최적점은 항상 광학 깊이 1/2",
+        "src": "standard",
+        "where": "위 식을 미분",
+        "class": "CALCULATED",
+        "note": "B와 n이 약분되므로 밀도·선폭·진동자 세기·셀 길이가 전부 사라집니다. 남는 것은 1/2뿐입니다. 수치 훑기가 10²⁰ m⁻³에서 0.4991로 수렴합니다."
+      }
+    ],
+    "parametric_note": "아홉 줄 중 여섯 줄이 논문의 식 번호를 그대로 답니다. 마지막 세 줄만 이 저장소의 계산입니다."
+  },
+  "validation": {
+    "verdict": "PASS",
+    "checks": [
+      {
+        "name": "T/04과의 단면적",
+        "result": "비 0.999967",
+        "how": "굴절률·Kramers–Kronig 경로 대 진동자 세기·로렌치안 경로. 코드를 공유하지 않습니다"
+      },
+      {
+        "name": "복소 로렌치안 조건",
+        "result": "Γ(압력)/Γ(도플러) = 27.7",
+        "how": "논문이 요구하는 Γ(압력) ≫ Γ(도플러). 매 실행 출력"
+      },
+      {
+        "name": "공명에서의 회전",
+        "result": "−0.47 mrad (D1 꼬리뿐)",
+        "how": "Im[L]이 홀함수이므로 D2 항은 정확히 0이어야 합니다"
+      },
+      {
+        "name": "최적 광학 깊이",
+        "result": "0.4991 대 해석값 0.5",
+        "how": "밀도를 10¹⁶에서 10²¹ m⁻³까지 훑어 수치 최적점의 OD를 비교"
+      },
+      {
+        "name": "그림 프레임",
+        "result": "23개 그림의 모든 라벨이 뷰박스 안",
+        "how": "scripts/validators/svg_fit.mjs"
+      }
+    ]
+  },
+  "unknown": [
+    "초미세구조를 분해하지 않았습니다. 논문 식 (2.99)와 표 2.4가 네 개의 D1 공명을 편광 P의 함수로 따로 다루는데, 여기서는 식 (2.87)의 미분해 극한을 썼습니다. Γ(압력)/Δ(초미세) = 2.08이라 완전히 뭉개지지는 않으므로, 이것이 이 계산의 가장 큰 근사입니다.",
+    "스핀 온도 분포를 가정하지 않고 P(x)를 그냥 입력으로 두었습니다. 논문 식 (2.88)–(2.89)는 빠른 스핀 교환에서 ρ(F,m) ∝ e^(βm)을 주는데, T/05가 푼 분포는 그 모양이 아닙니다. 둘을 잇지 않았습니다.",
+    "프로브가 셀을 지나며 스스로 편광을 파괴하는 것(T/08의 R(pr) 항)을 넣지 않았습니다. 최적 detuning이 흡수를 OD 1/2로 유지하므로 무시할 수 없는 크기입니다.",
+    "프로브의 빛 이동을 계산하지 않았습니다. T/07이 heading error의 절반으로 남겨둔 것과 같은 항목이고, detuning을 고르는 이 계산과 직접 얽힙니다.",
+    "셀 안에서 P가 균일하다고 보았습니다. T/06은 그렇지 않다고 했습니다 — 회전은 경로를 따라 쌓이므로 실제로는 P(z)의 적분입니다.",
+    "검출기 쪽을 다루지 않았습니다. 균형 편광계가 이 각도를 어떻게 전압으로 바꾸는지는 W/02의 하드웨어이고, 논문 §2.4.2의 이론은 여기에 넣지 않았습니다.",
+    "감도를 계산하지 않았습니다. 신호는 이제 있지만 잡음이 없습니다. 온도를 올리면 신호는 계속 커지는데 T₂가 무너지므로(T/08), 최적 온도는 그 둘을 함께 놓아야 나옵니다."
+  ],
+  "artifacts": [
+    {
+      "path": "scripts/solve_faraday.py",
+      "note": "전체 계산. --check로 재실행 동일성 검사"
+    },
+    {
+      "path": "analysis/faraday.json",
+      "note": "모든 수치와 두 검산"
+    },
+    {
+      "path": "input/papers/seltzer-alkali-metal-magnetometry-2008.pdf",
+      "note": "§2.4가 37쪽"
+    },
+    {
+      "path": "assets/diagrams/rb87-faraday-lineshape.svg",
+      "note": "분산과 흡수"
+    },
+    {
+      "path": "assets/diagrams/rb87-faraday-signal.svg",
+      "note": "통과해 나오는 신호"
+    },
+    {
+      "path": "assets/diagrams/rb87-faraday-half.svg",
+      "note": "최적 광학 깊이 1/2"
+    }
+  ],
+  "en": {
+    "title": "How the Spin Is Actually Read",
+    "summary": "T/01 through T/08 prepare a polarisation and let it precess; none of them computes what a detector sees. A polarised vapour is circularly birefringent, so the probe's plane of polarisation turns. That angle is the signal.",
+    "question": "Where should the probe sit? Line centre is where the absorption is largest - and where the rotation is exactly zero."
+  }
+}

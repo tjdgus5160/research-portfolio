@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400"
+  role="img" aria-labelledby="hft hfd" class="lvl">
+<title id="hft">The optimum optical depth</title><desc id="hfd">The optical depth at the best probe detuning, against vapour density over six decades. It approaches one half from below and stays there, which is what the far-detuned derivation predicts.</desc>
+<style>
+  .lvl{font-family:"IBM Plex Mono","SF Mono",monospace}
+  .l{stroke:var(--t0,#0d0d0d);stroke-width:3;fill:none}
+  .m{stroke:var(--t1,#3a3a3a);stroke-width:2;fill:none}
+  .thin{stroke:var(--t1,#3a3a3a);stroke-width:1.5;fill:none}
+  .dash{stroke:var(--t2,#8a8a8a);stroke-width:1;stroke-dasharray:3 4;fill:none}
+  text{fill:var(--t0,#0d0d0d);font-size:11px}
+  .sm{font-size:9px;fill:var(--t1,#3a3a3a)}
+  .xs{font-size:8px;fill:var(--t1,#3a3a3a);letter-spacing:.05em}
+  .xs,.sm{paint-order:stroke fill;stroke:var(--t3,#d7d7d7);stroke-width:3px;
+    stroke-linejoin:round}
+</style>
+<text x="16" y="22" class="xs">THE OPTIMUM IS AN OPTICAL DEPTH OF ONE HALF</text>
+<text x="744" y="22" class="xs" text-anchor="end">밀도를 여섯 자릿수에 걸쳐</text>
+<line x1="100" y1="306.0" x2="636" y2="306.0" class="dash"/>
+<text x="92" y="310.0" class="xs" text-anchor="end">0</text>
+<line x1="100" y1="229.8" x2="636" y2="229.8" class="dash"/>
+<text x="92" y="233.8" class="xs" text-anchor="end">0.25</text>
+<line x1="100" y1="153.5" x2="636" y2="153.5" class="dash"/>
+<text x="92" y="157.5" class="xs" text-anchor="end">0.5</text>
+<line x1="100" y1="77.2" x2="636" y2="77.2" class="dash"/>
+<text x="92" y="81.2" class="xs" text-anchor="end">0.75</text>
+<text x="100.0" y="324" class="xs" text-anchor="middle">10^16</text>
+<text x="278.7" y="324" class="xs" text-anchor="middle">10^18</text>
+<text x="457.3" y="324" class="xs" text-anchor="middle">10^20</text>
+<text x="636.0" y="324" class="xs" text-anchor="middle">10^22</text>
+<line x1="100" y1="306" x2="636" y2="306" class="thin"/>
+<line x1="100" y1="306" x2="100" y2="62" class="thin"/>
+<text x="368.0" y="344" class="sm" text-anchor="middle">⁸⁷Rb 수밀도 / m⁻³</text>
+<text x="24" y="184.0" class="sm" transform="rotate(-90 24 184.0)" text-anchor="middle">최적점에서의 광학 깊이</text>
+<polyline class="l" points="100.0,305.3 108.9,305.1 117.9,304.9 126.8,304.6 135.7,304.3 144.7,303.8 153.6,303.3 162.5,302.6 171.5,301.7 180.4,300.6 189.3,299.2 198.3,297.5 207.2,295.4 216.1,292.7 225.1,289.5 234.0,285.5 242.9,280.8 251.9,275.1 260.8,268.2 269.7,260.4 278.7,251.6 287.6,241.6 296.5,231.3 305.5,220.8 314.4,210.4 323.3,200.8 332.3,192.3 341.2,185.3 350.1,179.1 359.1,174.0 368.0,169.5 376.9,166.5 385.9,163.7 394.8,161.4 403.7,159.5 412.7,158.0 421.6,156.7 430.5,155.9 439.5,155.0 448.4,154.3 457.3,153.7 466.3,153.2 475.2,152.9 484.1,152.3 493.1,151.9 502.0,151.6 510.9,151.2 519.9,150.7 528.8,150.3 537.7,149.8 546.7,149.3 555.6,148.7 564.5,148.1 573.5,147.5 582.4,146.7 591.3,145.9 600.3,145.0 609.2,144.1 618.1,143.0 627.1,141.8 636.0,140.5"/>
+<line x1="100" y1="153.5" x2="636" y2="153.5" class="thin"/>
+<text x="108" y="146" class="xs">OD = 1/2 — 해석적으로 유도되는 값</text>
+<text x="16" y="362" class="xs">선에서 충분히 멀어지면 θ ≈ An/δ, OD ≈ Bn/δ². 곱 (An/δ)·e^(−Bn/δ²)을 δ로 미분해 0으로 놓으면 δ² = 2Bn이고,</text>
+<text x="16" y="376" class="xs">그것을 OD = Bn/δ²에 넣으면 B와 n이 약분되어 정확히 1/2이 남습니다. 선폭도 진동자 세기도 셀 길이도 B 안에서 사라집니다.</text>
+<text x="16" y="390" class="xs">왼쪽 끝이 1/2에 못 미치는 것은 그 근사가 깨지기 때문입니다 — 최적 detuning이 선폭의 절반과 비슷해집니다.</text>
+</svg>
